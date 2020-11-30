@@ -1,16 +1,29 @@
-import os
-import unittest
-
-from mercicor.tests.conftest import pytest_report_header
-
-__copyright__ = "Copyright 2019, 3Liz"
+__copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
-__revision__ = "$Format:%H$"
+
+import os
+import sys
+import unittest
+
+from osgeo import gdal
+from qgis.core import Qgis
+from qgis.PyQt import Qt
+
+
+def pytest_report_header(config):
+    """Used by PyTest and Unittest."""
+    message = "QGIS : {}\n".format(Qgis.QGIS_VERSION_INT)
+    message += "Python GDAL : {}\n".format(gdal.VersionInfo("VERSION_NUM"))
+    message += "Python : {}\n".format(sys.version)
+    # message += 'Python path : {}'.format(sys.path)
+    message += "QT : {}".format(Qt.QT_VERSION_STR)
+    return message
 
 
 def _run_tests(test_suite, package_name, pattern):
     """Core function to test a test suite.
+
     :param test_suite: Unittest test suite
     """
     count = test_suite.countTestCases()
@@ -33,7 +46,7 @@ def _run_tests(test_suite, package_name, pattern):
     print("TOTAL                : {}".format(results.testsRun))
 
 
-def test_package(package="..", pattern="test_*.py"):
+def test_package(package=".", pattern="test_*.py"):
     """Test package.
     This function is called by CLI without arguments.
 

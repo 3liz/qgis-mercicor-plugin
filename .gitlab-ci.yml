@@ -2,6 +2,7 @@ variables:
   CUSTOMER: "mercicor"
   PLUGIN_NAME: "mercicor"
   PROJECT_ID: "365"
+  GIT_STRATEGY: clone
 
 stages:
 - Tests 🎳
@@ -17,26 +18,20 @@ Lint:
   tags:
     - factory
 
-# Besoin d'utiliser le travail de David pour les images dockers et services
-#qgis-3.4:
-#  stage: Tests 🎳
-#  before_script:
-#    - >
-#      docker run
-#      -d --name ${CI_JOB_ID}
-#      -v ${CI_PROJECT_DIR}/analyse_itv_rerau:/analyse_itv_rerau
-#      -e GITLAB=yes -e DISPLAY=:99
-#      ${REGISTRY_URL}/qgis/qgis:release-3_4
-#    - sleep 10
-#    - docker exec -t ${CI_JOB_ID} sh -c "qgis_setup.sh analyse_itv_rerau"
-#  script:
-#    - >
-#      docker exec -t ${CI_JOB_ID}
-#      sh -c "qgis_testrunner.sh analyse_itv_rerau.qgis_plugin_tools.infrastructure.test_runner.test_package"
-#  after_script:
-#    - docker rm -f ${CI_JOB_ID}
-#  tags:
-#    - factory
+QGIS-3.4:
+  stage: Tests 🎳
+  image:
+    name: registry.snap.lizlan:5000/qgis/qgis:release-3_4
+  script:
+    - qgis_setup.sh ${PLUGIN_NAME}
+    # Patch the script because it use an invalid redirection to non-existent /dev/tty
+    # Run xvfb if necessary
+    - nohup /usr/bin/Xvfb $DISPLAY -screen 0 1024x768x24 -ac +extension GLX +render -noreset -nolisten tcp &
+    - ./.docker/qgis_testrunner.sh ${PLUGIN_NAME}.tests.test_runner.test_package
+  variables:
+     DISPLAY: ':99'
+  tags:
+    - factory-plain
 
 Package:
   stage: Package 📦
