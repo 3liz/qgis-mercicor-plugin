@@ -12,10 +12,10 @@ hasProcessingProvider=yes
 
 tracker=https://projects.3liz.org/
 repository=https://projects.3liz.org/
-tags=merciror
+tags=mercicor
 
 homepage=https://projects.3liz.org/
 category=Analysis
-icon=resources/icons/icon.png
+icon=resources/icons/icon.jpg
 experimental=False
 deprecated=False
