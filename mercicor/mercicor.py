@@ -18,3 +18,16 @@ class Mercicor:
 
     def unload(self):
         pass
+
+    @staticmethod
+    def run_tests(pattern='test_*.py', package=None):
+        """Run the test inside QGIS."""
+        from pathlib import Path
+        try:
+            from mercicor.tests.test_runner import test_package
+            if package is None:
+                package = '{}.__init__'.format(Path(__file__).parent.name)
+            test_package(package, pattern)
+        except (AttributeError, ModuleNotFoundError):
+            message = 'Could not load tests. Are you using a production package?'
+            print(message) # NOQA
