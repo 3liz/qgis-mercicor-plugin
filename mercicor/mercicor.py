@@ -2,6 +2,10 @@ __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
+from qgis.core import QgsApplication
+
+from mercicor.processing.provider import MercicorProvider
+
 
 class Mercicor:
 
@@ -11,7 +15,8 @@ class Mercicor:
 
     def initProcessing(self):
         if not self.provider:
-            pass
+            self.provider = MercicorProvider()
+            QgsApplication.processingRegistry().addProvider(self.provider)
 
     def initGui(self):
         self.initProcessing()
