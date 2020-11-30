@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+
+# Plugins, QGIS-plugin-CI
+mercicor.*.zip
+plugins.xml
+
+# Temp files
+*~
+*.bak
