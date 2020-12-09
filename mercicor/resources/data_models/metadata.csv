@@ -1,0 +1,5 @@
+idx,name,type,typeName,length,precision,comment,alias
+1,id,4,Integer64,0,0,,Id
+2,project_name,10,String,0,0,,Nom du projet
+3,crs,10,String,0,0,,crs
+4,extent,10,String,0,0,,Emprise

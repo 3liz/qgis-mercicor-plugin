@@ -4,7 +4,10 @@ import configparser
 import shutil
 import tempfile
 
-from os.path import abspath, dirname, join, pardir
+from os.path import abspath, dirname, join
+
+from qgis.core import QgsProcessingException, QgsVectorLayer
+from qgis.PyQt.QtWidgets import QApplication
 
 
 def plugin_path(*args):
@@ -17,7 +20,7 @@ def plugin_path(*args):
     :rtype: str
     """
     path = dirname(__file__)
-    path = abspath(abspath(join(path, pardir)))
+    path = abspath(abspath(path))
     for item in args:
         path = abspath(join(path, item))
 
@@ -74,3 +77,20 @@ def resources_path(*args):
         path = abspath(join(path, item))
 
     return path
+
+
+def tr(text, context="@default"):
+    return QApplication.translate(context, text)
+
+
+def load_csv(csv_filename: str, path=None) -> QgsVectorLayer:
+    """Load a named CSV as a vector layer."""
+    if not path:
+        path = resources_path('data', '{}.csv'.format(csv_filename))
+    layer = QgsVectorLayer(path, csv_filename, 'ogr')
+    layer.setProviderEncoding('UTF-8')
+    if not layer.isValid():
+        raise QgsProcessingException(
+            '* ERREUR: Impossible de charger le CSV "{}"'.format(path))
+
+    return layer
