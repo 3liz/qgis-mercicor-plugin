@@ -97,14 +97,14 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
 
-        baseName = self.parameterAsString(parameters, self.FILE_GPKG, context)
-        projectName = self.parameterAsString(parameters, self.PROJECT_NAME, context)
+        base_name = self.parameterAsString(parameters, self.FILE_GPKG, context)
+        project_name = self.parameterAsString(parameters, self.PROJECT_NAME, context)
         extent = self.parameterAsExtent(parameters, self.PROJECT_EXTENT, context)
-        parentBaseName = str(Path(baseName).parent)
-        if not baseName.endswith('.gpkg'):
-            baseName = os.path.join(parentBaseName, Path(baseName).stem + '.gpkg')
+        parent_base_name = str(Path(base_name).parent)
+        if not base_name.endswith('.gpkg'):
+            base_name = os.path.join(parent_base_name, Path(base_name).stem + '.gpkg')
 
-        if os.path.exists(baseName):
+        if os.path.exists(base_name):
             feedback.reportError('Le fichier existe déjà.')
 
         tables = [
@@ -120,7 +120,7 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
         }
 
         encoding = 'UTF-8'
-        driverName = QgsVectorFileWriter.driverForExtension('gpkg')
+        driver_name = QgsVectorFileWriter.driverForExtension('gpkg')
         crs = self.parameterAsCrs(parameters, self.PROJECT_CRS, context)
 
         for tab in tables:
@@ -148,11 +148,11 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
 
             # set create file layer options
             options = QgsVectorFileWriter.SaveVectorOptions()
-            options.driverName = driverName
+            options.driverName = driver_name
             options.fileEncoding = encoding
 
             options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteFile
-            if os.path.exists(baseName):
+            if os.path.exists(base_name):
                 options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteLayer
 
             options.layerName = vl.name()
@@ -161,7 +161,7 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
             # write file
             write_result, error_message = QgsVectorFileWriter.writeAsVectorFormat(
                 vl,
-                baseName,
+                base_name,
                 options)
 
             # result
@@ -173,13 +173,12 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
             del pr
             del vl
 
-        outputLayers = []
+        output_layers = []
         for tab in tables:
-            # Connexion à la couche troncon_rerau_classif dans le Geopackage
-            dest_layer = QgsVectorLayer('{0}|layername={1}'.format(baseName, tab), tab, 'ogr')
+            dest_layer = QgsVectorLayer('{0}|layername={1}'.format(base_name, tab), tab, 'ogr')
             if not dest_layer.isValid():
                 raise QgsProcessingException(
-                    '* ERROR: Can\'t load layer {1} in {0}'.format(baseName, tab))
+                    '* ERROR: Can\'t load layer {1} in {0}'.format(base_name, tab))
 
             feedback.pushInfo('The layer {0} has been created'.format(tab))
 
@@ -187,14 +186,14 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
                 fields = dest_layer.fields()
                 feature = QgsFeature()
                 feature.setFields(fields)
-                feature.setAttribute(fields.indexFromName('project_name'), projectName)
+                feature.setAttribute(fields.indexFromName('project_name'), project_name)
                 feature.setAttribute(fields.indexFromName('crs'), str(crs.authid()))
                 feature.setAttribute(fields.indexFromName('extent'), str(extent))
                 dest_layer.startEditing()
                 dest_layer.addFeature(feature)
                 dest_layer.commitChanges()
 
-            outputLayers.append(dest_layer.id())
+            output_layers.append(dest_layer.id())
             # Ajout de la couche au projet
             context.temporaryLayerStore().addMapLayer(dest_layer)
             context.addLayerToLoadOnCompletion(
@@ -205,5 +204,5 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
                     self.OUTPUT_LAYERS
                 )
             )
-            context.project().setFileName(projectName)
-        return {self.FILE_GPKG: baseName, self.OUTPUT_LAYERS: outputLayers}
+            context.project().setFileName(project_name)
+        return {self.FILE_GPKG: base_name, self.OUTPUT_LAYERS: output_layers}

@@ -1,7 +1,7 @@
 
 start_tests:
 	@echo 'Start docker-compose'
-	@cd .docker && ./start.sh
+	@cd .docker && ./start.sh with-qgis
 
 run_tests:
 	@echo 'Running tests, containers must be running'

@@ -46,7 +46,7 @@ def _run_tests(test_suite, package_name, pattern):
     print("TOTAL                : {}".format(results.testsRun))
 
 
-def test_package(package=".", pattern="test_*.py"):
+def test_package(package=None, pattern="test_*.py"):
     """Test package.
     This function is called by CLI without arguments.
 
@@ -60,6 +60,9 @@ def test_package(package=".", pattern="test_*.py"):
     if pattern_environment and pattern_environment != 'default_pattern':
         print("Pattern from environment : {}".format(pattern_environment))
         pattern = pattern_environment
+
+    if package is None:
+        package = os.path.dirname(os.path.realpath(__file__))
 
     test_loader = unittest.defaultTestLoader
     test_suite = test_loader.discover(package, pattern=pattern)

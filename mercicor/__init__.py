@@ -11,5 +11,5 @@ def classFactory(iface):  # pylint: disable=invalid-name
     :param iface: A QGIS interface instance.
     :type iface: QgisInterface
     """
-    from mercicor.mercicor import Mercicor
+    from mercicor.plugin import Mercicor
     return Mercicor(iface)

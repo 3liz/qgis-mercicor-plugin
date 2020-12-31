@@ -18,10 +18,10 @@ Lint:
   tags:
     - factory
 
-QGIS-3.4:
+QGIS-3.10:
   stage: Tests 🎳
   image:
-    name: registry.snap.lizlan:5000/qgis/qgis:release-3_4
+    name: registry.snap.lizlan:5000/qgis/qgis:release-3_10
   script:
     - qgis_setup.sh ${PLUGIN_NAME}
     # Patch the script because it use an invalid redirection to non-existent /dev/tty

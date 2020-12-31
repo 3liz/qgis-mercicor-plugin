@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 export $(grep -v '^#' .env | xargs)
 
+WITH_QGIS=${1:-noqgis}
+
 FILE="docker-compose-qgis.yml"
 
 docker-compose -f ${FILE} up -d --force-recreate --remove-orphans

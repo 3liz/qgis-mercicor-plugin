@@ -1,16 +1,12 @@
 """ Test geopackage """
 
 import os.path
-import unittest
-
-from os import listdir
-
-import processing
 
 from qgis.core import QgsProcessingContext, QgsProcessingFeedback, QgsProject
+from qgis.processing import run
 
 from mercicor.processing.provider import MercicorProvider as ProcessingProvider
-from mercicor.qgis_plugin_tools import plugin_test_data_path, resources_path
+from mercicor.tests.base_processing import BaseTestProcessing
 
 __copyright__ = "Copyright 2019, 3Liz"
 __license__ = "GPL version 3"
@@ -18,10 +14,10 @@ __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
 
 
-class TestGeopackage(unittest.TestCase):
+class TestGeopackage(BaseTestProcessing):
 
     def test_create_geopackage(self):
-        """ test to create geopackage """
+        """ Test to create geopackage. """
         provider = ProcessingProvider()
         project = QgsProject()
         context = QgsProcessingContext()
@@ -29,17 +25,16 @@ class TestGeopackage(unittest.TestCase):
         feedback = QgsProcessingFeedback()
 
         params = {
-            "FILE_GPKG": plugin_test_data_path('test.gpkg'),
+            "FILE_GPKG": '/tmp/test_create_geopackage.gpkg',
             "PROJECT_NAME": 'test_geopackage',
             "PROJECT_CRS": 'EPSG:2154',
             "PROJECT_EXTENT": (
-                '-338017.34377143125,834663.5259292874,752553.0288248351,1087604.7058821833 ',
-                '[EPSG:2154]'
+                '-338017.34377143125,834663.5259292874,752553.0288248351,1087604.7058821833'
             )
         }
         alg = "{}:create_geopackage_project".format(provider.id())
-        processing.run(
+        run(
             alg, params, context=context, feedback=feedback
         )
 
-        self.assertTrue(os.path.exists(plugin_test_data_path('test.gpkg')))
+        self.assertTrue(os.path.exists('/tmp/test_create_geopackage.gpkg'))
