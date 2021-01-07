@@ -22,7 +22,8 @@ class Mercicor:
         self.initProcessing()
 
     def unload(self):
-        pass
+        if self.provider:
+            QgsApplication.processingRegistry().removeProvider(self.provider)
 
     @staticmethod
     def run_tests(pattern='test_*.py', package=None):

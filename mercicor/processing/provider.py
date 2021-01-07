@@ -8,6 +8,7 @@ from qgis.PyQt.QtGui import QIcon
 from mercicor.processing.project.create_geopackage import (
     CreateGeopackageProject,
 )
+from mercicor.processing.project.load_qml import LoadStyles
 from mercicor.qgis_plugin_tools import resources_path
 
 
@@ -15,6 +16,7 @@ class MercicorProvider(QgsProcessingProvider):
 
     def loadAlgorithms(self):
         self.addAlgorithm(CreateGeopackageProject())
+        self.addAlgorithm(LoadStyles())
 
     def id(self):  # NOQA
         return "mercicor"

@@ -1,7 +1,6 @@
 __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
-__revision__ = "$Format:%H$"
 
 import os.path
 
@@ -22,11 +21,11 @@ from qgis.core import (
     QgsVectorLayer,
 )
 
-from mercicor.processing.base_algorithm import BaseProcessingAlgorithm
+from mercicor.processing.project.base import BaseProjectAlgorithm
 from mercicor.qgis_plugin_tools import load_csv, resources_path, tr
 
 
-class CreateGeopackageProject(BaseProcessingAlgorithm):
+class CreateGeopackageProject(BaseProjectAlgorithm):
 
     FILE_GPKG = 'FILE_GPKG'
     PROJECT_CRS = 'PROJECT_CRS'
@@ -40,14 +39,8 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
     def displayName(self):
         return tr('Create geopackage project')
 
-    def group(self):
-        return tr('Administration')
-
-    def groupId(self):
-        return 'administration'
-
     def shortHelpString(self):
-        return 'algorithm to create a geopackage file with 3 layers'
+        return 'To start a blank new project, you need to create first a geopackage file.'
 
     def initAlgorithm(self, config):
 
@@ -100,6 +93,7 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
         base_name = self.parameterAsString(parameters, self.FILE_GPKG, context)
         project_name = self.parameterAsString(parameters, self.PROJECT_NAME, context)
         extent = self.parameterAsExtent(parameters, self.PROJECT_EXTENT, context)
+
         parent_base_name = str(Path(base_name).parent)
         if not base_name.endswith('.gpkg'):
             base_name = os.path.join(parent_base_name, Path(base_name).stem + '.gpkg')
@@ -127,18 +121,18 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
             # create virtual layer
             vl_path = geometries[tab]
             if vl_path != 'None':
-                vl_path = "{0}?crs={1}".format(geometries[tab], crs.authid())
+                vl_path = "{}?crs={}".format(geometries[tab], crs.authid())
             vl = QgsVectorLayer(vl_path, tab, "memory")
             pr = vl.dataProvider()
 
             # define fields
             fields = QgsFields()
 
-            path = resources_path('data_models', '{0}.csv'.format(tab,))
+            path = resources_path('data_models', '{}.csv'.format(tab))
             csv = load_csv(tab, path)
 
-            for cfeat in csv.getFeatures():
-                fields.append(QgsField(name=cfeat['name'], type=int(cfeat['type'])))
+            for csv_feature in csv.getFeatures():
+                fields.append(QgsField(name=csv_feature['name'], type=int(csv_feature['type'])))
 
             del csv
 
@@ -166,8 +160,7 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
 
             # result
             if write_result != QgsVectorFileWriter.NoError:
-                raise QgsProcessingException(
-                    '* ERROR: {0}'.format(error_message))
+                raise QgsProcessingException('* ERROR: {}'.format(error_message))
 
             del fields
             del pr
@@ -175,12 +168,12 @@ class CreateGeopackageProject(BaseProcessingAlgorithm):
 
         output_layers = []
         for tab in tables:
-            dest_layer = QgsVectorLayer('{0}|layername={1}'.format(base_name, tab), tab, 'ogr')
+            dest_layer = QgsVectorLayer('{}|layername={}'.format(base_name, tab), tab, 'ogr')
             if not dest_layer.isValid():
                 raise QgsProcessingException(
                     '* ERROR: Can\'t load layer {1} in {0}'.format(base_name, tab))
 
-            feedback.pushInfo('The layer {0} has been created'.format(tab))
+            feedback.pushInfo('The layer {} has been created'.format(tab))
 
             if tab == 'metadata':
                 fields = dest_layer.fields()
