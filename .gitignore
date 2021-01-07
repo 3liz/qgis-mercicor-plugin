@@ -16,3 +16,7 @@ plugins.xml
 # Temp files
 *~
 *.bak
+
+# Geopackage
+*.gpkg-shm
+*.gpkg-wal

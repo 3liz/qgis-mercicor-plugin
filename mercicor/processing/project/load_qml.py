@@ -7,8 +7,8 @@ import os
 
 from qgis.core import (
     QgsMapLayer,
-    QgsProcessingParameterDefinition,
-    QgsProcessingParameterString,
+    QgsProcessingOutputNumber,
+    QgsProcessingParameterBoolean,
 )
 
 from mercicor.processing.project.base import BaseProjectAlgorithm
@@ -17,8 +17,12 @@ from mercicor.qgis_plugin_tools import resources_path, tr
 
 class LoadStyles(BaseProjectAlgorithm):
 
-    INPUT = "INPUT"
-    OUTPUT_MSG = "OUTPUT MSG"
+    CHECK = 'CHECK'
+    QML_LOADED = 'QML_LOADED'
+
+    def __init__(self):
+        super().__init__()
+        self.success = 0
 
     def name(self):
         return "load_qml"
@@ -30,17 +34,26 @@ class LoadStyles(BaseProjectAlgorithm):
         return tr("Charger les styles pour les différentes couches.")
 
     def initAlgorithm(self, config):
-        parameter = QgsProcessingParameterString(self.INPUT, "Champ qui ne sert à rien.")
-        parameter.setFlags(parameter.flags() | QgsProcessingParameterDefinition.FlagHidden)
-        self.addParameter(parameter)
+        self.addParameter(QgsProcessingParameterBoolean(self.CHECK, "Appliquer les styles"))
+        self.addOutput(QgsProcessingOutputNumber(self.QML_LOADED, 'Nombre de QML chargés'))
+
+    def checkParameterValues(self, parameters, context):
+        flag = self.parameterAsBoolean(parameters, self.CHECK, context)
+        if not flag:
+            return False, 'Vous devez utiliser la case à cocher pour l\'application des styles.'
+
+        return super().checkParameterValues(parameters, context)
 
     def prepareAlgorithm(self, parameters, context, feedback):
         _ = parameters
+
         expected_names = ["habitat", "pression"]
         qml_component = {
             'style': QgsMapLayer.Symbology,
             'form': QgsMapLayer.Forms,
         }
+
+        self.success = 0
 
         for name, component in qml_component.items():
             for layer_name in expected_names:
@@ -51,9 +64,10 @@ class LoadStyles(BaseProjectAlgorithm):
                         continue
                     layer.loadNamedStyle(qml_file, component)
                     feedback.pushInfo(layer.name() + "Style for {} successfully loaded")
+                    self.success += 1
 
         return True
 
     def processAlgorithm(self, parameters, context, feedback):
         _, _, _ = parameters, context, feedback
-        return {}
+        return {self.QML_LOADED: self.success}

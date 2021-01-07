@@ -51,7 +51,7 @@ def plugin_test_data_path(*args, copy=False):
     :return: Absolute path to the resources folder.
     :rtype: str
     """
-    path = abspath(abspath(join(plugin_path(), "test", "data")))
+    path = abspath(abspath(join(plugin_path(), "tests", "data")))
     for item in args:
         path = abspath(join(path, item))
 
