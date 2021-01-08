@@ -1,4 +1,4 @@
-""" Test geopackage """
+""" Test project. """
 
 import os.path
 
@@ -8,7 +8,7 @@ from qgis.processing import run
 from mercicor.qgis_plugin_tools import plugin_test_data_path
 from mercicor.tests.base_processing import BaseTestProcessing
 
-__copyright__ = "Copyright 2019, 3Liz"
+__copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 __revision__ = "$Format:%H$"
