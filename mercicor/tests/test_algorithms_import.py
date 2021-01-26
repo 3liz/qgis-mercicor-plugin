@@ -6,6 +6,7 @@ from qgis.core import (
     QgsPointXY,
     QgsProcessingContext,
     QgsProject,
+    QgsRectangle,
     QgsVectorLayer,
     edit,
 )
@@ -39,44 +40,56 @@ class TestImportAlgorithms(BaseTestProcessing):
         self.assertTrue(habitat_layer.isValid())
         project.addMapLayer(habitat_layer)
 
-        layer_to_import = QgsVectorLayer(
-            'MultiPolygon?crs=epsg:2154&field=id:integer&field=expression:string(20)&index=yes',
-            'polygon',
-            'memory')
+        projections = ['2154', '4326']
+        for i, proj in enumerate(projections):
+            layer_to_import = QgsVectorLayer(
+                f'MultiPolygon?crs=epsg:{proj}&field=id:integer&field=expression:string(20)&index=yes',
+                'polygon',
+                'memory')
 
-        x = 700000  # NOQA VNE001
-        y = 7000000  # NOQA VNE001
+            if proj == '2154':
+                x = 700000  # NOQA VNE001
+                y = 7000000  # NOQA VNE001
+            else:
+                x = 3.0  # NOQA VNE001
+                y = 50.0  # NOQA VNE001
 
-        with edit(layer_to_import):
-            feature = QgsFeature(layer_to_import.fields())
-            feature.setGeometry(QgsGeometry.fromMultiPolygonXY(
-                [
+            with edit(layer_to_import):
+                feature = QgsFeature(layer_to_import.fields())
+                feature.setGeometry(QgsGeometry.fromMultiPolygonXY(
                     [
                         [
-                            QgsPointXY(0+x, 0+y), QgsPointXY(5+x, 0+y), QgsPointXY(5+x, 5+y),
-                            QgsPointXY(0+x, 5+y), QgsPointXY(0+x, 0+y)
-                        ]
-                    ],
-                    [
+                            [
+                                QgsPointXY(0+x, 0+y), QgsPointXY(5+x, 0+y), QgsPointXY(5+x, 5+y),
+                                QgsPointXY(0+x, 5+y), QgsPointXY(0+x, 0+y)
+                            ]
+                        ],
                         [
-                            QgsPointXY(5+x, 0+y), QgsPointXY(10+x, 0+y), QgsPointXY(10+x, 5+y),
-                            QgsPointXY(5+x, 5+y), QgsPointXY(5+x, 0+y)
+                            [
+                                QgsPointXY(5+x, 0+y), QgsPointXY(10+x, 0+y), QgsPointXY(10+x, 5+y),
+                                QgsPointXY(5+x, 5+y), QgsPointXY(5+x, 0+y)
+                            ]
                         ]
                     ]
-                ]
-            ))
-            feature.setAttributes([1, "area($geometry)"])
-            layer_to_import.addFeature(feature)
+                ))
+                feature.setAttributes([1, "area($geometry)"])
+                layer_to_import.addFeature(feature)
 
-        self.assertEqual(1, layer_to_import.featureCount())
+            self.assertEqual(1, layer_to_import.featureCount())
 
-        params = {
-            "INPUT_LAYER": layer_to_import,
-            "EXPRESSION_FIELD": 'expression',
-            "OUTPUT_LAYER": pression_layer,
-        }
-        run("mercicor:import_donnees_pression", params)
+            params = {
+                "INPUT_LAYER": layer_to_import,
+                "EXPRESSION_FIELD": 'expression',
+                "OUTPUT_LAYER": pression_layer,
+            }
+            run("mercicor:import_donnees_pression", params)
 
-        self.assertEqual(2, pression_layer.featureCount())
-        index = pression_layer.fields().indexOf('type_pression')
-        self.assertSetEqual({'25'}, pression_layer.uniqueValues(index))
+            self.assertEqual(2 * (i + 1), pression_layer.featureCount())
+
+            if proj == '2154':
+                index = pression_layer.fields().indexOf('type_pression')
+                self.assertSetEqual({'25'}, pression_layer.uniqueValues(index))
+
+                self.assertEqual(layer_to_import.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
+            else:
+                self.assertEqual(layer_to_import.extent(), QgsRectangle(3, 50, 13, 55))

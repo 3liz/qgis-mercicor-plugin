@@ -83,6 +83,23 @@ class ImportPressureData(BaseImportAlgorithm):
             feedback=feedback,
             is_child_algorithm=True)
 
+        if input_layer.crs() != output_layer.crs():
+            feedback.pushInfo(
+                'Le CRS de la couche de destination est différent. Reprojection en {}…'.format(
+                    output_layer.crs().authid()))
+
+            params = {
+                'INPUT': results['OUTPUT'],
+                'TARGET_CRS': output_layer.crs(),
+                'OUTPUT': 'memory:'
+            }
+            results = processing.run(
+                "native:reprojectlayer",
+                params,
+                context=context,
+                feedback=feedback,
+                is_child_algorithm=True)
+
         if not isinstance(results['OUTPUT'], QgsVectorLayer):
             layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
         else:
