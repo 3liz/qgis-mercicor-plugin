@@ -2,7 +2,7 @@
 
 import os.path
 
-from qgis.core import QgsProcessingContext, QgsProject, QgsVectorLayer
+from qgis.core import QgsVectorLayer
 from qgis.processing import run
 
 from mercicor.qgis_plugin_tools import plugin_test_data_path
@@ -30,24 +30,19 @@ class TestProjectAlgorithms(BaseTestProcessing):
 
     def test_apply_qml_styles(self):
         """ Test to apply some QML to loaded layers in the canvas. """
-        project = QgsProject()
-        context = QgsProcessingContext()
-        context.setProject(project)
-
         gpkg = plugin_test_data_path('main_geopackage.gpkg', copy=True)
 
         name = 'pression'
         pression_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
         self.assertTrue(pression_layer.isValid())
-        project.addMapLayer(pression_layer)
 
         name = 'habitat'
         habitat_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
         self.assertTrue(habitat_layer.isValid())
-        project.addMapLayer(habitat_layer)
 
         params = {
-            "CHECK": True,
+            "PRESSURE_LAYER": pression_layer,
+            "HABITAT_LAYER": habitat_layer,
         }
-        result = run("mercicor:load_qml", params, context=context)
-        self.assertGreaterEqual(1, result['QML_LOADED'])
+        result = run("mercicor:load_qml", params)
+        self.assertGreaterEqual(2, result['QML_LOADED'])

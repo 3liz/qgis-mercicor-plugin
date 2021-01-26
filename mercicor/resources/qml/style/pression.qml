@@ -1,16 +1,18 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
 <qgis styleCategories="Symbology" version="3.10.14-A Coruña">
-  <renderer-v2 attr="sante" forceraster="0" symbollevels="0" enableorderby="0" type="categorizedSymbol">
+  <renderer-v2 attr="type_pression" forceraster="0" symbollevels="0" enableorderby="0" type="categorizedSymbol">
     <categories>
       <category value="1" symbol="0" render="true" label="Bon"/>
       <category value="2" symbol="1" render="true" label="Moyen"/>
-      <category value="3" symbol="2" render="true" label="Mauvais"/>
+      <category value="3" symbol="2" render="true" label="Assez moyen"/>
+      <category value="4" symbol="3" render="true" label="Mauvais"/>
+      <category value="5" symbol="4" render="true" label="Très mauvais"/>
     </categories>
     <symbols>
       <symbol type="fill" name="0" clip_to_extent="1" force_rhr="0" alpha="1">
         <layer enabled="1" locked="0" pass="0" class="SimpleFill">
           <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
-          <prop v="199,233,173,255" k="color"/>
+          <prop v="171,221,164,255" k="color"/>
           <prop v="bevel" k="joinstyle"/>
           <prop v="0,0" k="offset"/>
           <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
@@ -32,7 +34,7 @@
       <symbol type="fill" name="1" clip_to_extent="1" force_rhr="0" alpha="1">
         <layer enabled="1" locked="0" pass="0" class="SimpleFill">
           <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
-          <prop v="254,201,128,255" k="color"/>
+          <prop v="255,255,191,255" k="color"/>
           <prop v="bevel" k="joinstyle"/>
           <prop v="0,0" k="offset"/>
           <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
@@ -54,7 +56,51 @@
       <symbol type="fill" name="2" clip_to_extent="1" force_rhr="0" alpha="1">
         <layer enabled="1" locked="0" pass="0" class="SimpleFill">
           <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
-          <prop v="215,25,28,255" k="color"/>
+          <prop v="253,174,97,255" k="color"/>
+          <prop v="bevel" k="joinstyle"/>
+          <prop v="0,0" k="offset"/>
+          <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+          <prop v="MM" k="offset_unit"/>
+          <prop v="35,35,35,255" k="outline_color"/>
+          <prop v="solid" k="outline_style"/>
+          <prop v="0.26" k="outline_width"/>
+          <prop v="MM" k="outline_width_unit"/>
+          <prop v="solid" k="style"/>
+          <data_defined_properties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </data_defined_properties>
+        </layer>
+      </symbol>
+      <symbol type="fill" name="3" clip_to_extent="1" force_rhr="0" alpha="1">
+        <layer enabled="1" locked="0" pass="0" class="SimpleFill">
+          <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+          <prop v="222,104,106,255" k="color"/>
+          <prop v="bevel" k="joinstyle"/>
+          <prop v="0,0" k="offset"/>
+          <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
+          <prop v="MM" k="offset_unit"/>
+          <prop v="35,35,35,255" k="outline_color"/>
+          <prop v="solid" k="outline_style"/>
+          <prop v="0.26" k="outline_width"/>
+          <prop v="MM" k="outline_width_unit"/>
+          <prop v="solid" k="style"/>
+          <data_defined_properties>
+            <Option type="Map">
+              <Option type="QString" name="name" value=""/>
+              <Option name="properties"/>
+              <Option type="QString" name="type" value="collection"/>
+            </Option>
+          </data_defined_properties>
+        </layer>
+      </symbol>
+      <symbol type="fill" name="4" clip_to_extent="1" force_rhr="0" alpha="1">
+        <layer enabled="1" locked="0" pass="0" class="SimpleFill">
+          <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
+          <prop v="186,28,0,255" k="color"/>
           <prop v="bevel" k="joinstyle"/>
           <prop v="0,0" k="offset"/>
           <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>
@@ -78,7 +124,7 @@
       <symbol type="fill" name="0" clip_to_extent="1" force_rhr="0" alpha="1">
         <layer enabled="1" locked="0" pass="0" class="SimpleFill">
           <prop v="3x:0,0,0,0,0,0" k="border_width_map_unit_scale"/>
-          <prop v="232,113,141,255" k="color"/>
+          <prop v="255,158,23,255" k="color"/>
           <prop v="bevel" k="joinstyle"/>
           <prop v="0,0" k="offset"/>
           <prop v="3x:0,0,0,0,0,0" k="offset_map_unit_scale"/>

@@ -7,8 +7,9 @@ import os
 
 from qgis.core import (
     QgsMapLayer,
+    QgsProcessing,
     QgsProcessingOutputNumber,
-    QgsProcessingParameterBoolean,
+    QgsProcessingParameterVectorLayer,
 )
 
 from mercicor.processing.project.base import BaseProjectAlgorithm
@@ -17,7 +18,8 @@ from mercicor.qgis_plugin_tools import resources_path, tr
 
 class LoadStyles(BaseProjectAlgorithm):
 
-    CHECK = 'CHECK'
+    PRESSURE_LAYER = 'PRESSURE_LAYER'
+    HABITAT_LAYER = 'HABITAT_LAYER'
     QML_LOADED = 'QML_LOADED'
 
     def __init__(self):
@@ -34,20 +36,36 @@ class LoadStyles(BaseProjectAlgorithm):
         return tr("Charger les styles pour les différentes couches.")
 
     def initAlgorithm(self, config):
-        self.addParameter(QgsProcessingParameterBoolean(self.CHECK, "Appliquer les styles"))
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.PRESSURE_LAYER,
+                "Couche des pressions",
+                [QgsProcessing.TypeVectorPolygon],
+                defaultValue='pression',
+                optional=True,
+            )
+        )
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.HABITAT_LAYER,
+                "Couche des habitats",
+                [QgsProcessing.TypeVectorPolygon],
+                defaultValue='habitat',
+                optional=True,
+            )
+        )
         self.addOutput(QgsProcessingOutputNumber(self.QML_LOADED, 'Nombre de QML chargés'))
 
-    def checkParameterValues(self, parameters, context):
-        flag = self.parameterAsBoolean(parameters, self.CHECK, context)
-        if not flag:
-            return False, 'Vous devez utiliser la case à cocher pour l\'application des styles.'
-
-        return super().checkParameterValues(parameters, context)
-
     def prepareAlgorithm(self, parameters, context, feedback):
-        _ = parameters
 
-        expected_names = ["habitat", "pression"]
+        pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LAYER, context)
+        habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
+
+        input_layers = {
+            "habitat": habitat_layer,
+            "pression": pressure_layer,
+        }
+
         qml_component = {
             'style': QgsMapLayer.Symbology,
             'form': QgsMapLayer.Forms,
@@ -56,15 +74,13 @@ class LoadStyles(BaseProjectAlgorithm):
         self.success = 0
 
         for name, component in qml_component.items():
-            for layer_name in expected_names:
-                layers = context.project().mapLayersByName(layer_name)
-                for layer in layers:
-                    qml_file = resources_path('qml', name, '{}.qml'.format(layer_name))
-                    if not os.path.exists(qml_file):
-                        continue
-                    layer.loadNamedStyle(qml_file, component)
-                    feedback.pushInfo(layer.name() + "Style for {} successfully loaded")
-                    self.success += 1
+            for layer_name, vector_layer in input_layers.items():
+                qml_file = resources_path('qml', name, '{}.qml'.format(layer_name))
+                if not os.path.exists(qml_file):
+                    continue
+                vector_layer.loadNamedStyle(qml_file, component)
+                feedback.pushInfo(vector_layer.name() + "Style for {} successfully loaded")
+                self.success += 1
 
         return True
 
