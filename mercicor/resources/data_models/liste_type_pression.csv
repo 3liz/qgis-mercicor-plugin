@@ -1,4 +1,4 @@
 idx,name,type,typeName,length,precision,comment,alias
 1,id,4,Integer64,0,0,ID,Id
-2,nom_zni,10,String,0,0,Nom,Nom
-3,sante,4,Integer64,0,0,État,État
+2,key,4,Integer64,0,0,Clé,Clé
+3,label,10,String,0,0,Étiquette,Étiquette

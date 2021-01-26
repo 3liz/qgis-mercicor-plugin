@@ -18,15 +18,20 @@ class TestProjectAlgorithms(BaseTestProcessing):
 
     def test_create_geopackage(self):
         """ Test to create a geopackage. """
+        file_path = '/tmp/test_create_geopackage.gpkg'
         params = {
-            "FILE_GPKG": '/tmp/test_create_geopackage.gpkg',
+            "FILE_GPKG": file_path,
             "PROJECT_NAME": 'test_geopackage',
             "PROJECT_CRS": 'EPSG:2154',
             "PROJECT_EXTENT": '0,10,0,10',
         }
         run("mercicor:create_geopackage_project", params)
 
-        self.assertTrue(os.path.exists('/tmp/test_create_geopackage.gpkg'))
+        self.assertTrue(os.path.exists(file_path))
+
+        layer = QgsVectorLayer(file_path, "test", "ogr")
+        self.assertTrue(layer.isValid())
+        self.assertEqual(5, len(layer.dataProvider().subLayers()))
 
     def test_apply_qml_styles(self):
         """ Test to apply some QML to loaded layers in the canvas. """

@@ -4,7 +4,7 @@
     <categories>
       <category value="1" symbol="0" render="true" label="Bon"/>
       <category value="2" symbol="1" render="true" label="Moyen"/>
-      <category value="3" symbol="2" render="true" label="Mauvais"/>
+      <category value="3" symbol="2" render="true" label="Faible"/>
     </categories>
     <symbols>
       <symbol type="fill" name="0" clip_to_extent="1" force_rhr="0" alpha="1">

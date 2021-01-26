@@ -107,8 +107,8 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             'habitat': 'Polygon',
             'pression': 'Polygon',
             'metadata': 'None',
-            # 'liste_type_pression': 'None',
-            # 'liste_sante': 'None',
+            'liste_type_pression': 'None',
+            'liste_sante': 'None',
         }
 
         self.create_geopackage(base_name, crs, tables)
@@ -116,13 +116,25 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         output_layers = self.load_layers(base_name, feedback, tables)
 
         # Add metadata
-        fields = output_layers['metadata'].fields()
-        feature = QgsFeature(fields)
-        feature.setAttribute(fields.indexFromName('project_name'), project_name)
-        feature.setAttribute(fields.indexFromName('crs'), str(crs.authid()))
-        feature.setAttribute(fields.indexFromName('extent'), str(extent))
+        feature = QgsFeature(output_layers['metadata'].fields())
+        feature.setAttribute('project_name', project_name)
+        feature.setAttribute('crs', str(crs.authid()))
+        feature.setAttribute('extent', str(extent))
         with edit(output_layers['metadata']):
             output_layers['metadata'].addFeature(feature)
+
+        # Add glossary for pressure
+        data = {
+            'liste_type_pression': ['Très faible', 'Faible', 'Moyenne', 'Forte', 'Très forte'],
+            'liste_sante': ['Bon', 'Moyen', 'Faible'],
+        }
+        for table, labels in data.items():
+            with edit(output_layers[table]):
+                for i, label in enumerate(labels):
+                    feature = QgsFeature(output_layers[table].fields())
+                    feature.setAttribute('key', i + 1)
+                    feature.setAttribute('label', label)
+                    output_layers[table].addFeature(feature)
 
         # Load layers in the project
         output_id = []
