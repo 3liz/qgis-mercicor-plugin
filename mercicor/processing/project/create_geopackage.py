@@ -124,6 +124,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             output_layers['metadata'].addFeature(feature)
 
         # Add glossary for pressure
+        # If you edit these labels, you MUST change in the resources/qml/style folder as well
         data = {
             'liste_type_pression': ['Très faible', 'Faible', 'Moyenne', 'Forte', 'Très forte'],
             'liste_sante': ['Bon', 'Moyen', 'Faible'],

@@ -50,4 +50,5 @@ class TestProjectAlgorithms(BaseTestProcessing):
             "HABITAT_LAYER": habitat_layer,
         }
         result = run("mercicor:load_qml", params)
-        self.assertGreaterEqual(2, result['QML_LOADED'])
+        self.assertGreaterEqual(4, result['QML_LOADED'])
+        self.assertGreaterEqual(2, result['RELATIONS_ADDED'])
