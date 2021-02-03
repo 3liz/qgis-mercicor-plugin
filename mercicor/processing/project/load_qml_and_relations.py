@@ -1,7 +1,6 @@
 __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
-__revision__ = "$Format:%H$"
 
 import os
 
@@ -35,7 +34,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         self.input_layers = None
 
     def name(self):
-        return "load_qml"
+        return "load_qml_and_relations"
 
     def displayName(self):
         return tr("Charger les styles")
@@ -98,8 +97,9 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         }
 
         qml_component = {
-            'style': QgsMapLayer.Symbology,
+            'fields': QgsMapLayer.Fields,
             'form': QgsMapLayer.Forms,
+            'style': QgsMapLayer.Symbology,
         }
 
         self.success_qml = 0
@@ -167,6 +167,10 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
             relation_manager.addRelation(relation)
             self.success_relation += 1
+
+        for layer in self.input_layers:
+            if layer.isSpatial():
+                layer.triggerRepaint()
 
         return {
             self.QML_LOADED: self.success_qml,
