@@ -60,6 +60,8 @@ class TestImportAlgorithms(BaseTestProcessing):
 
         assert 1 == layer_to_import.featureCount()
 
+        count = pression_layer.featureCount()
+
         params = {
             "INPUT_LAYER": layer_to_import,
             "EXPRESSION_FIELD": 'expression',
@@ -67,6 +69,7 @@ class TestImportAlgorithms(BaseTestProcessing):
         }
         run("mercicor:import_donnees_pression", params)
 
+        assert count + 2 == pression_layer.featureCount()
         return layer_to_import
 
     def test_import_pressure_data(self):

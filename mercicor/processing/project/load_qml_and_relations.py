@@ -168,7 +168,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             relation_manager.addRelation(relation)
             self.success_relation += 1
 
-        for layer in self.input_layers:
+        for layer in self.input_layers.values():
             if layer.isSpatial():
                 layer.triggerRepaint()
 

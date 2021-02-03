@@ -20,3 +20,6 @@ plugins.xml
 # Geopackage
 *.gpkg-shm
 *.gpkg-wal
+
+# Tests
+output_*.gpkg

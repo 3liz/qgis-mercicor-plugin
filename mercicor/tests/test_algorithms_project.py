@@ -46,7 +46,9 @@ class TestProjectAlgorithms(BaseTestProcessing):
             # With data
             name = 'pression'
             pression_layer = QgsVectorLayer('{}|layername={}'.format(file_path, name), name, 'ogr')
-            from mercicor.tests.test_algorithms_import import TestImportAlgorithms
+            from mercicor.tests.test_algorithms_import import (
+                TestImportAlgorithms,
+            )
             TestImportAlgorithms.import_data('2154', pression_layer)
 
             shutil.copy(file_path, plugin_test_data_path('output_main_geopackage_data.gpkg'))

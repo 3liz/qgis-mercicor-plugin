@@ -21,14 +21,20 @@ from qgis.core import (
 
 from mercicor.processing.imports.base import BaseImportAlgorithm
 
-# from mercicor.processing.post_processor import TriggerRepaintPostProcessor
-
 
 class ImportPressureData(BaseImportAlgorithm):
 
     INPUT_LAYER = 'INPUT_LAYER'
     EXPRESSION_FIELD = 'EXPRESSION_FIELD'
     OUTPUT_LAYER = 'OUTPUT_LAYER'
+
+    def __init__(self):
+        super().__init__()
+        self._output_layer = None
+
+    @property
+    def output_layer(self):
+        return self._output_layer
 
     def name(self):
         return 'import_donnees_pression'
@@ -70,7 +76,7 @@ class ImportPressureData(BaseImportAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT_LAYER, context)
         expression_field = self.parameterAsExpression(parameters, self.EXPRESSION_FIELD, context)
-        output_layer = self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context)
+        self._output_layer = self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context)
 
         params = {
             'INPUT': input_layer,
@@ -83,14 +89,14 @@ class ImportPressureData(BaseImportAlgorithm):
             feedback=feedback,
             is_child_algorithm=True)
 
-        if input_layer.crs() != output_layer.crs():
+        if input_layer.crs() != self.output_layer.crs():
             feedback.pushInfo(
                 'Le CRS de la couche de destination est différent. Reprojection en {}…'.format(
-                    output_layer.crs().authid()))
+                    self.output_layer.crs().authid()))
 
             params = {
                 'INPUT': results['OUTPUT'],
-                'TARGET_CRS': output_layer.crs(),
+                'TARGET_CRS': self.output_layer.crs(),
                 'OUTPUT': 'memory:'
             }
             results = processing.run(
@@ -126,21 +132,14 @@ class ImportPressureData(BaseImportAlgorithm):
 
             value = expression.evaluate(expression_context)
 
-            output_feature = QgsFeature(output_layer.fields())
+            output_feature = QgsFeature(self.output_layer.fields())
             output_feature.setGeometry(input_feature.geometry())
             output_feature.setAttribute('type_pression', value)
-            with edit(output_layer):
-                output_layer.addFeature(output_feature)
-
-        # context.layerToLoadOnCompletionDetails(
-        #     output_layer.id()
-        # ).setPostProcessor(
-        #     TriggerRepaintPostProcessor.create()
-        # )
+            with edit(self.output_layer):
+                self.output_layer.addFeature(output_feature)
 
         return {}
 
-    # def postProcess(self, context, feedback):
-    #     store = self.temporaryLayerStore()
-    #     output_layer = self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context)
-    #     out
+    def postProcess(self, context, feedback):
+        self.output_layer.reloadData()
+        self.output_layer.triggerRepaint()
