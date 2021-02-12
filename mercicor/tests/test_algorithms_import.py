@@ -55,7 +55,7 @@ class TestImportAlgorithms(BaseTestProcessing):
                     ]
                 ]
             ))
-            feature.setAttributes([1, "area($geometry)"])
+            feature.setAttributes([1, "if(area($geometry) = 25, 1,5)"])
             layer_to_import.addFeature(feature)
 
         assert 1 == layer_to_import.featureCount()
@@ -98,7 +98,7 @@ class TestImportAlgorithms(BaseTestProcessing):
 
             if proj == '2154':
                 index = pression_layer.fields().indexOf('type_pression')
-                self.assertSetEqual({25}, pression_layer.uniqueValues(index))
+                self.assertSetEqual({1}, pression_layer.uniqueValues(index))
 
                 self.assertEqual(layer_to_import.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
             else:
