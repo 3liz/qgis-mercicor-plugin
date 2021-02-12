@@ -85,11 +85,6 @@ class TestImportAlgorithms(BaseTestProcessing):
         self.assertTrue(pression_layer.isValid())
         project.addMapLayer(pression_layer)
 
-        name = 'habitat'
-        habitat_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
-        self.assertTrue(habitat_layer.isValid())
-        project.addMapLayer(habitat_layer)
-
         projections = ['2154', '4326']
         for i, proj in enumerate(projections):
             layer_to_import = self.import_data(proj, pression_layer)
@@ -103,3 +98,25 @@ class TestImportAlgorithms(BaseTestProcessing):
                 self.assertEqual(layer_to_import.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
             else:
                 self.assertEqual(layer_to_import.extent(), QgsRectangle(3, 50, 13, 55))
+
+    def test_import_habitat_data(self):
+        """ Test to import habitat data. """
+        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        target_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, 'habitat'), 'habitat', 'ogr')
+        self.assertEqual(0, target_layer.featureCount())
+
+        import_layer = QgsVectorLayer(plugin_test_data_path('import_habitat.geojson'), 'habitat', 'ogr')
+        self.assertTrue(import_layer.isValid())
+        self.assertEqual(1, import_layer.featureCount())
+        params = {
+            "INPUT_LAYER": import_layer,
+            "EXPRESSION_FIELD": 'expression',
+            "NAME_FIELD": 'nom',
+            "OUTPUT_LAYER": target_layer,
+        }
+        run("mercicor:import_donnees_habitat", params)
+        index = target_layer.fields().indexOf('sante')
+
+        self.assertEqual(2, target_layer.featureCount())
+        self.assertSetEqual({1}, target_layer.uniqueValues(index))
+        self.assertEqual(target_layer.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
