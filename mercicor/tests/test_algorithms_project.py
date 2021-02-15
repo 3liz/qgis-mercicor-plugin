@@ -80,5 +80,5 @@ class TestProjectAlgorithms(BaseTestProcessing):
             "HABITAT_LIST_LAYER": list_type_health,
         }
         result = run("mercicor:load_qml_and_relations", params)
-        self.assertGreaterEqual(6, result['QML_LOADED'])
+        self.assertGreaterEqual(8, result['QML_LOADED'])
         self.assertGreaterEqual(2, result['RELATIONS_ADDED'])
