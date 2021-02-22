@@ -1,7 +1,8 @@
-## CHANGELOG
+# CHANGELOG
 
-### 0.1.0 - 15/12/2020
+## 0.1.0 - 2021-02-23
 
-* First version of the plugin
+* Première version de l'extension
+* Import des données pressions et habitats
 
-###
+##

@@ -13,5 +13,5 @@ stop_tests:
 
 tests: start_tests run_tests stop_tests
 
-html-pages:
-	@docker run --rm -w /plugin -v $(shell pwd):/plugin 3liz/pymarkdown:latest docs/README.md docs/index.html
+processing-doc:
+	cd .docker && ./processing_doc.sh

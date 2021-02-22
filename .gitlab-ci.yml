@@ -9,6 +9,17 @@ stages:
 - Package 📦
 - Release 🚀
 
+Doc:
+  stage: Tests 🎳
+  before_script:
+    - pip install --user -r requirements-doc.txt
+  script:
+    - cp CHANGELOG.md docs/
+    - mkdocs build
+    - upload_folder_to_packages_server build/ private/${CUSTOMER}/docs
+  tags:
+    - factory
+
 Lint:
   stage: Tests 🎳
   before_script:
@@ -65,14 +76,6 @@ Package:
       - ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip
       - plugins.xml
       - changelog.txt
-
-Documentation:
-  stage: Release 🚀
-  when: manual
-  script:
-    - upload_folder_to_packages_server docs/ private/${CUSTOMER}/docs
-  tags:
-    - fabric
 
 Release:
   stage: Release 🚀

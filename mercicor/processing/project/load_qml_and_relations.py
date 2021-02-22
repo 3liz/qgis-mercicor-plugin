@@ -100,6 +100,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             'fields': QgsMapLayer.Fields,
             'form': QgsMapLayer.Forms,
             'style': QgsMapLayer.Symbology,
+            'layer_configuration': QgsMapLayer.LayerConfiguration,
         }
 
         self.success_qml = 0
@@ -117,7 +118,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 if not os.path.exists(qml_file):
                     continue
                 vector_layer.loadNamedStyle(qml_file, component)
-                feedback.pushInfo(vector_layer.name() + "{} for {} successfully loaded".format(
+                feedback.pushInfo(vector_layer.name() + " {} for {} successfully loaded".format(
                     name.capitalize(), layer_name))
                 self.success_qml += 1
 

@@ -9,6 +9,10 @@ __pycache__/
 # IDE
 .idea/
 
+# MkDocs
+docs/CHANGELOG.md
+build/
+
 # Plugins, QGIS-plugin-CI
 mercicor.*.zip
 plugins.xml
