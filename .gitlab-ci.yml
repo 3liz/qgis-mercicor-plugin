@@ -1,5 +1,5 @@
 variables:
-  CUSTOMER: "mercicor"
+  CUSTOMER: "um3-mercicor"
   PLUGIN_NAME: "mercicor"
   PROJECT_ID: "365"
   GIT_STRATEGY: clone
@@ -15,7 +15,7 @@ Doc:
     - pip install --user -r requirements-doc.txt
   script:
     - cp CHANGELOG.md docs/
-    - mkdocs build
+    - /home/factory-runner/.local/bin/mkdocs build -f mkdocs.yml
     - upload_folder_to_packages_server build/ private/${CUSTOMER}/docs
   tags:
     - factory
