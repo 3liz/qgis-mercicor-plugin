@@ -6,10 +6,10 @@ Il faut suivre la procédure sur [l'ajout d'un dépôt QGIS](https://docs.3liz.o
 à l'aide du dépôt QGIS ci-dessous et **aussi** suivre la partie pour ajouter une **authentification**.
 
 * Le nom d'utilisateur et le mot de passe ont été communiqués.
-* URL du dépôt QGIS : https://packages.3liz.org/private/mercicor/plugins.xml
+* URL du dépôt QGIS : https://packages.3liz.org/private/um3-mercicor/plugins.xml
 
 !!! tip
-    Pensez à utiliser la case à cocher dans QGIS pour qu'il puisse vérifier automatiquement les mises à jours
+    Pensez à utiliser la case à cocher dans QGIS pour qu'il puisse vérifier automatiquement les mises à jour
     des extensions. C'est dans "Gestionnaire des extensions -> Paramètres -> Chercher des mises à jour au 
     démarrage"
 
@@ -17,7 +17,7 @@ Il faut suivre la procédure sur [l'ajout d'un dépôt QGIS](https://docs.3liz.o
 
 Pour télécharger manuellement un ZIP d'une version :
 
-* URL du dernier ZIP : https://packages.3liz.org/private/mercicor/mercicor.latest.zip
-* URL d'un ZIP en particulier : https://packages.3liz.org/private/mercicor/mercicor.0.1.0.zip
+* URL du dernier ZIP : https://packages.3liz.org/private/um3-mercicor/mercicor.latest.zip
+* URL d'un ZIP en particulier : https://packages.3liz.org/private/um3-mercicor/mercicor.0.1.0.zip
 
 Il faut se référer au [changelog](../changelog.md) pour le numéro de version.
