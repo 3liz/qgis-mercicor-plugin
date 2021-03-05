@@ -37,7 +37,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
 
         layer = QgsVectorLayer(file_path, "test", "ogr")
         self.assertTrue(layer.isValid())
-        self.assertEqual(5, len(layer.dataProvider().subLayers()))
+        self.assertEqual(4, len(layer.dataProvider().subLayers()))
 
         if debug:
             # Without data
@@ -69,16 +69,11 @@ class TestProjectAlgorithms(BaseTestProcessing):
         list_type_pressure = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
         self.assertTrue(habitat_layer.isValid())
 
-        name = 'liste_sante'
-        list_type_health = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
-        self.assertTrue(habitat_layer.isValid())
-
         params = {
             "PRESSURE_LAYER": pression_layer,
             "PRESSURE_LIST_LAYER": list_type_pressure,
             "HABITAT_LAYER": habitat_layer,
-            "HABITAT_LIST_LAYER": list_type_health,
         }
         result = run("mercicor:load_qml_and_relations", params)
-        self.assertGreaterEqual(8, result['QML_LOADED'])
-        self.assertGreaterEqual(2, result['RELATIONS_ADDED'])
+        self.assertEqual(result['QML_LOADED'], 7)
+        # self.assertEqual(result['RELATIONS_ADDED'], 1)

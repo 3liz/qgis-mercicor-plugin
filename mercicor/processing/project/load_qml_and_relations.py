@@ -21,7 +21,6 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
     PRESSURE_LAYER = 'PRESSURE_LAYER'
     HABITAT_LAYER = 'HABITAT_LAYER'
-    HABITAT_LIST_LAYER = 'HABITAT_LIST_LAYER'
     PRESSURE_LIST_LAYER = 'PRESSURE_LIST_LAYER'
 
     RELATIONS_ADDED = 'RELATIONS_ADDED'
@@ -70,14 +69,6 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 defaultValue='liste_type_pression',
             )
         )
-        self.addParameter(
-            QgsProcessingParameterVectorLayer(
-                self.HABITAT_LIST_LAYER,
-                "Liste des types d'habitat",
-                [QgsProcessing.TypeVectorPolygon],
-                defaultValue='liste_sante',
-            )
-        )
 
         self.addOutput(QgsProcessingOutputNumber(self.RELATIONS_ADDED, 'Nombre de relations chargés'))
         self.addOutput(QgsProcessingOutputNumber(self.QML_LOADED, 'Nombre de QML chargés'))
@@ -87,13 +78,11 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LAYER, context)
         habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
         list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
-        list_habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LIST_LAYER, context)
 
         self.input_layers = {
             "habitat": habitat_layer,
             "pression": pressure_layer,
             "list_pressure": list_pressure_layer,
-            "list_habitat": list_habitat_layer,
         }
 
         qml_component = {
@@ -102,9 +91,6 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             'style': QgsMapLayer.Symbology,
             'layer_configuration': QgsMapLayer.LayerConfiguration,
         }
-
-        self.success_qml = 0
-        self.success_relation = 0
 
         self.add_styles(feedback, self.input_layers, qml_component)
         return True
@@ -131,14 +117,6 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     def postProcessAlgorithm(self, context, feedback):
 
         relations = [
-            {
-                'id': 'fk_habitat_sante',
-                'name': 'Lien Habitat - Santé',
-                'referencingLayer': self.input_layers['habitat'].id(),
-                'referencingField': 'sante',
-                'referencedLayer': self.input_layers['list_habitat'].id(),
-                'referencedField': 'key',
-            },
             {
                 'id': 'fk_pression_type',
                 'name': 'Lien Pression - Type Pression',

@@ -104,11 +104,10 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             feedback.reportError('Le fichier existe déjà. Ré-écriture du fichier…')
 
         tables = {
-            'habitat': 'Polygon',
+            'habitat': 'MultiPolygon',
             'pression': 'Polygon',
             'metadata': 'None',
             'liste_type_pression': 'None',
-            'liste_sante': 'None',
         }
 
         self.create_geopackage(base_name, crs, tables)
@@ -127,7 +126,6 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         # If you edit these labels, you MUST change in the resources/qml/style folder as well
         data = {
             'liste_type_pression': ['Très faible', 'Faible', 'Moyenne', 'Forte', 'Très forte'],
-            'liste_sante': ['Bon', 'Moyen', 'Faible'],
         }
         for table, labels in data.items():
             with edit(output_layers[table]):
