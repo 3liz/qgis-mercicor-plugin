@@ -37,7 +37,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
 
         layer = QgsVectorLayer(file_path, "test", "ogr")
         self.assertTrue(layer.isValid())
-        self.assertEqual(4, len(layer.dataProvider().subLayers()))
+        self.assertEqual(5, len(layer.dataProvider().subLayers()))
 
         if debug:
             # Without data

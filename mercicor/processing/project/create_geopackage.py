@@ -108,11 +108,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             'pression': 'Polygon',
             'metadata': 'None',
             'liste_type_pression': 'None',
-<<<<<<< HEAD
-=======
-            'liste_sante': 'None',
             'observations': 'Point',
->>>>>>> 7e7d0cf... adding csv for observation layer
         }
 
         self.create_geopackage(base_name, crs, tables)
