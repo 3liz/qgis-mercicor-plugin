@@ -12,7 +12,7 @@ stages:
 Build-doc:
   stage: Tests 🎳
   before_script:
-    - pip install --user -r requirements-doc.txt
+    - pip install --user -r requirements/requirements-doc.txt
   script:
     - cp CHANGELOG.md docs/
     - /home/factory-runner/.local/bin/mkdocs build -f mkdocs.yml
@@ -35,7 +35,7 @@ Upload-doc:
 Lint:
   stage: Tests 🎳
   before_script:
-    - pip install --user -r requirements-dev.txt
+    - pip install --user -r requirements/requirements-dev.txt
   script:
     - flake8
   tags:
