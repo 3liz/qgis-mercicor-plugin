@@ -2,7 +2,7 @@ variables:
   CUSTOMER: "um3-mercicor"
   PLUGIN_NAME: "mercicor"
   PROJECT_ID: "365"
-  GIT_STRATEGY: clone
+  # GIT_STRATEGY: clone
 
 stages:
 - Tests 🎳
@@ -11,6 +11,10 @@ stages:
 
 Build-doc:
   stage: Tests 🎳
+  when: manual
+  only:
+    - tags
+    - schedules
   before_script:
     - pip install --user -r requirements/requirements-doc.txt
   script:
@@ -25,6 +29,10 @@ Build-doc:
 
 Upload-doc:
   stage: Release 🚀
+  when: manual
+  only:
+    - tags
+    - schedules
   dependencies:
     - Build-doc
   script:
@@ -46,6 +54,23 @@ QGIS-3.10:
   image:
     name: registry.snap.lizlan:5000/qgis/qgis:release-3_10
   script:
+    - qgis_setup.sh ${PLUGIN_NAME}
+    # Patch the script because it use an invalid redirection to non-existent /dev/tty
+    # Run xvfb if necessary
+    - nohup /usr/bin/Xvfb $DISPLAY -screen 0 1024x768x24 -ac +extension GLX +render -noreset -nolisten tcp &
+    - ./.docker/qgis_testrunner.sh ${PLUGIN_NAME}.tests.test_runner.test_package
+  variables:
+     DISPLAY: ':99'
+  tags:
+    - factory-plain
+
+QGIS-3.16:
+  stage: Tests 🎳
+  image:
+    name: registry.snap.lizlan:5000/qgis/qgis:release-3_16
+  script:
+    - mkdir /tests_directory/
+    - ln -s ${CI_PROJECT_DIR}/mercicor /tests_directory
     - qgis_setup.sh ${PLUGIN_NAME}
     # Patch the script because it use an invalid redirection to non-existent /dev/tty
     # Run xvfb if necessary

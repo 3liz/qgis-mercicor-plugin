@@ -26,7 +26,7 @@ class TestImportAlgorithms(BaseTestProcessing):
     def import_data(cls, projection, pression_layer):
         """ Internal function to import data. """
         layer_to_import = QgsVectorLayer(
-            f'MultiPolygon?crs=epsg:{projection}&field=id:integer&field=expression:string(20)&index=yes',
+            f'MultiPolygon?crs=epsg:{projection}&field=id:integer&field=expression:string(30)&index=yes',
             'polygon',
             'memory')
 
