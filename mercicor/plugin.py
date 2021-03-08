@@ -36,4 +36,4 @@ class Mercicor:
             test_package(package, pattern)
         except (AttributeError, ModuleNotFoundError):
             message = 'Could not load tests. Are you using a production package?'
-            print(message) # NOQA
+            print(message)  # NOQA
