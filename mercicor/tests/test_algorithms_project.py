@@ -73,12 +73,17 @@ class TestProjectAlgorithms(BaseTestProcessing):
         habitat_etat_ecologique = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
         self.assertTrue(habitat_etat_ecologique.isValid())
 
+        name = 'observations'
+        observations = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+        self.assertTrue(habitat_etat_ecologique.isValid())
+
         params = {
             "PRESSURE_LAYER": pression_layer,
             "PRESSURE_LIST_LAYER": list_type_pressure,
             "HABITAT_LAYER": habitat_layer,
             "HABITAT_ETAT_ECOLOGIQUE_LAYER": habitat_etat_ecologique,
+            "OBSERVATIONS_LAYER": observations,
         }
         result = run("mercicor:load_qml_and_relations", params)
-        self.assertEqual(result['QML_LOADED'], 6)
+        self.assertEqual(result['QML_LOADED'], 8)
         # self.assertEqual(result['RELATIONS_ADDED'], 1)

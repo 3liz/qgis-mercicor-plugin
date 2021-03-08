@@ -24,6 +24,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     HABITAT_LAYER = 'HABITAT_LAYER'
     PRESSURE_LIST_LAYER = 'PRESSURE_LIST_LAYER'
     HABITAT_ETAT_ECOLOGIQUE_LAYER = 'HABITAT_ETAT_ECOLOGIQUE_LAYER'
+    OBSERVATIONS_LAYER = 'OBSERVATIONS_LAYER'
 
     RELATIONS_ADDED = 'RELATIONS_ADDED'
     QML_LOADED = 'QML_LOADED'
@@ -53,12 +54,14 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
         habitat_etat_ecologique = self.parameterAsVectorLayer(
             parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
+        observations_layer = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_LAYER, context)
 
         self.input_layers = {
             "habitat": habitat_layer,
             "pression": pressure_layer,
             "list_pressure": list_pressure_layer,
             "habitat_etat_ecologique": habitat_etat_ecologique,
+            "observations": observations_layer,
         }
 
     def checkParameterValues(self, parameters, context):
@@ -95,6 +98,15 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 "Liste des types de pression",
                 [QgsProcessing.TypeVectorPolygon],
                 defaultValue='liste_type_pression',
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.OBSERVATIONS_LAYER,
+                "Couches des observations",
+                [QgsProcessing.TypeVectorPoint],
+                defaultValue='observations',
             )
         )
 
