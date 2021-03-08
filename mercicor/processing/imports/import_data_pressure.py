@@ -5,9 +5,6 @@ __email__ = "info@3liz.org"
 import processing
 
 from qgis.core import (
-    QgsExpression,
-    QgsExpressionContext,
-    QgsExpressionContextUtils,
     QgsFeature,
     QgsFeatureRequest,
     QgsProcessing,
@@ -18,6 +15,7 @@ from qgis.core import (
     QgsVectorLayer,
     edit,
 )
+from qgis.PyQt.QtCore import NULL
 
 from mercicor.processing.imports.base import BaseImportAlgorithm
 
@@ -25,7 +23,7 @@ from mercicor.processing.imports.base import BaseImportAlgorithm
 class ImportPressureData(BaseImportAlgorithm):
 
     INPUT_LAYER = 'INPUT_LAYER'
-    EXPRESSION_FIELD = 'EXPRESSION_FIELD'
+    PRESSURE_FIELD = 'PRESSURE_FIELD'
     OUTPUT_LAYER = 'OUTPUT_LAYER'
 
     def __init__(self):
@@ -57,26 +55,36 @@ class ImportPressureData(BaseImportAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterField(
-                self.EXPRESSION_FIELD,
-                "Champ comportant l'expression",
+                self.PRESSURE_FIELD,
+                "Champ comportant la pression",
                 None,
                 self.INPUT_LAYER,
-                QgsProcessingParameterField.String,
+                QgsProcessingParameterField.Numeric,
             )
         )
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.OUTPUT_LAYER,
-                "Couche des pressions",
+                "Couche des pressions de destination",
                 [QgsProcessing.TypeVectorPolygon],
             )
         )
 
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT_LAYER, context)
-        expression_field = self.parameterAsExpression(parameters, self.EXPRESSION_FIELD, context)
+        pressure_field = self.parameterAsExpression(parameters, self.PRESSURE_FIELD, context)
         self._output_layer = self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context)
+
+        index = input_layer.fields().indexOf(pressure_field)
+        unique_values = input_layer.uniqueValues(index)
+        expected = {1, 2, 3, 4, 5, NULL}
+        if not unique_values.issubset(expected):
+            feedback.reportError(
+                'Valeur possible pour la pression : ' + ', '.join([str(i) for i in expected]))
+            diff = unique_values - expected
+            raise QgsProcessingException(
+                'Valeur inconnue pour la pression : ' + ', '.join([str(i) for i in diff]))
 
         params = {
             'INPUT': input_layer,
@@ -111,30 +119,16 @@ class ImportPressureData(BaseImportAlgorithm):
         else:
             layer = results['OUTPUT']
 
-        expression_context = QgsExpressionContext()
-        expression_context.appendScope(QgsExpressionContextUtils.globalScope())
-        expression_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        expression_context.appendScope(QgsExpressionContextUtils.layerScope(layer))
-
         request = QgsFeatureRequest()
-        request.setSubsetOfAttributes([expression_field], input_layer.fields())
+        request.setSubsetOfAttributes([pressure_field], input_layer.fields())
         for input_feature in layer.getFeatures(request):
 
             if feedback.isCanceled():
                 break
 
-            expression_context.setFeature(input_feature)
-            expression = QgsExpression(input_feature[expression_field])
-            expression.prepare(expression_context)
-            if expression.hasEvalError():
-                raise QgsProcessingException(
-                    '{} : {}'.format(expression.expression(), expression.evalErrorString()))
-
-            value = expression.evaluate(expression_context)
-
             output_feature = QgsFeature(self.output_layer.fields())
             output_feature.setGeometry(input_feature.geometry())
-            output_feature.setAttribute('type_pression', value)
+            output_feature.setAttribute('type_pression', input_feature[pressure_field])
             with edit(self.output_layer):
                 self.output_layer.addFeature(output_feature)
 

@@ -49,7 +49,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
             from mercicor.tests.test_algorithms_import import (
                 TestImportAlgorithms,
             )
-            TestImportAlgorithms.import_data('2154', pression_layer)
+            TestImportAlgorithms.import_data(pression_layer)
 
             shutil.copy(file_path, plugin_test_data_path('output_main_geopackage_data.gpkg'))
 
