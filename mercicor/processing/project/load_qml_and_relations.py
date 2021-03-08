@@ -12,6 +12,7 @@ from qgis.core import (
     QgsProcessingParameterVectorLayer,
     QgsProviderRegistry,
     QgsRelation,
+    QgsVectorLayerJoinInfo,
 )
 
 from mercicor.processing.project.base import BaseProjectAlgorithm
@@ -174,6 +175,14 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 'referencedField': 'id',
             },
         ]
+
+        join_habitat = QgsVectorLayerJoinInfo()
+        join_habitat.setJoinFieldName('id')
+        join_habitat.setTargetFieldName('id')
+        join_habitat.setJoinLayerId(self.input_layers['habitat_etat_ecologique'].id())
+        join_habitat.setJoinLayer(self.input_layers['habitat_etat_ecologique'])
+        self.input_layers['habitat'].addJoin(join_habitat)
+
         relation_manager = context.project().relationManager()
         for definition in relations:
 
