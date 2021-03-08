@@ -5,13 +5,9 @@ __email__ = "info@3liz.org"
 import processing
 
 from qgis.core import (
-    QgsExpression,
-    QgsExpressionContext,
-    QgsExpressionContextUtils,
     QgsFeature,
     QgsFeatureRequest,
     QgsProcessing,
-    QgsProcessingException,
     QgsProcessingParameterField,
     QgsProcessingParameterVectorLayer,
     QgsProcessingUtils,
@@ -26,7 +22,7 @@ class ImportHabitatData(BaseImportAlgorithm):
 
     INPUT_LAYER = 'INPUT_LAYER'
     NAME_FIELD = 'NAME_FIELD'
-    EXPRESSION_FIELD = 'EXPRESSION_FIELD'
+    FACIES_FIELD = 'FACIES_FIELD'
     OUTPUT_LAYER = 'OUTPUT_LAYER'
 
     def __init__(self):
@@ -68,8 +64,8 @@ class ImportHabitatData(BaseImportAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterField(
-                self.EXPRESSION_FIELD,
-                "Champ comportant l'expression",
+                self.FACIES_FIELD,
+                "Champ comportant le faciès",
                 None,
                 self.INPUT_LAYER,
                 QgsProcessingParameterField.String,
@@ -79,7 +75,7 @@ class ImportHabitatData(BaseImportAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.OUTPUT_LAYER,
-                "Couche des habitats",
+                "Couche des habitats de destination",
                 [QgsProcessing.TypeVectorPolygon],
                 defaultValue='habitat',
             )
@@ -87,7 +83,7 @@ class ImportHabitatData(BaseImportAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT_LAYER, context)
-        expression_field = self.parameterAsExpression(parameters, self.EXPRESSION_FIELD, context)
+        facies_field = self.parameterAsExpression(parameters, self.FACIES_FIELD, context)
         name_field = self.parameterAsExpression(parameters, self.NAME_FIELD, context)
         self._output_layer = self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context)
 
@@ -125,31 +121,17 @@ class ImportHabitatData(BaseImportAlgorithm):
         else:
             layer = results['OUTPUT']
 
-        expression_context = QgsExpressionContext()
-        expression_context.appendScope(QgsExpressionContextUtils.globalScope())
-        expression_context.appendScope(QgsExpressionContextUtils.projectScope(context.project()))
-        expression_context.appendScope(QgsExpressionContextUtils.layerScope(layer))
-
         request = QgsFeatureRequest()
-        request.setSubsetOfAttributes([expression_field], input_layer.fields())
+        request.setSubsetOfAttributes([name_field, facies_field], input_layer.fields())
         for input_feature in layer.getFeatures(request):
 
             if feedback.isCanceled():
                 break
 
-            expression_context.setFeature(input_feature)
-            expression = QgsExpression(input_feature[expression_field])
-            expression.prepare(expression_context)
-            if expression.hasEvalError():
-                raise QgsProcessingException(
-                    '{} : {}'.format(expression.expression(), expression.evalErrorString()))
-
-            value = expression.evaluate(expression_context)
-
             output_feature = QgsFeature(self.output_layer.fields())
             output_feature.setGeometry(input_feature.geometry())
             output_feature.setAttribute('nom_zni', input_feature[name_field])
-            output_feature.setAttribute('sante', value)
+            output_feature.setAttribute('facies', input_feature[facies_field])
             with edit(self.output_layer):
                 self.output_layer.addFeature(output_feature)
 

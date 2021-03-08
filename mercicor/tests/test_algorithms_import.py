@@ -93,7 +93,7 @@ class TestImportAlgorithms(BaseTestProcessing):
 
             if proj == '2154':
                 index = pression_layer.fields().indexOf('type_pression')
-                self.assertSetEqual({1}, pression_layer.uniqueValues(index))
+                self.assertSetEqual({5}, pression_layer.uniqueValues(index))
 
                 self.assertEqual(layer_to_import.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
             else:
@@ -110,13 +110,13 @@ class TestImportAlgorithms(BaseTestProcessing):
         self.assertEqual(1, import_layer.featureCount())
         params = {
             "INPUT_LAYER": import_layer,
-            "EXPRESSION_FIELD": 'expression',
+            "FACIES_FIELD": 'facies',
             "NAME_FIELD": 'nom',
             "OUTPUT_LAYER": target_layer,
         }
         run("mercicor:import_donnees_habitat", params)
-        index = target_layer.fields().indexOf('sante')
+        index = target_layer.fields().indexOf('facies')
 
         self.assertEqual(2, target_layer.featureCount())
-        self.assertSetEqual({1}, target_layer.uniqueValues(index))
-        self.assertEqual(target_layer.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
+        self.assertSetEqual({'bon'}, target_layer.uniqueValues(index))
+        # self.assertEqual(target_layer.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))

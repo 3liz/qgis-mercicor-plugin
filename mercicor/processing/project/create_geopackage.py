@@ -119,7 +119,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         feature = QgsFeature(output_layers['metadata'].fields())
         feature.setAttribute('project_name', project_name)
         feature.setAttribute('crs', str(crs.authid()))
-        feature.setAttribute('extent', str(extent))
+        feature.setAttribute('extent', extent.asWktPolygon())
         with edit(output_layers['metadata']):
             output_layers['metadata'].addFeature(feature)
 
