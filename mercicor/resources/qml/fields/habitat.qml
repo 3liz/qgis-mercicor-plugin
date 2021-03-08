@@ -1,12 +1,12 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="3.10.14-A Coruña" styleCategories="Fields">
+<qgis styleCategories="Fields" version="3.10.14-A Coruña">
   <fieldConfiguration>
     <field name="id">
       <editWidget type="TextEdit">
         <config>
           <Option type="Map">
-            <Option type="bool" name="IsMultiline" value="false"/>
-            <Option type="bool" name="UseHtml" value="false"/>
+            <Option name="IsMultiline" value="false" type="bool"/>
+            <Option name="UseHtml" value="false" type="bool"/>
           </Option>
         </config>
       </editWidget>
@@ -15,50 +15,41 @@
       <editWidget type="TextEdit">
         <config>
           <Option type="Map">
-            <Option type="bool" name="IsMultiline" value="false"/>
-            <Option type="bool" name="UseHtml" value="false"/>
+            <Option name="IsMultiline" value="false" type="bool"/>
+            <Option name="UseHtml" value="false" type="bool"/>
           </Option>
         </config>
       </editWidget>
     </field>
-    <field name="sante">
-      <editWidget type="RelationReference">
+    <field name="facies">
+      <editWidget type="TextEdit">
         <config>
-          <Option type="Map">
-            <Option type="bool" name="AllowAddFeatures" value="false"/>
-            <Option type="bool" name="AllowNULL" value="false"/>
-            <Option type="bool" name="MapIdentification" value="false"/>
-            <Option type="bool" name="OrderByValue" value="false"/>
-            <Option type="bool" name="ReadOnly" value="false"/>
-            <Option type="QString" name="Relation" value="fk_habitat_sante"/>
-            <Option type="bool" name="ShowForm" value="false"/>
-            <Option type="bool" name="ShowOpenFormButton" value="true"/>
-          </Option>
+          <Option/>
         </config>
       </editWidget>
     </field>
   </fieldConfiguration>
   <aliases>
-    <alias field="id" index="0" name="ID"/>
-    <alias field="nom" index="1" name="Nom ZNI"/>
-    <alias field="sante" index="2" name="État de santé"/>
+    <alias name="" index="0" field="id"/>
+    <alias name="" index="1" field="nom"/>
+    <alias name="" index="2" field="facies"/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
   <defaults>
-    <default field="id" expression="" applyOnUpdate="0"/>
-    <default field="nom" expression="" applyOnUpdate="0"/>
-    <default field="sante" expression="" applyOnUpdate="0"/>
+    <default expression="" applyOnUpdate="0" field="id"/>
+    <default expression="" applyOnUpdate="0" field="nom"/>
+    <default expression="" applyOnUpdate="0" field="facies"/>
   </defaults>
   <constraints>
-    <constraint field="id" unique_strength="1" constraints="3" exp_strength="0" notnull_strength="1"/>
-    <constraint field="nom" unique_strength="0" constraints="0" exp_strength="0" notnull_strength="0"/>
-    <constraint field="sante" unique_strength="0" constraints="0" exp_strength="0" notnull_strength="0"/>
+    <constraint notnull_strength="1" unique_strength="1" constraints="3" exp_strength="0" field="id"/>
+    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="nom"/>
+    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="facies"/>
   </constraints>
   <constraintExpressions>
-    <constraint field="id" desc="" exp=""/>
-    <constraint field="nom" desc="" exp=""/>
-    <constraint field="sante" desc="" exp=""/>
+    <constraint desc="" exp="" field="id"/>
+    <constraint desc="" exp="" field="nom"/>
+    <constraint desc="" exp="" field="facies"/>
   </constraintExpressions>
   <expressionfields/>
   <layerGeometryType>2</layerGeometryType>
