@@ -109,6 +109,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             'metadata': 'None',
             'liste_type_pression': 'None',
             'observations': 'Point',
+            'habitat_etat_ecologique': 'None',
         }
 
         self.create_geopackage(base_name, crs, tables)

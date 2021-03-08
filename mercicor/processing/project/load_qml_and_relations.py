@@ -22,6 +22,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     PRESSURE_LAYER = 'PRESSURE_LAYER'
     HABITAT_LAYER = 'HABITAT_LAYER'
     PRESSURE_LIST_LAYER = 'PRESSURE_LIST_LAYER'
+    HABITAT_ETAT_ECOLOGIQUE_LAYER = 'HABITAT_ETAT_ECOLOGIQUE_LAYER'
 
     RELATIONS_ADDED = 'RELATIONS_ADDED'
     QML_LOADED = 'QML_LOADED'
@@ -70,6 +71,15 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             )
         )
 
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.HABITAT_ETAT_ECOLOGIQUE_LAYER,
+                "Table des observations ramenées à l'habitat",
+                [QgsProcessing.TypeVectorPolygon],
+                defaultValue='habitat_etat_ecologique',
+            )
+        )
+
         self.addOutput(QgsProcessingOutputNumber(self.RELATIONS_ADDED, 'Nombre de relations chargés'))
         self.addOutput(QgsProcessingOutputNumber(self.QML_LOADED, 'Nombre de QML chargés'))
 
@@ -78,11 +88,14 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LAYER, context)
         habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
         list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
+        habitat_etat_ecologique = self.parameterAsVectorLayer(
+            parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
 
         self.input_layers = {
             "habitat": habitat_layer,
             "pression": pressure_layer,
             "list_pressure": list_pressure_layer,
+            "habitat_etat_ecologique": habitat_etat_ecologique,
         }
 
         qml_component = {
@@ -124,6 +137,14 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 'referencingField': 'type_pression',
                 'referencedLayer': self.input_layers['list_pressure'].id(),
                 'referencedField': 'key',
+            },
+            {
+                'id': 'fk_habitat',
+                'name': 'Lien habitat - Type Pression',
+                'referencingLayer': self.input_layers['habitat'].id(),
+                'referencingField': 'id',
+                'referencedLayer': self.input_layers['habitat_etat_ecologique'].id(),
+                'referencedField': 'id',
             },
         ]
         relation_manager = context.project().relationManager()
