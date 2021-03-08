@@ -10,7 +10,6 @@ from qgis.core import (
     QgsProcessingException,
     QgsProcessingOutputNumber,
     QgsProcessingParameterVectorLayer,
-    QgsProviderRegistry,
     QgsRelation,
     QgsVectorLayerJoinInfo,
 )
@@ -26,6 +25,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     PRESSURE_LIST_LAYER = 'PRESSURE_LIST_LAYER'
     HABITAT_ETAT_ECOLOGIQUE_LAYER = 'HABITAT_ETAT_ECOLOGIQUE_LAYER'
     OBSERVATIONS_LAYER = 'OBSERVATIONS_LAYER'
+    SCENARIO_PRESSION = 'SCENARIO_PRESSION'
 
     RELATIONS_ADDED = 'RELATIONS_ADDED'
     QML_LOADED = 'QML_LOADED'
@@ -56,6 +56,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         habitat_etat_ecologique = self.parameterAsVectorLayer(
             parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
         observations_layer = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_LAYER, context)
+        scenario_pression = self.parameterAsVectorLayer(parameters, self.SCENARIO_PRESSION, context)
 
         self.input_layers = {
             "habitat": habitat_layer,
@@ -63,6 +64,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             "list_pressure": list_pressure_layer,
             "habitat_etat_ecologique": habitat_etat_ecologique,
             "observations": observations_layer,
+            "scenario_pression": scenario_pression,
         }
 
     def checkParameterValues(self, parameters, context):
@@ -120,6 +122,15 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             )
         )
 
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.SCENARIO_PRESSION,
+                "Couche des scénario de pression",
+                [QgsProcessing.TypeVectorPolygon],
+                defaultValue='scenario_pression',
+            )
+        )
+
         self.addOutput(QgsProcessingOutputNumber(self.RELATIONS_ADDED, 'Nombre de relations chargés'))
         self.addOutput(QgsProcessingOutputNumber(self.QML_LOADED, 'Nombre de QML chargés'))
 
@@ -172,6 +183,14 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 'referencingLayer': self.input_layers['habitat'].id(),
                 'referencingField': 'id',
                 'referencedLayer': self.input_layers['habitat_etat_ecologique'].id(),
+                'referencedField': 'id',
+            },
+            {
+                'id': 'rel_pression_scenario',
+                'name': 'Lien pression - scenario Pression',
+                'referencingLayer': self.input_layers['pression'].id(),
+                'referencingField': 'scenar_id',
+                'referencedLayer': self.input_layers['scenario_pression'].id(),
                 'referencedField': 'id',
             },
         ]
