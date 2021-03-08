@@ -108,6 +108,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             'pression': 'Polygon',
             'metadata': 'None',
             'liste_type_pression': 'None',
+            'observations': 'Point',
         }
 
         self.create_geopackage(base_name, crs, tables)
