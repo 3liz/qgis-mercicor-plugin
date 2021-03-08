@@ -23,7 +23,7 @@ from qgis.core import (
 )
 
 from mercicor.processing.project.base import BaseProjectAlgorithm
-from mercicor.qgis_plugin_tools import load_csv, resources_path, tr
+from mercicor.qgis_plugin_tools import load_csv, resources_path
 
 
 class CreateGeopackageProject(BaseProjectAlgorithm):
@@ -38,18 +38,17 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         return 'create_geopackage_project'
 
     def displayName(self):
-        return tr('Create geopackage project')
+        return 'Créer le geopackage de la zone d\'étude'
 
     def shortHelpString(self):
-        return 'To start a blank new project, you need to create first a geopackage file.'
+        return "Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage."
 
     def initAlgorithm(self, config):
 
-        # target project folder
         self.addParameter(
             QgsProcessingParameterFileDestination(
                 self.FILE_GPKG,
-                'Geopackage File',
+                'Fichier Geopackage',
                 fileFilter='gpkg'
             )
         )
@@ -57,7 +56,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         self.addParameter(
             QgsProcessingParameterString(
                 self.PROJECT_NAME,
-                tr('Project name'),
+                'Nom de la zone d\'étude',
                 defaultValue='',
                 optional=False
             )
@@ -67,7 +66,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         self.addParameter(
             QgsProcessingParameterCrs(
                 self.PROJECT_CRS,
-                tr('Project CRS'),
+                'CRS du project',
                 defaultValue='EPSG:2154',
                 optional=False,
             )
@@ -77,7 +76,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         self.addParameter(
             QgsProcessingParameterExtent(
                 self.PROJECT_EXTENT,
-                tr('Project extent'),
+                'Emprise du projet',
                 defaultValue=''
             )
         )
@@ -171,7 +170,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
 
     @staticmethod
     def create_geopackage(file_path, crs, tables) -> None:
-        """ Create the geopackage for the given"""
+        """ Create the geopackage for the given path. """
         encoding = 'UTF-8'
         driver_name = QgsVectorFileWriter.driverForExtension('gpkg')
         for table, geometry in tables.items():

@@ -8,9 +8,9 @@ hide:
 ## Administration
 
 
-### Create geopackage project
+### Créer le geopackage de la zone d'étude
 
-To start a blank new project, you need to create first a geopackage file.
+Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage.
 
 ![algo_id](./mercicor-create_geopackage_project.png)
 
@@ -18,17 +18,17 @@ To start a blank new project, you need to create first a geopackage file.
 
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-FILE_GPKG|Geopackage File|FileDestination||✓|||
-PROJECT_NAME|Project name|String||✓|||
-PROJECT_CRS|Project CRS|Crs||✓||Default: EPSG:2154 <br> |
-PROJECT_EXTENT|Project extent|Extent||✓|||
+FILE_GPKG|Fichier Geopackage|FileDestination||✓|||
+PROJECT_NAME|Nom de la zone d'étude|String||✓|||
+PROJECT_CRS|CRS du project|Crs||✓||Default: EPSG:2154 <br> |
+PROJECT_EXTENT|Emprise du projet|Extent||✓|||
 
 
 #### Outputs
 
 | ID | Description | Type | Info |
 |:-:|:-:|:-:|:-:|
-FILE_GPKG|Geopackage File|File||
+FILE_GPKG|Fichier Geopackage|File||
 OUTPUT_LAYERS|Couches de sorties|MultipleLayers||
 
 
@@ -50,7 +50,7 @@ Les relations vont aussi être chargés dans le projet.
 PRESSURE_LAYER|Couche des pressions|VectorLayer||✓||Default: pression <br> Type: TypeVectorPolygon <br>|
 HABITAT_LAYER|Couche des habitats|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
 PRESSURE_LIST_LAYER|Liste des types de pression|VectorLayer||✓||Default: liste_type_pression <br> Type: TypeVectorPolygon <br>|
-HABITAT_LIST_LAYER|Liste des types d'habitat|VectorLayer||✓||Default: liste_sante <br> Type: TypeVectorPolygon <br>|
+HABITAT_ETAT_ECOLOGIQUE_LAYER|Table des observations ramenées à l'habitat|VectorLayer||✓||Default: habitat_etat_ecologique <br> Type: TypeVectorPolygon <br>|
 
 
 #### Outputs
@@ -69,7 +69,7 @@ QML_LOADED|Nombre de QML chargés|Number||
 
 ### Import données habitat
 
-Import des données des habitats
+Import des données des habitats. Le champ du faciès doit être correctement formaté.
 
 ![algo_id](./mercicor-import_donnees_habitat.png)
 
@@ -79,8 +79,8 @@ Import des données des habitats
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 INPUT_LAYER|Couche pour l'import|VectorLayer||✓||Type: TypeVectorPolygon <br>|
 NAME_FIELD|Champ comportant le nom de l'habitat|Field||✓|||
-EXPRESSION_FIELD|Champ comportant l'expression|Field||✓|||
-OUTPUT_LAYER|Couche des habitats|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
+FACIES_FIELD|Champ comportant le faciès|Field||✓|||
+OUTPUT_LAYER|Couche des habitats de destination|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
 
 
 #### Outputs
@@ -94,7 +94,10 @@ No output
 
 ### Import données pression
 
-Import des données de pression
+Import des données de pression.
+
+Le champ des pressions doit être correctement formaté : 
+1, 2, 3, 4, 5, NULL
 
 ![algo_id](./mercicor-import_donnees_pression.png)
 
@@ -103,8 +106,8 @@ Import des données de pression
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 INPUT_LAYER|Couche pour l'import|VectorLayer||✓||Type: TypeVectorPolygon <br>|
-EXPRESSION_FIELD|Champ comportant l'expression|Field||✓|||
-OUTPUT_LAYER|Couche des pressions|VectorLayer||✓||Type: TypeVectorPolygon <br>|
+PRESSURE_FIELD|Champ comportant la pression|Field||✓|||
+OUTPUT_LAYER|Couche des pressions de destination|VectorLayer||✓||Type: TypeVectorPolygon <br>|
 
 
 #### Outputs

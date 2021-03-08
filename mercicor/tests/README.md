@@ -1,6 +1,7 @@
 # Test data
 
-Refaire le geopackage vide :
+Refaire le geopackage vide de données, mais avec les tables.
+Il ne faut changer que le chemin de destination.
 
 ```python
 processing.run(

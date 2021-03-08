@@ -40,7 +40,7 @@ class ImportHabitatData(BaseImportAlgorithm):
         return 'Import données habitat'
 
     def shortHelpString(self):
-        return 'Import des données des habitats'
+        return 'Import des données des habitats. Le champ du faciès doit être correctement formaté.'
 
     def initAlgorithm(self, config):
 

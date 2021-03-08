@@ -14,7 +14,7 @@ from qgis.core import (
 )
 
 from mercicor.processing.project.base import BaseProjectAlgorithm
-from mercicor.qgis_plugin_tools import resources_path, tr
+from mercicor.qgis_plugin_tools import resources_path
 
 
 class LoadStylesAndRelations(BaseProjectAlgorithm):
@@ -37,10 +37,10 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         return "load_qml_and_relations"
 
     def displayName(self):
-        return tr("Charger les styles")
+        return "Charger les styles"
 
     def shortHelpString(self):
-        return tr(
+        return (
             "Charger les styles pour les différentes couches.\n\n"
             "Les relations vont aussi être chargés dans le projet."
         )

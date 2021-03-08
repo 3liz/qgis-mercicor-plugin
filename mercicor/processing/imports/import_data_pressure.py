@@ -30,6 +30,9 @@ class ImportPressureData(BaseImportAlgorithm):
         super().__init__()
         self._output_layer = None
 
+        # Values for "pression"
+        self.expected_values = {1, 2, 3, 4, 5, NULL}
+
     @property
     def output_layer(self):
         return self._output_layer
@@ -41,7 +44,11 @@ class ImportPressureData(BaseImportAlgorithm):
         return 'Import données pression'
 
     def shortHelpString(self):
-        return 'Import des données de pression'
+        return (
+            'Import des données de pression.\n\n'
+            'Le champ des pressions doit être correctement formaté : \n'
+            '{}'.format(', '.join([str(i) for i in self.expected_values]))
+        )
 
     def initAlgorithm(self, config):
 
@@ -78,11 +85,10 @@ class ImportPressureData(BaseImportAlgorithm):
 
         index = input_layer.fields().indexOf(pressure_field)
         unique_values = input_layer.uniqueValues(index)
-        expected = {1, 2, 3, 4, 5, NULL}
-        if not unique_values.issubset(expected):
+        if not unique_values.issubset(self.expected_values):
             feedback.reportError(
-                'Valeur possible pour la pression : ' + ', '.join([str(i) for i in expected]))
-            diff = unique_values - expected
+                'Valeur possible pour la pression : ' + ', '.join([str(i) for i in self.expected_values]))
+            diff = unique_values - self.expected_values
             raise QgsProcessingException(
                 'Valeur inconnue pour la pression : ' + ', '.join([str(i) for i in diff]))
 
