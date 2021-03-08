@@ -1,6 +1,7 @@
 """ Test import data. """
 
 from qgis.core import (
+    Qgis,
     QgsFeature,
     QgsGeometry,
     QgsPointXY,
@@ -93,7 +94,10 @@ class TestImportAlgorithms(BaseTestProcessing):
         with self.assertRaises(QgsProcessingException) as context:
             run("mercicor:import_donnees_pression", params)
 
-        self.assertEqual(str(context.exception), 'Valeur inconnue pour la pression : 10')
+        if Qgis.QGIS_VERSION_INT < 31600:
+            self.assertEqual(str(context.exception), 'There were errors executing the algorithm.')
+        else:
+            self.assertEqual(str(context.exception), 'Valeur inconnue pour la pression : 10')
 
     def test_import_pressure_data(self):
         """ Test to import pressure data. """

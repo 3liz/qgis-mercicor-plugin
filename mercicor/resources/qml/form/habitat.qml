@@ -24,12 +24,12 @@ def my_form_open(dialog, layer, feature):
   <editorlayout>generatedlayout</editorlayout>
   <editable>
     <field name="id" editable="1"/>
-    <field name="nom_zni" editable="1"/>
+    <field name="nom" editable="1"/>
     <field name="sante" editable="1"/>
   </editable>
   <labelOnTop>
     <field name="id" labelOnTop="0"/>
-    <field name="nom_zni" labelOnTop="0"/>
+    <field name="nom" labelOnTop="0"/>
     <field name="sante" labelOnTop="0"/>
   </labelOnTop>
   <widgets/>

@@ -130,7 +130,7 @@ class ImportHabitatData(BaseImportAlgorithm):
 
             output_feature = QgsFeature(self.output_layer.fields())
             output_feature.setGeometry(input_feature.geometry())
-            output_feature.setAttribute('nom_zni', input_feature[name_field])
+            output_feature.setAttribute('nom', input_feature[name_field])
             output_feature.setAttribute('facies', input_feature[facies_field])
             with edit(self.output_layer):
                 self.output_layer.addFeature(output_feature)

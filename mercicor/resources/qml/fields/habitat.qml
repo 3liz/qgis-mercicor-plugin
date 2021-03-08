@@ -11,7 +11,7 @@
         </config>
       </editWidget>
     </field>
-    <field name="nom_zni">
+    <field name="nom">
       <editWidget type="TextEdit">
         <config>
           <Option type="Map">
@@ -40,24 +40,24 @@
   </fieldConfiguration>
   <aliases>
     <alias field="id" index="0" name="ID"/>
-    <alias field="nom_zni" index="1" name="Nom ZNI"/>
+    <alias field="nom" index="1" name="Nom ZNI"/>
     <alias field="sante" index="2" name="État de santé"/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
   <defaults>
     <default field="id" expression="" applyOnUpdate="0"/>
-    <default field="nom_zni" expression="" applyOnUpdate="0"/>
+    <default field="nom" expression="" applyOnUpdate="0"/>
     <default field="sante" expression="" applyOnUpdate="0"/>
   </defaults>
   <constraints>
     <constraint field="id" unique_strength="1" constraints="3" exp_strength="0" notnull_strength="1"/>
-    <constraint field="nom_zni" unique_strength="0" constraints="0" exp_strength="0" notnull_strength="0"/>
+    <constraint field="nom" unique_strength="0" constraints="0" exp_strength="0" notnull_strength="0"/>
     <constraint field="sante" unique_strength="0" constraints="0" exp_strength="0" notnull_strength="0"/>
   </constraints>
   <constraintExpressions>
     <constraint field="id" desc="" exp=""/>
-    <constraint field="nom_zni" desc="" exp=""/>
+    <constraint field="nom" desc="" exp=""/>
     <constraint field="sante" desc="" exp=""/>
   </constraintExpressions>
   <expressionfields/>
