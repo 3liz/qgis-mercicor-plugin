@@ -5,6 +5,7 @@ __pycache__/
 
 # OS
 .DS_Store
+__MACOSX/
 
 # IDE
 .idea/
@@ -27,3 +28,4 @@ plugins.xml
 
 # Tests
 output_*.gpkg
+data/
