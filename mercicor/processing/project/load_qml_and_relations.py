@@ -15,7 +15,7 @@ from qgis.core import (
 )
 
 from mercicor.processing.project.base import BaseProjectAlgorithm
-from mercicor.qgis_plugin_tools import resources_path
+from mercicor.qgis_plugin_tools import load_csv, resources_path
 
 
 class LoadStylesAndRelations(BaseProjectAlgorithm):
@@ -47,25 +47,6 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             "Charger les styles pour les différentes couches.\n\n"
             "Les relations vont aussi être chargés dans le projet."
         )
-
-    def fetch_layers(self, parameters, context):
-        """ Fetch layers from the form and set them in a dictionary. """
-        pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LAYER, context)
-        habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
-        list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
-        habitat_etat_ecologique = self.parameterAsVectorLayer(
-            parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
-        observations_layer = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_LAYER, context)
-        scenario_pression = self.parameterAsVectorLayer(parameters, self.SCENARIO_PRESSION, context)
-
-        self.input_layers = {
-            "habitat": habitat_layer,
-            "pression": pressure_layer,
-            "list_pressure": list_pressure_layer,
-            "habitat_etat_ecologique": habitat_etat_ecologique,
-            "observations": observations_layer,
-            "scenario_pression": scenario_pression,
-        }
 
     def checkParameterValues(self, parameters, context):
         """ Check if all given output layers are in the geopackage. """
@@ -136,29 +117,8 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
     def prepareAlgorithm(self, parameters, context, feedback):
         self.fetch_layers(parameters, context)
-
-        qml_component = {
-            'fields': QgsMapLayer.Fields,
-            'form': QgsMapLayer.Forms,
-            'style': QgsMapLayer.Symbology,
-            'layer_configuration': QgsMapLayer.LayerConfiguration,
-        }
-
-        self.add_styles(feedback, self.input_layers, qml_component)
+        self.add_styles(feedback, self.input_layers)
         return True
-
-    def add_styles(self, feedback, input_layers, qml_component):
-        """ Add all QML style in the resource folder to given layers. """
-        feedback.pushInfo("Ajout des styles")
-        for name, component in qml_component.items():
-            for layer_name, vector_layer in input_layers.items():
-                qml_file = resources_path('qml', name, '{}.qml'.format(layer_name))
-                if not os.path.exists(qml_file):
-                    continue
-                vector_layer.loadNamedStyle(qml_file, component)
-                feedback.pushInfo(vector_layer.name() + " {} for {} successfully loaded".format(
-                    name.capitalize(), layer_name))
-                self.success_qml += 1
 
     def processAlgorithm(self, parameters, context, feedback):
         return {
@@ -167,14 +127,38 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         }
 
     def postProcessAlgorithm(self, context, feedback):
+        self.add_relations(context, feedback)
+        self.add_joins()
 
+        for layer in self.input_layers.values():
+            if layer.isSpatial():
+                layer.triggerRepaint()
+
+        self.add_alias_from_csv(feedback, self.input_layers)
+
+        return {
+            self.QML_LOADED: self.success_qml,
+            self.RELATIONS_ADDED: self.success_relation,
+        }
+
+    def add_joins(self):
+        """ Add all joins between tables. """
+        join_habitat = QgsVectorLayerJoinInfo()
+        join_habitat.setJoinFieldName('id')
+        join_habitat.setTargetFieldName('id')
+        join_habitat.setJoinLayerId(self.input_layers['habitat_etat_ecologique'].id())
+        join_habitat.setJoinLayer(self.input_layers['habitat_etat_ecologique'])
+        self.input_layers['habitat'].addJoin(join_habitat)
+
+    def add_relations(self, context, feedback):
+        """ Add all relations to the QGIS project. """
         relations = [
             {
                 'id': 'fk_pression_type',
                 'name': 'Lien Pression - Type Pression',
                 'referencingLayer': self.input_layers['pression'].id(),
                 'referencingField': 'type_pression',
-                'referencedLayer': self.input_layers['list_pressure'].id(),
+                'referencedLayer': self.input_layers['liste_type_pression'].id(),
                 'referencedField': 'key',
             },
             {
@@ -194,13 +178,6 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 'referencedField': 'id',
             },
         ]
-
-        join_habitat = QgsVectorLayerJoinInfo()
-        join_habitat.setJoinFieldName('id')
-        join_habitat.setTargetFieldName('id')
-        join_habitat.setJoinLayerId(self.input_layers['habitat_etat_ecologique'].id())
-        join_habitat.setJoinLayer(self.input_layers['habitat_etat_ecologique'])
-        self.input_layers['habitat'].addJoin(join_habitat)
 
         relation_manager = context.project().relationManager()
         for definition in relations:
@@ -223,11 +200,55 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             relation_manager.addRelation(relation)
             self.success_relation += 1
 
-        for layer in self.input_layers.values():
-            if layer.isSpatial():
-                layer.triggerRepaint()
+    @staticmethod
+    def add_alias_from_csv(feedback, input_layers):
+        """ The geopackage has been created from CSV files, but we need to set alias. """
+        for name, layer in input_layers.items():
+            feedback.pushInfo("Relecture du CSV {} pour réappliquer les alias sur les champs".format(name))
+            path = resources_path('data_models', '{}.csv'.format(name))
+            csv = load_csv(name, path)
 
-        return {
-            self.QML_LOADED: self.success_qml,
-            self.RELATIONS_ADDED: self.success_relation,
+            for csv_feature in csv.getFeatures():
+                index = layer.fields().indexOf(csv_feature['name'])
+                if not index:
+                    continue
+
+                field = layer.fields().field(index)
+                field.setAlias(csv_feature['alias'])
+
+    def add_styles(self, feedback, input_layers):
+        """ Add all QML style in the resource folder to given layers. """
+        feedback.pushInfo("Ajout des styles")
+        qml_component = {
+            'fields': QgsMapLayer.Fields,
+            'form': QgsMapLayer.Forms,
+            'style': QgsMapLayer.Symbology,
+            'layer_configuration': QgsMapLayer.LayerConfiguration,
+        }
+        for name, component in qml_component.items():
+            for layer_name, vector_layer in input_layers.items():
+                qml_file = resources_path('qml', name, '{}.qml'.format(layer_name))
+                if not os.path.exists(qml_file):
+                    continue
+                vector_layer.loadNamedStyle(qml_file, component)
+                feedback.pushInfo(vector_layer.name() + " {} for {} successfully loaded".format(
+                    name.capitalize(), layer_name))
+                self.success_qml += 1
+
+    def fetch_layers(self, parameters, context):
+        """ Fetch layers from the form and set them in a dictionary. """
+        pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LAYER, context)
+        habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
+        list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
+        habitat_etat_ecologique = self.parameterAsVectorLayer(
+            parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
+        observations_layer = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_LAYER, context)
+        scenario_pression = self.parameterAsVectorLayer(parameters, self.SCENARIO_PRESSION, context)
+        self.input_layers = {
+            "habitat": habitat_layer,
+            "pression": pressure_layer,
+            "liste_type_pression": list_pressure_layer,
+            "observations": observations_layer,
+            "habitat_etat_ecologique": habitat_etat_ecologique,
+            "scenario_pression": scenario_pression,
         }
