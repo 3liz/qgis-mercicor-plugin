@@ -8,7 +8,12 @@ from abc import abstractmethod
 from os.path import isfile
 from typing import Tuple
 
-from qgis.core import Qgis, QgsProcessingAlgorithm, QgsProviderRegistry, QgsMapLayer
+from qgis.core import (
+    Qgis,
+    QgsMapLayer,
+    QgsProcessingAlgorithm,
+    QgsProviderRegistry,
+)
 from qgis.PyQt.QtGui import QIcon
 
 from mercicor.qgis_plugin_tools import resources_path
