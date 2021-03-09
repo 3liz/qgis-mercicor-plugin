@@ -4,8 +4,6 @@ __email__ = "info@3liz.org"
 
 from abc import abstractmethod
 
-from qgis.core import QgsProviderRegistry
-
 from mercicor.processing.base_algorithm import BaseProcessingAlgorithm
 
 
