@@ -10,6 +10,7 @@ from qgis.core import (
     QgsProcessingException,
     QgsProcessingOutputNumber,
     QgsProcessingParameterVectorLayer,
+    QgsProviderRegistry,
     QgsRelation,
 )
 
@@ -44,6 +45,32 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             "Charger les styles pour les différentes couches.\n\n"
             "Les relations vont aussi être chargés dans le projet."
         )
+
+    def fetch_layers(self, parameters, context):
+        """ Fetch layers from the form and set them in a dictionary. """
+        pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LAYER, context)
+        habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
+        list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
+        habitat_etat_ecologique = self.parameterAsVectorLayer(
+            parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
+
+        self.input_layers = {
+            "habitat": habitat_layer,
+            "pression": pressure_layer,
+            "list_pressure": list_pressure_layer,
+            "habitat_etat_ecologique": habitat_etat_ecologique,
+        }
+
+    def checkParameterValues(self, parameters, context):
+        """ Check if all given output layers are in the geopackage. """
+        self.fetch_layers(parameters, context)
+
+        for layer in self.input_layers.values():
+            flag, msg = self.check_layer_is_geopackage(layer)
+            if not flag:
+                return False, msg
+
+        return super().checkParameterValues(parameters, context)
 
     def initAlgorithm(self, config):
         self.addParameter(
@@ -84,19 +111,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         self.addOutput(QgsProcessingOutputNumber(self.QML_LOADED, 'Nombre de QML chargés'))
 
     def prepareAlgorithm(self, parameters, context, feedback):
-
-        pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LAYER, context)
-        habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
-        list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
-        habitat_etat_ecologique = self.parameterAsVectorLayer(
-            parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
-
-        self.input_layers = {
-            "habitat": habitat_layer,
-            "pression": pressure_layer,
-            "list_pressure": list_pressure_layer,
-            "habitat_etat_ecologique": habitat_etat_ecologique,
-        }
+        self.fetch_layers(parameters, context)
 
         qml_component = {
             'fields': QgsMapLayer.Fields,

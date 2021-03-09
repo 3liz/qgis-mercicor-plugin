@@ -1,13 +1,14 @@
 """Base class algorithm."""
 
-__copyright__ = "Copyright 2020, 3Liz"
+__copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
 from abc import abstractmethod
 from os.path import isfile
+from typing import Tuple
 
-from qgis.core import Qgis, QgsProcessingAlgorithm
+from qgis.core import Qgis, QgsProcessingAlgorithm, QgsProviderRegistry, QgsMapLayer
 from qgis.PyQt.QtGui import QIcon
 
 from mercicor.qgis_plugin_tools import resources_path
@@ -53,3 +54,15 @@ class BaseProcessingAlgorithm(QgsProcessingAlgorithm):
     @abstractmethod
     def shortHelpString(self):
         pass
+
+    @staticmethod
+    def check_layer_is_geopackage(layer: QgsMapLayer) -> Tuple[bool, str]:
+        uri = QgsProviderRegistry.instance().decodeUri('ogr', layer.source())
+        if not uri['path'].lower().endswith('.gpkg') or not uri['layerName']:
+            message = (
+                'La couche doit être le geopackage de la zone d\'étude et non pas {}'.format(
+                    layer.source())
+            )
+            return False, message
+
+        return True, ''
