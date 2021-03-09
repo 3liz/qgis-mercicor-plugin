@@ -7,12 +7,12 @@ import processing
 from qgis.core import (
     QgsFeature,
     QgsFeatureRequest,
+    QgsGeometry,
     QgsProcessing,
     QgsProcessingParameterField,
     QgsProcessingParameterVectorLayer,
     QgsProcessingUtils,
     QgsVectorLayer,
-    edit,
 )
 
 from mercicor.processing.imports.base import BaseImportAlgorithm
@@ -121,6 +121,7 @@ class ImportHabitatData(BaseImportAlgorithm):
         else:
             layer = results['OUTPUT']
 
+        self.output_layer.startEditing()
         request = QgsFeatureRequest()
         request.setSubsetOfAttributes([name_field, facies_field], input_layer.fields())
         for input_feature in layer.getFeatures(request):
@@ -129,12 +130,14 @@ class ImportHabitatData(BaseImportAlgorithm):
                 break
 
             output_feature = QgsFeature(self.output_layer.fields())
-            output_feature.setGeometry(input_feature.geometry())
+            geometry = QgsGeometry(input_feature.geometry())
+            geometry.convertToMultiType()
+            output_feature.setGeometry(geometry)
             output_feature.setAttribute('nom', input_feature[name_field])
             output_feature.setAttribute('facies', input_feature[facies_field])
-            with edit(self.output_layer):
-                self.output_layer.addFeature(output_feature)
+            self.output_layer.addFeature(output_feature)
 
+        self.output_layer.commitChanges()
         return {}
 
     def postProcess(self, context, feedback):
