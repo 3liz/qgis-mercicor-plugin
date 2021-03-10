@@ -31,7 +31,7 @@ class ImportPressureData(BaseImportAlgorithm):
         self._output_layer = None
 
         # Values for "pression"
-        self.expected_values = {1, 2, 3, 4, 5, NULL}
+        self.expected_values = {1, 2, 3, 4, 5, 6, NULL}
 
     @property
     def output_layer(self):
