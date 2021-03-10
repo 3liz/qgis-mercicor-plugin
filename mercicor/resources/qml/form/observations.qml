@@ -23,151 +23,151 @@ def my_form_open(dialog, layer, feature):
   <featformsuppress>0</featformsuppress>
   <editorlayout>tablayout</editorlayout>
   <attributeEditorForm>
-    <attributeEditorField showLabel="1" index="1" name="nom_station"/>
-    <attributeEditorField showLabel="1" index="2" name="station_man"/>
-    <attributeEditorField showLabel="1" index="3" name="perc_bsd"/>
-    <attributeEditorField showLabel="1" index="4" name="perc_bsm"/>
-    <attributeEditorField showLabel="1" index="5" name="datetime_obs"/>
-    <attributeEditorField showLabel="1" index="6" name="note_bsd"/>
-    <attributeEditorField showLabel="1" index="7" name="note_bsm"/>
-    <attributeEditorField showLabel="1" index="8" name="note_ben"/>
-    <attributeEditorField showLabel="1" index="9" name="note_man"/>
-    <attributeEditorField showLabel="1" index="10" name="note_pmi"/>
-    <attributeEditorField showLabel="1" index="11" name="score_station"/>
-    <attributeEditorContainer showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="0" name="Physicochimie" visibilityExpression="">
-      <attributeEditorField showLabel="1" index="12" name="phch_temp"/>
-      <attributeEditorField showLabel="1" index="13" name="phch_dop"/>
-      <attributeEditorField showLabel="1" index="14" name="phch_do"/>
-      <attributeEditorField showLabel="1" index="15" name="phch_cond"/>
-      <attributeEditorField showLabel="1" index="16" name="phch_sal"/>
-      <attributeEditorField showLabel="1" index="17" name="phch_ph"/>
-      <attributeEditorField showLabel="1" index="18" name="phch_turb"/>
-      <attributeEditorField showLabel="1" index="19" name="phch_sedi"/>
+    <attributeEditorField index="1" showLabel="1" name="nom_station"/>
+    <attributeEditorField index="2" showLabel="1" name="station_man"/>
+    <attributeEditorField index="3" showLabel="1" name="perc_bsd"/>
+    <attributeEditorField index="4" showLabel="1" name="perc_bsm"/>
+    <attributeEditorField index="5" showLabel="1" name="datetime_obs"/>
+    <attributeEditorField index="6" showLabel="1" name="note_bsd"/>
+    <attributeEditorField index="7" showLabel="1" name="note_bsm"/>
+    <attributeEditorField index="8" showLabel="1" name="note_ben"/>
+    <attributeEditorField index="9" showLabel="1" name="note_man"/>
+    <attributeEditorField index="10" showLabel="1" name="note_pmi"/>
+    <attributeEditorField index="11" showLabel="1" name="score_station"/>
+    <attributeEditorContainer columnCount="1" groupBox="0" visibilityExpression="" showLabel="1" visibilityExpressionEnabled="0" name="Physicochimie">
+      <attributeEditorField index="12" showLabel="1" name="phch_temp"/>
+      <attributeEditorField index="13" showLabel="1" name="phch_dop"/>
+      <attributeEditorField index="14" showLabel="1" name="phch_do"/>
+      <attributeEditorField index="15" showLabel="1" name="phch_cond"/>
+      <attributeEditorField index="16" showLabel="1" name="phch_sal"/>
+      <attributeEditorField index="17" showLabel="1" name="phch_ph"/>
+      <attributeEditorField index="18" showLabel="1" name="phch_turb"/>
+      <attributeEditorField index="19" showLabel="1" name="phch_sedi"/>
     </attributeEditorContainer>
-    <attributeEditorContainer showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="1" name="Indics Benthos Substrats durs" visibilityExpression="CASE WHEN &quot;station_man&quot; = false THEN true END">
-      <attributeEditorField showLabel="1" index="20" name="bsd_recouv_cor"/>
-      <attributeEditorField showLabel="1" index="21" name="bsd_p_acrop"/>
-      <attributeEditorField showLabel="1" index="22" name="bsd_vital_cor"/>
-      <attributeEditorField showLabel="1" index="23" name="bsd_comp_struc"/>
-      <attributeEditorField showLabel="1" index="24" name="bsd_taille_cor"/>
-      <attributeEditorField showLabel="1" index="25" name="bsd_dens_juv"/>
-      <attributeEditorField showLabel="1" index="26" name="bsd_f_sessile"/>
-      <attributeEditorField showLabel="1" index="27" name="bsd_recouv_ma"/>
+    <attributeEditorContainer columnCount="1" groupBox="0" visibilityExpression="CASE WHEN &quot;station_man&quot; IS NOT TRUE THEN true END" showLabel="1" visibilityExpressionEnabled="1" name="Indics Benthos Substrats durs">
+      <attributeEditorField index="20" showLabel="1" name="bsd_recouv_cor"/>
+      <attributeEditorField index="21" showLabel="1" name="bsd_p_acrop"/>
+      <attributeEditorField index="22" showLabel="1" name="bsd_vital_cor"/>
+      <attributeEditorField index="23" showLabel="1" name="bsd_comp_struc"/>
+      <attributeEditorField index="24" showLabel="1" name="bsd_taille_cor"/>
+      <attributeEditorField index="25" showLabel="1" name="bsd_dens_juv"/>
+      <attributeEditorField index="26" showLabel="1" name="bsd_f_sessile"/>
+      <attributeEditorField index="27" showLabel="1" name="bsd_recouv_ma"/>
     </attributeEditorContainer>
-    <attributeEditorContainer showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="1" name="Indics Benthos Substrats meubles" visibilityExpression="CASE WHEN &quot;station_man&quot; = false THEN true END">
-      <attributeEditorField showLabel="1" index="28" name="bsm_fragm_herb"/>
-      <attributeEditorField showLabel="1" index="29" name="bsm_recouv_her"/>
-      <attributeEditorField showLabel="1" index="30" name="bsm_haut_herb"/>
-      <attributeEditorField showLabel="1" index="31" name="bsm_dens_herb"/>
-      <attributeEditorField showLabel="1" index="32" name="bsm_div_herb"/>
-      <attributeEditorField showLabel="1" index="33" name="bsm_epibiose"/>
+    <attributeEditorContainer columnCount="1" groupBox="0" visibilityExpression="CASE WHEN &quot;station_man&quot; IS NOT TRUE THEN true END" showLabel="1" visibilityExpressionEnabled="1" name="Indics Benthos Substrats meubles">
+      <attributeEditorField index="28" showLabel="1" name="bsm_fragm_herb"/>
+      <attributeEditorField index="29" showLabel="1" name="bsm_recouv_her"/>
+      <attributeEditorField index="30" showLabel="1" name="bsm_haut_herb"/>
+      <attributeEditorField index="31" showLabel="1" name="bsm_dens_herb"/>
+      <attributeEditorField index="32" showLabel="1" name="bsm_div_herb"/>
+      <attributeEditorField index="33" showLabel="1" name="bsm_epibiose"/>
     </attributeEditorContainer>
-    <attributeEditorContainer showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="1" name="Indics Mangroves" visibilityExpression="CASE WHEN &quot;station_man&quot; = true THEN true END">
-      <attributeEditorField showLabel="1" index="34" name="man_fragm"/>
-      <attributeEditorField showLabel="1" index="35" name="man_recouv"/>
-      <attributeEditorField showLabel="1" index="36" name="man_diam_tronc"/>
-      <attributeEditorField showLabel="1" index="37" name="man_dens"/>
-      <attributeEditorField showLabel="1" index="38" name="man_diversit"/>
-      <attributeEditorField showLabel="1" index="39" name="man_vital"/>
+    <attributeEditorContainer columnCount="1" groupBox="0" visibilityExpression="CASE WHEN &quot;station_man&quot; IS true THEN true END" showLabel="1" visibilityExpressionEnabled="1" name="Indics Mangroves">
+      <attributeEditorField index="34" showLabel="1" name="man_fragm"/>
+      <attributeEditorField index="35" showLabel="1" name="man_recouv"/>
+      <attributeEditorField index="36" showLabel="1" name="man_diam_tronc"/>
+      <attributeEditorField index="37" showLabel="1" name="man_dens"/>
+      <attributeEditorField index="38" showLabel="1" name="man_diversit"/>
+      <attributeEditorField index="39" showLabel="1" name="man_vital"/>
     </attributeEditorContainer>
-    <attributeEditorContainer showLabel="1" columnCount="1" groupBox="0" visibilityExpressionEnabled="0" name="Indics Poissons et Macro-invertégrés" visibilityExpression="">
-      <attributeEditorField showLabel="1" index="40" name="pmi_div_poi"/>
-      <attributeEditorField showLabel="1" index="41" name="pmi_predat_poi"/>
-      <attributeEditorField showLabel="1" index="42" name="pmi_scarib_poi"/>
-      <attributeEditorField showLabel="1" index="43" name="pmi_macro_inv"/>
+    <attributeEditorContainer columnCount="1" groupBox="0" visibilityExpression="" showLabel="1" visibilityExpressionEnabled="0" name="Indics Poissons et Macro-invertégrés">
+      <attributeEditorField index="40" showLabel="1" name="pmi_div_poi"/>
+      <attributeEditorField index="41" showLabel="1" name="pmi_predat_poi"/>
+      <attributeEditorField index="42" showLabel="1" name="pmi_scarib_poi"/>
+      <attributeEditorField index="43" showLabel="1" name="pmi_macro_inv"/>
     </attributeEditorContainer>
   </attributeEditorForm>
   <editable>
-    <field name="bsd_comp_struc" editable="1"/>
-    <field name="bsd_dens_juv" editable="1"/>
-    <field name="bsd_f_sessile" editable="1"/>
-    <field name="bsd_p_acrop" editable="1"/>
-    <field name="bsd_recouv_cor" editable="1"/>
-    <field name="bsd_recouv_ma" editable="1"/>
-    <field name="bsd_taille_cor" editable="1"/>
-    <field name="bsd_vital_cor" editable="1"/>
-    <field name="bsm_dens_herb" editable="1"/>
-    <field name="bsm_div_herb" editable="1"/>
-    <field name="bsm_epibiose" editable="1"/>
-    <field name="bsm_fragm_herb" editable="1"/>
-    <field name="bsm_haut_herb" editable="1"/>
-    <field name="bsm_recouv_her" editable="1"/>
-    <field name="datetime_obs" editable="1"/>
-    <field name="id" editable="1"/>
-    <field name="man_dens" editable="1"/>
-    <field name="man_diam_tronc" editable="1"/>
-    <field name="man_diversit" editable="1"/>
-    <field name="man_fragm" editable="1"/>
-    <field name="man_recouv" editable="1"/>
-    <field name="man_vital" editable="1"/>
-    <field name="nom_station" editable="1"/>
-    <field name="note_ben" editable="1"/>
-    <field name="note_bsd" editable="1"/>
-    <field name="note_bsm" editable="1"/>
-    <field name="note_man" editable="1"/>
-    <field name="note_pmi" editable="1"/>
-    <field name="perc_bsd" editable="1"/>
-    <field name="perc_bsm" editable="1"/>
-    <field name="phch_cond" editable="1"/>
-    <field name="phch_do" editable="1"/>
-    <field name="phch_dop" editable="1"/>
-    <field name="phch_ph" editable="1"/>
-    <field name="phch_sal" editable="1"/>
-    <field name="phch_sedi" editable="1"/>
-    <field name="phch_temp" editable="1"/>
-    <field name="phch_turb" editable="1"/>
-    <field name="pmi_div_poi" editable="1"/>
-    <field name="pmi_macro_inv" editable="1"/>
-    <field name="pmi_predat_poi" editable="1"/>
-    <field name="pmi_scarib_poi" editable="1"/>
-    <field name="score_station" editable="1"/>
-    <field name="station_man" editable="1"/>
+    <field editable="1" name="bsd_comp_struc"/>
+    <field editable="1" name="bsd_dens_juv"/>
+    <field editable="1" name="bsd_f_sessile"/>
+    <field editable="1" name="bsd_p_acrop"/>
+    <field editable="1" name="bsd_recouv_cor"/>
+    <field editable="1" name="bsd_recouv_ma"/>
+    <field editable="1" name="bsd_taille_cor"/>
+    <field editable="1" name="bsd_vital_cor"/>
+    <field editable="1" name="bsm_dens_herb"/>
+    <field editable="1" name="bsm_div_herb"/>
+    <field editable="1" name="bsm_epibiose"/>
+    <field editable="1" name="bsm_fragm_herb"/>
+    <field editable="1" name="bsm_haut_herb"/>
+    <field editable="1" name="bsm_recouv_her"/>
+    <field editable="1" name="datetime_obs"/>
+    <field editable="1" name="id"/>
+    <field editable="1" name="man_dens"/>
+    <field editable="1" name="man_diam_tronc"/>
+    <field editable="1" name="man_diversit"/>
+    <field editable="1" name="man_fragm"/>
+    <field editable="1" name="man_recouv"/>
+    <field editable="1" name="man_vital"/>
+    <field editable="1" name="nom_station"/>
+    <field editable="1" name="note_ben"/>
+    <field editable="1" name="note_bsd"/>
+    <field editable="1" name="note_bsm"/>
+    <field editable="1" name="note_man"/>
+    <field editable="1" name="note_pmi"/>
+    <field editable="1" name="perc_bsd"/>
+    <field editable="1" name="perc_bsm"/>
+    <field editable="1" name="phch_cond"/>
+    <field editable="1" name="phch_do"/>
+    <field editable="1" name="phch_dop"/>
+    <field editable="1" name="phch_ph"/>
+    <field editable="1" name="phch_sal"/>
+    <field editable="1" name="phch_sedi"/>
+    <field editable="1" name="phch_temp"/>
+    <field editable="1" name="phch_turb"/>
+    <field editable="1" name="pmi_div_poi"/>
+    <field editable="1" name="pmi_macro_inv"/>
+    <field editable="1" name="pmi_predat_poi"/>
+    <field editable="1" name="pmi_scarib_poi"/>
+    <field editable="1" name="score_station"/>
+    <field editable="1" name="station_man"/>
   </editable>
   <labelOnTop>
-    <field name="bsd_comp_struc" labelOnTop="0"/>
-    <field name="bsd_dens_juv" labelOnTop="0"/>
-    <field name="bsd_f_sessile" labelOnTop="0"/>
-    <field name="bsd_p_acrop" labelOnTop="0"/>
-    <field name="bsd_recouv_cor" labelOnTop="0"/>
-    <field name="bsd_recouv_ma" labelOnTop="0"/>
-    <field name="bsd_taille_cor" labelOnTop="0"/>
-    <field name="bsd_vital_cor" labelOnTop="0"/>
-    <field name="bsm_dens_herb" labelOnTop="0"/>
-    <field name="bsm_div_herb" labelOnTop="0"/>
-    <field name="bsm_epibiose" labelOnTop="0"/>
-    <field name="bsm_fragm_herb" labelOnTop="0"/>
-    <field name="bsm_haut_herb" labelOnTop="0"/>
-    <field name="bsm_recouv_her" labelOnTop="0"/>
-    <field name="datetime_obs" labelOnTop="0"/>
-    <field name="id" labelOnTop="0"/>
-    <field name="man_dens" labelOnTop="0"/>
-    <field name="man_diam_tronc" labelOnTop="0"/>
-    <field name="man_diversit" labelOnTop="0"/>
-    <field name="man_fragm" labelOnTop="0"/>
-    <field name="man_recouv" labelOnTop="0"/>
-    <field name="man_vital" labelOnTop="0"/>
-    <field name="nom_station" labelOnTop="0"/>
-    <field name="note_ben" labelOnTop="0"/>
-    <field name="note_bsd" labelOnTop="0"/>
-    <field name="note_bsm" labelOnTop="0"/>
-    <field name="note_man" labelOnTop="0"/>
-    <field name="note_pmi" labelOnTop="0"/>
-    <field name="perc_bsd" labelOnTop="0"/>
-    <field name="perc_bsm" labelOnTop="0"/>
-    <field name="phch_cond" labelOnTop="0"/>
-    <field name="phch_do" labelOnTop="0"/>
-    <field name="phch_dop" labelOnTop="0"/>
-    <field name="phch_ph" labelOnTop="0"/>
-    <field name="phch_sal" labelOnTop="0"/>
-    <field name="phch_sedi" labelOnTop="0"/>
-    <field name="phch_temp" labelOnTop="0"/>
-    <field name="phch_turb" labelOnTop="0"/>
-    <field name="pmi_div_poi" labelOnTop="0"/>
-    <field name="pmi_macro_inv" labelOnTop="0"/>
-    <field name="pmi_predat_poi" labelOnTop="0"/>
-    <field name="pmi_scarib_poi" labelOnTop="0"/>
-    <field name="score_station" labelOnTop="0"/>
-    <field name="station_man" labelOnTop="0"/>
+    <field labelOnTop="0" name="bsd_comp_struc"/>
+    <field labelOnTop="0" name="bsd_dens_juv"/>
+    <field labelOnTop="0" name="bsd_f_sessile"/>
+    <field labelOnTop="0" name="bsd_p_acrop"/>
+    <field labelOnTop="0" name="bsd_recouv_cor"/>
+    <field labelOnTop="0" name="bsd_recouv_ma"/>
+    <field labelOnTop="0" name="bsd_taille_cor"/>
+    <field labelOnTop="0" name="bsd_vital_cor"/>
+    <field labelOnTop="0" name="bsm_dens_herb"/>
+    <field labelOnTop="0" name="bsm_div_herb"/>
+    <field labelOnTop="0" name="bsm_epibiose"/>
+    <field labelOnTop="0" name="bsm_fragm_herb"/>
+    <field labelOnTop="0" name="bsm_haut_herb"/>
+    <field labelOnTop="0" name="bsm_recouv_her"/>
+    <field labelOnTop="0" name="datetime_obs"/>
+    <field labelOnTop="0" name="id"/>
+    <field labelOnTop="0" name="man_dens"/>
+    <field labelOnTop="0" name="man_diam_tronc"/>
+    <field labelOnTop="0" name="man_diversit"/>
+    <field labelOnTop="0" name="man_fragm"/>
+    <field labelOnTop="0" name="man_recouv"/>
+    <field labelOnTop="0" name="man_vital"/>
+    <field labelOnTop="0" name="nom_station"/>
+    <field labelOnTop="0" name="note_ben"/>
+    <field labelOnTop="0" name="note_bsd"/>
+    <field labelOnTop="0" name="note_bsm"/>
+    <field labelOnTop="0" name="note_man"/>
+    <field labelOnTop="0" name="note_pmi"/>
+    <field labelOnTop="0" name="perc_bsd"/>
+    <field labelOnTop="0" name="perc_bsm"/>
+    <field labelOnTop="0" name="phch_cond"/>
+    <field labelOnTop="0" name="phch_do"/>
+    <field labelOnTop="0" name="phch_dop"/>
+    <field labelOnTop="0" name="phch_ph"/>
+    <field labelOnTop="0" name="phch_sal"/>
+    <field labelOnTop="0" name="phch_sedi"/>
+    <field labelOnTop="0" name="phch_temp"/>
+    <field labelOnTop="0" name="phch_turb"/>
+    <field labelOnTop="0" name="pmi_div_poi"/>
+    <field labelOnTop="0" name="pmi_macro_inv"/>
+    <field labelOnTop="0" name="pmi_predat_poi"/>
+    <field labelOnTop="0" name="pmi_scarib_poi"/>
+    <field labelOnTop="0" name="score_station"/>
+    <field labelOnTop="0" name="station_man"/>
   </labelOnTop>
   <widgets/>
   <layerGeometryType>0</layerGeometryType>
