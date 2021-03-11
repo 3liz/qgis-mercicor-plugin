@@ -26,6 +26,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     HABITAT_ETAT_ECOLOGIQUE_LAYER = 'HABITAT_ETAT_ECOLOGIQUE_LAYER'
     OBSERVATIONS_LAYER = 'OBSERVATIONS_LAYER'
     SCENARIO_PRESSION = 'SCENARIO_PRESSION'
+    HABITAT_PRESSION_ETAT_ECOLOGIQUE = 'HABITAT_PRESSION_ETAT_ECOLOGIQUE'
 
     RELATIONS_ADDED = 'RELATIONS_ADDED'
     QML_LOADED = 'QML_LOADED'
@@ -112,6 +113,15 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             )
         )
 
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.HABITAT_PRESSION_ETAT_ECOLOGIQUE,
+                "Couche du résultat de l'intersection entre les pressions et les habitats.",
+                [QgsProcessing.TypeVectorPolygon],
+                defaultValue='habitat_pression_etat_ecologique',
+            )
+        )
+
         self.addOutput(QgsProcessingOutputNumber(self.RELATIONS_ADDED, 'Nombre de relations chargés'))
         self.addOutput(QgsProcessingOutputNumber(self.QML_LOADED, 'Nombre de QML chargés'))
 
@@ -142,13 +152,51 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         }
 
     def add_joins(self):
+        # Define array with info for join
+        joins_array = [
+            {
+                'JoinFieldName': 'id',
+                'TargetFieldName': 'id',
+                'JoinLayerId': self.input_layers['habitat_etat_ecologique'].id(),
+                'JoinLayer': self.input_layers['habitat_etat_ecologique'],
+                'layerAddJoin': self.input_layers['habitat'],
+                'prefix': '',
+            },
+            {
+                'JoinFieldName': 'id',
+                'TargetFieldName': 'habitat_id',
+                'JoinLayerId': self.input_layers['habitat'].id(),
+                'JoinLayer': self.input_layers['habitat'],
+                'layerAddJoin': self.input_layers['habitat_pression_etat_ecologique'],
+                'prefix': 'hab_'
+            },
+            {
+                'JoinFieldName': 'id',
+                'TargetFieldName': 'pression_id',
+                'JoinLayerId': self.input_layers['pression'].id(),
+                'JoinLayer': self.input_layers['pression'],
+                'layerAddJoin': self.input_layers['habitat_pression_etat_ecologique'],
+                'prefix': 'pression_',
+            },
+            {
+                'JoinFieldName': 'id',
+                'TargetFieldName': 'scenario_id',
+                'JoinLayerId': self.input_layers['scenario_pression'].id(),
+                'JoinLayer': self.input_layers['scenario_pression'],
+                'layerAddJoin': self.input_layers['habitat_pression_etat_ecologique'],
+                'prefix': 'scenario_',
+            },
+        ]
+
         """ Add all joins between tables. """
-        join_habitat = QgsVectorLayerJoinInfo()
-        join_habitat.setJoinFieldName('id')
-        join_habitat.setTargetFieldName('id')
-        join_habitat.setJoinLayerId(self.input_layers['habitat_etat_ecologique'].id())
-        join_habitat.setJoinLayer(self.input_layers['habitat_etat_ecologique'])
-        self.input_layers['habitat'].addJoin(join_habitat)
+        for definition in joins_array:
+            join_habitat = QgsVectorLayerJoinInfo()
+            join_habitat.setJoinFieldName(definition['JoinFieldName'])
+            join_habitat.setTargetFieldName(definition['TargetFieldName'])
+            join_habitat.setJoinLayerId(definition['JoinLayerId'])
+            join_habitat.setPrefix(definition['prefix'])
+            join_habitat.setJoinLayer(definition['JoinLayer'])
+            definition['layerAddJoin'].addJoin(join_habitat)
 
     def add_relations(self, context, feedback):
         """ Add all relations to the QGIS project. """
@@ -176,6 +224,30 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 'referencingField': 'scenar_id',
                 'referencedLayer': self.input_layers['scenario_pression'].id(),
                 'referencedField': 'id',
+            },
+            {
+                'id': 'rel_hab_press_etat_ecolo',
+                'name': 'Lien Habitat - Hab_press_etat_ecolo',
+                'referencingLayer': self.input_layers['habitat'].id(),
+                'referencingField': 'id',
+                'referencedLayer': self.input_layers['habitat_pression_etat_ecologique'].id(),
+                'referencedField': 'habitat_id',
+            },
+            {
+                'id': 'rel_pression_hab_press_etat_ecolo',
+                'name': 'Lien Pression - Hab_press_etat_ecolo',
+                'referencingLayer': self.input_layers['pression'].id(),
+                'referencingField': 'id',
+                'referencedLayer': self.input_layers['habitat_pression_etat_ecologique'].id(),
+                'referencedField': 'pression_id',
+            },
+            {
+                'id': 'rel_scenario_hab_press_etat_ecolo',
+                'name': 'Lien Scenario pression - Hab_press_etat_ecolo',
+                'referencingLayer': self.input_layers['scenario_pression'].id(),
+                'referencingField': 'id',
+                'referencedLayer': self.input_layers['habitat_pression_etat_ecologique'].id(),
+                'referencedField': 'scenario_id',
             },
         ]
 
@@ -244,6 +316,9 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
         observations_layer = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_LAYER, context)
         scenario_pression = self.parameterAsVectorLayer(parameters, self.SCENARIO_PRESSION, context)
+        habitat_pression_etat_ecologique = self.parameterAsVectorLayer(
+            parameters, self.HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
+
         self.input_layers = {
             "habitat": habitat_layer,
             "pression": pressure_layer,
@@ -251,4 +326,5 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             "observations": observations_layer,
             "habitat_etat_ecologique": habitat_etat_ecologique,
             "scenario_pression": scenario_pression,
+            "habitat_pression_etat_ecologique": habitat_pression_etat_ecologique,
         }

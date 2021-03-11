@@ -37,7 +37,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
 
         layer = QgsVectorLayer(file_path, "test", "ogr")
         self.assertTrue(layer.isValid())
-        self.assertEqual(7, len(layer.dataProvider().subLayers()))
+        self.assertEqual(8, len(layer.dataProvider().subLayers()))
 
         if debug:
             # Without data
@@ -81,6 +81,10 @@ class TestProjectAlgorithms(BaseTestProcessing):
         scenario_pression = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
         self.assertTrue(scenario_pression.isValid())
 
+        name = 'habitat_pression_etat_ecologique'
+        habitat_pression_etat_ecologique = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+        self.assertTrue(habitat_pression_etat_ecologique.isValid())
+
         params = {
             "PRESSURE_LAYER": pression_layer,
             "PRESSURE_LIST_LAYER": list_type_pressure,
@@ -88,6 +92,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
             "HABITAT_ETAT_ECOLOGIQUE_LAYER": habitat_etat_ecologique,
             "OBSERVATIONS_LAYER": observations,
             "SCENARIO_PRESSION": scenario_pression,
+            "HABITAT_PRESSION_ETAT_ECOLOGIQUE": habitat_pression_etat_ecologique,
         }
         result = run("mercicor:load_qml_and_relations", params)
         self.assertEqual(result['QML_LOADED'], 8)

@@ -110,6 +110,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             'observations': 'Point',
             'habitat_etat_ecologique': 'None',
             'scenario_pression': 'None',
+            'habitat_pression_etat_ecologique': 'MultiPolygon',
         }
 
         self.create_geopackage(base_name, crs, tables)
