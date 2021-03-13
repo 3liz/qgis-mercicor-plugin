@@ -152,51 +152,50 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         }
 
     def add_joins(self):
-        # Define array with info for join
+        """ Add all joins between tables. """
         joins_array = [
             {
-                'JoinFieldName': 'id',
-                'TargetFieldName': 'id',
-                'JoinLayerId': self.input_layers['habitat_etat_ecologique'].id(),
-                'JoinLayer': self.input_layers['habitat_etat_ecologique'],
-                'layerAddJoin': self.input_layers['habitat'],
+                'join_field_name': 'id',
+                'target_field_name': 'id',
+                'join_layer_id': self.input_layers['habitat_etat_ecologique'].id(),
+                'join_layer': self.input_layers['habitat_etat_ecologique'],
+                'layer_add_join': self.input_layers['habitat'],
                 'prefix': '',
             },
             {
-                'JoinFieldName': 'id',
-                'TargetFieldName': 'habitat_id',
-                'JoinLayerId': self.input_layers['habitat'].id(),
-                'JoinLayer': self.input_layers['habitat'],
-                'layerAddJoin': self.input_layers['habitat_pression_etat_ecologique'],
+                'join_field_name': 'id',
+                'target_field_name': 'habitat_id',
+                'join_layer_id': self.input_layers['habitat'].id(),
+                'join_layer': self.input_layers['habitat'],
+                'layer_add_join': self.input_layers['habitat_pression_etat_ecologique'],
                 'prefix': 'hab_'
             },
             {
-                'JoinFieldName': 'id',
-                'TargetFieldName': 'pression_id',
-                'JoinLayerId': self.input_layers['pression'].id(),
-                'JoinLayer': self.input_layers['pression'],
-                'layerAddJoin': self.input_layers['habitat_pression_etat_ecologique'],
+                'join_field_name': 'id',
+                'target_field_name': 'pression_id',
+                'join_layer_id': self.input_layers['pression'].id(),
+                'join_layer': self.input_layers['pression'],
+                'layer_add_join': self.input_layers['habitat_pression_etat_ecologique'],
                 'prefix': 'pression_',
             },
             {
-                'JoinFieldName': 'id',
-                'TargetFieldName': 'scenario_id',
-                'JoinLayerId': self.input_layers['scenario_pression'].id(),
-                'JoinLayer': self.input_layers['scenario_pression'],
-                'layerAddJoin': self.input_layers['habitat_pression_etat_ecologique'],
+                'join_field_name': 'id',
+                'target_field_name': 'scenario_id',
+                'join_layer_id': self.input_layers['scenario_pression'].id(),
+                'join_layer': self.input_layers['scenario_pression'],
+                'layer_add_join': self.input_layers['habitat_pression_etat_ecologique'],
                 'prefix': 'scenario_',
             },
         ]
 
-        """ Add all joins between tables. """
         for definition in joins_array:
             join_habitat = QgsVectorLayerJoinInfo()
-            join_habitat.setJoinFieldName(definition['JoinFieldName'])
-            join_habitat.setTargetFieldName(definition['TargetFieldName'])
-            join_habitat.setJoinLayerId(definition['JoinLayerId'])
+            join_habitat.setjoin_field_name(definition['join_field_name'])
+            join_habitat.settarget_field_name(definition['target_field_name'])
+            join_habitat.setjoin_layer_id(definition['join_layer_id'])
             join_habitat.setPrefix(definition['prefix'])
-            join_habitat.setJoinLayer(definition['JoinLayer'])
-            definition['layerAddJoin'].addJoin(join_habitat)
+            join_habitat.setjoin_layer(definition['join_layer'])
+            definition['layer_add_join'].addJoin(join_habitat)
 
     def add_relations(self, context, feedback):
         """ Add all relations to the QGIS project. """
