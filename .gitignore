@@ -29,3 +29,4 @@ plugins.xml
 # Tests
 output_*.gpkg
 data/
+mercicor/tests/data/output

@@ -37,6 +37,13 @@ class BaseProcessingAlgorithm(QgsProcessingAlgorithm):
         else:
             return super().icon()
 
+    @staticmethod
+    def set_tooltip_parameter(parameter, tooltip):
+        if Qgis.QGIS_VERSION_INT >= 31600:
+            parameter.setHelp(tooltip)
+        else:
+            parameter.tooltip_3liz = tooltip
+
     def parameters_help_string(self) -> str:
         """ Return a formatted help string for all parameters. """
         help_string = ''
@@ -62,6 +69,9 @@ class BaseProcessingAlgorithm(QgsProcessingAlgorithm):
 
     @staticmethod
     def check_layer_is_geopackage(layer: QgsMapLayer) -> Tuple[bool, str]:
+        if not layer:
+            return False, 'La couche est invalide'
+
         uri = QgsProviderRegistry.instance().decodeUri('ogr', layer.source())
         if not uri['path'].lower().endswith('.gpkg') or not uri['layerName']:
             message = (
