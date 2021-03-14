@@ -5,6 +5,9 @@ __email__ = "info@3liz.org"
 from qgis.core import QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
 
+from mercicor.processing.exports.download_observation import (
+    DownloadObservationFile,
+)
 from mercicor.processing.imports.import_data_habitat import ImportHabitatData
 from mercicor.processing.imports.import_data_pressure import ImportPressureData
 from mercicor.processing.project.create_geopackage import (
@@ -20,6 +23,7 @@ class MercicorProvider(QgsProcessingProvider):
 
     def loadAlgorithms(self):
         self.addAlgorithm(CreateGeopackageProject())
+        self.addAlgorithm(DownloadObservationFile())
         self.addAlgorithm(ImportHabitatData())
         self.addAlgorithm(ImportPressureData())
         self.addAlgorithm(LoadStylesAndRelations())
