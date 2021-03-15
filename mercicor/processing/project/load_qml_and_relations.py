@@ -190,12 +190,13 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
         for definition in joins_array:
             join_habitat = QgsVectorLayerJoinInfo()
-            join_habitat.setjoin_field_name(definition['join_field_name'])
-            join_habitat.settarget_field_name(definition['target_field_name'])
-            join_habitat.setjoin_layer_id(definition['join_layer_id'])
+            join_habitat.setJoinFieldName(definition['join_field_name'])
+            join_habitat.setTargetFieldName(definition['target_field_name'])
+            join_habitat.setJoinLayerId(definition['join_layer_id'])
             join_habitat.setPrefix(definition['prefix'])
-            join_habitat.setjoin_layer(definition['join_layer'])
-            definition['layer_add_join'].addJoin(join_habitat)
+            join_habitat.setJoinLayer(definition['join_layer'])
+            if not definition['layer_add_join'].addJoin(join_habitat):
+                raise Exception('Join not added {}'.format(definition['join_field_name']))
 
     def add_relations(self, context, feedback):
         """ Add all relations to the QGIS project. """
