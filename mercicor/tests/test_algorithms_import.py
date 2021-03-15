@@ -14,6 +14,9 @@ from qgis.core import (
 )
 from qgis.processing import run
 
+from mercicor.processing.imports.import_observations import (
+    ImportObservationData,
+)
 from mercicor.qgis_plugin_tools import plugin_test_data_path
 from mercicor.tests.base_processing import BaseTestProcessing
 
@@ -163,3 +166,61 @@ class TestImportAlgorithms(BaseTestProcessing):
         self.assertEqual(2, target_layer.featureCount())
         self.assertSetEqual({'bon'}, target_layer.uniqueValues(index))
         # self.assertEqual(target_layer.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
+
+    def test_import_observation_exist(self):
+        """ Test to retrieve a specific observation feature. """
+        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        name = 'observations'
+        observations = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+
+        feature = QgsFeature(observations.fields())
+        feature.setAttribute('id', 1)
+        feature.setAttribute('nom_station', 'Nom de la station')
+        feature.setGeometry(QgsGeometry.fromWkt('POINT(0 0)'))
+        with edit(observations):
+            observations.addFeature(feature)
+
+        self.assertTrue(ImportObservationData.observation_exists(observations, 1)[0])
+        self.assertFalse(ImportObservationData.observation_exists(observations, 100)[0])
+
+    def test_import_new_observation(self):
+        """ Test to import new observation with a geometry. """
+        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        name = 'observations'
+        observations = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+
+        layer_to_import = QgsVectorLayer(
+            'None?'
+            'field=id:integer&'
+            'field=note_man:integer&'
+            'field=another_field:integer&'
+            'field=latitude:double&'
+            'field=longitude:double&'
+            'index=yes',
+            'obs',
+            'memory')
+        feature = QgsFeature(layer_to_import.fields())
+        feature.setAttribute('id', 1)
+        feature.setAttribute('note_man', 10)
+        feature.setAttribute('another_field', 100)
+        feature.setAttribute('latitude', 1)
+        feature.setAttribute('longitude', 1)
+
+        with edit(layer_to_import):
+            layer_to_import.addFeature(feature)
+
+        params = {
+            "INPUT_LAYER": layer_to_import,
+            "OUTPUT_LAYER": observations,
+        }
+        run("mercicor:import_donnees_observation", params)
+
+        # Test geom, not the best check for now
+        self.assertNotEqual(observations.extent().center().x(), 0)
+        self.assertNotEqual(observations.extent().center().y(), 0)
+
+        # Test the feature
+        self.assertEqual(observations.featureCount(), 1)
+        self.assertSetEqual(observations.uniqueValues(0), {1})
+        index = observations.fields().indexOf('note_man')
+        self.assertSetEqual(observations.uniqueValues(index), {10})
