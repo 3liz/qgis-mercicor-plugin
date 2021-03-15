@@ -14,6 +14,7 @@ from qgis.core import (
     QgsField,
     QgsGeometry,
     QgsProcessing,
+    QgsProcessingException,
     QgsProcessingParameterBoolean,
     QgsProcessingParameterFileDestination,
     QgsProcessingParameterVectorLayer,
@@ -103,9 +104,15 @@ class DownloadObservationFile(BaseExportAlgorithm):
 
         if os.path.exists(file_path):
             feedback.reportError('Le fichier existe déjà. Ré-écriture du fichier…')
+            os.remove(file_path)
+        if os.path.exists(file_path):
+            raise QgsProcessingException('Fichier {} non supprimé'.format(file_path))
 
         feedback.pushInfo('Écriture du fichier tableur')
         self.export_as_xlsx(context, file_path, layer)
+
+        if not Path(file_path).exists():
+            raise QgsProcessingException('Le fichier de sortie n\'existe pas.')
 
         return {self.DESTINATION_FILE: file_path}
 
@@ -145,17 +152,12 @@ class DownloadObservationFile(BaseExportAlgorithm):
         options.driverName = QgsVectorFileWriter.driverForExtension('xlsx')
         options.fileEncoding = 'UTF-8'
         options.layerName = input_layer.name()
-        options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteFile
-        if os.path.exists(file_path):
-            options.actionOnExistingFile = QgsVectorFileWriter.CreateOrOverwriteLayer
 
-        file_writer = QgsVectorFileWriter.create(
+        write_result, error_message = QgsVectorFileWriter.writeAsVectorFormatV2(
+            input_layer,
             file_path,
-            input_layer.fields(),
-            input_layer.type(),
-            QgsCoordinateReferenceSystem.fromEpsgId(4326),
             context.project().transformContext(),
-            options)
-
-        for feature in input_layer.getFeatures():
-            file_writer.addFeature(feature)
+            options,
+        )
+        if write_result != QgsVectorFileWriter.NoError:
+            raise QgsProcessingException(error_message)
