@@ -15,8 +15,13 @@ from qgis.core import (
 class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
 
     def __init__(self):
+        """
+        Fonction d'initialisation
+        """
         super().__init__()
+        # expression context will be created in prepareAlgorithm
         self.exp_context = None
+        # needed fields to calculate notes
         self.fields = [
             "perc_bsd", "perc_bsm", "bsd_recouv_cor", "bsd_p_acrop", "bsd_vital_cor",
             "bsd_comp_struc", "bsd_taille_cor", "bsd_dens_juv", "bsd_f_sessile", "bsd_recouv_ma",
@@ -24,7 +29,9 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
             "bsm_epibiose", "man_fragm", "man_recouv", "man_diam_tronc", "man_dens", "man_diversit",
             "man_vital", "pmi_div_poi", "pmi_predat_poi", "pmi_scarib_poi", "pmi_macro_inv"
         ]
-        self.notes = ["note_bsd", "note_bsm", "note_ben", "note_man", "note_pmi"]
+        # note fields
+        self.notes = ["note_bsd", "note_bsm", "note_ben", "note_man", "note_pmi", "score_station"]
+        # note expressions
         self.expressions = {
             "note_bsd": '(("bsd_recouv_cor" + "bsd_p_acrop" + "bsd_vital_cor" + "bsd_comp_struc" + '
             '"bsd_taille_cor" + "bsd_dens_juv" + "bsd_f_sessile" + "bsd_recouv_ma") / 8.0) * (10.0 / 3.0)',
@@ -40,28 +47,52 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         }
 
     def group(self):
+        """
+        Libellé du groupe de l'algorithme
+        """
         return 'Calcul'
 
     def groupId(self):
+        """
+        Identifiant du groupe de l'algorithme
+        """
         return 'calcul'
 
     def name(self):
+        """
+        Identifiant de l'algorithme
+        """
         return 'calcul_notes'
 
     def displayName(self):
+        """
+        Libellé de l'algorithme
+        """
         return 'Calcul des notes MERCI-Cor'
 
     def shortHelpString(self):
+        """
+        Description de l'algorithme
+        """
         return 'Calcul des notes MERCI-Cor à partir des indicateurs MERCI-Cor'
 
-    # def inputParameterName(self):
-    #    return super().inputParameterName()
+    def inputParameterName(self):
+        """
+        Nom du paramètre pour la couche d'entrée
+        """
+        return super().inputParameterName()
 
-    # def inputParameterDescription(self):
-    #    return super().inputParameterDescription()
+    def inputParameterDescription(self):
+        """
+        Description du paramètre pour la couche d'entrée
+        """
+        return super().inputParameterDescription()
 
     def outputName(self):
-        return 'calcul_done'
+        """
+        Nom de la couche résultat
+        """
+        return 'output'
 
     def inputLayerTypes(self):
         """
@@ -69,10 +100,10 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         """
         return [QgsProcessing.TypeVector]
 
-    def createInstance(self):
-        return type(self)()
-
     def outputType(self):
+        """
+        Type de la couche de sortie
+        """
         return QgsProcessing.TypeVector
 
     def outputFields(self, inputFields):
@@ -81,6 +112,8 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         à partir de la liste des attributs de la
         couche d'entrée
         """
+        # Ajout des champs correspondant aux notes
+        # si il ne sont pas présents
         for field_name in self.notes:
             field_idx = inputFields.lookupField(field_name)
             if field_idx < 0:
@@ -90,9 +123,14 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
     def initAlgorithm(self, config):
         """
         Fonction d'initialisation de l'algorithme
-        Ajout des paramètres autres que la couche à modifier
         """
         return super().initAlgorithm(config)
+
+    def initParameters(self, config=None):
+        """
+        Fonction d'ajout des paramètres autres que la couche à modifier
+        """
+        pass
 
     def prepareAlgorithm(self, parameters, context, feedback):
         """
@@ -113,20 +151,25 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         Fonction de modification des objets géographiques
         Application des expressions pour les champs à mettre à jour
         """
+        # boucle sur les champs des notes merci-cor
         for note in self.notes:
+            # création de l'expression
             expression = QgsExpression(self.expressions[note])
+            # préparation de l'expression
             expression.prepare(self.exp_context)
             if expression.hasEvalError():
                 feedback.reportError(
-                    self.tr(u'Prepare error in expression "{}": {}')
+                    self.tr('Prepare error in expression "{}": {}')
                         .format(expression.expression(),
                                 expression.evalErrorString()))
                 continue
+            # Ajout de l'objet géographique au context de l'expression
             self.exp_context.setFeature(feature)
+            # Evaluation de l'expression
             feature[note] = expression.evaluate(self.exp_context)
             if expression.hasEvalError():
                 feedback.reportError(
-                        self.tr(u'Eval error in expression "{}": {}')
+                        self.tr('Eval error in expression "{}": {}')
                             .format(expression.expression(),
                                     expression.evalErrorString()))
                 break
@@ -135,16 +178,23 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
     def supportInPlaceEdit(self, layer):
         """
         Fonction de vérification que la couche est compatible avec l'algorithme
-        - Vérification que la couche est vectorielle
-        - Vérification que la couche contient les champs nécessaires aux calculs des notes
         """
+        # Vérification du type de la couche
         if layer.type() != QgsMapLayerType.VectorLayer:
             return False
+        # Vérification que la couche contient les champs nécessaires aux calculs des notes
         return self.checkFields(layer.fields())
 
     def checkFields(self, layer_fields):
+        """
+        Fonction de vérification que la couche contient les champs nécessaires
+        aux calculs des notes
+        """
         for field_name in self.fields:
             field_idx = layer_fields.lookupField(field_name)
             if field_idx < 0:
                 return False
         return True
+
+    def createInstance(self):
+        return type(self)()
