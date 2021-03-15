@@ -221,7 +221,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 'id': 'rel_pression_scenario',
                 'name': 'Lien pression - scenario Pression',
                 'referencingLayer': self.input_layers['pression'].id(),
-                'referencingField': 'scenar_id',
+                'referencingField': 'scenario_id',
                 'referencedLayer': self.input_layers['scenario_pression'].id(),
                 'referencedField': 'id',
             },

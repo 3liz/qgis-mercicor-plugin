@@ -10,6 +10,7 @@ from qgis.core import (
     QgsProcessing,
     QgsProcessingException,
     QgsProcessingParameterField,
+    QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
     QgsProcessingUtils,
     QgsVectorLayer,
@@ -24,11 +25,14 @@ class ImportPressureData(BaseImportAlgorithm):
 
     INPUT_LAYER = 'INPUT_LAYER'
     PRESSURE_FIELD = 'PRESSURE_FIELD'
+    SCENARIO_NAME = 'SCENARIO_NAME'
+    SCENARIO_LAYER = 'SCENARIO_LAYER'
     OUTPUT_LAYER = 'OUTPUT_LAYER'
 
     def __init__(self):
         super().__init__()
         self._output_layer = None
+        self.scenario_id = None
 
         # Values for "pression"
         self.expected_values = {1, 2, 3, 4, 5, 6, NULL}
@@ -70,17 +74,47 @@ class ImportPressureData(BaseImportAlgorithm):
             )
         )
 
+        parameter = QgsProcessingParameterString(
+            self.SCENARIO_NAME,
+            "Nom du scénario",
+        )
+        self.set_tooltip_parameter(
+            parameter, 'Le nom du scénario en cours pour cette couche des pressions.')
+        self.addParameter(parameter)
+
+        parameter = QgsProcessingParameterVectorLayer(
+            self.SCENARIO_LAYER,
+            "Couche des scénarios de destination",
+            [QgsProcessing.TypeVector],
+            defaultValue="scenario_pression",
+        )
+        self.set_tooltip_parameter(
+            parameter,
+            'La couche de destination des scénarios doit être la couche qui est dans le geopackage.')
+        self.addParameter(parameter)
+
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.OUTPUT_LAYER,
                 "Couche des pressions de destination",
                 [QgsProcessing.TypeVectorPolygon],
+                defaultValue="pression",
             )
         )
+
+    def checkParameterValues(self, parameters, context):
+        scenario_layer = self.parameterAsVectorLayer(parameters, self.SCENARIO_LAYER, context)
+        flag, msg = self.check_layer_is_geopackage(scenario_layer)
+        if not flag:
+            return False, msg
+
+        return super().checkParameterValues(parameters, context)
 
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT_LAYER, context)
         pressure_field = self.parameterAsExpression(parameters, self.PRESSURE_FIELD, context)
+        scenario_name = self.parameterAsString(parameters, self.SCENARIO_NAME, context)
+        scenario_layer = self.parameterAsVectorLayer(parameters, self.SCENARIO_LAYER, context)
         self._output_layer = self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context)
 
         index = input_layer.fields().indexOf(pressure_field)
@@ -125,6 +159,9 @@ class ImportPressureData(BaseImportAlgorithm):
         else:
             layer = results['OUTPUT']
 
+        self.scenario_id = self.insert_scenario(scenario_layer, scenario_name)
+        feedback.pushInfo('Création du scénario numéro {} : {}'.format(self.scenario_id, scenario_name))
+
         request = QgsFeatureRequest()
         request.setSubsetOfAttributes([pressure_field], input_layer.fields())
         for input_feature in layer.getFeatures(request):
@@ -134,11 +171,30 @@ class ImportPressureData(BaseImportAlgorithm):
 
             output_feature = QgsFeature(self.output_layer.fields())
             output_feature.setGeometry(input_feature.geometry())
+            output_feature.setAttribute('scenario_id', self.scenario_id)
             output_feature.setAttribute('type_pression', input_feature[pressure_field])
             with edit(self.output_layer):
                 self.output_layer.addFeature(output_feature)
 
+        if not self.output_layer.setSubsetString('"scenario_id" = {}'.format(self.scenario_id)):
+            raise QgsProcessingException('Subset string is not valid')
+
         return {}
+
+    @staticmethod
+    def insert_scenario(layer: QgsVectorLayer, name: str) -> int:
+        """ Insert the new scenario and get its ID. """
+        feature = QgsFeature(layer.fields())
+        feature.setAttribute('nom', name)
+        with edit(layer):
+            layer.addFeature(feature)
+
+        request = QgsFeatureRequest()
+        request.setLimit(1)
+        request.addOrderBy('id', False)
+        feature = QgsFeature()
+        layer.getFeatures(request).nextFeature(feature)
+        return feature['id']
 
     def postProcess(self, context, feedback):
         self.output_layer.reloadData()

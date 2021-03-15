@@ -25,7 +25,7 @@ __email__ = "info@3liz.org"
 class TestImportAlgorithms(BaseTestProcessing):
 
     @classmethod
-    def import_data(cls, pression_layer):
+    def import_data(cls, pression_layer: QgsVectorLayer, scenario_layer: QgsVectorLayer):
         """ Internal function to import data. """
         layer_to_import = QgsVectorLayer(
             'MultiPolygon?crs=epsg:2154&field=id:integer&field=pression:integer&index=yes',
@@ -63,6 +63,8 @@ class TestImportAlgorithms(BaseTestProcessing):
         params = {
             "INPUT_LAYER": layer_to_import,
             "PRESSURE_FIELD": 'pression',
+            "SCENARIO_NAME": 'testing scenario',
+            "SCENARIO_LAYER": scenario_layer,
             "OUTPUT_LAYER": pression_layer,
         }
         run("mercicor:import_donnees_pression", params)
@@ -86,9 +88,13 @@ class TestImportAlgorithms(BaseTestProcessing):
 
         gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
         pression_layer = QgsVectorLayer('{}|layername=pression'.format(gpkg), 'test', 'ogr')
+        scenario_pression_layer = QgsVectorLayer(
+            '{}|layername=scenario_pression'.format(gpkg), 'test scenario', 'ogr')
         params = {
             "INPUT_LAYER": layer_to_import,
             "PRESSURE_FIELD": 'pression',
+            "SCENARIO_NAME": 'scenario',
+            "SCENARIO_LAYER": scenario_pression_layer,
             "OUTPUT_LAYER": pression_layer,
         }
         with self.assertRaises(QgsProcessingException) as context:
@@ -112,14 +118,29 @@ class TestImportAlgorithms(BaseTestProcessing):
         self.assertTrue(pression_layer.isValid())
         project.addMapLayer(pression_layer)
 
-        layer_to_import = self.import_data(pression_layer)
+        name = 'scenario_pression'
+        scenario_pression_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+        self.assertTrue(scenario_pression_layer.isValid())
+        project.addMapLayer(scenario_pression_layer)
 
+        layer_to_import = self.import_data(pression_layer, scenario_pression_layer)
+
+        # Couche pression
         self.assertEqual(2, pression_layer.featureCount())
 
         index = pression_layer.fields().indexOf('type_pression')
         self.assertSetEqual({1}, pression_layer.uniqueValues(index))
 
         self.assertEqual(layer_to_import.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
+
+        # Couche scénario
+        self.assertEqual(1, scenario_pression_layer.featureCount())
+        self.assertSetEqual(scenario_pression_layer.uniqueValues(0), {1})
+        self.assertSetEqual(scenario_pression_layer.uniqueValues(1), {'testing scenario'})
+
+        index = pression_layer.fields().indexOf('scenario_id')
+        self.assertSetEqual({1}, pression_layer.uniqueValues(index))
+        self.assertEqual(pression_layer.subsetString(), '"scenario_id" = 1')
 
     def test_import_habitat_data(self):
         """ Test to import habitat data. """

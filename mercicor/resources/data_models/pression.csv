@@ -1,4 +1,4 @@
 idx,name,type,typeName,length,precision,comment,alias
 1,id,4,Integer64,0,0,ID,ID
 2,type_pression,4,Integer64,0,0,Pression,Type de pression
-3,scenar_id,4,Integer64,0,0,Id scenario,Id Scenario
+3,scenario_id,4,Integer64,0,0,ID scénario,ID Scénario
