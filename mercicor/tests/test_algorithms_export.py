@@ -3,6 +3,7 @@
 from pathlib import Path
 
 from qgis.core import (
+    Qgis,
     QgsCoordinateReferenceSystem,
     QgsFeature,
     QgsGeometry,
@@ -54,7 +55,7 @@ class TestExportAlgorithms(BaseTestProcessing):
         params = {
             'INPUT_LAYER': observations,
             'INCLUDE_X_Y': False,
-            'DESTINATION_FILE': plugin_test_data_path('output', 'export.xlsx')
+            'DESTINATION_FILE': plugin_test_data_path('output', 'export_data_no_geom.xlsx')
         }
         results = run("mercicor:download_observation_file", params)
 
@@ -64,12 +65,26 @@ class TestExportAlgorithms(BaseTestProcessing):
 
         # Everything is fine with QGIS when there is a feature in the source layer.
         self.assertEqual(output.fields().count(), field_count)
-        self.assertEqual(output.featureCount(), feature_count)
+
+        if 31000 <= Qgis.QGIS_VERSION_INT <= 31099:
+            # Header recognised as a row by default, integer as text
+            self.assertSetEqual(output.uniqueValues(0), {'id', '1'})
+            self.assertEqual(output.featureCount(), 2)
+        else:  # QGIS 3.16+
+            # Single row, no header, integer recognised as integer
+            self.assertSetEqual(output.uniqueValues(0), {1})
+            self.assertEqual(output.featureCount(), 1)
 
         # With geom
         params['INCLUDE_X_Y'] = True
+        params['DESTINATION_FILE'] = plugin_test_data_path('output', 'export_data_geom.xlsx')
         results = run("mercicor:download_observation_file", params)
         output = QgsVectorLayer(results['DESTINATION_FILE'], 'export', 'ogr')
+
+        #  With geom, same result between QGIS 3.10 and 3.16 !
+        self.assertSetEqual(output.uniqueValues(0), {1})
+        self.assertEqual(output.featureCount(), 1)
+
         self.assertEqual(output.fields().count(), field_count + 2)
 
         # Test the integer part only about 4326 reprojection of the geometry
@@ -91,7 +106,7 @@ class TestExportAlgorithms(BaseTestProcessing):
         params = {
             'INPUT_LAYER': observations,
             'INCLUDE_X_Y': False,
-            'DESTINATION_FILE': plugin_test_data_path('output', 'export.xlsx')
+            'DESTINATION_FILE': plugin_test_data_path('output', 'export_no_data_no_geom.xlsx')
         }
         results = run("mercicor:download_observation_file", params)
 
@@ -100,11 +115,26 @@ class TestExportAlgorithms(BaseTestProcessing):
         self.assertTrue(output.isValid())
 
         self.assertEqual(output.fields().count(), field_count)
-        self.assertEqual(output.featureCount(), feature_count + 1)
+        if 31000 <= Qgis.QGIS_VERSION_INT <= 31099:
+            # Header recognised as a row by default, integer as text
+            self.assertSetEqual(output.uniqueValues(0), {'id', '1'})
+            self.assertEqual(output.featureCount(), feature_count + 2)
+        else:  # QGIS 3.16+
+            # Single row, no header, integer recognised as integer
+            self.assertSetEqual(output.uniqueValues(0), {1})
+            self.assertEqual(output.featureCount(), feature_count + 1)
 
         # With geom
         params['INCLUDE_X_Y'] = True
+        params['DESTINATION_FILE'] = plugin_test_data_path('output', 'export_no_data_geom.xlsx')
         results = run("mercicor:download_observation_file", params)
         output = QgsVectorLayer(results['DESTINATION_FILE'], 'export', 'ogr')
         self.assertEqual(output.fields().count(), field_count + 2)
-        self.assertEqual(output.featureCount(), feature_count + 1)
+
+        #  With geom, NOT the same result between QGIS 3.10 and 3.16 like the test before
+        if 31000 <= Qgis.QGIS_VERSION_INT <= 31099:
+            self.assertSetEqual(output.uniqueValues(0), {'id', '1'})
+            self.assertEqual(output.featureCount(), feature_count + 2)
+        else:  # QGIS 3.16+
+            self.assertSetEqual(output.uniqueValues(0), {1})
+            self.assertEqual(output.featureCount(), feature_count + 1)
