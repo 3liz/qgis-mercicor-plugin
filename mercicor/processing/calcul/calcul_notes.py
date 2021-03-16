@@ -2,6 +2,8 @@ __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
+from collections import OrderedDict
+
 from qgis.core import (
     QgsExpression,
     QgsField,
@@ -31,32 +33,31 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         ]
 
         # note expressions
-        self.expressions = {
-            "note_bsd": (
-                '(("bsd_recouv_cor" + "bsd_p_acrop" + "bsd_vital_cor" + "bsd_comp_struc" + '
-                '"bsd_taille_cor" + "bsd_dens_juv" + "bsd_f_sessile" + "bsd_recouv_ma") / 8.0) * (10.0 / 3.0)'
-            ),
-            "note_bsm": (
+        self.expressions = OrderedDict()
+        self.expressions['note_bsd'] = (
+            '(("bsd_recouv_cor" + "bsd_p_acrop" + "bsd_vital_cor" + "bsd_comp_struc" + '
+            '"bsd_taille_cor" + "bsd_dens_juv" + "bsd_f_sessile" + "bsd_recouv_ma") / 8.0) * (10.0 / 3.0)'
+        )
+        self.expressions['note_bsm'] = (
                 '(("bsm_fragm_herb" + "bsm_recouv_her" + "bsm_haut_herb" + "bsm_dens_herb" + '
                 '"bsm_div_herb" + "bsm_epibiose") / 6.0) * (10.0 / 3.0)'
-            ),
-            "note_ben": (
-                '"note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm"'
-            ),
-            "note_man": (
-                '(("man_fragm" + "man_recouv" + "man_diam_tronc" + "man_dens" + "man_diversit" + '
-                '"man_vital") / 6.0) * (10.0 / 3.0)'
-            ),
-            "note_pmi": (
-                '(("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_inv") / 4) * (10 / 3)'
-            ),
-            "score_mercicor": (
-                'CASE '
-                'WHEN "station_man" THEN ("note_man" + "note_pmi") / 2 '
-                'ELSE ("note_ben" + "note_pmi") / 2 '
-                'END'
-            ),
-        }
+        )
+        self.expressions['note_ben'] = (
+            '"note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm"'
+        )
+        self.expressions['note_man'] = (
+            '(("man_fragm" + "man_recouv" + "man_diam_tronc" + "man_dens" + "man_diversit" + '
+            '"man_vital") / 6.0) * (10.0 / 3.0)'
+        )
+        self.expressions['note_pmi'] = (
+            '(("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_inv") / 4) * (10 / 3)'
+        )
+        self.expressions['score_mercicor'] = (
+            'CASE '
+            'WHEN "station_man" THEN ("note_man" + "note_pmi") / 2 '
+            'ELSE ("note_ben" + "note_pmi") / 2 '
+            'END'
+        )
 
     def group(self):
         """
@@ -122,7 +123,7 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         """
         Liste des attributs de la couche résultat à partir de la liste des attributs de la couche d'entrée
         """
-        # Ajout des champs correspondant aux notes si il ne sont pas présents
+        # Ajout des champs correspondant aux notes si ils ne sont pas présents
         for field_name in self.expressions.keys():
             field_idx = input_fields.lookupField(field_name)
             if field_idx < 0:
@@ -197,7 +198,7 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         if layer.type() != QgsMapLayerType.VectorLayer:
             return False
         # Vérification que la couche contient les champs nécessaires aux calculs des notes
-        return self.checkFields(layer.fields())
+        return self.check_fields(layer.fields())
 
     def check_fields(self, layer_fields):
         """
