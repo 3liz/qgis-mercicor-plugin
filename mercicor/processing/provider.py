@@ -5,12 +5,12 @@ __email__ = "info@3liz.org"
 from qgis.core import QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
 
+from mercicor.processing.calcul.calcul_notes import CalculNotes
 from mercicor.processing.exports.download_observation import (
     DownloadObservationFile,
 )
 from mercicor.processing.imports.import_data_habitat import ImportHabitatData
 from mercicor.processing.imports.import_data_pressure import ImportPressureData
-from mercicor.processing.project.calcul_notes import CalculNotes
 from mercicor.processing.project.create_geopackage import (
     CreateGeopackageProject,
 )
@@ -23,12 +23,12 @@ from mercicor.qgis_plugin_tools import resources_path
 class MercicorProvider(QgsProcessingProvider):
 
     def loadAlgorithms(self):
+        self.addAlgorithm(CalculNotes())
         self.addAlgorithm(CreateGeopackageProject())
         self.addAlgorithm(DownloadObservationFile())
         self.addAlgorithm(ImportHabitatData())
         self.addAlgorithm(ImportPressureData())
         self.addAlgorithm(LoadStylesAndRelations())
-        self.addAlgorithm(CalculNotes())
 
     def id(self):  # NOQA
         return "mercicor"
