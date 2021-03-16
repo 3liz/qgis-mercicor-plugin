@@ -21,15 +21,21 @@ class TestCalculsAlgorithms(BaseTestProcessing):
     def test_expressions_mercicor(self):
         """ Test that expressions are valid. """
         gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
-        layer = QgsVectorLayer('{}|layername=habitat_pression_etat_ecologique'.format(gpkg), 'test', 'ogr')
+        layer = QgsVectorLayer('{}|layername=observations'.format(gpkg), 'test', 'ogr')
 
+        # Fields
+        for field in CalculNotes().fields:
+            with self.subTest(i=field):
+                self.assertGreater(layer.fields().indexOf(field), -1, field)
+
+        # Expressions
         context = QgsExpressionContext()
         context.appendScope(QgsExpressionContextUtils.layerScope(layer))
 
-        expressions = CalculNotes().expressions
-        for field, formula in expressions.items():
-            self.assertGreater(layer.fields().indexOf(field), -1)
+        for field, formula in CalculNotes().expressions.items():
+            with self.subTest(i=field):
+                self.assertGreater(layer.fields().indexOf(field), -1)
 
-            expression = QgsExpression(formula)
-            expression.prepare(context)
-            self.assertFalse(expression.hasParserError())
+                expression = QgsExpression(formula)
+                expression.prepare(context)
+                self.assertFalse(expression.hasParserError())
