@@ -12,9 +12,6 @@ stages:
 Build-doc:
   stage: Tests 🎳
   when: manual
-  only:
-    - tags
-    - schedules
   before_script:
     - pip install --user -r requirements/requirements-doc.txt
   script:
@@ -30,9 +27,6 @@ Build-doc:
 Upload-doc:
   stage: Release 🚀
   when: manual
-  only:
-    - tags
-    - schedules
   dependencies:
     - Build-doc
   script:
