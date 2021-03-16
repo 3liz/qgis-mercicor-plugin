@@ -50,7 +50,7 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
             "note_pmi": (
                 '(("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_inv") / 4) * (10 / 3)'
             ),
-            "score_station": (
+            "score_mercicor": (
                 'CASE '
                 'WHEN "station_man" THEN ("note_man" + "note_pmi") / 2 '
                 'ELSE ("note_ben" + "note_pmi") / 2 '

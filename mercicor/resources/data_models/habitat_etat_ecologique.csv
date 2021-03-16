@@ -7,7 +7,7 @@ idx,name,type,typeName,length,precision,comment,alias
 6,note_ben,6,Double,0,0,Note Mercicor Benthique,Note Mercicor Benthique
 7,note_man,6,Double,0,0,Note Mercicor Mangrove,Note Mercicor Mangrove
 8,note_pmi,6,Double,0,0,Note Mercicor Poissons et Macro-invertébrés,Note Mercicor Poissons et Macro-invertébrés
-9,score_station,6,Double,0,0,Score Mercicor,Score Mercicor
+9,score_mercicor,6,Double,0,0,Score Mercicor,Score Mercicor
 10,bsd_recouv_cor,6,Double,0,0,Recouvrement corallien (Scléractiniaires),Recouvrement corallien (Scléractiniaires)
 11,bsd_p_acrop,6,Double,0,0,Pourcentage du recouvrement corallien représenté par les coraux acropores,Pourcentage du recouvrement corallien représenté par les coraux acropores
 12,bsd_vital_cor,6,Double,0,0,Vitalité et taux de mortalité corallienne,Vitalité et taux de mortalité corallienne

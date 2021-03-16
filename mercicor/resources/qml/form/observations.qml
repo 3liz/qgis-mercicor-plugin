@@ -33,7 +33,7 @@ def my_form_open(dialog, layer, feature):
     <attributeEditorField index="8" showLabel="1" name="note_ben"/>
     <attributeEditorField index="9" showLabel="1" name="note_man"/>
     <attributeEditorField index="10" showLabel="1" name="note_pmi"/>
-    <attributeEditorField index="11" showLabel="1" name="score_station"/>
+    <attributeEditorField index="11" showLabel="1" name="score_mercicor"/>
     <attributeEditorContainer columnCount="1" groupBox="0" visibilityExpression="" showLabel="1" visibilityExpressionEnabled="0" name="Physicochimie">
       <attributeEditorField index="12" showLabel="1" name="phch_temp"/>
       <attributeEditorField index="13" showLabel="1" name="phch_dop"/>
@@ -120,7 +120,7 @@ def my_form_open(dialog, layer, feature):
     <field editable="1" name="pmi_macro_inv"/>
     <field editable="1" name="pmi_predat_poi"/>
     <field editable="1" name="pmi_scarib_poi"/>
-    <field editable="1" name="score_station"/>
+    <field editable="1" name="score_mercicor"/>
     <field editable="1" name="station_man"/>
   </editable>
   <labelOnTop>
@@ -166,7 +166,7 @@ def my_form_open(dialog, layer, feature):
     <field labelOnTop="0" name="pmi_macro_inv"/>
     <field labelOnTop="0" name="pmi_predat_poi"/>
     <field labelOnTop="0" name="pmi_scarib_poi"/>
-    <field labelOnTop="0" name="score_station"/>
+    <field labelOnTop="0" name="score_mercicor"/>
     <field labelOnTop="0" name="station_man"/>
   </labelOnTop>
   <widgets/>

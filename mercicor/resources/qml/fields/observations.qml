@@ -78,7 +78,7 @@
         </config>
       </editWidget>
     </field>
-    <field name="score_station">
+    <field name="score_mercicor">
       <editWidget type="TextEdit">
         <config>
           <Option/>
@@ -322,7 +322,7 @@
     <alias index="8" name="" field="note_ben"/>
     <alias index="9" name="" field="note_man"/>
     <alias index="10" name="" field="note_pmi"/>
-    <alias index="11" name="" field="score_station"/>
+    <alias index="11" name="" field="score_mercicor"/>
     <alias index="12" name="" field="phch_temp"/>
     <alias index="13" name="" field="phch_dop"/>
     <alias index="14" name="" field="phch_do"/>
@@ -370,7 +370,7 @@
     <default expression="" field="note_ben" applyOnUpdate="0"/>
     <default expression="" field="note_man" applyOnUpdate="0"/>
     <default expression="" field="note_pmi" applyOnUpdate="0"/>
-    <default expression="" field="score_station" applyOnUpdate="0"/>
+    <default expression="" field="score_mercicor" applyOnUpdate="0"/>
     <default expression="" field="phch_temp" applyOnUpdate="0"/>
     <default expression="" field="phch_dop" applyOnUpdate="0"/>
     <default expression="" field="phch_do" applyOnUpdate="0"/>
@@ -416,7 +416,7 @@
     <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="note_ben"/>
     <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="note_man"/>
     <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="note_pmi"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="score_station"/>
+    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="score_mercicor"/>
     <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_temp"/>
     <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_dop"/>
     <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_do"/>
@@ -462,7 +462,7 @@
     <constraint desc="" field="note_ben" exp=""/>
     <constraint desc="" field="note_man" exp=""/>
     <constraint desc="" field="note_pmi" exp=""/>
-    <constraint desc="" field="score_station" exp=""/>
+    <constraint desc="" field="score_mercicor" exp=""/>
     <constraint desc="" field="phch_temp" exp=""/>
     <constraint desc="" field="phch_dop" exp=""/>
     <constraint desc="" field="phch_do" exp=""/>
