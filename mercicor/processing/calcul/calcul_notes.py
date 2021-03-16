@@ -2,7 +2,6 @@ __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
-from PyQt5.QtCore import QVariant
 from qgis.core import (
     QgsExpression,
     QgsField,
@@ -10,6 +9,7 @@ from qgis.core import (
     QgsProcessing,
     QgsProcessingFeatureBasedAlgorithm,
 )
+from qgis.PyQt.QtCore import QVariant
 
 
 class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
@@ -29,21 +29,33 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
             "bsm_epibiose", "man_fragm", "man_recouv", "man_diam_tronc", "man_dens", "man_diversit",
             "man_vital", "pmi_div_poi", "pmi_predat_poi", "pmi_scarib_poi", "pmi_macro_inv"
         ]
-        # note fields
-        self.notes = ["note_bsd", "note_bsm", "note_ben", "note_man", "note_pmi", "score_station"]
+
         # note expressions
         self.expressions = {
-            "note_bsd": '(("bsd_recouv_cor" + "bsd_p_acrop" + "bsd_vital_cor" + "bsd_comp_struc" + '
-            '"bsd_taille_cor" + "bsd_dens_juv" + "bsd_f_sessile" + "bsd_recouv_ma") / 8.0) * (10.0 / 3.0)',
-            "note_bsm": '(("bsm_fragm_herb" + "bsm_recouv_her" + "bsm_haut_herb" + "bsm_dens_herb" + '
-            '"bsm_div_herb" + "bsm_epibiose") / 6.0) * (10.0 / 3.0)',
-            "note_ben": '"note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm"',
-            "note_man": '(("man_fragm" + "man_recouv" + "man_diam_tronc" + "man_dens" + "man_diversit" + '
-            '"man_vital") / 6.0) * (10.0 / 3.0)',
-            "note_pmi": '(("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_inv") / 4) * (10 '
-            '/ 3)',
-            "score_station": 'CASE WHEN "station_man" THEN ("note_man" + "note_pmi") / 2 ELSE ("note_ben" + '
-            '"note_pmi") / 2 END'
+            "note_bsd": (
+                '(("bsd_recouv_cor" + "bsd_p_acrop" + "bsd_vital_cor" + "bsd_comp_struc" + '
+                '"bsd_taille_cor" + "bsd_dens_juv" + "bsd_f_sessile" + "bsd_recouv_ma") / 8.0) * (10.0 / 3.0)'
+            ),
+            "note_bsm": (
+                '(("bsm_fragm_herb" + "bsm_recouv_her" + "bsm_haut_herb" + "bsm_dens_herb" + '
+                '"bsm_div_herb" + "bsm_epibiose") / 6.0) * (10.0 / 3.0)'
+            ),
+            "note_ben": (
+                '"note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm"'
+            ),
+            "note_man": (
+                '(("man_fragm" + "man_recouv" + "man_diam_tronc" + "man_dens" + "man_diversit" + '
+                '"man_vital") / 6.0) * (10.0 / 3.0)'
+            ),
+            "note_pmi": (
+                '(("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_inv") / 4) * (10 / 3)'
+            ),
+            "score_station": (
+                'CASE '
+                'WHEN "station_man" THEN ("note_man" + "note_pmi") / 2 '
+                'ELSE ("note_ben" + "note_pmi") / 2 '
+                'END'
+            ),
         }
 
     def group(self):
@@ -100,25 +112,22 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         """
         return [QgsProcessing.TypeVector]
 
-    def outputType(self):
+    def outputLayerType(self):
         """
         Type de la couche de sortie
         """
         return QgsProcessing.TypeVector
 
-    def outputFields(self, inputFields):
+    def outputFields(self, input_fields):
         """
-        Liste des attributs de la couche résultat
-        à partir de la liste des attributs de la
-        couche d'entrée
+        Liste des attributs de la couche résultat à partir de la liste des attributs de la couche d'entrée
         """
-        # Ajout des champs correspondant aux notes
-        # si il ne sont pas présents
-        for field_name in self.notes:
-            field_idx = inputFields.lookupField(field_name)
+        # Ajout des champs correspondant aux notes si il ne sont pas présents
+        for field_name in self.expressions.keys():
+            field_idx = input_fields.lookupField(field_name)
             if field_idx < 0:
-                inputFields.append(QgsField(field_name, QVariant.Double, '', 24, 15))
-        return inputFields
+                input_fields.append(QgsField(field_name, QVariant.Double, '', 24, 15))
+        return input_fields
 
     def initAlgorithm(self, config):
         """
@@ -134,25 +143,28 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
 
     def prepareAlgorithm(self, parameters, context, feedback):
         """
-        Fonction de préparation de l'algorithm
+        Fonction de préparation de l'algorithme
         Il est possible de vérifier le paramètre INPUT
         """
         # get source
         source = self.parameterAsSource(parameters, 'INPUT', context)
+
         # check that field source has needed fields
-        if not self.checkFields(source.fields()):
+        if not self.check_fields(source.fields()):
             return False
+
         # create expression context
         self.exp_context = self.createExpressionContext(parameters, context, source)
         return True
 
     def processFeature(self, feature, context, feedback):
         """
-        Fonction de modification des objets géographiques
+        Fonction de modification des objets géographiques.
+
         Application des expressions pour les champs à mettre à jour
         """
         # boucle sur les champs des notes merci-cor
-        for note in self.notes:
+        for note in self.expressions.keys():
             # création de l'expression
             expression = QgsExpression(self.expressions[note])
             # préparation de l'expression
@@ -187,7 +199,7 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         # Vérification que la couche contient les champs nécessaires aux calculs des notes
         return self.checkFields(layer.fields())
 
-    def checkFields(self, layer_fields):
+    def check_fields(self, layer_fields):
         """
         Fonction de vérification que la couche contient les champs nécessaires
         aux calculs des notes
