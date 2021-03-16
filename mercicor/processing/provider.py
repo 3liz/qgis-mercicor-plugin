@@ -10,6 +10,7 @@ from mercicor.processing.exports.download_observation import (
 )
 from mercicor.processing.imports.import_data_habitat import ImportHabitatData
 from mercicor.processing.imports.import_data_pressure import ImportPressureData
+from mercicor.processing.project.calcul_notes import CalculNotes
 from mercicor.processing.project.create_geopackage import (
     CreateGeopackageProject,
 )
@@ -27,6 +28,7 @@ class MercicorProvider(QgsProcessingProvider):
         self.addAlgorithm(ImportHabitatData())
         self.addAlgorithm(ImportPressureData())
         self.addAlgorithm(LoadStylesAndRelations())
+        self.addAlgorithm(CalculNotes())
 
     def id(self):  # NOQA
         return "mercicor"
