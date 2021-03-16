@@ -10,7 +10,12 @@ site_dir: build
 nav:
     - Accueil: index.md
     - Guide utilisateur:
-        - 'Utilisation': 'user-guide/utilisation.md'
+        - 'Index': 'user-guide/index.md'
+        - 'Création du projet': 'user-guide/initialisation-projet.md'
+        - 'Import des habitats': 'user-guide/import-donnees-habitats.md'
+        - 'Préparation de la campagne': 'user-guide/preparation-observations.md'
+        - 'Intégration de la campagne': 'user-guide/integration-campagne.md'
+        - 'Étude des scénarios': 'user-guide/etude-scenario.md'
         - 'Installation': 'user-guide/installation.md'
     - Traitements: processing/README.md
     - Changelog: changelog.md

@@ -2,7 +2,7 @@ __copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
-from typing import Tuple, Optional
+from typing import Optional, Tuple
 
 from qgis.core import (
     QgsCoordinateReferenceSystem,
@@ -39,8 +39,9 @@ class ImportObservationData(BaseImportAlgorithm):
     def shortHelpString(self):
         return (
             'Import des données des observations.\n\n'
-            'Expliciter si MAJ ou AJOUT\n'
-            'Expliciter pour la GEOM\n'
+            'L\'algortihme peut soit mettre à jour des observations existantes ou alors les rajouter dans '
+            'la table destinaton.\n'
+            'Pour cela, l\'algorithme s\'appuie sur le ID de la station.\n'
         )
 
     def initAlgorithm(self, config):

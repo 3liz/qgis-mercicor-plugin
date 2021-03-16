@@ -14,7 +14,7 @@ from qgis.core import (
 )
 from qgis.processing import run
 
-from mercicor.processing.imports.import_observations import (
+from mercicor.processing.imports.import_data_observations import (
     ImportObservationData,
 )
 from mercicor.qgis_plugin_tools import plugin_test_data_path

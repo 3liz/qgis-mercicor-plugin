@@ -10,10 +10,10 @@ from mercicor.processing.exports.download_observation import (
     DownloadObservationFile,
 )
 from mercicor.processing.imports.import_data_habitat import ImportHabitatData
-from mercicor.processing.imports.import_data_pressure import ImportPressureData
-from mercicor.processing.imports.import_observations import (
+from mercicor.processing.imports.import_data_observations import (
     ImportObservationData,
 )
+from mercicor.processing.imports.import_data_pressure import ImportPressureData
 from mercicor.processing.project.create_geopackage import (
     CreateGeopackageProject,
 )

@@ -150,6 +150,32 @@ No output
 ***
 
 
+### Import données observation
+
+Import des données des observations.
+
+L'algortihme peut soit mettre à jour des observations existantes ou alors les rajouter dans la table destinaton.Pour cela, l'algorithme s'appuie sur le ID de la station.
+
+
+![algo_id](./mercicor-import_donnees_observation.png)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+INPUT_LAYER|Couche pour l'import des observations|VectorLayer||✓||Type: TypeVector <br>|
+OUTPUT_LAYER|Couche des observations de destination|VectorLayer||✓||Default: observations <br> Type: TypeVectorPolygon <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+No output
+
+***
+
+
 ### Import données pression
 
 Import des données de pression.
