@@ -10,7 +10,7 @@ Une fois [installé](./installation.md), pour utiliser l'outil, il faut se rendr
 Il y a plusieurs étapes : 
 
 * [Création du projet](./initialisation-projet.md)
-* [Import des données habitats](./initialisation-projet.md)
+* [Import des données habitats](./import-donnees-habitats.md)
 * [Préparation de la campagne d'observations](./preparation-observations.md)
 * [Intégration des données d'observations](./integration-campagne.md)
 * [Étude des scénarios](./etude-scenario.md)
