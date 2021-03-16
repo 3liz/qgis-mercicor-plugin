@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # Intégration des données de la campagne d'observation
 
 Concernant l'intégration des données d'observations on fait soit une saisie via QGIS et le formulaire 

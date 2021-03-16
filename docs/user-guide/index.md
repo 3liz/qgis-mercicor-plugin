@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # Guide d'utilisation
 
 Une fois [installé](./installation.md), pour utiliser l'outil, il faut se rendre dans la boîte à outils de traitements de QGIS.

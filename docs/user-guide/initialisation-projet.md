@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # Création d'un projet
 
 La création d'un nouveau projet via l'extension permet de générer un projet vide sans devoir le créer 
