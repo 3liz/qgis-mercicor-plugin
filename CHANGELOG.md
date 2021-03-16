@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 0.3.0 - 2021-03-XX
+
+* Ajout du type de pression "Emprise"
+* Ajout de la couche "habitat_pression_etat_ecologique"
+* Ajout de la notion de scénario lors de l'import des pressions
+* Ajout de l'algorithme de calcul des notes mercicor
+* Ajout de l'export de la couche des observations au format tableur
+* Ajout de l'algorithme d'import des données observations
+* Mise à jour de la documentation utilisateur
+* Mise à jour du formulaire des observations
+* Remplacement du champ "score_station" par "score_mercicor"
+
 ## 0.2.0 - 2021-03-09
 
 * Mise à jour de la table habitat et de l'import des données
