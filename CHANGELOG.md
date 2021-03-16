@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.3.0 - 2021-03-XX
+## 0.3.0 - 2021-03-16
 
 * Ajout du type de pression "Emprise"
 * Ajout de la couche "habitat_pression_etat_ecologique"
