@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.3.1 - 2021-03-XX
+## 0.3.1 - 2021-03-16
 
 * Modification de l'aide des algorithmes
 * Mise à jour de la documentation
