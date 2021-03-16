@@ -7,8 +7,8 @@ pour l'ajout d'observation :
 
 Soit par l'import fichier Excel.
 
-Enfin pour le calcul des notes Merci-cor des observations et calcul de l'état écologique des habitats
-où un algorithme y est dédié.
+Enfin pour le calcul des notes Merci-cor des observations et calcul de l'état écologique des habitats, 
+un algorithme y est dédié.
 
 Il y deux façons de l'utiliser :
 
