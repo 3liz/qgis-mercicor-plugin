@@ -1,9 +1,6 @@
----
-hide:
-  - toc
----
-
 # Intégration des données de la campagne d'observation
+
+## Données d'observations
 
 Concernant l'intégration des données d'observations on fait soit une saisie via QGIS et le formulaire 
 pour l'ajout d'observation :
@@ -11,6 +8,10 @@ pour l'ajout d'observation :
 ![form_observation](media/mercicor-form_observ.png)
 
 Soit par l'import fichier Excel.
+
+![Import des données observations](../processing/mercicor-import_donnees_observation.png)
+
+## Calcul des notes Merci-Cor
 
 Enfin pour le calcul des notes Merci-cor des observations et calcul de l'état écologique des habitats, 
 un algorithme y est dédié.
