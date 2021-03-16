@@ -159,20 +159,22 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
             expression.prepare(self.exp_context)
             if expression.hasEvalError():
                 feedback.reportError(
-                    self.tr('Prepare error in expression "{}": {}')
-                        .format(expression.expression(),
-                                expression.evalErrorString()))
+                    'Erreur lors de la préparation de l\'expression "{}": {}'.format(
+                        expression.expression(),
+                        expression.evalErrorString()))
                 continue
+
             # Ajout de l'objet géographique au context de l'expression
             self.exp_context.setFeature(feature)
             # Evaluation de l'expression
             feature[note] = expression.evaluate(self.exp_context)
             if expression.hasEvalError():
                 feedback.reportError(
-                        self.tr('Eval error in expression "{}": {}')
-                            .format(expression.expression(),
-                                    expression.evalErrorString()))
+                    'Erreur d\'évaluation de l\'expression "{}": {}'.format(
+                        expression.expression(),
+                        expression.evalErrorString()))
                 break
+
         return [feature]
 
     def supportInPlaceEdit(self, layer):
