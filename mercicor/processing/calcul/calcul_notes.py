@@ -87,7 +87,11 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         """
         Description de l'algorithme
         """
-        return 'Calcul des notes MERCI-Cor à partir des indicateurs MERCI-Cor'
+        message = 'Calcul des notes MERCI-Cor à partir des indicateurs MERCI-Cor\n\n'
+        message += 'Liste des notes : \n'
+        for field, formula in self.expressions.items():
+            message += '{} = {}\n'.format(field, formula)
+        return message
 
     def inputParameterName(self):
         """

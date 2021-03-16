@@ -51,7 +51,9 @@ class ImportPressureData(BaseImportAlgorithm):
         return (
             'Import des données de pression.\n\n'
             'Le champ des pressions doit être correctement formaté : \n'
-            '{}'.format(', '.join([str(i) for i in self.expected_values]))
+            '{values}\n'
+            'Un scénario sera également crée et la couche sera filtrée pour ce scénario.'.format(
+                values=', '.join([str(i) for i in self.expected_values]))
         )
 
     def initAlgorithm(self, config):

@@ -46,7 +46,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     def shortHelpString(self):
         return (
             "Charger les styles pour les différentes couches.\n\n"
-            "Les relations vont aussi être chargés dans le projet."
+            "Les relations et les jointures vont également être chargés dans le projet."
         )
 
     def checkParameterValues(self, parameters, context):
