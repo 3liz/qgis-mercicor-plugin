@@ -14,6 +14,8 @@ from qgis.core import (
     QgsVectorLayerJoinInfo,
 )
 
+from mercicor.actions import actions_list
+from mercicor.definitions.relations import relations
 from mercicor.processing.project.base import BaseProjectAlgorithm
 from mercicor.qgis_plugin_tools import load_csv, resources_path
 
@@ -140,6 +142,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     def postProcessAlgorithm(self, context, feedback):
         self.add_relations(context, feedback)
         self.add_joins()
+        self.add_actions()
 
         for layer in self.input_layers.values():
             if layer.isSpatial():
@@ -149,6 +152,15 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             self.QML_LOADED: self.success_qml,
             self.RELATIONS_ADDED: self.success_relation,
         }
+
+    def add_actions(self):
+        """ Add actions for layers. """
+        for action in actions_list.values():
+            # We remove multiple times actions on a layer :(
+            self.input_layers[action.layer].actions().clearActions()
+
+        for action in actions_list.values():
+            self.input_layers[action.layer].actions().addAction(action.action)
 
     def add_joins(self):
         """ Add all joins between tables. """
@@ -199,71 +211,27 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
     def add_relations(self, context, feedback):
         """ Add all relations to the QGIS project. """
-        relations = [
-            {
-                'id': 'fk_pression_type',
-                'name': 'Lien Pression - Type Pression',
-                'referencingLayer': self.input_layers['pression'].id(),
-                'referencingField': 'type_pression',
-                'referencedLayer': self.input_layers['liste_type_pression'].id(),
-                'referencedField': 'key',
-            },
-            {
-                'id': 'fk_habitat',
-                'name': 'Lien habitat - Type Pression',
-                'referencingLayer': self.input_layers['habitat'].id(),
-                'referencingField': 'id',
-                'referencedLayer': self.input_layers['habitat_etat_ecologique'].id(),
-                'referencedField': 'id',
-            },
-            {
-                'id': 'rel_pression_scenario',
-                'name': 'Lien pression - scenario Pression',
-                'referencingLayer': self.input_layers['pression'].id(),
-                'referencingField': 'scenario_id',
-                'referencedLayer': self.input_layers['scenario_pression'].id(),
-                'referencedField': 'id',
-            },
-            {
-                'id': 'rel_hab_press_etat_ecolo',
-                'name': 'Lien Habitat - Hab_press_etat_ecolo',
-                'referencingLayer': self.input_layers['habitat'].id(),
-                'referencingField': 'id',
-                'referencedLayer': self.input_layers['habitat_pression_etat_ecologique'].id(),
-                'referencedField': 'habitat_id',
-            },
-            {
-                'id': 'rel_pression_hab_press_etat_ecolo',
-                'name': 'Lien Pression - Hab_press_etat_ecolo',
-                'referencingLayer': self.input_layers['pression'].id(),
-                'referencingField': 'id',
-                'referencedLayer': self.input_layers['habitat_pression_etat_ecologique'].id(),
-                'referencedField': 'pression_id',
-            },
-            {
-                'id': 'rel_scenario_hab_press_etat_ecolo',
-                'name': 'Lien Scenario pression - Hab_press_etat_ecolo',
-                'referencingLayer': self.input_layers['scenario_pression'].id(),
-                'referencingField': 'id',
-                'referencedLayer': self.input_layers['habitat_pression_etat_ecologique'].id(),
-                'referencedField': 'scenario_id',
-            },
-        ]
-
         relation_manager = context.project().relationManager()
         for definition in relations:
 
+            definition = dict(definition)
             if relation_manager.relation(definition['id']):
                 relation_manager.removeRelation(definition['id'])
                 feedback.pushDebugInfo('Removing pre-existing relation {}'.format(definition['id']))
+
+            referencing = definition['referencing_layer']
+            definition['referencing_layer'] = self.input_layers[referencing].id()
+
+            referenced = definition['referenced_layer']
+            definition['referenced_layer'] = self.input_layers[referenced].id()
 
             feedback.pushInfo(definition['name'])
             relation = QgsRelation()
             relation.setId(definition['id'])
             relation.setName(definition['name'])
-            relation.setReferencingLayer(definition['referencingLayer'])
-            relation.setReferencedLayer(definition['referencedLayer'])
-            relation.addFieldPair(definition['referencingField'], definition['referencedField'])
+            relation.setReferencingLayer(definition['referencing_layer'])
+            relation.setReferencedLayer(definition['referenced_layer'])
+            relation.addFieldPair(definition['referencing_field'], definition['referenced_field'])
             relation.setStrength(QgsRelation.Association)
             if not relation.isValid():
                 raise QgsProcessingException('{} is not valid'.format(definition['name']))
