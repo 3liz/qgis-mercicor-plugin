@@ -97,6 +97,31 @@ class ImportHabitatData(BaseImportAlgorithm):
 
         params = {
             'INPUT': input_layer,
+            'DISTANCE': 0,
+            'OUTPUT': 'memory:'
+        }
+        results = processing.run(
+            "native:buffer",
+            params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True)
+
+        params = {
+            'INPUT': results['OUTPUT'],
+            'FIELD': [name_field, facies_field],
+            'OUTPUT': 'memory:'
+        }
+        results = processing.run(
+            "native:collect",
+            params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True,
+        )
+
+        params = {
+            'INPUT': results['OUTPUT'],
             'OUTPUT': 'memory:'
         }
         results = processing.run(
@@ -123,18 +148,6 @@ class ImportHabitatData(BaseImportAlgorithm):
                 context=context,
                 feedback=feedback,
                 is_child_algorithm=True)
-
-        params = {
-            'INPUT': results['OUTPUT'],
-            'DISTANCE': 0,
-            'OUTPUT': 'memory:'
-        }
-        results = processing.run(
-            "native:buffer",
-            params,
-            context=context,
-            feedback=feedback,
-            is_child_algorithm=True)
 
         layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
 
