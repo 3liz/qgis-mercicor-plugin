@@ -92,7 +92,7 @@ class ImportHabitatData(BaseImportAlgorithm):
             'OUTPUT': 'memory:'
         }
         results = processing.run(
-            "native:multiparttosingleparts",
+            "native:promotetomulti",
             params,
             context=context,
             feedback=feedback,
@@ -131,7 +131,6 @@ class ImportHabitatData(BaseImportAlgorithm):
 
             output_feature = QgsFeature(self.output_layer.fields())
             geometry = QgsGeometry(input_feature.geometry())
-            geometry.convertToMultiType()
             output_feature.setGeometry(geometry)
             output_feature.setAttribute('nom', input_feature[name_field])
             output_feature.setAttribute('facies', input_feature[facies_field])

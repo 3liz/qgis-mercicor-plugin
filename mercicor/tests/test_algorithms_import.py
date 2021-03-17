@@ -163,7 +163,7 @@ class TestImportAlgorithms(BaseTestProcessing):
         run("mercicor:import_donnees_habitat", params)
         index = target_layer.fields().indexOf('facies')
 
-        self.assertEqual(2, target_layer.featureCount())
+        self.assertEqual(1, target_layer.featureCount())
         self.assertSetEqual({'bon'}, target_layer.uniqueValues(index))
         # self.assertEqual(target_layer.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
 
