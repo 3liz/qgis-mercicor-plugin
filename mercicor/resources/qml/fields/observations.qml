@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="3.10.14-A Coruña" styleCategories="Fields">
+<qgis styleCategories="Fields" version="3.10.14-A Coruña">
   <fieldConfiguration>
     <field name="id">
       <editWidget type="TextEdit">
@@ -23,478 +23,778 @@
       </editWidget>
     </field>
     <field name="perc_bsd">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="perc_bsm">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="datetime_obs">
       <editWidget type="DateTime">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="allow_null" value="true"/>
+            <Option type="bool" name="calendar_popup" value="true"/>
+            <Option type="QString" name="display_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <Option type="QString" name="field_format" value="yyyy-MM-dd HH:mm:ss"/>
+            <Option type="bool" name="field_iso_format" value="false"/>
+          </Option>
+        </config>
+      </editWidget>
+    </field>
+    <field name="profondeur">
+      <editWidget type="Range">
+        <config>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="note_bsd">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="note_bsm">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="note_ben">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="note_man">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="note_pmi">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="score_mercicor">
       <editWidget type="TextEdit">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="IsMultiline" value="false"/>
+            <Option type="bool" name="UseHtml" value="false"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="phch_temp">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="phch_dop">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="phch_do">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="phch_cond">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="phch_sal">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="phch_ph">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="phch_turb">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="phch_sedi">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="1.7976931348623157e+308"/>
+            <Option type="double" name="Min" value="-1.7976931348623157e+308"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsd_recouv_cor">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsd_p_acrop">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsd_vital_cor">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsd_comp_struc">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsd_taille_cor">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsd_dens_juv">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsd_f_sessile">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsd_recouv_ma">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsm_fragm_herb">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsm_recouv_her">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsm_haut_herb">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsm_dens_herb">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsm_div_herb">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="bsm_epibiose">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="man_fragm">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="man_recouv">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="man_diam_tronc">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="man_dens">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="man_diversit">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="man_vital">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="pmi_div_poi">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="pmi_predat_poi">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="pmi_scarib_poi">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
     <field name="pmi_macro_inv">
-      <editWidget type="TextEdit">
+      <editWidget type="Range">
         <config>
-          <Option/>
+          <Option type="Map">
+            <Option type="bool" name="AllowNull" value="true"/>
+            <Option type="double" name="Max" value="3"/>
+            <Option type="double" name="Min" value="0"/>
+            <Option type="int" name="Precision" value="0"/>
+            <Option type="double" name="Step" value="1"/>
+            <Option type="QString" name="Style" value="SpinBox"/>
+          </Option>
         </config>
       </editWidget>
     </field>
   </fieldConfiguration>
   <aliases>
-    <alias index="0" name="" field="id"/>
-    <alias index="1" name="" field="nom_station"/>
-    <alias index="2" name="" field="station_man"/>
-    <alias index="3" name="" field="perc_bsd"/>
-    <alias index="4" name="" field="perc_bsm"/>
-    <alias index="5" name="" field="datetime_obs"/>
-    <alias index="6" name="" field="note_bsd"/>
-    <alias index="7" name="" field="note_bsm"/>
-    <alias index="8" name="" field="note_ben"/>
-    <alias index="9" name="" field="note_man"/>
-    <alias index="10" name="" field="note_pmi"/>
-    <alias index="11" name="" field="score_mercicor"/>
-    <alias index="12" name="" field="phch_temp"/>
-    <alias index="13" name="" field="phch_dop"/>
-    <alias index="14" name="" field="phch_do"/>
-    <alias index="15" name="" field="phch_cond"/>
-    <alias index="16" name="" field="phch_sal"/>
-    <alias index="17" name="" field="phch_ph"/>
-    <alias index="18" name="" field="phch_turb"/>
-    <alias index="19" name="" field="phch_sedi"/>
-    <alias index="20" name="" field="bsd_recouv_cor"/>
-    <alias index="21" name="" field="bsd_p_acrop"/>
-    <alias index="22" name="" field="bsd_vital_cor"/>
-    <alias index="23" name="" field="bsd_comp_struc"/>
-    <alias index="24" name="" field="bsd_taille_cor"/>
-    <alias index="25" name="" field="bsd_dens_juv"/>
-    <alias index="26" name="" field="bsd_f_sessile"/>
-    <alias index="27" name="" field="bsd_recouv_ma"/>
-    <alias index="28" name="" field="bsm_fragm_herb"/>
-    <alias index="29" name="" field="bsm_recouv_her"/>
-    <alias index="30" name="" field="bsm_haut_herb"/>
-    <alias index="31" name="" field="bsm_dens_herb"/>
-    <alias index="32" name="" field="bsm_div_herb"/>
-    <alias index="33" name="" field="bsm_epibiose"/>
-    <alias index="34" name="" field="man_fragm"/>
-    <alias index="35" name="" field="man_recouv"/>
-    <alias index="36" name="" field="man_diam_tronc"/>
-    <alias index="37" name="" field="man_dens"/>
-    <alias index="38" name="" field="man_diversit"/>
-    <alias index="39" name="" field="man_vital"/>
-    <alias index="40" name="" field="pmi_div_poi"/>
-    <alias index="41" name="" field="pmi_predat_poi"/>
-    <alias index="42" name="" field="pmi_scarib_poi"/>
-    <alias index="43" name="" field="pmi_macro_inv"/>
+    <alias name="" field="id" index="0"/>
+    <alias name="Nom de la station d'observations" field="nom_station" index="1"/>
+    <alias name="Station en Mangrove" field="station_man" index="2"/>
+    <alias name="Pourcentage Benthique de substrats durs " field="perc_bsd" index="3"/>
+    <alias name="Pourcentage Benthique de substrats meubles" field="perc_bsm" index="4"/>
+    <alias name="Date et heure d'observations" field="datetime_obs" index="5"/>
+    <alias name="Profondeur" field="profondeur" index="6"/>
+    <alias name="Note Mercicor Benthique de substrats durs" field="note_bsd" index="7"/>
+    <alias name="Note Mercicor Benthique de substrats meubles" field="note_bsm" index="8"/>
+    <alias name="Note Mercicor Benthique" field="note_ben" index="9"/>
+    <alias name="Note Mercicor Mangrove" field="note_man" index="10"/>
+    <alias name="Note Mercicor Poissons et Macro-invertébrés" field="note_pmi" index="11"/>
+    <alias name="Score Mercicor" field="score_mercicor" index="12"/>
+    <alias name="Température de l'eau" field="phch_temp" index="13"/>
+    <alias name="Oxygène dissous en pourcentage" field="phch_dop" index="14"/>
+    <alias name="Oxygène dissous en mg/L" field="phch_do" index="15"/>
+    <alias name="Conductivité en ms par cm" field="phch_cond" index="16"/>
+    <alias name="Salinité de l'eau" field="phch_sal" index="17"/>
+    <alias name="PH de l'eau" field="phch_ph" index="18"/>
+    <alias name="Turbidité de l'eau" field="phch_turb" index="19"/>
+    <alias name="Sédimentation" field="phch_sedi" index="20"/>
+    <alias name="Recouvrement corallien (Scléractiniaires)" field="bsd_recouv_cor" index="21"/>
+    <alias name="Pourcentage du recouvrement corallien représenté par les coraux acropores" field="bsd_p_acrop" index="22"/>
+    <alias name="Vitalité et taux de mortalité corallienne" field="bsd_vital_cor" index="23"/>
+    <alias name="Complexité structurelle des peuplements coralliens" field="bsd_comp_struc" index="24"/>
+    <alias name="Taille des coraux vivants" field="bsd_taille_cor" index="25"/>
+    <alias name="Densité de coraux juvéniles" field="bsd_dens_juv" index="26"/>
+    <alias name="Recouvrement par la faune sessile non corallienne" field="bsd_f_sessile" index="27"/>
+    <alias name="Recouvrement par les macroalgues" field="bsd_recouv_ma" index="28"/>
+    <alias name="Fragmentation de l’herbier" field="bsm_fragm_herb" index="29"/>
+    <alias name="Recouvrement par l’herbier (patchs)" field="bsm_recouv_her" index="30"/>
+    <alias name="Hauteur de l’herbier (patchs)" field="bsm_haut_herb" index="31"/>
+    <alias name="Densité des phanérogames (patchs)" field="bsm_dens_herb" index="32"/>
+    <alias name="Diversité spécifique des phanérogames (patchs)" field="bsm_div_herb" index="33"/>
+    <alias name="Epibiose de l’herbier (patchs)" field="bsm_epibiose" index="34"/>
+    <alias name="Fragmentation de la mangrove" field="man_fragm" index="35"/>
+    <alias name="Recouvrement par la mangrove (patchs)" field="man_recouv" index="36"/>
+    <alias name="Diamètre des troncs (patchs)" field="man_diam_tronc" index="37"/>
+    <alias name="Densité des palétuviers (patchs)" field="man_dens" index="38"/>
+    <alias name="Diversité spécifique des palétuviers (patchs)" field="man_diversit" index="39"/>
+    <alias name="Vitalité des palétuviers (patchs)" field="man_vital" index="40"/>
+    <alias name="Diversité spécifique des peuplements de poissons" field="pmi_div_poi" index="41"/>
+    <alias name="Abondance et maturité des prédateurs supérieurs récifaux" field="pmi_predat_poi" index="42"/>
+    <alias name="Abondance et maturité des poissons perroquets" field="pmi_scarib_poi" index="43"/>
+    <alias name="Abondance des macro-invertébrés" field="pmi_macro_inv" index="44"/>
   </aliases>
   <excludeAttributesWMS/>
   <excludeAttributesWFS/>
   <defaults>
-    <default expression="" field="id" applyOnUpdate="0"/>
-    <default expression="" field="nom_station" applyOnUpdate="0"/>
-    <default expression="" field="station_man" applyOnUpdate="0"/>
-    <default expression="" field="perc_bsd" applyOnUpdate="0"/>
-    <default expression="" field="perc_bsm" applyOnUpdate="0"/>
-    <default expression="" field="datetime_obs" applyOnUpdate="0"/>
-    <default expression="" field="note_bsd" applyOnUpdate="0"/>
-    <default expression="" field="note_bsm" applyOnUpdate="0"/>
-    <default expression="" field="note_ben" applyOnUpdate="0"/>
-    <default expression="" field="note_man" applyOnUpdate="0"/>
-    <default expression="" field="note_pmi" applyOnUpdate="0"/>
-    <default expression="" field="score_mercicor" applyOnUpdate="0"/>
-    <default expression="" field="phch_temp" applyOnUpdate="0"/>
-    <default expression="" field="phch_dop" applyOnUpdate="0"/>
-    <default expression="" field="phch_do" applyOnUpdate="0"/>
-    <default expression="" field="phch_cond" applyOnUpdate="0"/>
-    <default expression="" field="phch_sal" applyOnUpdate="0"/>
-    <default expression="" field="phch_ph" applyOnUpdate="0"/>
-    <default expression="" field="phch_turb" applyOnUpdate="0"/>
-    <default expression="" field="phch_sedi" applyOnUpdate="0"/>
-    <default expression="" field="bsd_recouv_cor" applyOnUpdate="0"/>
-    <default expression="" field="bsd_p_acrop" applyOnUpdate="0"/>
-    <default expression="" field="bsd_vital_cor" applyOnUpdate="0"/>
-    <default expression="" field="bsd_comp_struc" applyOnUpdate="0"/>
-    <default expression="" field="bsd_taille_cor" applyOnUpdate="0"/>
-    <default expression="" field="bsd_dens_juv" applyOnUpdate="0"/>
-    <default expression="" field="bsd_f_sessile" applyOnUpdate="0"/>
-    <default expression="" field="bsd_recouv_ma" applyOnUpdate="0"/>
-    <default expression="" field="bsm_fragm_herb" applyOnUpdate="0"/>
-    <default expression="" field="bsm_recouv_her" applyOnUpdate="0"/>
-    <default expression="" field="bsm_haut_herb" applyOnUpdate="0"/>
-    <default expression="" field="bsm_dens_herb" applyOnUpdate="0"/>
-    <default expression="" field="bsm_div_herb" applyOnUpdate="0"/>
-    <default expression="" field="bsm_epibiose" applyOnUpdate="0"/>
-    <default expression="" field="man_fragm" applyOnUpdate="0"/>
-    <default expression="" field="man_recouv" applyOnUpdate="0"/>
-    <default expression="" field="man_diam_tronc" applyOnUpdate="0"/>
-    <default expression="" field="man_dens" applyOnUpdate="0"/>
-    <default expression="" field="man_diversit" applyOnUpdate="0"/>
-    <default expression="" field="man_vital" applyOnUpdate="0"/>
-    <default expression="" field="pmi_div_poi" applyOnUpdate="0"/>
-    <default expression="" field="pmi_predat_poi" applyOnUpdate="0"/>
-    <default expression="" field="pmi_scarib_poi" applyOnUpdate="0"/>
-    <default expression="" field="pmi_macro_inv" applyOnUpdate="0"/>
+    <default applyOnUpdate="0" expression="" field="id"/>
+    <default applyOnUpdate="0" expression="" field="nom_station"/>
+    <default applyOnUpdate="0" expression="" field="station_man"/>
+    <default applyOnUpdate="0" expression="" field="perc_bsd"/>
+    <default applyOnUpdate="0" expression="" field="perc_bsm"/>
+    <default applyOnUpdate="0" expression="" field="datetime_obs"/>
+    <default applyOnUpdate="0" expression="" field="profondeur"/>
+    <default applyOnUpdate="0" expression="" field="note_bsd"/>
+    <default applyOnUpdate="0" expression="" field="note_bsm"/>
+    <default applyOnUpdate="0" expression="" field="note_ben"/>
+    <default applyOnUpdate="0" expression="" field="note_man"/>
+    <default applyOnUpdate="0" expression="" field="note_pmi"/>
+    <default applyOnUpdate="0" expression="" field="score_mercicor"/>
+    <default applyOnUpdate="0" expression="" field="phch_temp"/>
+    <default applyOnUpdate="0" expression="" field="phch_dop"/>
+    <default applyOnUpdate="0" expression="" field="phch_do"/>
+    <default applyOnUpdate="0" expression="" field="phch_cond"/>
+    <default applyOnUpdate="0" expression="" field="phch_sal"/>
+    <default applyOnUpdate="0" expression="" field="phch_ph"/>
+    <default applyOnUpdate="0" expression="" field="phch_turb"/>
+    <default applyOnUpdate="0" expression="" field="phch_sedi"/>
+    <default applyOnUpdate="0" expression="" field="bsd_recouv_cor"/>
+    <default applyOnUpdate="0" expression="" field="bsd_p_acrop"/>
+    <default applyOnUpdate="0" expression="" field="bsd_vital_cor"/>
+    <default applyOnUpdate="0" expression="" field="bsd_comp_struc"/>
+    <default applyOnUpdate="0" expression="" field="bsd_taille_cor"/>
+    <default applyOnUpdate="0" expression="" field="bsd_dens_juv"/>
+    <default applyOnUpdate="0" expression="" field="bsd_f_sessile"/>
+    <default applyOnUpdate="0" expression="" field="bsd_recouv_ma"/>
+    <default applyOnUpdate="0" expression="" field="bsm_fragm_herb"/>
+    <default applyOnUpdate="0" expression="" field="bsm_recouv_her"/>
+    <default applyOnUpdate="0" expression="" field="bsm_haut_herb"/>
+    <default applyOnUpdate="0" expression="" field="bsm_dens_herb"/>
+    <default applyOnUpdate="0" expression="" field="bsm_div_herb"/>
+    <default applyOnUpdate="0" expression="" field="bsm_epibiose"/>
+    <default applyOnUpdate="0" expression="" field="man_fragm"/>
+    <default applyOnUpdate="0" expression="" field="man_recouv"/>
+    <default applyOnUpdate="0" expression="" field="man_diam_tronc"/>
+    <default applyOnUpdate="0" expression="" field="man_dens"/>
+    <default applyOnUpdate="0" expression="" field="man_diversit"/>
+    <default applyOnUpdate="0" expression="" field="man_vital"/>
+    <default applyOnUpdate="0" expression="" field="pmi_div_poi"/>
+    <default applyOnUpdate="0" expression="" field="pmi_predat_poi"/>
+    <default applyOnUpdate="0" expression="" field="pmi_scarib_poi"/>
+    <default applyOnUpdate="0" expression="" field="pmi_macro_inv"/>
   </defaults>
   <constraints>
-    <constraint notnull_strength="1" unique_strength="1" constraints="3" exp_strength="0" field="id"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="nom_station"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="station_man"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="perc_bsd"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="perc_bsm"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="datetime_obs"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="note_bsd"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="note_bsm"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="note_ben"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="note_man"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="note_pmi"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="score_mercicor"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_temp"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_dop"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_do"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_cond"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_sal"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_ph"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_turb"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="phch_sedi"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsd_recouv_cor"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsd_p_acrop"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsd_vital_cor"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsd_comp_struc"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsd_taille_cor"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsd_dens_juv"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsd_f_sessile"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsd_recouv_ma"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsm_fragm_herb"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsm_recouv_her"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsm_haut_herb"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsm_dens_herb"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsm_div_herb"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="bsm_epibiose"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="man_fragm"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="man_recouv"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="man_diam_tronc"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="man_dens"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="man_diversit"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="man_vital"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="pmi_div_poi"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="pmi_predat_poi"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="pmi_scarib_poi"/>
-    <constraint notnull_strength="0" unique_strength="0" constraints="0" exp_strength="0" field="pmi_macro_inv"/>
+    <constraint unique_strength="1" exp_strength="0" notnull_strength="1" field="id" constraints="3"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="nom_station" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="station_man" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="perc_bsd" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="perc_bsm" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="datetime_obs" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="profondeur" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="note_bsd" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="note_bsm" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="note_ben" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="note_man" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="note_pmi" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="score_mercicor" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="phch_temp" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="phch_dop" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="phch_do" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="phch_cond" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="phch_sal" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="phch_ph" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="phch_turb" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="phch_sedi" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsd_recouv_cor" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsd_p_acrop" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsd_vital_cor" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsd_comp_struc" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsd_taille_cor" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsd_dens_juv" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsd_f_sessile" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsd_recouv_ma" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsm_fragm_herb" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsm_recouv_her" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsm_haut_herb" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsm_dens_herb" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsm_div_herb" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="bsm_epibiose" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="man_fragm" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="man_recouv" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="man_diam_tronc" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="man_dens" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="man_diversit" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="man_vital" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="pmi_div_poi" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="pmi_predat_poi" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="pmi_scarib_poi" constraints="0"/>
+    <constraint unique_strength="0" exp_strength="0" notnull_strength="0" field="pmi_macro_inv" constraints="0"/>
   </constraints>
   <constraintExpressions>
-    <constraint desc="" field="id" exp=""/>
-    <constraint desc="" field="nom_station" exp=""/>
-    <constraint desc="" field="station_man" exp=""/>
-    <constraint desc="" field="perc_bsd" exp=""/>
-    <constraint desc="" field="perc_bsm" exp=""/>
-    <constraint desc="" field="datetime_obs" exp=""/>
-    <constraint desc="" field="note_bsd" exp=""/>
-    <constraint desc="" field="note_bsm" exp=""/>
-    <constraint desc="" field="note_ben" exp=""/>
-    <constraint desc="" field="note_man" exp=""/>
-    <constraint desc="" field="note_pmi" exp=""/>
-    <constraint desc="" field="score_mercicor" exp=""/>
-    <constraint desc="" field="phch_temp" exp=""/>
-    <constraint desc="" field="phch_dop" exp=""/>
-    <constraint desc="" field="phch_do" exp=""/>
-    <constraint desc="" field="phch_cond" exp=""/>
-    <constraint desc="" field="phch_sal" exp=""/>
-    <constraint desc="" field="phch_ph" exp=""/>
-    <constraint desc="" field="phch_turb" exp=""/>
-    <constraint desc="" field="phch_sedi" exp=""/>
-    <constraint desc="" field="bsd_recouv_cor" exp=""/>
-    <constraint desc="" field="bsd_p_acrop" exp=""/>
-    <constraint desc="" field="bsd_vital_cor" exp=""/>
-    <constraint desc="" field="bsd_comp_struc" exp=""/>
-    <constraint desc="" field="bsd_taille_cor" exp=""/>
-    <constraint desc="" field="bsd_dens_juv" exp=""/>
-    <constraint desc="" field="bsd_f_sessile" exp=""/>
-    <constraint desc="" field="bsd_recouv_ma" exp=""/>
-    <constraint desc="" field="bsm_fragm_herb" exp=""/>
-    <constraint desc="" field="bsm_recouv_her" exp=""/>
-    <constraint desc="" field="bsm_haut_herb" exp=""/>
-    <constraint desc="" field="bsm_dens_herb" exp=""/>
-    <constraint desc="" field="bsm_div_herb" exp=""/>
-    <constraint desc="" field="bsm_epibiose" exp=""/>
-    <constraint desc="" field="man_fragm" exp=""/>
-    <constraint desc="" field="man_recouv" exp=""/>
-    <constraint desc="" field="man_diam_tronc" exp=""/>
-    <constraint desc="" field="man_dens" exp=""/>
-    <constraint desc="" field="man_diversit" exp=""/>
-    <constraint desc="" field="man_vital" exp=""/>
-    <constraint desc="" field="pmi_div_poi" exp=""/>
-    <constraint desc="" field="pmi_predat_poi" exp=""/>
-    <constraint desc="" field="pmi_scarib_poi" exp=""/>
-    <constraint desc="" field="pmi_macro_inv" exp=""/>
+    <constraint field="id" exp="" desc=""/>
+    <constraint field="nom_station" exp="" desc=""/>
+    <constraint field="station_man" exp="" desc=""/>
+    <constraint field="perc_bsd" exp="" desc=""/>
+    <constraint field="perc_bsm" exp="" desc=""/>
+    <constraint field="datetime_obs" exp="" desc=""/>
+    <constraint field="profondeur" exp="" desc=""/>
+    <constraint field="note_bsd" exp="" desc=""/>
+    <constraint field="note_bsm" exp="" desc=""/>
+    <constraint field="note_ben" exp="" desc=""/>
+    <constraint field="note_man" exp="" desc=""/>
+    <constraint field="note_pmi" exp="" desc=""/>
+    <constraint field="score_mercicor" exp="" desc=""/>
+    <constraint field="phch_temp" exp="" desc=""/>
+    <constraint field="phch_dop" exp="" desc=""/>
+    <constraint field="phch_do" exp="" desc=""/>
+    <constraint field="phch_cond" exp="" desc=""/>
+    <constraint field="phch_sal" exp="" desc=""/>
+    <constraint field="phch_ph" exp="" desc=""/>
+    <constraint field="phch_turb" exp="" desc=""/>
+    <constraint field="phch_sedi" exp="" desc=""/>
+    <constraint field="bsd_recouv_cor" exp="" desc=""/>
+    <constraint field="bsd_p_acrop" exp="" desc=""/>
+    <constraint field="bsd_vital_cor" exp="" desc=""/>
+    <constraint field="bsd_comp_struc" exp="" desc=""/>
+    <constraint field="bsd_taille_cor" exp="" desc=""/>
+    <constraint field="bsd_dens_juv" exp="" desc=""/>
+    <constraint field="bsd_f_sessile" exp="" desc=""/>
+    <constraint field="bsd_recouv_ma" exp="" desc=""/>
+    <constraint field="bsm_fragm_herb" exp="" desc=""/>
+    <constraint field="bsm_recouv_her" exp="" desc=""/>
+    <constraint field="bsm_haut_herb" exp="" desc=""/>
+    <constraint field="bsm_dens_herb" exp="" desc=""/>
+    <constraint field="bsm_div_herb" exp="" desc=""/>
+    <constraint field="bsm_epibiose" exp="" desc=""/>
+    <constraint field="man_fragm" exp="" desc=""/>
+    <constraint field="man_recouv" exp="" desc=""/>
+    <constraint field="man_diam_tronc" exp="" desc=""/>
+    <constraint field="man_dens" exp="" desc=""/>
+    <constraint field="man_diversit" exp="" desc=""/>
+    <constraint field="man_vital" exp="" desc=""/>
+    <constraint field="pmi_div_poi" exp="" desc=""/>
+    <constraint field="pmi_predat_poi" exp="" desc=""/>
+    <constraint field="pmi_scarib_poi" exp="" desc=""/>
+    <constraint field="pmi_macro_inv" exp="" desc=""/>
   </constraintExpressions>
   <expressionfields/>
   <layerGeometryType>0</layerGeometryType>

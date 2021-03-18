@@ -5,41 +5,42 @@ idx,name,type,typeName,length,precision,comment,alias
 4,perc_bsd,6,Double,0,0,Pourcentage Benthique de substrats durs ,Pourcentage Benthique de substrats durs 
 5,perc_bsm,6,Double,0,0,Pourcentage Benthique de substrats meubles,Pourcentage Benthique de substrats meubles
 6,datetime_obs,16,DateTime,0,0,Date et heure d'observations,Date et heure d'observations
-7,note_bsd,6,Double,0,0,Note Mercicor Benthique de substrats durs,Note Mercicor Benthique de substrats durs
-8,note_bsm,6,Double,0,0,Note Mercicor Benthique de substrats meubles,Note Mercicor Benthique de substrats meubles
-9,note_ben,6,Double,0,0,Note Mercicor Benthique,Note Mercicor Benthique
-10,note_man,6,Double,0,0,Note Mercicor Mangrove,Note Mercicor Mangrove
-11,note_pmi,6,Double,0,0,Note Mercicor Poissons et Macro-invertébrés,Note Mercicor Poissons et Macro-invertébrés
-12,score_mercicor,6,Double,0,0,Score Mercicor,Score Mercicor
-13,phch_temp,6,Double,0,0,Température de l'eau,Température de l'eau
-14,phch_dop,6,Double,0,0,Oxygène dissous en pourcentage,Oxygène dissous en pourcentage
-15,phch_do,6,Double,0,0,Oxygène dissous en mg/L,Oxygène dissous en mg/L
-16,phch_cond,6,Double,0,0,Conductivité en ms par cm,Conductivité en ms par cm
-17,phch_sal,6,Double,0,0,Salinité de l'eau,Salinité de l'eau
-18,phch_ph,6,Double,0,0,PH de l'eau,PH de l'eau
-19,phch_turb,6,Double,0,0,Turbidité de l'eau,Turbidité de l'eau
-20,phch_sedi,6,Double,0,0,Sédimentation,Sédimentation
-21,bsd_recouv_cor,6,Double,0,0,Recouvrement corallien (Scléractiniaires),Recouvrement corallien (Scléractiniaires)
-22,bsd_p_acrop,6,Double,0,0,Pourcentage du recouvrement corallien représenté par les coraux acropores,Pourcentage du recouvrement corallien représenté par les coraux acropores
-23,bsd_vital_cor,6,Double,0,0,Vitalité et taux de mortalité corallienne,Vitalité et taux de mortalité corallienne
-24,bsd_comp_struc,6,Double,0,0,Complexité structurelle des peuplements coralliens,Complexité structurelle des peuplements coralliens
-25,bsd_taille_cor,6,Double,0,0,Taille des coraux vivants,Taille des coraux vivants
-26,bsd_dens_juv,6,Double,0,0,Densité de coraux juvéniles,Densité de coraux juvéniles
-27,bsd_f_sessile,6,Double,0,0,Recouvrement par la faune sessile non corallienne,Recouvrement par la faune sessile non corallienne
-28,bsd_recouv_ma,6,Double,0,0,Recouvrement par les macroalgues,Recouvrement par les macroalgues
-29,bsm_fragm_herb,6,Double,0,0,Fragmentation de l’herbier,Fragmentation de l’herbier
-30,bsm_recouv_her,6,Double,0,0,Recouvrement par l’herbier (patchs),Recouvrement par l’herbier (patchs)
-31,bsm_haut_herb,6,Double,0,0,Hauteur de l’herbier (patchs),Hauteur de l’herbier (patchs)
-32,bsm_dens_herb,6,Double,0,0,Densité des phanérogames (patchs),Densité des phanérogames (patchs)
-33,bsm_div_herb,6,Double,0,0,Diversité spécifique des phanérogames (patchs),Diversité spécifique des phanérogames (patchs)
-34,bsm_epibiose,6,Double,0,0,Epibiose de l’herbier (patchs),Epibiose de l’herbier (patchs)
-35,man_fragm,6,Double,0,0,Fragmentation de la mangrove,Fragmentation de la mangrove
-36,man_recouv,6,Double,0,0,Recouvrement par la mangrove (patchs),Recouvrement par la mangrove (patchs)
-37,man_diam_tronc,6,Double,0,0,Diamètre des troncs (patchs),Diamètre des troncs (patchs)
-38,man_dens,6,Double,0,0,Densité des palétuviers (patchs),Densité des palétuviers (patchs)
-39,man_diversit,6,Double,0,0,Diversité spécifique des palétuviers (patchs),Diversité spécifique des palétuviers (patchs)
-40,man_vital,6,Double,0,0,Vitalité des palétuviers (patchs),Vitalité des palétuviers (patchs)
-41,pmi_div_poi,6,Double,0,0,Diversité spécifique des peuplements de poissons,Diversité spécifique des peuplements de poissons
-42,pmi_predat_poi,6,Double,0,0,Abondance et maturité des prédateurs supérieurs récifaux,Abondance et maturité des prédateurs supérieurs récifaux
-43,pmi_scarib_poi,6,Double,0,0,Abondance et maturité des poissons perroquets,Abondance et maturité des poissons perroquets
-44,pmi_macro_inv,6,Double,0,0,Abondance des macro-invertébrés,Abondance des macro-invertébrés
+7,profondeur,6,Double,0,0,Profondeur,Profondeur
+8,note_bsd,6,Double,0,0,Note Mercicor Benthique de substrats durs,Note Mercicor Benthique de substrats durs
+9,note_bsm,6,Double,0,0,Note Mercicor Benthique de substrats meubles,Note Mercicor Benthique de substrats meubles
+10,note_ben,6,Double,0,0,Note Mercicor Benthique,Note Mercicor Benthique
+11,note_man,6,Double,0,0,Note Mercicor Mangrove,Note Mercicor Mangrove
+12,note_pmi,6,Double,0,0,Note Mercicor Poissons et Macro-invertébrés,Note Mercicor Poissons et Macro-invertébrés
+13,score_mercicor,6,Double,0,0,Score Mercicor,Score Mercicor
+14,phch_temp,6,Double,0,0,Température de l'eau,Température de l'eau
+15,phch_dop,6,Double,0,0,Oxygène dissous en pourcentage,Oxygène dissous en pourcentage
+16,phch_do,6,Double,0,0,Oxygène dissous en mg/L,Oxygène dissous en mg/L
+17,phch_cond,6,Double,0,0,Conductivité en ms par cm,Conductivité en ms par cm
+18,phch_sal,6,Double,0,0,Salinité de l'eau,Salinité de l'eau
+19,phch_ph,6,Double,0,0,PH de l'eau,PH de l'eau
+20,phch_turb,6,Double,0,0,Turbidité de l'eau,Turbidité de l'eau
+21,phch_sedi,6,Double,0,0,Sédimentation,Sédimentation
+22,bsd_recouv_cor,6,Double,0,0,Recouvrement corallien (Scléractiniaires),Recouvrement corallien (Scléractiniaires)
+23,bsd_p_acrop,6,Double,0,0,Pourcentage du recouvrement corallien représenté par les coraux acropores,Pourcentage du recouvrement corallien représenté par les coraux acropores
+24,bsd_vital_cor,6,Double,0,0,Vitalité et taux de mortalité corallienne,Vitalité et taux de mortalité corallienne
+25,bsd_comp_struc,6,Double,0,0,Complexité structurelle des peuplements coralliens,Complexité structurelle des peuplements coralliens
+26,bsd_taille_cor,6,Double,0,0,Taille des coraux vivants,Taille des coraux vivants
+27,bsd_dens_juv,6,Double,0,0,Densité de coraux juvéniles,Densité de coraux juvéniles
+28,bsd_f_sessile,6,Double,0,0,Recouvrement par la faune sessile non corallienne,Recouvrement par la faune sessile non corallienne
+29,bsd_recouv_ma,6,Double,0,0,Recouvrement par les macroalgues,Recouvrement par les macroalgues
+30,bsm_fragm_herb,6,Double,0,0,Fragmentation de l’herbier,Fragmentation de l’herbier
+31,bsm_recouv_her,6,Double,0,0,Recouvrement par l’herbier (patchs),Recouvrement par l’herbier (patchs)
+32,bsm_haut_herb,6,Double,0,0,Hauteur de l’herbier (patchs),Hauteur de l’herbier (patchs)
+33,bsm_dens_herb,6,Double,0,0,Densité des phanérogames (patchs),Densité des phanérogames (patchs)
+34,bsm_div_herb,6,Double,0,0,Diversité spécifique des phanérogames (patchs),Diversité spécifique des phanérogames (patchs)
+35,bsm_epibiose,6,Double,0,0,Epibiose de l’herbier (patchs),Epibiose de l’herbier (patchs)
+36,man_fragm,6,Double,0,0,Fragmentation de la mangrove,Fragmentation de la mangrove
+37,man_recouv,6,Double,0,0,Recouvrement par la mangrove (patchs),Recouvrement par la mangrove (patchs)
+38,man_diam_tronc,6,Double,0,0,Diamètre des troncs (patchs),Diamètre des troncs (patchs)
+39,man_dens,6,Double,0,0,Densité des palétuviers (patchs),Densité des palétuviers (patchs)
+40,man_diversit,6,Double,0,0,Diversité spécifique des palétuviers (patchs),Diversité spécifique des palétuviers (patchs)
+41,man_vital,6,Double,0,0,Vitalité des palétuviers (patchs),Vitalité des palétuviers (patchs)
+42,pmi_div_poi,6,Double,0,0,Diversité spécifique des peuplements de poissons,Diversité spécifique des peuplements de poissons
+43,pmi_predat_poi,6,Double,0,0,Abondance et maturité des prédateurs supérieurs récifaux,Abondance et maturité des prédateurs supérieurs récifaux
+44,pmi_scarib_poi,6,Double,0,0,Abondance et maturité des poissons perroquets,Abondance et maturité des poissons perroquets
+45,pmi_macro_inv,6,Double,0,0,Abondance des macro-invertébrés,Abondance des macro-invertébrés
