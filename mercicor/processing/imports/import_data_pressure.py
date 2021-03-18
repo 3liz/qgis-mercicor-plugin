@@ -156,6 +156,18 @@ class ImportPressureData(BaseImportAlgorithm):
                 feedback=feedback,
                 is_child_algorithm=True)
 
+        params = {
+            'INPUT': results['OUTPUT'],
+            'DISTANCE': 0,
+            'OUTPUT': 'memory:'
+        }
+        results = processing.run(
+            "native:buffer",
+            params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True)
+
         if not isinstance(results['OUTPUT'], QgsVectorLayer):
             layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
         else:
