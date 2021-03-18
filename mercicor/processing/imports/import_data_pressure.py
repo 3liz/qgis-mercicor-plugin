@@ -133,7 +133,7 @@ class ImportPressureData(BaseImportAlgorithm):
             'OUTPUT': 'memory:'
         }
         results = processing.run(
-            "native:multiparttosingleparts",
+            "native:promotetomulti",
             params,
             context=context,
             feedback=feedback,

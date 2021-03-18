@@ -104,7 +104,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
 
         tables = {
             'habitat': 'MultiPolygon',
-            'pression': 'Polygon',
+            'pression': 'MultiPolygon',
             'metadata': 'None',
             'liste_type_pression': 'None',
             'observations': 'Point',

@@ -72,7 +72,7 @@ class TestImportAlgorithms(BaseTestProcessing):
         }
         run("mercicor:import_donnees_pression", params)
 
-        assert count + 2 == pression_layer.featureCount()
+        assert count + layer_to_import.featureCount() == pression_layer.featureCount()
         return layer_to_import
 
     def test_import_pressure_fail(self):
@@ -129,7 +129,7 @@ class TestImportAlgorithms(BaseTestProcessing):
         layer_to_import = self.import_data(pression_layer, scenario_pression_layer)
 
         # Couche pression
-        self.assertEqual(2, pression_layer.featureCount())
+        self.assertEqual(1, pression_layer.featureCount())
 
         index = pression_layer.fields().indexOf('type_pression')
         self.assertSetEqual({1}, pression_layer.uniqueValues(index))
