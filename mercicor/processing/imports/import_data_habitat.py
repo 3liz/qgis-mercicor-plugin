@@ -5,6 +5,7 @@ __email__ = "info@3liz.org"
 import processing
 
 from qgis.core import (
+    QgsCategorizedSymbolRenderer,
     QgsFeature,
     QgsFeatureRequest,
     QgsGeometry,
@@ -12,6 +13,10 @@ from qgis.core import (
     QgsProcessingParameterField,
     QgsProcessingParameterVectorLayer,
     QgsProcessingUtils,
+    QgsRandomColorRamp,
+    QgsRendererCategory,
+    QgsSymbol,
+    QgsWkbTypes,
 )
 
 from mercicor.processing.imports.base import BaseImportAlgorithm
@@ -39,7 +44,11 @@ class ImportHabitatData(BaseImportAlgorithm):
         return 'Import données habitat'
 
     def shortHelpString(self):
-        return 'Import des données des habitats. Le champ du faciès doit être correctement formaté.'
+        return (
+            'Import des données des habitats.\n'
+            'Le champ du faciès doit être correctement formaté.\n'
+            'Un style pour les habitats sera ajouté.\n'
+        )
 
     def initAlgorithm(self, config):
 
@@ -145,8 +154,26 @@ class ImportHabitatData(BaseImportAlgorithm):
             self.output_layer.addFeature(output_feature)
 
         self.output_layer.commitChanges()
+        self.set_style()
         return {}
 
+    def set_style(self):
+        """ Set the categorized style using random color. """
+        index = self.output_layer.fields().indexOf('nom')
+        values = self.output_layer.uniqueValues(index)
+
+        color = QgsRandomColorRamp()
+        color.setTotalColorCount(len(values))
+
+        categories = []
+        for i, value in enumerate(values):
+            symbol = QgsSymbol.defaultSymbol(QgsWkbTypes.PolygonGeometry)
+            symbol.setColor(color.color(i))
+            category = QgsRendererCategory(value, symbol, value)
+            categories.append(category)
+
+        renderer = QgsCategorizedSymbolRenderer('nom', categories)
+        self.output_layer.setRenderer(renderer)
+
     def postProcess(self, context, feedback):
-        self.output_layer.reloadData()
         self.output_layer.triggerRepaint()

@@ -167,6 +167,12 @@ class TestImportAlgorithms(BaseTestProcessing):
         self.assertSetEqual({'bon'}, target_layer.uniqueValues(index))
         # self.assertEqual(target_layer.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
 
+        # Check the default style
+        names = target_layer.uniqueValues(1)
+        self.assertSetEqual(names, {'zone 1'})
+        self.assertEqual(1, len(target_layer.renderer().categories()))
+        self.assertEqual('zone 1', target_layer.renderer().categories()[0].label())
+
     def test_import_observation_exist(self):
         """ Test to retrieve a specific observation feature. """
         gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
