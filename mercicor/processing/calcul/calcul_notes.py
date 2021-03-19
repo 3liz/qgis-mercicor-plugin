@@ -12,6 +12,9 @@ from qgis.core import (
     QgsProcessingFeatureBasedAlgorithm,
 )
 from qgis.PyQt.QtCore import QVariant
+from qgis.PyQt.QtGui import QIcon
+
+from mercicor.qgis_plugin_tools import resources_path
 
 
 class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
@@ -82,6 +85,9 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         Libellé de l'algorithme
         """
         return 'Calcul des notes MERCI-Cor'
+
+    def icon(self):
+        return QIcon(resources_path('icons', 'icon.jpg'))
 
     def shortHelpString(self):
         """
