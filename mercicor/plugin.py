@@ -2,8 +2,10 @@ __copyright__ = "Copyright 2020, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
-from qgis.core import QgsApplication
+from qgis.core import Qgis, QgsApplication, QgsMessageLog
+from qgis.PyQt.QtWidgets import QMessageBox
 
+from mercicor.actions import actions_list
 from mercicor.processing.provider import MercicorProvider
 
 
@@ -24,6 +26,26 @@ class Mercicor:
     def unload(self):
         if self.provider:
             QgsApplication.processingRegistry().removeProvider(self.provider)
+
+    @staticmethod
+    def run_action(name, *args):
+        """ Run a specific action. """
+        if name not in actions_list:
+            QMessageBox.critical(
+                None, 'Action non trouvée', 'L\'action n\'a pas été trouvée.')
+            return
+
+        if actions_list[name].count != len(args):
+            QMessageBox.critical(
+                None, 'Mauvais nombre d\'arguments', 'Mauvais nombre d\'arguments pour l\'action.')
+            return
+
+        params = list(args)
+        msg = 'Appel de l\'action {} avec les arguments: {}'
+        QgsMessageLog.logMessage(
+            msg.format(name, ', '.join(['{}'.format(i) for i in params])),
+            'Mercicor', Qgis.Info)
+        actions_list[name].function(*params)
 
     @staticmethod
     def run_tests(pattern='test_*.py', package=None):
