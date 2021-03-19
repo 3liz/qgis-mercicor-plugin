@@ -6,7 +6,11 @@ import shutil
 from qgis.core import QgsVectorLayer
 from qgis.processing import run
 
-from mercicor.qgis_plugin_tools import plugin_test_data_path
+from mercicor.qgis_plugin_tools import (
+    load_csv,
+    plugin_test_data_path,
+    resources_path,
+)
 from mercicor.tests.base_processing import BaseTestProcessing
 
 __copyright__ = "Copyright 2021, 3Liz"
@@ -52,6 +56,24 @@ class TestProjectAlgorithms(BaseTestProcessing):
             TestImportAlgorithms.import_data(pression_layer)
 
             shutil.copy(file_path, plugin_test_data_path('output_main_geopackage_data.gpkg'))
+
+    def test_empty_geopackage(self):
+        """ Test if the empty geopackage is up to date with CSV files. """
+        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+
+        files = os.listdir(resources_path('data_models'))
+        for csv_file in files:
+            with self.subTest(i=csv_file):
+                csv = load_csv(csv_file, resources_path('data_models', csv_file))
+                gpkg_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, csv_file[0:-4]), csv_file, 'ogr')
+
+                gpkg_fields = gpkg_layer.fields().names()
+                gpkg_fields.sort()
+
+                csv_fields = list(csv.uniqueValues(1))
+                csv_fields.sort()
+
+                self.assertListEqual(gpkg_fields, csv_fields)
 
     def test_apply_qml_styles(self):
         """ Test to apply some QML to loaded layers in the canvas. """
