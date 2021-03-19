@@ -168,10 +168,7 @@ class ImportPressureData(BaseImportAlgorithm):
             feedback=feedback,
             is_child_algorithm=True)
 
-        if not isinstance(results['OUTPUT'], QgsVectorLayer):
-            layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
-        else:
-            layer = results['OUTPUT']
+        layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
 
         self.scenario_id = self.insert_scenario(scenario_layer, scenario_name)
         feedback.pushInfo('Création du scénario numéro {} : {}'.format(self.scenario_id, scenario_name))

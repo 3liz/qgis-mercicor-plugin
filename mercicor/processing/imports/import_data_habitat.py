@@ -12,7 +12,6 @@ from qgis.core import (
     QgsProcessingParameterField,
     QgsProcessingParameterVectorLayer,
     QgsProcessingUtils,
-    QgsVectorLayer,
 )
 
 from mercicor.processing.imports.base import BaseImportAlgorithm
@@ -128,10 +127,7 @@ class ImportHabitatData(BaseImportAlgorithm):
             feedback=feedback,
             is_child_algorithm=True)
 
-        if not isinstance(results['OUTPUT'], QgsVectorLayer):
-            layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
-        else:
-            layer = results['OUTPUT']
+        layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
 
         self.output_layer.startEditing()
         request = QgsFeatureRequest()
