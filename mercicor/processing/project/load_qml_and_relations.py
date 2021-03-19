@@ -131,6 +131,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         return True
 
     def processAlgorithm(self, parameters, context, feedback):
+        self.add_alias_from_csv(feedback, self.input_layers)
         return {
             self.QML_LOADED: self.success_qml,
             self.RELATIONS_ADDED: self.success_relation,
@@ -143,8 +144,6 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         for layer in self.input_layers.values():
             if layer.isSpatial():
                 layer.triggerRepaint()
-
-        self.add_alias_from_csv(feedback, self.input_layers)
 
         return {
             self.QML_LOADED: self.success_qml,
@@ -285,8 +284,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 if not index:
                     continue
 
-                field = layer.fields().field(index)
-                field.setAlias(csv_feature['alias'])
+                layer.setFieldAlias(index, csv_feature['alias'])
 
     def add_styles(self, feedback, input_layers):
         """ Add all QML style in the resource folder to given layers. """

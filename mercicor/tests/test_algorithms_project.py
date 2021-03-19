@@ -119,3 +119,8 @@ class TestProjectAlgorithms(BaseTestProcessing):
         result = run("mercicor:load_qml_and_relations", params)
         self.assertEqual(result['QML_LOADED'], 8)
         # self.assertEqual(result['RELATIONS_ADDED'], 1)
+
+        # Check alias
+        field = pression_layer.fields().field(1)
+        self.assertEqual('type_pression', field.name())
+        self.assertEqual('Type de pression', field.alias())
