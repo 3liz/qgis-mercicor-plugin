@@ -5,6 +5,9 @@ __email__ = "info@3liz.org"
 from qgis.core import QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
 
+from mercicor.processing.calcul.calcul_habitat_etat_ecologique import (
+    CalculHabitatEtatEcologique,
+)
 from mercicor.processing.calcul.calcul_notes import CalculNotes
 from mercicor.processing.calcul.calcul_unicity_habitat import (
     CalculUnicityHabitat,
@@ -31,6 +34,7 @@ class MercicorProvider(QgsProcessingProvider):
     def loadAlgorithms(self):
         self.addAlgorithm(CalculNotes())
         self.addAlgorithm(CalculUnicityHabitat())
+        self.addAlgorithm(CalculHabitatEtatEcologique())
         self.addAlgorithm(CreateGeopackageProject())
         self.addAlgorithm(DownloadObservationFile())
         self.addAlgorithm(ImportHabitatData())
