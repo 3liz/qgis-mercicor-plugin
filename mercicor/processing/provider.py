@@ -6,6 +6,9 @@ from qgis.core import QgsProcessingProvider
 from qgis.PyQt.QtGui import QIcon
 
 from mercicor.processing.calcul.calcul_notes import CalculNotes
+from mercicor.processing.calcul.calcul_unicity_habitat import (
+    CalculUnicityHabitat,
+)
 from mercicor.processing.exports.download_observation import (
     DownloadObservationFile,
 )
@@ -27,6 +30,7 @@ class MercicorProvider(QgsProcessingProvider):
 
     def loadAlgorithms(self):
         self.addAlgorithm(CalculNotes())
+        self.addAlgorithm(CalculUnicityHabitat())
         self.addAlgorithm(CreateGeopackageProject())
         self.addAlgorithm(DownloadObservationFile())
         self.addAlgorithm(ImportHabitatData())
