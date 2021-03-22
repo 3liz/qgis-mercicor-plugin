@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 0.4.0 - 2021-03-XX
+
+* Ajout d'une action sur la table des "scénarios" pour changer le filtre en cours
+* Ajout du champ "profondeur" pour les observations
+* Ajout des alias sur les champs pour une meilleure compréhension
+* Ajout d'un style par défaut lors de l'import des habitats
+* Ajout d'une correction automatique lors de l'import des habitats et des pressions
+* Amélioration de la documentation
+* Import en multipolygon des habitats et des pressions
+
 ## 0.3.1 - 2021-03-16
 
 * Modification de l'aide des algorithmes
