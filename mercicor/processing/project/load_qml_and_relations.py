@@ -15,6 +15,7 @@ from qgis.core import (
 )
 
 from mercicor.actions import actions_list
+from mercicor.definitions.joins import joins
 from mercicor.definitions.relations import relations
 from mercicor.processing.project.base import BaseProjectAlgorithm
 from mercicor.qgis_plugin_tools import load_csv, resources_path
@@ -133,16 +134,24 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         return True
 
     def processAlgorithm(self, parameters, context, feedback):
+
+        feedback.pushInfo('\n')
         self.add_alias_from_csv(feedback, self.input_layers)
+
         return {
             self.QML_LOADED: self.success_qml,
             self.RELATIONS_ADDED: self.success_relation,
         }
 
     def postProcessAlgorithm(self, context, feedback):
+        feedback.pushInfo('\n')
         self.add_relations(context, feedback)
-        self.add_joins()
-        self.add_actions()
+
+        feedback.pushInfo('\n')
+        self.add_joins(feedback)
+
+        feedback.pushInfo('\n')
+        self.add_actions(feedback)
 
         for layer in self.input_layers.values():
             if layer.isSpatial():
@@ -153,59 +162,35 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             self.RELATIONS_ADDED: self.success_relation,
         }
 
-    def add_actions(self):
+    def add_actions(self, feedback):
         """ Add actions for layers. """
         for action in actions_list.values():
             # We remove multiple times actions on a layer :(
             self.input_layers[action.layer].actions().clearActions()
 
         for action in actions_list.values():
+            feedback.pushInfo('Ajout de l\'action sur {}'.format(action.layer))
             self.input_layers[action.layer].actions().addAction(action.action)
 
-    def add_joins(self):
+    def add_joins(self, feedback):
         """ Add all joins between tables. """
-        joins_array = [
-            {
-                'join_field_name': 'id',
-                'target_field_name': 'id',
-                'join_layer_id': self.input_layers['habitat_etat_ecologique'].id(),
-                'join_layer': self.input_layers['habitat_etat_ecologique'],
-                'layer_add_join': self.input_layers['habitat'],
-                'prefix': '',
-            },
-            {
-                'join_field_name': 'id',
-                'target_field_name': 'habitat_id',
-                'join_layer_id': self.input_layers['habitat'].id(),
-                'join_layer': self.input_layers['habitat'],
-                'layer_add_join': self.input_layers['habitat_pression_etat_ecologique'],
-                'prefix': 'hab_'
-            },
-            {
-                'join_field_name': 'id',
-                'target_field_name': 'pression_id',
-                'join_layer_id': self.input_layers['pression'].id(),
-                'join_layer': self.input_layers['pression'],
-                'layer_add_join': self.input_layers['habitat_pression_etat_ecologique'],
-                'prefix': 'pression_',
-            },
-            {
-                'join_field_name': 'id',
-                'target_field_name': 'scenario_id',
-                'join_layer_id': self.input_layers['scenario_pression'].id(),
-                'join_layer': self.input_layers['scenario_pression'],
-                'layer_add_join': self.input_layers['habitat_pression_etat_ecologique'],
-                'prefix': 'scenario_',
-            },
-        ]
+        for definition in joins:
+            join_layer = definition['join_layer']
+            layer_add_join = definition['layer_add_join']
 
-        for definition in joins_array:
+            feedback.pushInfo('Ajout de la jointure {} sur {}'.format(
+                join_layer, layer_add_join))
+
+            definition['join_layer'] = self.input_layers[join_layer]
+
+            definition['layer_add_join'] = self.input_layers[layer_add_join]
+
             join_habitat = QgsVectorLayerJoinInfo()
             join_habitat.setJoinFieldName(definition['join_field_name'])
-            join_habitat.setTargetFieldName(definition['target_field_name'])
-            join_habitat.setJoinLayerId(definition['join_layer_id'])
-            join_habitat.setPrefix(definition['prefix'])
             join_habitat.setJoinLayer(definition['join_layer'])
+            join_habitat.setJoinLayerId(definition['join_layer'].id())
+            join_habitat.setTargetFieldName(definition['target_field_name'])
+            join_habitat.setPrefix(definition['prefix'])
             if not definition['layer_add_join'].addJoin(join_habitat):
                 raise Exception('Join not added {}'.format(definition['join_field_name']))
 
@@ -242,8 +227,10 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     @staticmethod
     def add_alias_from_csv(feedback, input_layers):
         """ The geopackage has been created from CSV files, but we need to set alias. """
+        feedback.pushInfo("Relecture du CSV pour réappliquer les alias sur les champs sur")
+
         for name, layer in input_layers.items():
-            feedback.pushInfo("Relecture du CSV {} pour réappliquer les alias sur les champs".format(name))
+            feedback.pushInfo("   {}".format(name))
             path = resources_path('data_models', '{}.csv'.format(name))
             csv = load_csv(name, path)
 
