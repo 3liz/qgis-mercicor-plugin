@@ -28,6 +28,9 @@ class TestExportAlgorithms(BaseTestProcessing):
         name = 'observations'
         observations = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
 
+        name = 'habitat'
+        habitat = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+
         self.assertTrue(observations.isValid())
         self.assertEqual(observations.featureCount(), 0)
         self.assertEqual(observations.crs(), QgsCoordinateReferenceSystem(32738))
@@ -35,13 +38,13 @@ class TestExportAlgorithms(BaseTestProcessing):
         field_count = observations.fields().count()
         feature_count = observations.featureCount()
 
-        return observations, field_count, feature_count
+        return observations, field_count, feature_count, habitat
 
     def test_export_observation_with_data(self):
         """ Test to export the observation layer with data. """
-        observations, field_count, feature_count = self._observation_layer_empty()
+        observations, field_count, feature_count, habitat = self._observation_layer_empty()
 
-        # Add a feature
+        # Add an observation feature
         feature = QgsFeature(observations.fields())
         feature.setAttribute('id', 1)
         feature.setAttribute('nom_station', 'Nom de la station')
@@ -51,9 +54,19 @@ class TestExportAlgorithms(BaseTestProcessing):
         feature_count = observations.featureCount()
         self.assertEqual(feature_count, 1)
 
+        # Add an habitat feature
+        feature = QgsFeature(habitat.fields())
+        feature.setAttribute('id', 1)
+        feature.setAttribute('nom', 'Nom habitat')
+        feature.setAttribute('facies', 'Faciès habitat')
+        feature.setGeometry(QgsGeometry.fromWkt('POINT(0 0)').buffer(20, 20))
+        with edit(habitat):
+            habitat.addFeature(feature)
+
         # Without geom
         params = {
             'INPUT_LAYER': observations,
+            'HABITAT_LAYER': habitat,
             'INCLUDE_X_Y': False,
             'DESTINATION_FILE': plugin_test_data_path('output', 'export_data_no_geom.xlsx')
         }
@@ -64,16 +77,17 @@ class TestExportAlgorithms(BaseTestProcessing):
         self.assertTrue(output.isValid())
 
         # Everything is fine with QGIS when there is a feature in the source layer.
-        self.assertEqual(output.fields().count(), field_count)
+        # + 1, because there is the join with the habitat layer
+        self.assertEqual(output.fields().count(), field_count + 1)
 
-        if 31000 <= Qgis.QGIS_VERSION_INT <= 31099:
-            # Header recognised as a row by default, integer as text
-            self.assertSetEqual(output.uniqueValues(0), {'id', '1'})
-            self.assertEqual(output.featureCount(), 2)
-        else:  # QGIS 3.16+
-            # Single row, no header, integer recognised as integer
-            self.assertSetEqual(output.uniqueValues(0), {1})
-            self.assertEqual(output.featureCount(), 1)
+        # if 31000 <= Qgis.QGIS_VERSION_INT <= 31099:
+        #     # Header recognised as a row by default, integer as text
+        #     self.assertSetEqual(output.uniqueValues(0), {'id', '1'})
+        #     self.assertEqual(output.featureCount(), 2)
+        # else:  # QGIS 3.16+
+        # Single row, no header, integer recognised as integer
+        self.assertSetEqual(output.uniqueValues(0), {1})
+        self.assertEqual(output.featureCount(), 1)
 
         # With geom
         params['INCLUDE_X_Y'] = True
@@ -85,7 +99,9 @@ class TestExportAlgorithms(BaseTestProcessing):
         self.assertSetEqual(output.uniqueValues(0), {1})
         self.assertEqual(output.featureCount(), 1)
 
-        self.assertEqual(output.fields().count(), field_count + 2)
+        # + 2 for the geom latitude and longitude
+        # + 1 for the join with the habitat layer
+        self.assertEqual(output.fields().count(), field_count + 3)
 
         # Test the integer part only about 4326 reprojection of the geometry
         expected = {
@@ -98,9 +114,13 @@ class TestExportAlgorithms(BaseTestProcessing):
             self.assertEqual(len(unique), 1)
             self.assertEqual(int(unique[0]), expected_value)
 
+        # Check the layer join
+        index = output.fields().indexOf('habitat_facies')
+        self.assertSetEqual({'Faciès habitat'}, output.uniqueValues(index))
+
     def test_export_observation_empty(self):
         """ Test to export the observation layer when it is empty. """
-        observations, field_count, feature_count = self._observation_layer_empty()
+        observations, field_count, feature_count, _ = self._observation_layer_empty()
 
         # Without geom
         params = {

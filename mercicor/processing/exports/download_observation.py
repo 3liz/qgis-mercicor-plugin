@@ -18,10 +18,12 @@ from qgis.core import (
     QgsProcessingParameterBoolean,
     QgsProcessingParameterFileDestination,
     QgsProcessingParameterVectorLayer,
+    QgsProcessingUtils,
     QgsVectorFileWriter,
     QgsVectorLayer,
     edit,
 )
+from qgis.processing import run
 from qgis.PyQt.QtCore import QVariant
 
 from mercicor.processing.exports.base import BaseExportAlgorithm
@@ -30,6 +32,7 @@ from mercicor.processing.exports.base import BaseExportAlgorithm
 class DownloadObservationFile(BaseExportAlgorithm):
 
     INPUT_LAYER = 'INPUT_LAYER'
+    HABITAT_LAYER = 'HABITAT_LAYER'
     INCLUDE_X_Y = 'INCLUDE_X_Y'
     DESTINATION_FILE = 'DESTINATION_FILE'
 
@@ -63,6 +66,17 @@ class DownloadObservationFile(BaseExportAlgorithm):
         self.set_tooltip_parameter(parameter, tooltip)
         self.addParameter(parameter)
 
+        tooltip = "Couche des habitats dans le geopackage"
+        parameter = QgsProcessingParameterVectorLayer(
+            self.HABITAT_LAYER,
+            tooltip,
+            [QgsProcessing.TypeVectorPolygon],
+            defaultValue='habitat',
+            optional=True,
+        )
+        self.set_tooltip_parameter(parameter, tooltip)
+        self.addParameter(parameter)
+
         tooltip = 'Fichier tableur de destination'
         parameter = QgsProcessingParameterFileDestination(
             self.DESTINATION_FILE,
@@ -74,6 +88,7 @@ class DownloadObservationFile(BaseExportAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT_LAYER, context)
+        habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
         file_path = self.parameterAsFile(parameters, self.DESTINATION_FILE, context)
         include_geom = self.parameterAsBool(parameters, self.INCLUDE_X_Y, context)
 
@@ -97,6 +112,9 @@ class DownloadObservationFile(BaseExportAlgorithm):
 
             feedback.pushInfo('Ajout des colonnes longitude et latitude en EPSG:4326')
             self.add_geom_columns(context, layer)
+
+        if habitat_layer:
+            layer = self.add_habitat_info(layer, habitat_layer, context, feedback)
 
         parent_base_name = str(Path(file_path).parent)
         if not file_path.endswith('.xlsx'):
@@ -161,3 +179,29 @@ class DownloadObservationFile(BaseExportAlgorithm):
         )
         if write_result != QgsVectorFileWriter.NoError:
             raise QgsProcessingException(error_message)
+
+    @staticmethod
+    def add_habitat_info(input_layer, habitat_layer, context, feedback) -> QgsVectorLayer:
+        """ Add information from the habitat layer into the export. """
+        feedback.pushInfo('\n')
+        feedback.pushInfo('Jointure spatiale avec la couche "habitat" pour le champ "facies"')
+        params = {
+            'INPUT': input_layer,
+            'JOIN': habitat_layer,
+            'PREDICATE': [0],  # Intersects
+            'JOIN_FIELDS': ['facies'],
+            'METHOD': 1,  # Take attributes of the first located feature only (one-to-one)
+            'DISCARD_NONMATCHING': False,
+            'PREFIX': 'habitat_',
+            'OUTPUT':  'memory:'
+        }
+        results = run(
+            'qgis:joinattributesbylocation',
+            params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True,
+        )
+        feedback.pushInfo('{} habitats ont été trouvés'.format(results['JOINED_COUNT']))
+        layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
+        return layer
