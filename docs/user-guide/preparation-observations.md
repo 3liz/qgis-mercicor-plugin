@@ -7,4 +7,4 @@ hide:
 
 Lors de l'export Excel, on peut choisir d'exporter ou non les colonnes *latitude* et *longitude*.
 
-![export_observation](media/mercicor-export_observations.png)
+![export_observation](../processing/mercicor-download_observation_file.jpg)

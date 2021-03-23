@@ -21,7 +21,7 @@ note_pmi = (("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_in
 score_mercicor = CASE WHEN "station_man" THEN ("note_man" + "note_pmi") / 2 ELSE ("note_ben" + "note_pmi") / 2 END
 
 
-![algo_id](./mercicor-calcul_notes.png)
+![algo_id](./mercicor-calcul_notes.jpg)
 
 #### Parameters
 
@@ -47,7 +47,7 @@ Vérification des données des habitats.
 Les champs nom et faciès doivent être unique par objet géographique.
 
 
-![algo_id](./mercicor-calcul_unicity_habitat.png)
+![algo_id](./mercicor-calcul_unicity_habitat.jpg)
 
 #### Parameters
 
@@ -76,7 +76,7 @@ NUMBER_OF_NON_UNIQUE|Nombre de couple habitat/faciès non unique|Number||
 
 Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage.
 
-![algo_id](./mercicor-create_geopackage_project.png)
+![algo_id](./mercicor-create_geopackage_project.jpg)
 
 #### Parameters
 
@@ -105,7 +105,7 @@ Charger les styles pour les différentes couches.
 
 Les relations et les jointures vont également être chargés dans le projet.
 
-![algo_id](./mercicor-load_qml_and_relations.png)
+![algo_id](./mercicor-load_qml_and_relations.jpg)
 
 #### Parameters
 
@@ -138,7 +138,7 @@ QML_LOADED|Nombre de QML chargés|Number||
 
 Télécharger le modèle de fichier tableur pour les observations.
 
-![algo_id](./mercicor-download_observation_file.png)
+![algo_id](./mercicor-download_observation_file.jpg)
 
 #### Parameters
 
@@ -170,7 +170,7 @@ Le champ du faciès doit être correctement formaté.
 Un style pour les habitats sera ajouté.
 
 
-![algo_id](./mercicor-import_donnees_habitat.png)
+![algo_id](./mercicor-import_donnees_habitat.jpg)
 
 #### Parameters
 
@@ -199,7 +199,7 @@ L'algortihme peut soit mettre à jour des observations existantes ou alors les r
 Pour cela, l'algorithme s'appuie sur le ID de la station.
 
 
-![algo_id](./mercicor-import_donnees_observation.png)
+![algo_id](./mercicor-import_donnees_observation.jpg)
 
 #### Parameters
 
@@ -226,7 +226,7 @@ Le champ des pressions doit être correctement formaté :
 1, 2, 3, 4, 5, 6, NULL
 Un scénario sera également crée et la couche sera filtrée pour ce scénario.
 
-![algo_id](./mercicor-import_donnees_pression.png)
+![algo_id](./mercicor-import_donnees_pression.jpg)
 
 #### Parameters
 

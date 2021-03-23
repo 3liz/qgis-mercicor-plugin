@@ -18,14 +18,14 @@ Pour cette partie il y a deux algorithmes :
     * l'emprise
     * Le dossier de destination pour le fichier geopackage
 
-![create_gpkg](media/mercicor-create_gpkg.png)
+![create_gpkg](../processing/mercicor-create_geopackage_project.jpg)
 
 Après utilisation, un projet sur notre QGIS s'est crée avec toutes les couches.
 
-![layers_tree](media/mercicor-all_layers.png)
+![layers_tree](media/mercicor-all_layers.jpg)
 
 * Le second s'appelle **Charger les styles**. Il prend en paramètre les différentes couches du projet afin d'ajouter les styles.
 
-![import_style](media/mercicor-import_layers_styles.png)
+![import_style](../processing/mercicor-load_qml_and_relations.jpg)
 
-![layers_styles](media/mercicor-layers_styles.png)
+![layers_styles](media/mercicor-layers_styles.jpg)

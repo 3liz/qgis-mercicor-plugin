@@ -4,7 +4,11 @@
 
 <!-- faire un laius sur nom/faciès -> unicité des objets multipolygone dans la zone d'étude -->
 
-![import_habitat](media/mercicor-import_habitat.png)
+![import_habitat](../processing/mercicor-import_donnees_habitat.jpg)
+
+Exemple de données après import
+
+![data_habitat](media/mercicor-data_habitat.jpg)
 
 !!! tip
     Une correction automatique des géométries est faite lors de l'import.
@@ -15,4 +19,4 @@ Un algorithme permet de vérifier l'unicité des couples nom/faciès.
 
 Il en résulte une couche vectorielle ponctuelle qu'il faut vérifier.
 
-![vérification_nom_facies](../processing/mercicor-calcul_unicity_habitat.png)
+![vérification_nom_facies](../processing/mercicor-calcul_unicity_habitat.jpg)

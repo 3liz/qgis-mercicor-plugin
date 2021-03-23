@@ -75,7 +75,7 @@ def generate_processing_doc():  # NOQA C901
 
     for alg in provider.algorithms():
 
-        output_screen = join(PATH, '{}.png'.format(alg.id().replace(':', '-')))
+        output_screen = join(PATH, '{}.jpg'.format(alg.id().replace(':', '-')))
         alg_dialog = createAlgorithmDialog(alg.id())
         alg_dialog.resize(1100, 800)
         screen = alg_dialog.grab(QRect(QPoint(0, 0), QSize(-1, -1)))
