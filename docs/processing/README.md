@@ -41,6 +41,34 @@ OUTPUT|output|VectorLayer||
 ***
 
 
+### Calcul unicité habitat/faciès
+
+Vérification des données des habitats.
+Les champs nom et faciès doivent être unique par objet géographique.
+
+
+![algo_id](./mercicor-calcul_unicity_habitat.png)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+INPUT|Couche habitat|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
+OUTPUT|Couche des habitat/faciès à unifier|FeatureSink||||Type: TypeVectorPoint <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+OUTPUT|Couche des habitat/faciès à unifier|VectorLayer||
+NUMBER_OF_UNIQUE|Nombre de couple habitat/faciès unique|Number||
+NUMBER_OF_NON_UNIQUE|Nombre de couple habitat/faciès non unique|Number||
+
+
+***
+
+
 ## Administration
 
 
@@ -118,6 +146,7 @@ Télécharger le modèle de fichier tableur pour les observations.
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 INPUT_LAYER|Couche des observations dans le geopackage|VectorLayer|Couche des observations dans le geopackage|✓||Default: observations <br> Type: TypeVectorPoint <br>|
 INCLUDE_X_Y|Inclure des colonnes avec latitude/longitude|Boolean|Inclure des colonnes avec latitude/longitude|✓||Default: True <br> |
+HABITAT_LAYER|Couche des habitats dans le geopackage|VectorLayer|Couche des habitats dans le geopackage|||Default: habitat <br> Type: TypeVectorPolygon <br>|
 DESTINATION_FILE|Fichier tableur de destination|FileDestination|Fichier tableur de destination|✓|||
 
 
@@ -136,7 +165,10 @@ DESTINATION_FILE|Fichier tableur de destination|File||
 
 ### Import données habitat
 
-Import des données des habitats. Le champ du faciès doit être correctement formaté.
+Import des données des habitats.
+Le champ du faciès doit être correctement formaté.
+Un style pour les habitats sera ajouté.
+
 
 ![algo_id](./mercicor-import_donnees_habitat.png)
 
