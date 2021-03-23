@@ -1,17 +1,17 @@
 # CHANGELOG
 
-## 0.4.0 - 2021-03-XX
+## 0.4.0 - 2021-03-23
 
 * Ajout d'une action sur la table des "scénarios" pour changer le filtre en cours
 * Ajout du champ "profondeur" pour les observations
 * Ajout des alias sur les champs pour une meilleure compréhension des champs
 * Ajout d'un style par défaut lors de l'import des habitats avec une catégorisation
-* Ajout d'une correction automatique pour les géométries lors de l'import des habitats et des pressions
 * Ajout du support de la mise à jour des observations depuis le fichier tableur pour des observations existantes
 * Ajout d'un algorithme pour vérifier l'unicité nom/faciès dans la couche habitat
 * Ajout du faciès lors de l'export des observations au format XLSX
+* Ajout d'une correction automatique pour les géométries lors de l'import des habitats et des pressions
+* Ajout d'une transformation en multipolygons des habitats et des pressions lors de l'import
 * Amélioration de la documentation
-* Import en multipolygon des habitats et des pressions
 
 ## 0.3.1 - 2021-03-16
 
