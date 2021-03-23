@@ -83,8 +83,7 @@ class ImportObservationData(BaseImportAlgorithm):
         for feature in input_layer.getFeatures():
             exists, existing = self.observation_exists(self.output, feature['id'])
             if exists:
-                feedback.pushDebugInfo("Il n'est pas possible de mettre à jour une observation existante.")
-                # self.update_feature(feature, existing, has_geom, context, feedback)
+                self.update_feature(feature, existing, has_geom, context, feedback)
             else:
                 self.create_feature(feature, has_geom, context, feedback)
 
@@ -92,7 +91,28 @@ class ImportObservationData(BaseImportAlgorithm):
 
     def update_feature(self, feature, existing, with_geom, context, feedback):
         """ Update the existing observation in the geopackage. """
-        pass
+
+        attributes = dict()
+        latitude = None
+        longitude = None
+        for field in self.fields:
+            if field == 'latitude':
+                if with_geom:
+                    latitude = feature['latitude']
+            elif field == 'longitude':
+                if with_geom:
+                    longitude = feature['longitude']
+            elif field in self.input_fields:
+                attributes[existing.fields().indexOf(field)] = feature[field]
+            else:
+                feedback.pushDebugInfo('Omission du champ {}'.format(field))
+
+        with edit(self.output):
+            feedback.pushInfo('Mise à jour de l\'observation {}'.format(feature['nom_station']))
+            self.output.changeAttributeValues(existing.id(), attributes)
+            if latitude and longitude:
+                geom = self.create_point(longitude, latitude, self.output.crs(), context)
+                self.output.changeGeometry(existing.id(), geom)
 
     def create_feature(self, feature, with_geom, context, feedback):
         """ Create the new observation and import it in the geopackage. """
@@ -100,28 +120,37 @@ class ImportObservationData(BaseImportAlgorithm):
         latitude = None
         longitude = None
         for field in self.fields:
-            if with_geom and field == 'latitude':
-                latitude = feature['latitude']
-            elif with_geom and field == 'longitude':
-                longitude = feature['longitude']
+            if field == 'latitude':
+                if with_geom:
+                    latitude = feature['latitude']
+            elif field == 'longitude':
+                if with_geom:
+                    longitude = feature['longitude']
+            elif field in self.input_fields:
+                output_feature.setAttribute(field, feature[field])
             else:
-                if field in self.input_fields:
-                    output_feature.setAttribute(field, feature[field])
-                else:
-                    feedback.pushDebugInfo('Omission du champ {}'.format(field))
+                feedback.pushDebugInfo('Omission du champ {}'.format(field))
 
         if latitude and longitude:
-            geom = QgsGeometry.fromWkt('POINT({} {})'.format(longitude, latitude))
-
-            transform = QgsCoordinateTransform(
-                QgsCoordinateReferenceSystem(4326),
-                self.output.crs(),
-                context.project())
-            geom.transform(transform)
+            geom = self.create_point(longitude, latitude, self.output.crs(), context)
             output_feature.setGeometry(geom)
 
         with edit(self.output):
+            feedback.pushInfo('Création de la nouvelle observation {}'.format(feature['nom_station']))
             self.output.addFeature(output_feature)
+
+    @staticmethod
+    def create_point(
+            longitude: int, latitude: int, crs: QgsCoordinateReferenceSystem, context) -> QgsGeometry:
+        """ Create the point geometry and reproject it. """
+        geom = QgsGeometry.fromWkt('POINT({} {})'.format(longitude, latitude))
+
+        transform = QgsCoordinateTransform(
+            QgsCoordinateReferenceSystem(4326),
+            crs,
+            context.project())
+        geom.transform(transform)
+        return geom
 
     @staticmethod
     def observation_exists(layer, feature_id) -> Tuple[bool, Optional[QgsFeature]]:
@@ -135,3 +164,7 @@ class ImportObservationData(BaseImportAlgorithm):
             return True, join_feature
         else:
             return False, None
+
+    def postProcess(self, context, feedback):
+        self.output_layer.reloadData()
+        self.output_layer.triggerRepaint()

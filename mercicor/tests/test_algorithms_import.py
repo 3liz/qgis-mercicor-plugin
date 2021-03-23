@@ -189,8 +189,8 @@ class TestImportAlgorithms(BaseTestProcessing):
         self.assertTrue(ImportObservationData.observation_exists(observations, 1)[0])
         self.assertFalse(ImportObservationData.observation_exists(observations, 100)[0])
 
-    def test_import_new_observation(self):
-        """ Test to import new observation with a geometry. """
+    def test_import_observations(self):
+        """ Test to import observations with a geometry from a vector layer. """
         gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
         name = 'observations'
         observations = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
@@ -198,6 +198,7 @@ class TestImportAlgorithms(BaseTestProcessing):
         layer_to_import = QgsVectorLayer(
             'None?'
             'field=id:integer&'
+            'field=nom_station:string(20)&'
             'field=note_man:integer&'
             'field=another_field:integer&'
             'field=latitude:double&'
@@ -207,10 +208,11 @@ class TestImportAlgorithms(BaseTestProcessing):
             'memory')
         feature = QgsFeature(layer_to_import.fields())
         feature.setAttribute('id', 1)
+        feature.setAttribute('nom_station', 'TEST 01')
         feature.setAttribute('note_man', 10)
-        feature.setAttribute('another_field', 100)
-        feature.setAttribute('latitude', 1)
-        feature.setAttribute('longitude', 1)
+        feature.setAttribute('another_field', 10)
+        feature.setAttribute('latitude', -12.72)
+        feature.setAttribute('longitude', 45.17)
 
         with edit(layer_to_import):
             layer_to_import.addFeature(feature)
@@ -220,13 +222,42 @@ class TestImportAlgorithms(BaseTestProcessing):
             "OUTPUT_LAYER": observations,
         }
         run("mercicor:import_donnees_observation", params)
-
-        # Test geom, not the best check for now
-        self.assertNotEqual(observations.extent().center().x(), 0)
-        self.assertNotEqual(observations.extent().center().y(), 0)
-
-        # Test the feature
         self.assertEqual(observations.featureCount(), 1)
+
+        # Test geom
+        self.assertAlmostEqual(int(observations.extent().center().x()), 518455, 0)
+        self.assertAlmostEqual(int(observations.extent().center().y()), 8593822, 0)
+
+        # Test the new feature attributes
         self.assertSetEqual(observations.uniqueValues(0), {1})
         index = observations.fields().indexOf('note_man')
         self.assertSetEqual(observations.uniqueValues(index), {10})
+
+        # Update the feature
+        feature_id = 1
+        self.assertTrue(layer_to_import.getFeature(feature_id).isValid())
+        note_man_index = layer_to_import.fields().indexOf('note_man')
+        another_field_index = layer_to_import.fields().indexOf('another_field')
+        latitude_index = layer_to_import.fields().indexOf('latitude')
+        longitude_index = layer_to_import.fields().indexOf('longitude')
+
+        attributes = {
+            note_man_index: 1000,
+            another_field_index: 1000,
+            latitude_index: -12.6,
+            longitude_index: 45.0,
+        }
+        with edit(layer_to_import):
+            layer_to_import.changeAttributeValues(feature_id, attributes)
+
+        run("mercicor:import_donnees_observation", params)
+        self.assertEqual(observations.featureCount(), 1)
+
+        # Test geom
+        self.assertAlmostEqual(int(observations.extent().center().x()), 500000, 0)
+        self.assertAlmostEqual(int(observations.extent().center().y()), 8607098, 0)
+
+        # Test attributes
+        self.assertSetEqual(observations.uniqueValues(0), {1})
+        index = observations.fields().indexOf('note_man')
+        self.assertSetEqual(observations.uniqueValues(index), {1000})

@@ -9,6 +9,10 @@ pour l'ajout d'observation :
 
 Soit par l'import fichier Excel.
 
+!!! tip
+    On peut ouvrir une feuille Excel dans QGIS, comme une couche tabulaire, sans géométrie.
+    Ce fichier s'ouvre comme une couche "vecteur".
+
 ![Import des données observations](../processing/mercicor-import_donnees_observation.png)
 
 ## Calcul des notes Merci-Cor
