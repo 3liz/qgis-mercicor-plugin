@@ -99,7 +99,6 @@ class CalculUnicityHabitat(CalculAlgorithm):
         super().__init__()
         # needed fields to check unicity
         self.fields = ['nom', 'facies']
-        self.output_layer = None
 
     def name(self):
         return 'calcul_unicity_habitat'
@@ -187,6 +186,7 @@ class CalculUnicityHabitat(CalculAlgorithm):
                 non_unique_couples.append(couple)
 
         if not non_unique_couples:
+            feedback.pushInfo('L\'ensemble des couples noms/faciès sont uniques')
             (sink, dest_id) = self.parameterAsSink(
                 parameters, self.OUTPUT, context,
                 source.fields(), source.wkbType(), source.sourceCrs())
@@ -196,6 +196,10 @@ class CalculUnicityHabitat(CalculAlgorithm):
                 self.NUMBER_OF_NON_UNIQUE: 0
             }
 
+        feedback.pushInfo('Certains couples ne sont pas uniques :')
+        for couple in non_unique_couples:
+            feedback.pushInfo('   {} - {}'.format(couple[0], couple[1]))
+
         expressions = []
         for couple in non_unique_couples:
             exp = ' AND '.join([
@@ -203,7 +207,10 @@ class CalculUnicityHabitat(CalculAlgorithm):
                 QgsExpression.createFieldEqualityExpression(self.fields[1], couple[1])
             ])
             expressions.append(exp)
-        exp = '('+') OR ('.join(expressions)+')'
+        exp = '('
+        exp += ') OR ('.join(expressions)
+        exp += ')'
+        feedback.pushDebugInfo(exp)
         exp_context = self.createExpressionContext(parameters, context, source)
 
         request = QgsFeatureRequest()
@@ -217,8 +224,6 @@ class CalculUnicityHabitat(CalculAlgorithm):
             'INPUT': layer,
             'OUTPUT': 'memory:'
         }
-        # Use TEMPORARY_OUTPUT instead of memory:
-
         results = processing.run(
             "native:pointonsurface",
             params,
@@ -240,9 +245,9 @@ class CalculUnicityHabitat(CalculAlgorithm):
             is_child_algorithm=True,
         )
 
-        self.output_layer = results['OUTPUT']
-        if context.willLoadLayerOnCompletion(self.output_layer):
-            layer_details = context.layerToLoadOnCompletionDetails(self.output_layer)
+        output_layer = results['OUTPUT']
+        if context.willLoadLayerOnCompletion(output_layer):
+            layer_details = context.layerToLoadOnCompletionDetails(output_layer)
             output_def = self.parameterDefinition(self.OUTPUT)
             layer_details.name = output_def.description()
             layer_details.setPostProcessor(
@@ -250,7 +255,7 @@ class CalculUnicityHabitat(CalculAlgorithm):
             )
 
         return {
-            self.OUTPUT: self.output_layer,
+            self.OUTPUT: output_layer,
             self.NUMBER_OF_UNIQUE: len(unique_couples),
             self.NUMBER_OF_NON_UNIQUE: len(non_unique_couples)
         }
