@@ -89,8 +89,8 @@ class CalculUnicityHabitat(CalculAlgorithm):
 
     INPUT = 'INPUT'
     OUTPUT = 'OUTPUT'
-    NUMBEROFUNIQUE = 'NUMBEROFUNIQUE'
-    NUMBEROFNONUNIQUE = 'NUMBEROFNONUNIQUE'
+    NUMBER_OF_UNIQUE = 'NUMBER_OF_UNIQUE'
+    NUMBER_OF_NON_UNIQUE = 'NUMBER_OF_NON_UNIQUE'
 
     def __init__(self):
         """
@@ -99,17 +99,18 @@ class CalculUnicityHabitat(CalculAlgorithm):
         super().__init__()
         # needed fields to check unicity
         self.fields = ['nom', 'facies']
+        self.output_layer = None
 
     def name(self):
         return 'calcul_unicity_habitat'
 
     def displayName(self):
-        return 'Calcul unicité habitat/facies'
+        return 'Calcul unicité habitat/faciès'
 
     def shortHelpString(self):
         return (
             'Vérification des données des habitats.\n'
-            'Les champs nom et faciès doivent être unique\n'
+            'Les champs nom et faciès doivent être unique '
             'par objet géographique.\n'
         )
 
@@ -127,7 +128,7 @@ class CalculUnicityHabitat(CalculAlgorithm):
         self.addParameter(
             QgsProcessingParameterFeatureSink(
                 self.OUTPUT,
-                "Couche des habitat/facès à unifier",
+                "Couche des habitat/faciès à unifier",
                 QgsProcessing.TypeVectorPoint,
                 optional=True,
             )
@@ -135,14 +136,14 @@ class CalculUnicityHabitat(CalculAlgorithm):
 
         self.addOutput(
             QgsProcessingOutputNumber(
-                'NUMBEROFUNIQUE',
+                self.NUMBER_OF_UNIQUE,
                 'Nombre de couple habitat/faciès unique'
             )
         )
 
         self.addOutput(
             QgsProcessingOutputNumber(
-                'NUMBEROFUNIQUE',
+                self.NUMBER_OF_NON_UNIQUE,
                 'Nombre de couple habitat/faciès non unique'
             )
         )
@@ -191,8 +192,8 @@ class CalculUnicityHabitat(CalculAlgorithm):
                 source.fields(), source.wkbType(), source.sourceCrs())
             return {
                 self.OUTPUT: dest_id,
-                self.NUMBEROFUNIQUE: len(unique_couples),
-                self.NUMBEROFNONUNIQUE: 0
+                self.NUMBER_OF_UNIQUE: len(unique_couples),
+                self.NUMBER_OF_NON_UNIQUE: 0
             }
 
         expressions = []
@@ -250,6 +251,6 @@ class CalculUnicityHabitat(CalculAlgorithm):
 
         return {
             self.OUTPUT: self.output_layer,
-            self.NUMBEROFUNIQUE: len(unique_couples),
-            self.NUMBEROFNONUNIQUE: len(non_unique_couples)
+            self.NUMBER_OF_UNIQUE: len(unique_couples),
+            self.NUMBER_OF_NON_UNIQUE: len(non_unique_couples)
         }
