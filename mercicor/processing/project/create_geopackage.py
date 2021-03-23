@@ -49,7 +49,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             QgsProcessingParameterFileDestination(
                 self.FILE_GPKG,
                 'Fichier Geopackage',
-                fileFilter='gpkg'
+                fileFilter='Projet geopackage (*.gpkg)',
             )
         )
 

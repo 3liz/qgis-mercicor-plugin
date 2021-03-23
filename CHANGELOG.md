@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.5.0 - 2021-03-XX
+
+* Correction pour les algorithmes devant utiliser un fichier de destination
+
 ## 0.4.0 - 2021-03-23
 
 * Ajout d'une action sur la table des "scénarios" pour changer le filtre en cours

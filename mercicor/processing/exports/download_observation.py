@@ -81,7 +81,7 @@ class DownloadObservationFile(BaseExportAlgorithm):
         parameter = QgsProcessingParameterFileDestination(
             self.DESTINATION_FILE,
             tooltip,
-            fileFilter='xlsx',
+            fileFilter='Fichier tableur (*.xlsx)',
         )
         self.set_tooltip_parameter(parameter, tooltip)
         self.addParameter(parameter)
