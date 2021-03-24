@@ -1,6 +1,6 @@
 [general]
 name=Mercicor
-qgisMinimumVersion=3.0
+qgisMinimumVersion=3.10
 description=Mercicor
 version=master
 changelog=changelog
