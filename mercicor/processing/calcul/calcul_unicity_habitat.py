@@ -222,7 +222,7 @@ class CalculUnicityHabitat(CalculAlgorithm):
         params = {
             'ALL_PARTS': True,
             'INPUT': layer,
-            'OUTPUT': 'memory:'
+            'OUTPUT': 'TEMPORARY_OUTPUT'
         }
         results = processing.run(
             "native:pointonsurface",

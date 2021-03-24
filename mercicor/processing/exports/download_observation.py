@@ -193,7 +193,7 @@ class DownloadObservationFile(BaseExportAlgorithm):
             'METHOD': 1,  # Take attributes of the first located feature only (one-to-one)
             'DISCARD_NONMATCHING': False,
             'PREFIX': 'habitat_',
-            'OUTPUT':  'memory:'
+            'OUTPUT':  'TEMPORARY_OUTPUT'
         }
         results = run(
             'qgis:joinattributesbylocation',

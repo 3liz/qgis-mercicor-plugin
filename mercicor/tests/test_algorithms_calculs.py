@@ -68,7 +68,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
 
         params = {
             'INPUT': layer,
-            'OUTPUT': 'memory:'
+            'OUTPUT': 'TEMPORARY_OUTPUT'
         }
         results = run("mercicor:calcul_unicity_habitat", params)
         self.assertEqual(2, results['NUMBER_OF_UNIQUE'])

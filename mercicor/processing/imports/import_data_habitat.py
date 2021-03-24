@@ -98,7 +98,7 @@ class ImportHabitatData(BaseImportAlgorithm):
         params = {
             'INPUT': input_layer,
             'DISTANCE': 0,
-            'OUTPUT': 'memory:'
+            'OUTPUT': 'TEMPORARY_OUTPUT'
         }
         results = processing.run(
             "native:buffer",
@@ -110,7 +110,7 @@ class ImportHabitatData(BaseImportAlgorithm):
         params = {
             'INPUT': results['OUTPUT'],
             'FIELD': [name_field, facies_field],
-            'OUTPUT': 'memory:'
+            'OUTPUT': 'TEMPORARY_OUTPUT'
         }
         results = processing.run(
             "native:collect",
@@ -122,7 +122,7 @@ class ImportHabitatData(BaseImportAlgorithm):
 
         params = {
             'INPUT': results['OUTPUT'],
-            'OUTPUT': 'memory:'
+            'OUTPUT': 'TEMPORARY_OUTPUT'
         }
         results = processing.run(
             "native:promotetomulti",
@@ -140,7 +140,7 @@ class ImportHabitatData(BaseImportAlgorithm):
             params = {
                 'INPUT': results['OUTPUT'],
                 'TARGET_CRS': self.output_layer.crs(),
-                'OUTPUT': 'memory:'
+                'OUTPUT': 'TEMPORARY_OUTPUT'
             }
             results = processing.run(
                 "native:reprojectlayer",
