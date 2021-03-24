@@ -13,7 +13,7 @@ attribute_joins = [
     {
         'join_field_name': 'id',
         'target_field_name': 'habitat_id',
-        'join_layer': 'habitat',
+        'join_layer': 'habitat_etat_ecologique',
         'layer_add_join': 'habitat_pression_etat_ecologique',
         'prefix': 'hab_'
     },
