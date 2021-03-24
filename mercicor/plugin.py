@@ -3,17 +3,21 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
 from qgis.core import Qgis, QgsApplication, QgsMessageLog
-from qgis.PyQt.QtWidgets import QMessageBox
+from qgis.PyQt.QtCore import QUrl
+from qgis.PyQt.QtGui import QDesktopServices, QIcon
+from qgis.PyQt.QtWidgets import QAction, QMessageBox
 
 from mercicor.actions import actions_list
 from mercicor.processing.provider import MercicorProvider
+from mercicor.qgis_plugin_tools import resources_path
 
 
 class Mercicor:
 
     def __init__(self, iface):
-        _ = iface
+        self.iface = iface
         self.provider = None
+        self.help_action = None
 
     def initProcessing(self):
         if not self.provider:
@@ -23,9 +27,26 @@ class Mercicor:
     def initGui(self):
         self.initProcessing()
 
+        # Open the online help
+        self.help_action = QAction(
+            QIcon(resources_path('icons', 'icon.jpg')),
+            'Mercicor',
+            self.iface.mainWindow())
+        self.iface.pluginHelpMenu().addAction(self.help_action)
+        self.help_action.triggered.connect(self.open_help)
+
     def unload(self):
         if self.provider:
             QgsApplication.processingRegistry().removeProvider(self.provider)
+
+        if self.help_action:
+            self.iface.pluginHelpMenu().removeAction(self.help_action)
+            del self.help_action
+
+    @staticmethod
+    def open_help():
+        """ Open the online help. """
+        QDesktopServices.openUrl(QUrl('https://packages.3liz.org/private/um3-mercicor/docs/'))
 
     @staticmethod
     def run_action(name, *args):
