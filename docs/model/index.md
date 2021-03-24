@@ -68,13 +68,13 @@ observations : ...
 habitat_etat_ecologique : id PK
 habitat_etat_ecologique : nom
 habitat_etat_ecologique : facies
-habitat_etat_ecologique : note_bsd
-habitat_etat_ecologique : note_bsm
-habitat_etat_ecologique : note_ben
-habitat_etat_ecologique : note_man
-habitat_etat_ecologique : note_pmi
-habitat_etat_ecologique : score_mercicor
+habitat_etat_ecologique : station_man
+habitat_etat_ecologique : perc_bsd
+habitat_etat_ecologique : perc_bsm
 habitat_etat_ecologique : bsd_recouv_cor
+habitat_etat_ecologique : bsd_p_acrop
+habitat_etat_ecologique : bsd_vital_cor
+habitat_etat_ecologique : bsd_comp_struc
 habitat_etat_ecologique : ...
 ```
 
@@ -218,34 +218,36 @@ habitat_etat_ecologique : ...
 |1|**id**|qlonglong|Identifiant|
 |2|nom|QString|Nom de l'habitat|
 |3|facies|QString|Faciès de l'habitat|
-|4|note_bsd|double|Note Mercicor Benthique de substrats durs|
-|5|note_bsm|double|Note Mercicor Benthique de substrats meubles|
-|6|note_ben|double|Note Mercicor Benthique|
-|7|note_man|double|Note Mercicor Mangrove|
-|8|note_pmi|double|Note Mercicor Poissons et Macro-invertébrés|
-|9|score_mercicor|double|Score Mercicor|
-|10|bsd_recouv_cor|double|Recouvrement corallien (Scléractiniaires)|
-|11|bsd_p_acrop|double|Pourcentage du recouvrement corallien représenté par les coraux acropores|
-|12|bsd_vital_cor|double|Vitalité et taux de mortalité corallienne|
-|13|bsd_comp_struc|double|Complexité structurelle des peuplements coralliens|
-|14|bsd_taille_cor|double|Taille des coraux vivants|
-|15|bsd_dens_juv|double|Densité de coraux juvéniles|
-|16|bsd_f_sessile|double|Recouvrement par la faune sessile non corallienne|
-|17|bsd_recouv_ma|double|Recouvrement par les macroalgues|
-|18|bsm_fragm_herb|double|Fragmentation de l’herbier|
-|19|bsm_recouv_her|double|Recouvrement par l’herbier (patchs)|
-|20|bsm_haut_herb|double|Hauteur de l’herbier (patchs)|
-|21|bsm_dens_herb|double|Densité des phanérogames (patchs)|
-|22|bsm_div_herb|double|Diversité spécifique des phanérogames (patchs)|
-|23|bsm_epibiose|double|Epibiose de l’herbier (patchs)|
-|24|man_fragm|double|Fragmentation de la mangrove|
-|25|man_recouv|double|Recouvrement par la mangrove (patchs)|
-|26|man_diam_tronc|double|Diamètre des troncs (patchs)|
-|27|man_dens|double|Densité des palétuviers (patchs)|
-|28|man_diversit|double|Diversité spécifique des palétuviers (patchs)|
-|29|man_vital|double|Vitalité des palétuviers (patchs)|
-|30|pmi_div_poi|double|Diversité spécifique des peuplements de poissons|
-|31|pmi_predat_poi|double|Abondance et maturité des prédateurs supérieurs récifaux|
-|32|pmi_scarib_poi|double|Abondance et maturité des poissons perroquets|
-|33|pmi_macro_inv|double|Abondance des macro-invertébrés|
-
+|4|station_man|bool|Stations en Mangrove|
+|5|perc_bsd|double|Pourcentage Benthique de substrats durs|
+|6|perc_bsm|double|Pourcentage Benthique de substrats meubles|
+|7|bsd_recouv_cor|double|Recouvrement corallien (Scléractiniaires)|
+|8|bsd_p_acrop|double|Pourcentage du recouvrement corallien représenté par les coraux acropores|
+|9|bsd_vital_cor|double|Vitalité et taux de mortalité corallienne|
+|10|bsd_comp_struc|double|Complexité structurelle des peuplements coralliens|
+|11|bsd_taille_cor|double|Taille des coraux vivants|
+|12|bsd_dens_juv|double|Densité de coraux juvéniles|
+|13|bsd_f_sessile|double|Recouvrement par la faune sessile non corallienne|
+|14|bsd_recouv_ma|double|Recouvrement par les macroalgues|
+|15|bsm_fragm_herb|double|Fragmentation de l’herbier|
+|16|bsm_recouv_her|double|Recouvrement par l’herbier (patchs)|
+|17|bsm_haut_herb|double|Hauteur de l’herbier (patchs)|
+|18|bsm_dens_herb|double|Densité des phanérogames (patchs)|
+|19|bsm_div_herb|double|Diversité spécifique des phanérogames (patchs)|
+|20|bsm_epibiose|double|Epibiose de l’herbier (patchs)|
+|21|man_fragm|double|Fragmentation de la mangrove|
+|22|man_recouv|double|Recouvrement par la mangrove (patchs)|
+|23|man_diam_tronc|double|Diamètre des troncs (patchs)|
+|24|man_dens|double|Densité des palétuviers (patchs)|
+|25|man_diversit|double|Diversité spécifique des palétuviers (patchs)|
+|26|man_vital|double|Vitalité des palétuviers (patchs)|
+|27|pmi_div_poi|double|Diversité spécifique des peuplements de poissons|
+|28|pmi_predat_poi|double|Abondance et maturité des prédateurs supérieurs récifaux|
+|29|pmi_scarib_poi|double|Abondance et maturité des poissons perroquets|
+|30|pmi_macro_inv|double|Abondance des macro-invertébrés|
+|31|note_bsd|double|Note Mercicor Benthique de substrats durs|
+|32|note_bsm|double|Note Mercicor Benthique de substrats meubles|
+|33|note_ben|double|Note Mercicor Benthique|
+|34|note_man|double|Note Mercicor Mangrove|
+|35|note_pmi|double|Note Mercicor Poissons et Macro-invertébrés|
+|36|score_mercicor|double|Score Mercicor|
