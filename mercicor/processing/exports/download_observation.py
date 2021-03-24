@@ -189,7 +189,7 @@ class DownloadObservationFile(BaseExportAlgorithm):
             'INPUT': input_layer,
             'JOIN': habitat_layer,
             'PREDICATE': [0],  # Intersects
-            'JOIN_FIELDS': ['facies'],
+            'JOIN_FIELDS': ['nom', 'facies'],
             'METHOD': 1,  # Take attributes of the first located feature only (one-to-one)
             'DISCARD_NONMATCHING': False,
             'PREFIX': 'habitat_',

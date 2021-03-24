@@ -77,8 +77,8 @@ class TestExportAlgorithms(BaseTestProcessing):
         self.assertTrue(output.isValid())
 
         # Everything is fine with QGIS when there is a feature in the source layer.
-        # + 1, because there is the join with the habitat layer
-        self.assertEqual(output.fields().count(), field_count + 1)
+        # + 2, because there is the join with the habitat layer
+        self.assertEqual(output.fields().count(), field_count + 2)
 
         # if 31000 <= Qgis.QGIS_VERSION_INT <= 31099:
         #     # Header recognised as a row by default, integer as text
@@ -100,8 +100,8 @@ class TestExportAlgorithms(BaseTestProcessing):
         self.assertEqual(output.featureCount(), 1)
 
         # + 2 for the geom latitude and longitude
-        # + 1 for the join with the habitat layer
-        self.assertEqual(output.fields().count(), field_count + 3)
+        # + 2 for the join with the habitat layer
+        self.assertEqual(output.fields().count(), field_count + 4)
 
         # Test the integer part only about 4326 reprojection of the geometry
         expected = {
@@ -117,6 +117,8 @@ class TestExportAlgorithms(BaseTestProcessing):
         # Check the layer join
         index = output.fields().indexOf('habitat_facies')
         self.assertSetEqual({'Faciès habitat'}, output.uniqueValues(index))
+        index = output.fields().indexOf('habitat_nom')
+        self.assertSetEqual({'Nom habitat'}, output.uniqueValues(index))
 
     def test_export_observation_empty(self):
         """ Test to export the observation layer when it is empty. """
