@@ -149,6 +149,18 @@ class ImportHabitatData(BaseImportAlgorithm):
                 feedback=feedback,
                 is_child_algorithm=True)
 
+        params = {
+            'INPUT': results['OUTPUT'],
+            'DISTANCE': 0,
+            'OUTPUT': 'memory:'
+        }
+        results = processing.run(
+            "native:buffer",
+            params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True)
+
         layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
 
         self.output_layer.startEditing()

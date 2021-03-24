@@ -181,6 +181,18 @@ class ImportPressureData(BaseImportAlgorithm):
                 feedback=feedback,
                 is_child_algorithm=True)
 
+        params = {
+            'INPUT': results['OUTPUT'],
+            'DISTANCE': 0,
+            'OUTPUT': 'memory:'
+        }
+        results = processing.run(
+            "native:buffer",
+            params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True)
+
         layer = QgsProcessingUtils.mapLayerFromString(results['OUTPUT'], context, True)
 
         self.scenario_id = self.insert_scenario(scenario_layer, scenario_name)
