@@ -1,8 +1,14 @@
 # CHANGELOG
 
-## 0.5.0 - 2021-03-XX
+## 0.5.0 - 2021-03-24
 
+* Ajout de l'algorithme du calcul des états écologiques des habitats
+* Ajout d'une documentation concernant le modèle de données https://packages.3liz.org/private/um3-mercicor/docs/model/
+* Ajout du nom de l'habitat lors de l'export en XLSX
+* Ajout d'un bouton pour ouvrir l'aide en ligne depuis le menu d'aide
 * Correction pour les algorithmes devant utiliser un fichier de destination
+* Correction de l'action QGIS pour changer de scénario depuis la table attributaire
+* Mise à jour de la documentation https://packages.3liz.org/private/um3-mercicor/docs/
 
 ## 0.4.0 - 2021-03-23
 

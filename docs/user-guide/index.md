@@ -14,5 +14,6 @@ Il y a plusieurs étapes :
 * [Préparation de la campagne d'observations](./preparation-observations.md)
 * [Intégration des données d'observations](./integration-campagne.md)
 * [Étude des scénarios](./etude-scenario.md)
+* [Calcul de l'état écologique](./calcul-etat-ecologique.md)
 
 ![create_gpkg](media/mercicor-barre_outils.jpg)
