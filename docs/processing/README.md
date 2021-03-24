@@ -8,6 +8,36 @@ hide:
 ## Calcul
 
 
+### Calcul état écologique des habitats
+
+Calcul de l'état écologique des habitats
+à partir des données d'observations :
+Vérification de l'unicité du facies,
+Jointure de données,
+Calcul des notes
+
+![algo_id](./mercicor-calcul_habitat_etat_ecologique.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+HABITAT|Couche habitat|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
+OBSERVATIONS|Couche observations|VectorLayer||✓||Default: observations <br> Type: TypeVectorPoint <br>|
+HABITAT_ETAT_ECOLOGIQUE|Table habitat etat ecologique|VectorLayer||✓||Default: habitat_etat_ecologique <br> Type: TypeVectorAnyGeometry <br>|
+OUTPUT_LAYER|Table habitat état écologique en sortie|FeatureSink||✓||Type: TypeVectorAnyGeometry <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+OUTPUT_LAYER|Table habitat état écologique en sortie|VectorLayer||
+
+
+***
+
+
 ### Calcul des notes MERCI-Cor
 
 Calcul des notes MERCI-Cor à partir des indicateurs MERCI-Cor
@@ -18,7 +48,7 @@ note_bsm = (("bsm_fragm_herb" + "bsm_recouv_her" + "bsm_haut_herb" + "bsm_dens_h
 note_ben = "note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm"
 note_man = (("man_fragm" + "man_recouv" + "man_diam_tronc" + "man_dens" + "man_diversit" + "man_vital") / 6.0) * (10.0 / 3.0)
 note_pmi = (("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_inv") / 4) * (10 / 3)
-score_mercicor = CASE WHEN "station_man" THEN ("note_man" + "note_pmi") / 2 ELSE ("note_ben" + "note_pmi") / 2 END
+score_mercicor = CASE WHEN lower(to_string("station_man")) = 'true' THEN ("note_man" + "note_pmi") / 2 ELSE ("note_ben" + "note_pmi") / 2 END
 
 
 ![algo_id](./mercicor-calcul_notes.jpg)
@@ -124,7 +154,9 @@ HABITAT_PRESSION_ETAT_ECOLOGIQUE|Couche du résultat de l'intersection entre les
 
 | ID | Description | Type | Info |
 |:-:|:-:|:-:|:-:|
-RELATIONS_ADDED|Nombre de relations chargés|Number||
+JOINS_ADDED|Nombre de jointures chargées|Number||
+ACTIONS_ADDED|Nombre d'actions chargées|Number||
+RELATIONS_ADDED|Nombre de relations chargées|Number||
 QML_LOADED|Nombre de QML chargés|Number||
 
 
