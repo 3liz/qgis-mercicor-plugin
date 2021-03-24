@@ -31,6 +31,8 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     SCENARIO_PRESSION = 'SCENARIO_PRESSION'
     HABITAT_PRESSION_ETAT_ECOLOGIQUE = 'HABITAT_PRESSION_ETAT_ECOLOGIQUE'
 
+    ACTIONS_ADDED = 'ACTIONS_ADDED'
+    JOINS_ADDED = 'JOINS_ADDED'
     RELATIONS_ADDED = 'RELATIONS_ADDED'
     QML_LOADED = 'QML_LOADED'
 
@@ -38,6 +40,8 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         super().__init__()
         self.success_qml = 0
         self.success_relation = 0
+        self.success_join = 0
+        self.success_action = 0
         self.input_layers = None
 
     def name(self):
@@ -125,7 +129,9 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             )
         )
 
-        self.addOutput(QgsProcessingOutputNumber(self.RELATIONS_ADDED, 'Nombre de relations chargés'))
+        self.addOutput(QgsProcessingOutputNumber(self.JOINS_ADDED, 'Nombre de jointures chargées'))
+        self.addOutput(QgsProcessingOutputNumber(self.ACTIONS_ADDED, 'Nombre d\'actions chargées'))
+        self.addOutput(QgsProcessingOutputNumber(self.RELATIONS_ADDED, 'Nombre de relations chargées'))
         self.addOutput(QgsProcessingOutputNumber(self.QML_LOADED, 'Nombre de QML chargés'))
 
     def prepareAlgorithm(self, parameters, context, feedback):
@@ -141,6 +147,8 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         return {
             self.QML_LOADED: self.success_qml,
             self.RELATIONS_ADDED: self.success_relation,
+            self.JOINS_ADDED: self.success_join,
+            self.ACTIONS_ADDED: self.success_action,
         }
 
     def postProcessAlgorithm(self, context, feedback):
@@ -160,6 +168,8 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         return {
             self.QML_LOADED: self.success_qml,
             self.RELATIONS_ADDED: self.success_relation,
+            self.JOINS_ADDED: self.success_join,
+            self.ACTIONS_ADDED: self.success_action,
         }
 
     def add_actions(self, feedback):
@@ -171,6 +181,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         for action in actions_list.values():
             feedback.pushInfo('Ajout de l\'action sur {}'.format(action.layer))
             self.input_layers[action.layer].actions().addAction(action.action)
+            self.success_action += 1
 
     def add_joins(self, feedback):
         """ Add all joins between tables. """
@@ -193,6 +204,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             join_habitat.setPrefix(definition['prefix'])
             if not definition['layer_add_join'].addJoin(join_habitat):
                 raise Exception('Join not added {}'.format(definition['join_field_name']))
+            self.success_join += 1
 
     def add_relations(self, context, feedback):
         """ Add all relations to the QGIS project. """

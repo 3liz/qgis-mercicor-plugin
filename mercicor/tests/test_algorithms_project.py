@@ -118,6 +118,8 @@ class TestProjectAlgorithms(BaseTestProcessing):
         }
         result = run("mercicor:load_qml_and_relations", params)
         self.assertEqual(result['QML_LOADED'], 8)
+        # self.assertEqual(result['JOINS_ADDED'], 4)
+        # self.assertEqual(result['ACTIONS_ADDED'], 1)
         # self.assertEqual(result['RELATIONS_ADDED'], 1)
 
         # Check alias
