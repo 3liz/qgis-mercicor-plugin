@@ -5,7 +5,7 @@
 Concernant l'intégration des données d'observations on fait soit une saisie via QGIS et le formulaire 
 pour l'ajout d'observation :
 
-![form_observation](media/mercicor-form_observ.png)
+![form_observation](media/mercicor-form_observ.jpg)
 
 Soit par l'import fichier Excel.
 
@@ -13,7 +13,7 @@ Soit par l'import fichier Excel.
     On peut ouvrir une feuille Excel dans QGIS, comme une couche tabulaire, sans géométrie.
     Ce fichier s'ouvre comme une couche "vecteur".
 
-![Import des données observations](../processing/mercicor-import_donnees_observation.png)
+![Import des données observations](../processing/mercicor-import_donnees_observation.jpg)
 
 ## Calcul des notes Merci-Cor
 
@@ -27,7 +27,7 @@ Il y deux façons de l'utiliser :
     * Si l'algorithme effectue les calculs uniquement sur les entités sélectionnées ou pas
     * Si on veut exporter le résultat dans une couche
     * puis si l'on veut ajouter la couche résultat au projet
-![calcul_notes](media/mercicor-calcul_notes.png)
+![calcul_notes](../processing/mercicor-calcul_notes.jpg)
 
 * Deuxième façon. On sélectionne la couche dans l'arbre des couches et on entre en mode éditions (image 1 ci-dessous), dans la 
 boîte à outils on clique sur `Editer les entités sur place` (bouton sélectionné sur l'image 2 ci-dessous), 
@@ -37,4 +37,4 @@ sélectionner avant l'exécution de l'algorithme.
 !!! note
     Contrairement à une exécution normale ici aucune boîte de dialogue n'apparaît.
 
-![select_layer_tree](media/mercicor-select_layer.png) ![edit_in_place](media/mercicor-edit_in_place.png)
+![select_layer_tree](media/mercicor-select_layer.jpg) ![edit_in_place](media/mercicor-edit_in_place.jpg)

@@ -15,4 +15,4 @@ Il y a plusieurs étapes :
 * [Intégration des données d'observations](./integration-campagne.md)
 * [Étude des scénarios](./etude-scenario.md)
 
-![create_gpkg](media/mercicor-barre_outils.png)
+![create_gpkg](media/mercicor-barre_outils.jpg)
