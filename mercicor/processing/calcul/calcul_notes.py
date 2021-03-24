@@ -57,7 +57,7 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         )
         self.expressions['score_mercicor'] = (
             'CASE '
-            'WHEN "station_man" THEN ("note_man" + "note_pmi") / 2 '
+            'WHEN lower(to_string("station_man")) = \'true\' THEN ("note_man" + "note_pmi") / 2 '
             'ELSE ("note_ben" + "note_pmi") / 2 '
             'END'
         )
