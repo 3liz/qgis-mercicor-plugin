@@ -184,7 +184,7 @@ class DownloadObservationFile(BaseExportAlgorithm):
     def add_habitat_info(input_layer, habitat_layer, context, feedback) -> QgsVectorLayer:
         """ Add information from the habitat layer into the export. """
         feedback.pushInfo('\n')
-        feedback.pushInfo('Jointure spatiale avec la couche "habitat" pour le champ "facies"')
+        feedback.pushInfo("Jointure spatiale avec la couche 'habitat' pour le champ 'facies'")
         params = {
             'INPUT': input_layer,
             'JOIN': habitat_layer,
