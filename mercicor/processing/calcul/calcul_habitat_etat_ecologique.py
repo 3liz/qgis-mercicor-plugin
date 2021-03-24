@@ -35,11 +35,11 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
 
     def shortHelpString(self):
         return (
-            'Calcul de l\'état écologique des habitats\n'
+            'Calcul de l\'état écologique des habitats '
             'à partir des données d\'observations :\n'
-            'Vérification de l\'unicité du facies,\n'
-            'Jointure de données,\n'
-            'Calcul des notes'
+            '- Vérification de l\'unicité du facies\n'
+            '- Jointure de données\n'
+            '- Calcul des notes'
 
         )
 
@@ -66,7 +66,7 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.HABITAT_ETAT_ECOLOGIQUE,
-                "Table habitat etat ecologique",
+                "Table habitat état écologique",
                 [QgsProcessing.TypeVectorAnyGeometry],
                 defaultValue='habitat_etat_ecologique',
             )
@@ -102,7 +102,7 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
                     results['NUMBER_OF_NON_UNIQUE']
                 )
             )
-            feedback.pushInfo('Les couples habitat/faciès ne sont pas uniques !')
+            feedback.reportError('Les couples habitat/faciès ne sont pas uniques !')
             msg = 'Utiliser l\'algorithme Mercicor : '
             msg += 'Calcul unicité habitat/faciès ; '
             msg += 'pour corriger le problème.'
@@ -123,8 +123,8 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
                 'man_vital', 'pmi_div_poi', 'pmi_predat_poi', 'pmi_scarib_poi', 'pmi_macro_inv'
             ],
             'OUTPUT': 'TEMPORARY_OUTPUT',
-            'PREDICATE': [0],
-            'SUMMARIES': [6]
+            'PREDICATE': [0],  # Intersects
+            'SUMMARIES': [6]  # Mean
         }
 
         results = processing.run(
@@ -155,8 +155,8 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
             'JOIN': observ_layer,
             'JOIN_FIELDS': ['station_man'],
             'OUTPUT': 'TEMPORARY_OUTPUT',
-            'PREDICATE': [0],
-            'SUMMARIES': [3]
+            'PREDICATE': [0],  # Intersects
+            'SUMMARIES': [3]  # Max
         }
 
         results = processing.run(
