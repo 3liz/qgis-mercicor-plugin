@@ -2,7 +2,7 @@ __copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
-joins = [
+attribute_joins = [
     {
         'join_field_name': 'id',
         'target_field_name': 'id',
@@ -30,5 +30,12 @@ joins = [
         'join_layer': 'scenario_pression',
         'layer_add_join': 'habitat_pression_etat_ecologique',
         'prefix': 'scenario_',
+    },
+]
+
+spatial_joins = [
+    {
+        'input': 'habitat',
+        'target': 'observations',
     },
 ]

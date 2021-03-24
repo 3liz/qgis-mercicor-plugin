@@ -22,6 +22,7 @@ from qgis.core import (
     edit,
 )
 
+from mercicor.definitions.tables import tables
 from mercicor.processing.project.base import BaseProjectAlgorithm
 from mercicor.qgis_plugin_tools import load_csv, resources_path
 
@@ -102,20 +103,9 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         if os.path.exists(base_name):
             feedback.reportError('Le fichier existe déjà. Ré-écriture du fichier…')
 
-        tables = {
-            'habitat': 'MultiPolygon',
-            'pression': 'MultiPolygon',
-            'metadata': 'None',
-            'liste_type_pression': 'None',
-            'observations': 'Point',
-            'habitat_etat_ecologique': 'None',
-            'scenario_pression': 'None',
-            'habitat_pression_etat_ecologique': 'MultiPolygon',
-        }
+        self.create_geopackage(base_name, crs)
 
-        self.create_geopackage(base_name, crs, tables)
-
-        output_layers = self.load_layers(base_name, feedback, tables)
+        output_layers = self.load_layers(base_name, feedback)
 
         # Add metadata
         feature = QgsFeature(output_layers['metadata'].fields())
@@ -156,7 +146,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         return {self.FILE_GPKG: base_name, self.OUTPUT_LAYERS: output_id}
 
     @staticmethod
-    def load_layers(base_name, feedback, tables):
+    def load_layers(base_name, feedback):
         """ Create vector layer object from URI. """
         output_layers = {}
         for table in tables.keys():
@@ -171,7 +161,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         return output_layers
 
     @staticmethod
-    def create_geopackage(file_path, crs, tables) -> None:
+    def create_geopackage(file_path, crs) -> None:
         """ Create the geopackage for the given path. """
         encoding = 'UTF-8'
         driver_name = QgsVectorFileWriter.driverForExtension('gpkg')

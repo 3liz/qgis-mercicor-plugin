@@ -15,7 +15,7 @@ from qgis.core import (
 )
 
 from mercicor.actions import actions_list
-from mercicor.definitions.joins import joins
+from mercicor.definitions.joins import attribute_joins
 from mercicor.definitions.relations import relations
 from mercicor.processing.project.base import BaseProjectAlgorithm
 from mercicor.qgis_plugin_tools import load_csv, resources_path
@@ -174,7 +174,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
     def add_joins(self, feedback):
         """ Add all joins between tables. """
-        for definition in joins:
+        for definition in attribute_joins:
             join_layer = definition['join_layer']
             layer_add_join = definition['layer_add_join']
 
