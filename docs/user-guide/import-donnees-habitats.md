@@ -6,12 +6,12 @@
 
 ![import_habitat](../processing/mercicor-import_donnees_habitat.jpg)
 
+!!! tip
+    Une correction automatique des géométries est faite lors de l'import.
+
 Exemple de données après import
 
 ![data_habitat](media/mercicor-data_habitat.jpg)
-
-!!! tip
-    Une correction automatique des géométries est faite lors de l'import.
 
 ## Vérification de l'unicité nom/faciès
 

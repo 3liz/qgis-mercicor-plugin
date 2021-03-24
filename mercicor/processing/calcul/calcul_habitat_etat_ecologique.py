@@ -31,7 +31,7 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
         return 'calcul_habitat_etat_ecologique'
 
     def displayName(self):
-        return 'Calcul état écologique des habitats'
+        return 'Calcul de l\'état écologique des habitats'
 
     def shortHelpString(self):
         return (

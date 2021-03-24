@@ -37,5 +37,6 @@ d'un scénario à un autre. Cela filtre les couches qui en dépendent :
 * Pression
 * Habitat pression état écologique
 
-Dans le menu clic-droit il faut sélectionner l'action **Mettre ce scénarion par défaut**
+Dans le menu clic-droit il faut sélectionner l'action **Mettre ce scénario par défaut**
+
 ![action](media/mercicor-use_action_scenario.jpg)

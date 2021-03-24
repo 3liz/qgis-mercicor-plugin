@@ -31,8 +31,11 @@ Il y deux façons de l'utiliser :
 
 * Deuxième façon. On sélectionne la couche dans l'arbre des couches et on entre en mode éditions (image 1 ci-dessous), dans la 
 boîte à outils on clique sur `Editer les entités sur place` (bouton sélectionné sur l'image 2 ci-dessous), 
-puis on exécute l'algorithme. Si l'on souhaite l'exécuter uniquement sur certaines entités il faut les 
-sélectionner avant l'exécution de l'algorithme.
+puis on exécute l'algorithme. 
+
+!!! tip
+    Si l'on souhaite l'exécuter uniquement sur certaines entités il faut les  sélectionner avant 
+    l'exécution de l'algorithme.
 
 !!! note
     Contrairement à une exécution normale ici aucune boîte de dialogue n'apparaît.

@@ -16,6 +16,7 @@ nav:
         - 'Préparation de la campagne': 'user-guide/preparation-observations.md'
         - 'Intégration de la campagne': 'user-guide/integration-campagne.md'
         - 'Étude des scénarios': 'user-guide/etude-scenario.md'
+        - "Calcul de l'état écologique": 'user-guide/calcul-etat-ecologique.md'
         - 'Installation': 'user-guide/installation.md'
     - 'Modèle de données': model/index.md
     - Traitements: processing/README.md
