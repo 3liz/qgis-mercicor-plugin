@@ -7,6 +7,11 @@ from collections import Callable
 from qgis.core import Qgis, QgsAction, QgsMessageLog, QgsProject
 from qgis.utils import iface
 
+from mercicor.definitions.relations import (
+    scenario_pression__habitat_pression_etat_ecologique,
+    scenario_pression__pression,
+)
+
 CALL = (
     "from qgis.utils import plugins\n"
     "plugins['mercicor'].run_action('{action_name}', {params})"
@@ -21,7 +26,10 @@ def change_scenario(*args, project: QgsProject = None):
     if project is None:
         project = QgsProject.instance()
 
-    relations_ids = ['rel_pression_scenario', 'rel_scenario_hab_press_etat_ecolo']
+    relations_ids = [
+        scenario_pression__pression['id'],
+        scenario_pression__habitat_pression_etat_ecologique['id'],
+    ]
     for ids in relations_ids:
         relation = project.relationManager().relation(ids)
         if not relation.isValid():
