@@ -186,6 +186,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     def add_joins(self, feedback):
         """ Add all joins between tables. """
         for definition in attribute_joins:
+            definition = dict(definition)
             join_layer = definition['join_layer']
             layer_add_join = definition['layer_add_join']
 
