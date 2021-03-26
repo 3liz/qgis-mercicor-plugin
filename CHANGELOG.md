@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.6.0 - 2021-03-XX
+
+* Ajout de l'algorithme concernant l'habitat pression état écologique
+* Ajout de la correction des géométries dans les algorithmes d'import
+* Correction d'une jointure
+
 ## 0.5.0 - 2021-03-24
 
 * Ajout de l'algorithme du calcul des états écologiques des habitats
