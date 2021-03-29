@@ -8,13 +8,12 @@ hide:
 ## Calcul
 
 
-### Calcul état écologique des habitats
+### Calcul de l'état écologique des habitats
 
-Calcul de l'état écologique des habitats
-à partir des données d'observations :
-Vérification de l'unicité du facies,
-Jointure de données,
-Calcul des notes
+Calcul de l'état écologique des habitats à partir des données d'observations :
+- Vérification de l'unicité du facies
+- Jointure de données
+- Calcul des notes
 
 ![algo_id](./mercicor-calcul_habitat_etat_ecologique.jpg)
 
@@ -24,7 +23,7 @@ Calcul des notes
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 HABITAT|Couche habitat|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
 OBSERVATIONS|Couche observations|VectorLayer||✓||Default: observations <br> Type: TypeVectorPoint <br>|
-HABITAT_ETAT_ECOLOGIQUE|Table habitat etat ecologique|VectorLayer||✓||Default: habitat_etat_ecologique <br> Type: TypeVectorAnyGeometry <br>|
+HABITAT_ETAT_ECOLOGIQUE|Table habitat état écologique|VectorLayer||✓||Default: habitat_etat_ecologique <br> Type: TypeVectorAnyGeometry <br>|
 OUTPUT_LAYER|Table habitat état écologique en sortie|FeatureSink||✓||Type: TypeVectorAnyGeometry <br>|
 
 
