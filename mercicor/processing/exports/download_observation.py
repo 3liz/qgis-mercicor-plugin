@@ -100,6 +100,8 @@ class DownloadObservationFile(BaseExportAlgorithm):
             feature = QgsFeature(layer.fields())
             feature.setAttribute('id', 1)
             feature.setAttribute('nom_station', 'Nom de la station')
+            feature.setAttribute('perc_bsd', 0.0)
+            feature.setAttribute('perc_bsm', 0.0)
             with edit(layer):
                 layer.addFeature(feature)
         else:
