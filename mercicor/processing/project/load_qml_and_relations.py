@@ -199,10 +199,10 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
             join_habitat = QgsVectorLayerJoinInfo()
             join_habitat.setJoinFieldName(definition['join_field_name'])
-            join_habitat.setJoinLayer(definition['join_layer'])
             join_habitat.setJoinLayerId(definition['join_layer'].id())
             join_habitat.setTargetFieldName(definition['target_field_name'])
             join_habitat.setPrefix(definition['prefix'])
+            join_habitat.setJoinLayer(definition['join_layer'])
             if not definition['layer_add_join'].addJoin(join_habitat):
                 raise Exception('Join not added {}'.format(definition['join_field_name']))
             self.success_join += 1
