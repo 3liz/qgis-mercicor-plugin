@@ -2,6 +2,9 @@ __copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
+# layer_add_join is the layer on which we want to add the join.
+# join_layer is the target
+
 attribute_joins = [
     {
         'join_field_name': 'id',

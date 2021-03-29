@@ -2,6 +2,10 @@ __copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
+# table_1__table_2 for the variable name
+# table_1-table_2 for the ID
+# Referenced then referencing for the order
+
 type_pression__pression = {
     'id': 'type_pression-pression',
     'name': 'Type pression - Pression',
