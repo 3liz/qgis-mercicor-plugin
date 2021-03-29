@@ -27,6 +27,21 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
     def __init__(self):
         super().__init__()
 
+    def checkParameterValues(self, parameters, context):
+        """
+        Check if source layer is in the geopackage
+        """
+        sources = []
+        sources.append(self.parameterAsVectorLayer(parameters, self.HABITAT, context))
+        sources.append(self.parameterAsVectorLayer(parameters, self.OBSERVATIONS, context))
+        sources.append(self.parameterAsVectorLayer(parameters, self.HABITAT_ETAT_ECOLOGIQUE, context))
+        for source in sources:
+            flag, msg = self.check_layer_is_geopackage(source)
+            if not flag:
+                return False, msg
+
+        return super().checkParameterValues(parameters, context)
+
     def name(self):
         return 'calcul_habitat_etat_ecologique'
 
