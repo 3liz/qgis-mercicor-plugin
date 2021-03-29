@@ -12,6 +12,7 @@ from mercicor.processing.calcul.calcul_habitat_pression_ecologique import (
     CalculHabitatPressionEtatEcologique,
 )
 from mercicor.processing.calcul.calcul_notes import CalculNotes
+from mercicor.processing.calcul.calcul_pertes import CalculPertes
 from mercicor.processing.calcul.calcul_unicity_habitat import (
     CalculUnicityHabitat,
 )
@@ -39,6 +40,7 @@ class MercicorProvider(QgsProcessingProvider):
         self.addAlgorithm(CalculHabitatPressionEtatEcologique())
         self.addAlgorithm(CalculNotes())
         self.addAlgorithm(CalculUnicityHabitat())
+        self.addAlgorithm(CalculPertes())
         self.addAlgorithm(CreateGeopackageProject())
         self.addAlgorithm(DownloadObservationFile())
         self.addAlgorithm(ImportHabitatData())

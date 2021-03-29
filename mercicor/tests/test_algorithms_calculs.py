@@ -132,3 +132,20 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         self.assertSetEqual({1}, results['OUTPUT'].uniqueValues(0))
         self.assertSetEqual({'nom 1'}, results['OUTPUT'].uniqueValues(1))
         self.assertSetEqual({'facies 1'}, results['OUTPUT'].uniqueValues(2))
+
+    def test_expressions_calcul_perte(self):
+        """ Test that expressions are valid. """
+        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        layer = QgsVectorLayer('{}|layername=habitat_pression_etat_ecologique'.format(gpkg), 'test', 'ogr')
+
+        # Expressions
+        context = QgsExpressionContext()
+        context.appendScope(QgsExpressionContextUtils.layerScope(layer))
+
+        for field, formula in CalculNotes().expressions.items():
+            with self.subTest(i=field):
+                self.assertGreater(layer.fields().indexOf(field), -1)
+
+                expression = QgsExpression(formula)
+                expression.prepare(context)
+                self.assertFalse(expression.hasParserError())
