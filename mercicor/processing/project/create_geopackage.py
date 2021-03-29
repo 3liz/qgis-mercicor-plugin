@@ -140,7 +140,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
                     self.OUTPUT_LAYERS
                 )
             )
-            context.project().setFileName(project_name)
+            context.project().setTitle(project_name)
             output_id.append(layer.id())
 
         return {self.FILE_GPKG: base_name, self.OUTPUT_LAYERS: output_id}
