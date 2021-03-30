@@ -7,6 +7,7 @@ import os.path
 from pathlib import Path
 
 from qgis.core import (
+    Qgis,
     QgsFeature,
     QgsField,
     QgsFields,
@@ -103,7 +104,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         if os.path.exists(base_name):
             feedback.reportError('Le fichier existe déjà. Ré-écriture du fichier…')
 
-        self.create_geopackage(base_name, crs)
+        self.create_geopackage(base_name, crs, context.project().transformContext())
 
         output_layers = self.load_layers(base_name, feedback)
 
@@ -161,7 +162,7 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         return output_layers
 
     @staticmethod
-    def create_geopackage(file_path, crs) -> None:
+    def create_geopackage(file_path, crs, transform_context) -> None:
         """ Create the geopackage for the given path. """
         encoding = 'UTF-8'
         driver_name = QgsVectorFileWriter.driverForExtension('gpkg')
@@ -204,10 +205,19 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             options.layerOptions = ['FID=id']
 
             # write file
-            write_result, error_message = QgsVectorFileWriter.writeAsVectorFormat(
-                vector_layer,
-                file_path,
-                options)
+            if Qgis.QGIS_VERSION_INT >= 31900:
+                write_result, error_message, _, _ = QgsVectorFileWriter.writeAsVectorFormatV3(
+                    vector_layer,
+                    file_path,
+                    transform_context,
+                    options)
+            else:
+                # 3.10 <= QGIS <3.18
+                write_result, error_message = QgsVectorFileWriter.writeAsVectorFormatV2(
+                    vector_layer,
+                    file_path,
+                    transform_context,
+                    options)
 
             # result
             if write_result != QgsVectorFileWriter.NoError:
