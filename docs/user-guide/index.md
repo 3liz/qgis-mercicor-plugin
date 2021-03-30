@@ -13,7 +13,7 @@ Il y a plusieurs étapes :
 * [Import des données habitats](./import-donnees-habitats.md)
 * [Préparation de la campagne d'observations](./preparation-observations.md)
 * [Intégration des données d'observations](./integration-campagne.md)
+* [Calcul de l'état écologique des habitats](./calcul-etat-ecologique.md)
 * [Étude des scénarios](./etude-scenario.md)
-* [Calcul de l'état écologique](./calcul-etat-ecologique.md)
 
 ![create_gpkg](media/mercicor-barre_outils.jpg)
