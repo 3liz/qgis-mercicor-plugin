@@ -2,9 +2,15 @@
 
 ## 0.6.0 - 2021-03-XX
 
+* Ajout de plusieurs champs à la couche "scenario_pression"
 * Ajout de l'algorithme concernant l'habitat pression état écologique
 * Ajout de la correction des géométries dans les algorithmes d'import
-* Correction d'une jointure
+* Ajout d'une vérification pour que les couches soient dans le geopackage
+* Ajout de l'algorithme pour compléter la couche "habitat_pression_etat_ecologique"
+* Correction d'une jointure sur la couche "habitat"
+* Correction d'une erreur lors de la génération du projet
+* Correction de l'application des jointures sur l'ensemble du projet
+* Mise à jour de la documentation
 
 ## 0.5.0 - 2021-03-24
 
