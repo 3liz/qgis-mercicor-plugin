@@ -1,6 +1,8 @@
 # Calcul de l'état écologique des habitats
-1/ Mise en place de la couche habitat
-Dans un premier temps il faut travailler sur la couche habitat pour définir des faciès. Pour cela il faut
+
+## Mise en place de la couche habitat
+
+Dans un premier temps, il faut travailler sur la couche habitat pour définir des faciès. Pour cela il faut
 remplir le champ faciès des entités dans lesquelles il est vide.
 
 Puis il faut sélectionner l'habitat sur lequel on souhaite travailler.
@@ -18,21 +20,23 @@ Puis on divise les différentes parties avec l'algorithme **De morceaux multiple
 
 <!--
 utilisation des outils de découpe split features.
-Enfin il faut modifer les faciès des nouvelles entitées.
+Enfin il faut modifier les faciès des nouvelles entités.
 -->
 
-2/ Vérification de l'unicité
+## Vérification de l'unicité
+
 Il faut vérifier l'unicité habitat via l'algorithme **Calcul unicité habitat/faciès**. Avec la couche
-multipoint de sortie sélectionner les objets à fusionner et les fusionner.
+multipoint de sortie, sélectionner les objets à fusionner et les fusionner.
 
-3/ Lancer l'algo de calcul de l'état écologique des habitats
+## Calcul de l'état écologique des habitats
 
-Une fois les données d'habitat et d'observation intégrées le calcul de l'état écologique des habitats peut être fait via
+Une fois les données d'habitat et d'observation intégrées, le calcul de l'état écologique des habitats peut être fait via
 l'algorithme **Calcul état écologique des habitats**.
 
 ![algo_hab_etat_ecolo](../processing/mercicor-calcul_habitat_etat_ecologique.jpg) 
 
 Cet algorithme va exécuter 3 étapes automatiquement :
+
 * Il utilise l'algorithme mercicor de vérification de l'unicité du champ `faciès` pour la couche habitat
 * Ensuite il va faire une intersection de données via l'algorithme QGIS de **Jointure d'attribut par localisation**
 * Puis il calcule les notes via l'algorithme mercicor de calcul des notes
