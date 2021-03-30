@@ -57,7 +57,7 @@ class ImportObservationData(BaseImportAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.OUTPUT_LAYER,
                 "Couche des observations de destination",
-                [QgsProcessing.TypeVectorPolygon],
+                [QgsProcessing.TypeVectorPoint],
                 defaultValue="observations",
             )
         )
