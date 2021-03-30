@@ -17,7 +17,7 @@ hide:
   - navigation
 ---
 
-# Modèle des données
+# Modèle de données
 
 ## Relations
 

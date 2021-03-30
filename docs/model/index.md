@@ -3,7 +3,7 @@ hide:
   - navigation
 ---
 
-# Modèle des données
+# Modèle de données
 
 ## Relations
 
@@ -33,12 +33,12 @@ habitat_pression_etat_ecologique : id PK
 habitat_pression_etat_ecologique : habitat_id FK
 habitat_pression_etat_ecologique : pression_id FK
 habitat_pression_etat_ecologique : scenario_id FK
-habitat_pression_etat_ecologique : note_bsd
-habitat_pression_etat_ecologique : note_bsm
-habitat_pression_etat_ecologique : note_ben
-habitat_pression_etat_ecologique : note_man
-habitat_pression_etat_ecologique : note_pmi
-habitat_pression_etat_ecologique : score_mercicor
+habitat_pression_etat_ecologique : station_man
+habitat_pression_etat_ecologique : perc_bsd
+habitat_pression_etat_ecologique : perc_bsm
+habitat_pression_etat_ecologique : bsd_recouv_cor
+habitat_pression_etat_ecologique : bsd_p_acrop
+habitat_pression_etat_ecologique : bsd_vital_cor
 habitat_pression_etat_ecologique : ...
 pression : geom MultiPolygon
 pression : id PK
@@ -50,6 +50,12 @@ habitat : nom
 habitat : facies
 scenario_pression : id PK
 scenario_pression : nom
+scenario_pression : perte_bsd
+scenario_pression : perte_bsm
+scenario_pression : perte_ben
+scenario_pression : perte_man
+scenario_pression : perte_pmi
+scenario_pression : perte_mercicor
 liste_type_pression : id PK
 liste_type_pression : key
 liste_type_pression : label
@@ -96,36 +102,39 @@ habitat_etat_ecologique : ...
 |2|[habitat_id FK](#habitat)|qlonglong|Identifiant habitat|
 |3|[pression_id FK](#pression)|qlonglong|Identifiant de pression|
 |4|[scenario_id FK](#scenario-pression)|qlonglong|Identifiant du scenario de pression|
-|5|note_bsd|double|Note Mercicor Benthique de substrats durs|
-|6|note_bsm|double|Note Mercicor Benthique de substrats meubles|
-|7|note_ben|double|Note Mercicor Benthique|
-|8|note_man|double|Note Mercicor Mangrove|
-|9|note_pmi|double|Note Mercicor Poissons et Macro-invertébrés|
-|10|score_mercicor|double|Score Mercicor|
-|11|bsd_recouv_cor|double|Recouvrement corallien (Scléractiniaires)|
-|12|bsd_p_acrop|double|Pourcentage du recouvrement corallien représenté par les coraux acropores|
-|13|bsd_vital_cor|double|Vitalité et taux de mortalité corallienne|
-|14|bsd_comp_struc|double|Complexité structurelle des peuplements coralliens|
-|15|bsd_taille_cor|double|Taille des coraux vivants|
-|16|bsd_dens_juv|double|Densité de coraux juvéniles|
-|17|bsd_f_sessile|double|Recouvrement par la faune sessile non corallienne|
-|18|bsd_recouv_ma|double|Recouvrement par les macroalgues|
-|19|bsm_fragm_herb|double|Fragmentation de l’herbier|
-|20|bsm_recouv_her|double|Recouvrement par l’herbier (patchs)|
-|21|bsm_haut_herb|double|Hauteur de l’herbier (patchs)|
-|22|bsm_dens_herb|double|Densité des phanérogames (patchs)|
-|23|bsm_div_herb|double|Diversité spécifique des phanérogames (patchs)|
-|24|bsm_epibiose|double|Epibiose de l’herbier (patchs)|
-|25|man_fragm|double|Fragmentation de la mangrove|
-|26|man_recouv|double|Recouvrement par la mangrove (patchs)|
-|27|man_diam_tronc|double|Diamètre des troncs (patchs)|
-|28|man_dens|double|Densité des palétuviers (patchs)|
-|29|man_diversit|double|Diversité spécifique des palétuviers (patchs)|
-|30|man_vital|double|Vitalité des palétuviers (patchs)|
-|31|pmi_div_poi|double|Diversité spécifique des peuplements de poissons|
-|32|pmi_predat_poi|double|Abondance et maturité des prédateurs supérieurs récifaux|
-|33|pmi_scarib_poi|double|Abondance et maturité des poissons perroquets|
-|34|pmi_macro_inv|double|Abondance des macro-invertébrés|
+|5|station_man|bool|Stations en Mangrove|
+|6|perc_bsd|double|Pourcentage Benthique de substrats durs|
+|7|perc_bsm|double|Pourcentage Benthique de substrats meubles|
+|8|bsd_recouv_cor|double|Recouvrement corallien (Scléractiniaires)|
+|9|bsd_p_acrop|double|Pourcentage du recouvrement corallien représenté par les coraux acropores|
+|10|bsd_vital_cor|double|Vitalité et taux de mortalité corallienne|
+|11|bsd_comp_struc|double|Complexité structurelle des peuplements coralliens|
+|12|bsd_taille_cor|double|Taille des coraux vivants|
+|13|bsd_dens_juv|double|Densité de coraux juvéniles|
+|14|bsd_f_sessile|double|Recouvrement par la faune sessile non corallienne|
+|15|bsd_recouv_ma|double|Recouvrement par les macroalgues|
+|16|bsm_fragm_herb|double|Fragmentation de l’herbier|
+|17|bsm_recouv_her|double|Recouvrement par l’herbier (patchs)|
+|18|bsm_haut_herb|double|Hauteur de l’herbier (patchs)|
+|19|bsm_dens_herb|double|Densité des phanérogames (patchs)|
+|20|bsm_div_herb|double|Diversité spécifique des phanérogames (patchs)|
+|21|bsm_epibiose|double|Epibiose de l’herbier (patchs)|
+|22|man_fragm|double|Fragmentation de la mangrove|
+|23|man_recouv|double|Recouvrement par la mangrove (patchs)|
+|24|man_diam_tronc|double|Diamètre des troncs (patchs)|
+|25|man_dens|double|Densité des palétuviers (patchs)|
+|26|man_diversit|double|Diversité spécifique des palétuviers (patchs)|
+|27|man_vital|double|Vitalité des palétuviers (patchs)|
+|28|pmi_div_poi|double|Diversité spécifique des peuplements de poissons|
+|29|pmi_predat_poi|double|Abondance et maturité des prédateurs supérieurs récifaux|
+|30|pmi_scarib_poi|double|Abondance et maturité des poissons perroquets|
+|31|pmi_macro_inv|double|Abondance des macro-invertébrés|
+|32|note_bsd|double|Note Mercicor Benthique de substrats durs|
+|33|note_bsm|double|Note Mercicor Benthique de substrats meubles|
+|34|note_ben|double|Note Mercicor Benthique|
+|35|note_man|double|Note Mercicor Mangrove|
+|36|note_pmi|double|Note Mercicor Poissons et Macro-invertébrés|
+|37|score_mercicor|double|Score Mercicor|
 
 ### Pression
 
@@ -151,6 +160,12 @@ habitat_etat_ecologique : ...
 |:-:|:-:|:-:|:-:|
 |1|**id**|qlonglong|Identifiant|
 |2|nom|QString|libellé du scenario|
+|3|perte_bsd|double|Perte Mercicor Benthique de substrats durs|
+|4|perte_bsm|double|Perte Mercicor Benthique de substrats meubles|
+|5|perte_ben|double|Perte Mercicor Benthique|
+|6|perte_man|double|Perte Mercicor Mangrove|
+|7|perte_pmi|double|Perte Mercicor Poissons et Macro-invertébrés|
+|8|perte_mercicor|double|Perte Mercicor|
 
 ### Liste Type Pression
 
