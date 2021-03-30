@@ -8,6 +8,9 @@ from qgis.PyQt.QtGui import QIcon
 from mercicor.processing.calcul.calcul_habitat_etat_ecologique import (
     CalculHabitatEtatEcologique,
 )
+from mercicor.processing.calcul.calcul_habitat_pression_ecologique import (
+    CalculHabitatPressionEtatEcologique,
+)
 from mercicor.processing.calcul.calcul_notes import CalculNotes
 from mercicor.processing.calcul.calcul_unicity_habitat import (
     CalculUnicityHabitat,
@@ -32,9 +35,10 @@ from mercicor.qgis_plugin_tools import resources_path
 class MercicorProvider(QgsProcessingProvider):
 
     def loadAlgorithms(self):
+        self.addAlgorithm(CalculHabitatEtatEcologique())
+        self.addAlgorithm(CalculHabitatPressionEtatEcologique())
         self.addAlgorithm(CalculNotes())
         self.addAlgorithm(CalculUnicityHabitat())
-        self.addAlgorithm(CalculHabitatEtatEcologique())
         self.addAlgorithm(CreateGeopackageProject())
         self.addAlgorithm(DownloadObservationFile())
         self.addAlgorithm(ImportHabitatData())

@@ -36,3 +36,10 @@ plugins['mercicor'].run_tests('test_*.py')
 * In your IDE, with linked QGIS library
     * Setup your `QGIS_PREFIX_PATH` etc
     * Right click on a test and launch it
+
+If you want to disable the geopackage check for input layers :
+
+```python
+import os
+os.environ['TESTING_MERCICOR'] = 'True'
+```

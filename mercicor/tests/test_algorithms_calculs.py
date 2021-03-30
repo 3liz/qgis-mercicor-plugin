@@ -1,5 +1,7 @@
 """ Test calcul. """
 
+import os
+
 from qgis.core import (
     QgsExpression,
     QgsExpressionContext,
@@ -43,6 +45,45 @@ class TestCalculsAlgorithms(BaseTestProcessing):
                 expression = QgsExpression(formula)
                 expression.prepare(context)
                 self.assertFalse(expression.hasParserError())
+
+    def test_habitat_pression_etat_ecologique(self):
+        """ Test to add data in the habitat_pression_etat_ecologique layer. """
+        pression_layer = QgsVectorLayer(
+            plugin_test_data_path('pression.geojson'), 'pression', 'ogr')
+
+        habitat_layer = QgsVectorLayer(plugin_test_data_path('habitat.geojson', copy=True), 'habitat', 'ogr')
+
+        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        name = 'habitat_pression_etat_ecologique'
+        hab_pression_etat_ecolo_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+
+        params = {
+            'HABITAT_LAYER': habitat_layer,
+            'PRESSION_LAYER': pression_layer,
+            'HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER': hab_pression_etat_ecolo_layer,
+        }
+        os.environ['TESTING_MERCICOR'] = 'True'
+        run("mercicor:calcul_habitat_pression_etat_ecologique", params)
+        self.assertEqual(20, hab_pression_etat_ecolo_layer.featureCount())
+        self.assertSetEqual({1, 2, 3, 4}, hab_pression_etat_ecolo_layer.uniqueValues(1))  # habitat_id
+        self.assertSetEqual({1, 2, 3, 4, 5}, hab_pression_etat_ecolo_layer.uniqueValues(2))  # pression_id
+        self.assertSetEqual({1}, hab_pression_etat_ecolo_layer.uniqueValues(3))  # scenario_id
+
+        index = hab_pression_etat_ecolo_layer.fields().indexOf('perc_bsd')
+        self.assertSetEqual({0, 1, 2, 3}, hab_pression_etat_ecolo_layer.uniqueValues(index))
+
+        # Increment +10 for testing purpose
+        index = habitat_layer.fields().indexOf('perc_bsd')
+        with edit(habitat_layer):
+            for feature in habitat_layer.getFeatures():
+                habitat_layer.changeAttributeValue(feature.id(), index, feature['perc_bsd'] + 10)
+
+        # Import it a second time, we must only update existing features with new perc_bsd
+        run("mercicor:calcul_habitat_pression_etat_ecologique", params)
+        self.assertEqual(20, hab_pression_etat_ecolo_layer.featureCount())
+        index = hab_pression_etat_ecolo_layer.fields().indexOf('perc_bsd')
+        self.assertSetEqual({10, 11, 12, 13}, hab_pression_etat_ecolo_layer.uniqueValues(index))
+        del os.environ['TESTING_MERCICOR']
 
     def test_unicity_facies_name(self):
         """ Test the unicity between name and facies. """
