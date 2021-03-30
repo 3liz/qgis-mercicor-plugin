@@ -33,7 +33,7 @@ class TestExportAlgorithms(BaseTestProcessing):
 
         self.assertTrue(observations.isValid())
         self.assertEqual(observations.featureCount(), 0)
-        self.assertEqual(observations.crs(), QgsCoordinateReferenceSystem(32738))
+        self.assertEqual(observations.crs(), QgsCoordinateReferenceSystem('EPSG:32738'))
 
         field_count = observations.fields().count()
         feature_count = observations.featureCount()

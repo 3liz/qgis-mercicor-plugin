@@ -145,7 +145,7 @@ class DownloadObservationFile(BaseExportAlgorithm):
         ]
         transform = QgsCoordinateTransform(
             layer.crs(),
-            QgsCoordinateReferenceSystem(4326),
+            QgsCoordinateReferenceSystem('EPSG:4326'),
             context.project())
 
         with edit(layer):

@@ -146,7 +146,7 @@ class ImportObservationData(BaseImportAlgorithm):
         geom = QgsGeometry.fromWkt('POINT({} {})'.format(longitude, latitude))
 
         transform = QgsCoordinateTransform(
-            QgsCoordinateReferenceSystem(4326),
+            QgsCoordinateReferenceSystem('EPSG:4326'),
             crs,
             context.project())
         geom.transform(transform)
