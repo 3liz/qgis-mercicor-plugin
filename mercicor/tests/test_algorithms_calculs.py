@@ -9,11 +9,13 @@ from qgis.core import (
     QgsFeature,
     QgsGeometry,
     QgsVectorLayer,
+    QgsVectorLayerJoinInfo,
     edit,
 )
 from qgis.processing import run
 
 from mercicor.processing.calcul.calcul_notes import CalculNotes
+from mercicor.processing.calcul.calcul_pertes import CalculPertes
 from mercicor.qgis_plugin_tools import plugin_test_data_path
 from mercicor.tests.base_processing import BaseTestProcessing
 
@@ -136,16 +138,23 @@ class TestCalculsAlgorithms(BaseTestProcessing):
     def test_expressions_calcul_perte(self):
         """ Test that expressions are valid. """
         gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
-        layer = QgsVectorLayer('{}|layername=habitat_pression_etat_ecologique'.format(gpkg), 'test', 'ogr')
+        layer = QgsVectorLayer(
+            '{}|layername=habitat_pression_etat_ecologique'.format(gpkg), 'test', 'ogr')
+        scenar = QgsVectorLayer('{}|layername=scenario_pression'.format(gpkg), 'test', 'ogr')
+        habitat_etat_ecolo = QgsVectorLayer(
+            '{}|layername=habitat_etat_ecologique'.format(gpkg), 'test', 'ogr')
 
-        # Expressions
-        context = QgsExpressionContext()
-        context.appendScope(QgsExpressionContextUtils.layerScope(layer))
+        join_habitat = QgsVectorLayerJoinInfo()
+        join_habitat.setJoinFieldName('id')
+        join_habitat.setJoinLayerId(habitat_etat_ecolo.id())
+        join_habitat.setTargetFieldName('habitat_id')
+        join_habitat.setPrefix('hab_')
+        join_habitat.setJoinLayer(habitat_etat_ecolo)
+        layer.addJoin(join_habitat)
 
-        for field, formula in CalculNotes().expressions.items():
-            with self.subTest(i=field):
-                self.assertGreater(layer.fields().indexOf(field), -1)
-
-                expression = QgsExpression(formula)
-                expression.prepare(context)
-                self.assertFalse(expression.hasParserError())
+        for note in CalculPertes().fields.keys():
+            with self.subTest(i=note):
+                self.assertGreater(scenar.fields().indexOf(note), -1, note)
+                for field in CalculPertes().fields[note]:
+                    with self.subTest(i=field):
+                        self.assertGreater(layer.fields().indexOf(field), -1, field)
