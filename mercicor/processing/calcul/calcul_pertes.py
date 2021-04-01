@@ -46,10 +46,10 @@ class CalculPertes(CalculAlgorithm):
         """
         Check if source layer is in the geopackage
         """
-        sources = []
-        sources.append(self.parameterAsVectorLayer(parameters, self.SCENARIO_PRESSION, context))
-        sources.append(self.parameterAsVectorLayer(
-            parameters, self.HABITAT_PRESSION_ETAT_ECOLOGIQUE, context))
+        sources = [
+            self.parameterAsVectorLayer(parameters, self.SCENARIO_PRESSION, context),
+            self.parameterAsVectorLayer(parameters, self.HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
+        ]
         for source in sources:
             flag, msg = self.check_layer_is_geopackage(source)
             if not flag:
@@ -61,7 +61,7 @@ class CalculPertes(CalculAlgorithm):
         return 'calcul_pertes'
 
     def displayName(self):
-        return 'calcul des notes de perte pour le scénario de pression'
+        return 'Calcul des notes de perte pour le scénario de pression'
 
     def shortHelpString(self):
         message = 'Calcul des notes de pertes à partir des indicateurs MERCI-Cor\n\n'
@@ -75,8 +75,8 @@ class CalculPertes(CalculAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.HABITAT_PRESSION_ETAT_ECOLOGIQUE,
-                "Table habitat état écologique",
-                [QgsProcessing.TypeVectorAnyGeometry],
+                "Table habitat pression état écologique",
+                [QgsProcessing.TypeVectorPolygon],
                 defaultValue='habitat_pression_etat_ecologique',
             )
         )
@@ -85,7 +85,7 @@ class CalculPertes(CalculAlgorithm):
             QgsProcessingParameterVectorLayer(
                 self.SCENARIO_PRESSION,
                 "Table scénario pression",
-                [QgsProcessing.TypeVectorPoint],
+                [QgsProcessing.TypeVectorAnyGeometry],
                 defaultValue='scenario_pression',
             )
         )

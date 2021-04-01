@@ -62,12 +62,12 @@ class CalculHabitatPressionEtatEcologique(CalculAlgorithm):
 
         parameter = QgsProcessingParameterVectorLayer(
             self.HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER,
-            "Couches habitat pression habitat pression écologique",
+            "Couches habitat pression état écologique",
             [QgsProcessing.TypeVectorPolygon],
             defaultValue='habitat_pression_etat_ecologique',
         )
         self.set_tooltip_parameter(
-            parameter, "Couches habitat pression habitat pression écologique dans le geopackage")
+            parameter, "Couches habitat pression état écologique dans le geopackage")
         self.addParameter(parameter)
 
     def checkParameterValues(self, parameters, context):
