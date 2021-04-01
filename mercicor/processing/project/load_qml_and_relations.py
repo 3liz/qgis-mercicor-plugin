@@ -211,28 +211,25 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         """ Add all relations to the QGIS project. """
         relation_manager = context.project().relationManager()
         for definition in relations:
+            # definition: Relation
 
-            definition = dict(definition)
-            if relation_manager.relation(definition['id']):
-                relation_manager.removeRelation(definition['id'])
-                feedback.pushDebugInfo('Removing pre-existing relation {}'.format(definition['id']))
+            if relation_manager.relation(definition.qgis_id):
+                relation_manager.removeRelation(definition.qgis_id)
+                feedback.pushDebugInfo('Removing pre-existing relation {}'.format(definition.qgis_id))
 
-            referencing = definition['referencing_layer']
-            definition['referencing_layer'] = self.input_layers[referencing].id()
+            referencing = self.input_layers[definition.referencing_layer].id()
+            referenced = self.input_layers[definition.referenced_layer].id()
 
-            referenced = definition['referenced_layer']
-            definition['referenced_layer'] = self.input_layers[referenced].id()
-
-            feedback.pushInfo(definition['name'])
+            feedback.pushInfo(definition.name)
             relation = QgsRelation()
-            relation.setId(definition['id'])
-            relation.setName(definition['name'])
-            relation.setReferencingLayer(definition['referencing_layer'])
-            relation.setReferencedLayer(definition['referenced_layer'])
-            relation.addFieldPair(definition['referencing_field'], definition['referenced_field'])
+            relation.setId(definition.qgis_id)
+            relation.setName(definition.name)
+            relation.setReferencingLayer(referencing)
+            relation.setReferencedLayer(referenced)
+            relation.addFieldPair(definition.referencing_field, definition.referenced_field)
             relation.setStrength(QgsRelation.Association)
             if not relation.isValid():
-                raise QgsProcessingException('{} is not valid'.format(definition['name']))
+                raise QgsProcessingException('{} is not valid'.format(definition.name))
 
             relation_manager.addRelation(relation)
             self.success_relation += 1

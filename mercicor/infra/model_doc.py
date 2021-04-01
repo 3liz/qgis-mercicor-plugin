@@ -6,7 +6,7 @@ from os.path import join
 from qgis.PyQt.QtCore import QVariant
 
 from mercicor.definitions.joins import spatial_joins
-from mercicor.definitions.relations import relations
+from mercicor.definitions.relations import Relation, relations
 from mercicor.definitions.tables import tables
 from mercicor.qgis_plugin_tools import load_csv, resources_path
 
@@ -59,10 +59,11 @@ def slug(table):
 
 def find_relation(field_name, table):
     for relation in relations:
-        if relation['referencing_layer'] == table and relation['referencing_field'] == field_name:
-            return relation['referenced_layer']
-        elif relation['referenced_layer'] == table and relation['referenced_field'] == field_name:
-            return relation['referencing_layer']
+        relation: Relation
+        if relation.referencing_layer == table and relation.referencing_field == field_name:
+            return relation.referenced_layer
+        elif relation.referenced_layer == table and relation.referenced_field == field_name:
+            return relation.referencing_layer
 
 def generate_model_doc():  # NOQA C901
     global TEMPLATE
@@ -137,9 +138,10 @@ def generate_model_doc():  # NOQA C901
         markdown_all += markdown
 
     for relation in relations:
+        relation: Relation
         mermaid_md += '{} <|-- {}\n'.format(
-            relation['referenced_layer'],
-            relation['referencing_layer'],
+            relation.referenced_layer,
+            relation.referencing_layer,
         )
 
     for spatial_join in spatial_joins:
