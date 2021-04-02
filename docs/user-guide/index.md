@@ -20,27 +20,27 @@ Il y a plusieurs étapes :
 ```mermaid
 graph TD
 Projet[Création du projet : geopackage et style]
-click Projet "/user-guide/initialisation-projet/"
+click Projet "/private/um3-mercicor/docs/user-guide/initialisation-projet/"
 Habitat[Import des données habitat]
-click Habitat "/user-guide/import-donnees-habitats/#import-dans-le-projet"
+click Habitat "/private/um3-mercicor/docs/user-guide/import-donnees-habitats/#import-dans-le-projet"
 VérificationUnicité[Vérification de l'unicité nom/faciès]
-click VérificationUnicité "/user-guide/import-donnees-habitats/#verification-de-lunicite-nomfacies"
+click VérificationUnicité "/private/um3-mercicor/docs/user-guide/import-donnees-habitats/#verification-de-lunicite-nomfacies"
 ObservationsExport[Préparation de la campagne]
-click ObservationsExport "/user-guide/preparation-observations/"
+click ObservationsExport "/private/um3-mercicor/docs/user-guide/preparation-observations/"
 ObservationsImport[Import de la campagne]
-click ObservationsImport "/user-guide/integration-campagne/#integration-des-donnees"
+click ObservationsImport "/private/um3-mercicor/docs/user-guide/integration-campagne/#integration-des-donnees"
 CalculNotesMercicor[Calcul des notes mercicor]
-click CalculNotesMercicor "/user-guide/integration-campagne/#calcul-des-notes-merci-cor"
+click CalculNotesMercicor "/private/um3-mercicor/docs/user-guide/integration-campagne/#calcul-des-notes-merci-cor"
 Pression[Import des pression]
-click Pression "/user-guide/etude-scenario/#integration-des-donnees-pressions"
+click Pression "/private/um3-mercicor/docs/user-guide/etude-scenario/#integration-des-donnees-pressions"
 ScénarioPression{{Création d'un scénario}}
-click ScénarioPression "/user-guide/etude-scenario/#gestion-des-scenarios"
+click ScénarioPression "/private/um3-mercicor/docs/user-guide/etude-scenario/#gestion-des-scenarios"
 EtatEcologique[État écologique des habitats]
-click EtatEcologique "/user-guide/calcul-etat-ecologique/#calcul-de-letat-ecologique-des-habitats"
+click EtatEcologique "/private/um3-mercicor/docs/user-guide/calcul-etat-ecologique/#calcul-de-letat-ecologique-des-habitats"
 EtatEcologiqueHabitatPression[Habitat pression état écologique]
-click EtatEcologiqueHabitatPression "/user-guide/habitat-pression-etat-ecologique/"
+click EtatEcologiqueHabitatPression "/private/um3-mercicor/docs/user-guide/habitat-pression-etat-ecologique/"
 Pertes[Calcul des pertes]
-click Pertes "/user-guide/pertes/"
+click Pertes "/private/um3-mercicor/docs/user-guide/pertes/"
 
 Projet --> Habitat
 Projet --> ObservationsExport
