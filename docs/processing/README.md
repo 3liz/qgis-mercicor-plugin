@@ -37,6 +37,30 @@ OUTPUT_LAYER|Table habitat état écologique en sortie|VectorLayer||
 ***
 
 
+### Ajout des entités de l'état écologique des habitats en fonction de la pression
+
+Ajout des entités de l'état écologique des habitats en fonction des pressions.
+
+![algo_id](./mercicor-calcul_habitat_pression_etat_ecologique.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+HABITAT_LAYER|Couches des habitats|VectorLayer|Couche des habitats dans le geopackage|✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
+PRESSION_LAYER|Couches des pressions|VectorLayer|Couche des pressions dans le geopackage|✓||Default: pression <br> Type: TypeVectorPolygon <br>|
+HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER|Couches habitat pression état écologique|VectorLayer|Couches habitat pression état écologique dans le geopackage|✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+No output
+
+***
+
+
 ### Calcul des notes MERCI-Cor
 
 Calcul des notes MERCI-Cor à partir des indicateurs MERCI-Cor
@@ -66,6 +90,37 @@ OUTPUT|output|FeatureSink||✓||Type: TypeVector <br>|
 |:-:|:-:|:-:|:-:|
 OUTPUT|output|VectorLayer||
 
+
+***
+
+
+### Calcul des notes de perte pour le scénario de pression
+
+Calcul des notes de pertes à partir des indicateurs MERCI-Cor
+
+Liste des notes :
+perte_bsd = sum( ("hab_note_bsd" - "note_bsd") * $area, group_by: "scenario_id")
+perte_bsm = sum( ("hab_note_bsm" - "note_bsm") * $area, group_by: "scenario_id")
+perte_man = sum( ("hab_note_man" - "note_man") * $area, group_by: "scenario_id")
+perte_pmi = sum( ("hab_note_pmi" - "note_pmi") * $area, group_by: "scenario_id")
+perte_mercicor = sum( ("hab_score_mercicor" - "note_score_mercicor") * $area, group_by: "scenario_id")
+
+
+![algo_id](./mercicor-calcul_pertes.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+HABITAT_PRESSION_ETAT_ECOLOGIQUE|Table habitat pression état écologique|VectorLayer||✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+SCENARIO_PRESSION|Table scénario pression|VectorLayer||✓||Default: scenario_pression <br> Type: TypeVectorAnyGeometry <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+No output
 
 ***
 
@@ -237,7 +292,7 @@ Pour cela, l'algorithme s'appuie sur le ID de la station.
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 INPUT_LAYER|Couche pour l'import des observations|VectorLayer||✓||Type: TypeVector <br>|
-OUTPUT_LAYER|Couche des observations de destination|VectorLayer||✓||Default: observations <br> Type: TypeVectorPolygon <br>|
+OUTPUT_LAYER|Couche des observations de destination|VectorLayer||✓||Default: observations <br> Type: TypeVectorPoint <br>|
 
 
 #### Outputs

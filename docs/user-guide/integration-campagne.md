@@ -1,11 +1,17 @@
-# Intégration des données de la campagne d'observation
+# Données d'observation
 
-## Données d'observations
+## Intégration des données
 
-Concernant l'intégration des données d'observations on fait soit une saisie via QGIS et le formulaire 
-pour l'ajout d'observation :
+### Saisie manuelle
+
+On peut utiliser la saisie dans QGIS via le formulaire d'édition pour l'ajout d'observation :
 
 ![form_observation](media/mercicor-form_observ.jpg)
+
+!!! tip
+    Pour la consultation dans la table attributaire, ne pas oublier de passer en mode "Formulaire".
+
+### Import de fichier tableur
 
 Soit par l'import fichier Excel.
 
@@ -34,7 +40,7 @@ boîte à outils on clique sur `Editer les entités sur place` (bouton sélectio
 puis on exécute l'algorithme. 
 
 !!! tip
-    Si l'on souhaite l'exécuter uniquement sur certaines entités il faut les  sélectionner avant 
+    Si l'on souhaite l'exécuter uniquement sur certaines entités il faut les sélectionner avant
     l'exécution de l'algorithme.
 
 !!! note

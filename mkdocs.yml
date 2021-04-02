@@ -15,8 +15,10 @@ nav:
         - 'Import des habitats': 'user-guide/import-donnees-habitats.md'
         - 'Préparation de la campagne': 'user-guide/preparation-observations.md'
         - 'Intégration de la campagne': 'user-guide/integration-campagne.md'
-        - 'Étude des scénarios': 'user-guide/etude-scenario.md'
         - "Calcul de l'état écologique": 'user-guide/calcul-etat-ecologique.md'
+        - 'Étude des scénarios': 'user-guide/etude-scenario.md'
+        - 'Habitat pression état écologique': 'user-guide/habitat-pression-etat-ecologique.md'
+        - 'Pertes': 'user-guide/pertes.md'
         - 'Installation': 'user-guide/installation.md'
     - 'Modèle de données': model/index.md
     - Traitements: processing/README.md

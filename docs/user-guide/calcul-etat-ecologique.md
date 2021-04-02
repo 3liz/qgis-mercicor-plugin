@@ -1,4 +1,4 @@
-# Calcul de l'état écologique des habitats
+# État écologique des habitats
 
 ## Mise en place de la couche habitat
 
@@ -25,8 +25,8 @@ Enfin il faut modifier les faciès des nouvelles entités.
 
 ## Vérification de l'unicité
 
-Il faut vérifier l'unicité habitat via l'algorithme **Calcul unicité habitat/faciès**. Avec la couche
-multipoint de sortie, sélectionner les objets à fusionner et les fusionner.
+Avant l'étape suivante, il convient de vérifier
+[l'unicité des couples nom/faciès](/user-guide/import-donnees-habitats/#verification-de-lunicite-nomfacies).
 
 ## Calcul de l'état écologique des habitats
 

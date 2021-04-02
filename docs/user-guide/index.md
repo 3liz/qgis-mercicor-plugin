@@ -12,22 +12,35 @@ Il y a plusieurs étapes :
 * [Intégration des données d'observations](./integration-campagne.md)
 * [Calcul de l'état écologique des habitats](./calcul-etat-ecologique.md)
 * [Étude des scénarios](./etude-scenario.md)
+* [Habitat pression état écologique](./habitat-pression-etat-ecologique.md)
+* [Pertes](./pertes.md)
 
 ## Diagramme
 
 ```mermaid
 graph TD
 Projet[Création du projet : geopackage et style]
+click Projet "/user-guide/initialisation-projet/"
 Habitat[Import des données habitat]
+click Habitat "/user-guide/import-donnees-habitats/#import-dans-le-projet"
 VérificationUnicité[Vérification de l'unicité nom/faciès]
+click VérificationUnicité "/user-guide/import-donnees-habitats/#verification-de-lunicite-nomfacies"
 ObservationsExport[Préparation de la campagne]
+click ObservationsExport "/user-guide/preparation-observations/"
 ObservationsImport[Import de la campagne]
+click ObservationsImport "/user-guide/integration-campagne/#integration-des-donnees"
 CalculNotesMercicor[Calcul des notes mercicor]
+click CalculNotesMercicor "/user-guide/integration-campagne/#calcul-des-notes-merci-cor"
 Pression[Import des pression]
+click Pression "/user-guide/etude-scenario/#integration-des-donnees-pressions"
 ScénarioPression{{Création d'un scénario}}
+click ScénarioPression "/user-guide/etude-scenario/#gestion-des-scenarios"
 EtatEcologique[État écologique des habitats]
+click EtatEcologique "/user-guide/calcul-etat-ecologique/#calcul-de-letat-ecologique-des-habitats"
 EtatEcologiqueHabitatPression[Habitat pression état écologique]
+click EtatEcologiqueHabitatPression "/user-guide/habitat-pression-etat-ecologique/"
 Pertes[Calcul des pertes]
+click Pertes "/user-guide/pertes/"
 
 Projet --> Habitat
 Projet --> ObservationsExport
