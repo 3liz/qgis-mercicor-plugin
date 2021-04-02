@@ -24,15 +24,13 @@ Calcul de l'état écologique des habitats à partir des données d'observations
 HABITAT|Couche habitat|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
 OBSERVATIONS|Couche observations|VectorLayer||✓||Default: observations <br> Type: TypeVectorPoint <br>|
 HABITAT_ETAT_ECOLOGIQUE|Table habitat état écologique|VectorLayer||✓||Default: habitat_etat_ecologique <br> Type: TypeVectorAnyGeometry <br>|
-OUTPUT_LAYER|Table habitat état écologique en sortie|FeatureSink||✓||Type: TypeVectorAnyGeometry <br>|
 
 
 #### Outputs
 
 | ID | Description | Type | Info |
 |:-:|:-:|:-:|:-:|
-OUTPUT_LAYER|Table habitat état écologique en sortie|VectorLayer||
-
+No output
 
 ***
 

@@ -7,7 +7,6 @@ import processing
 from qgis.core import (
     QgsFeature,
     QgsProcessing,
-    QgsProcessingParameterFeatureSink,
     QgsProcessingParameterVectorLayer,
     QgsProcessingUtils,
     QgsVectorLayer,
@@ -22,7 +21,6 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
     HABITAT = 'HABITAT'
     OBSERVATIONS = 'OBSERVATIONS'
     HABITAT_ETAT_ECOLOGIQUE = 'HABITAT_ETAT_ECOLOGIQUE'
-    OUTPUT_LAYER = 'OUTPUT_LAYER'
 
     def __init__(self):
         super().__init__()
@@ -84,13 +82,6 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
                 "Table habitat état écologique",
                 [QgsProcessing.TypeVectorAnyGeometry],
                 defaultValue='habitat_etat_ecologique',
-            )
-        )
-
-        self.addParameter(
-            QgsProcessingParameterFeatureSink(
-                self.OUTPUT_LAYER,
-                'Table habitat état écologique en sortie'
             )
         )
 
@@ -253,4 +244,4 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
         # Fin et enregistrement de la modification de la table habitat_etat_ecologique
         hab_etat_ecolo.commitChanges()
 
-        return {self.OUTPUT_LAYER: results['OUTPUT']}
+        return {}
