@@ -68,7 +68,7 @@ class CalculPertes(CalculAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.HABITAT_PRESSION_ETAT_ECOLOGIQUE,
-                "Table habitat pression état écologique",
+                "Couche habitat pression état écologique",
                 [QgsProcessing.TypeVectorPolygon],
                 defaultValue='habitat_pression_etat_ecologique',
             )
@@ -85,7 +85,7 @@ class CalculPertes(CalculAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         hab_etat_ecolo = self.parameterAsVectorLayer(
-           parameters, self.HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
+            parameters, self.HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
         scenario_pression = self.parameterAsVectorLayer(parameters, self.SCENARIO_PRESSION, context)
 
         scenario_pression.startEditing()

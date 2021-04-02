@@ -99,11 +99,11 @@ OUTPUT|output|VectorLayer||
 Calcul des notes de pertes à partir des indicateurs MERCI-Cor
 
 Liste des notes :
-perte_bsd = sum( ("hab_note_bsd" - "note_bsd") * $area, group_by: "scenario_id")
-perte_bsm = sum( ("hab_note_bsm" - "note_bsm") * $area, group_by: "scenario_id")
-perte_man = sum( ("hab_note_man" - "note_man") * $area, group_by: "scenario_id")
-perte_pmi = sum( ("hab_note_pmi" - "note_pmi") * $area, group_by: "scenario_id")
-perte_mercicor = sum( ("hab_score_mercicor" - "note_score_mercicor") * $area, group_by: "scenario_id")
+perte_bsd = La somme de '("hab_note_bsd" - "note_bsd") * surface', filtré par scénario
+perte_bsm = La somme de '("hab_note_bsm" - "note_bsm") * surface', filtré par scénario
+perte_man = La somme de '("hab_note_man" - "note_man") * surface', filtré par scénario
+perte_pmi = La somme de '("hab_note_pmi" - "note_pmi") * surface', filtré par scénario
+perte_mercicor = La somme de '("hab_score_mercicor" - "score_mercicor") * surface', filtré par scénario
 
 
 ![algo_id](./mercicor-calcul_pertes.jpg)
@@ -112,7 +112,7 @@ perte_mercicor = sum( ("hab_score_mercicor" - "note_score_mercicor") * $area, gr
 
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-HABITAT_PRESSION_ETAT_ECOLOGIQUE|Table habitat pression état écologique|VectorLayer||✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+HABITAT_PRESSION_ETAT_ECOLOGIQUE|Couche habitat pression état écologique|VectorLayer||✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
 SCENARIO_PRESSION|Table scénario pression|VectorLayer||✓||Default: scenario_pression <br> Type: TypeVectorAnyGeometry <br>|
 
 
