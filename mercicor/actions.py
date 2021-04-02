@@ -27,8 +27,8 @@ def change_scenario(*args, project: QgsProject = None):
         project = QgsProject.instance()
 
     relations_ids = [
-        scenario_pression__pression['id'],
-        scenario_pression__habitat_pression_etat_ecologique['id'],
+        scenario_pression__pression.qgis_id,
+        scenario_pression__habitat_pression_etat_ecologique.qgis_id,
     ]
     for ids in relations_ids:
         relation = project.relationManager().relation(ids)
