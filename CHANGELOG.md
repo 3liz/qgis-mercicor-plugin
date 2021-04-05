@@ -13,6 +13,7 @@
 * Correction d'une jointure sur la couche "habitat"
 * Correction d'une erreur lors de la génération du projet
 * Correction de l'application des jointures sur l'ensemble du projet
+* Suppression de la sortie couche de l'algorithme : Calcul de l'état écologique des habitats
 * Mise à jour de la documentation
 
 ## 0.5.0 - 2021-03-24
