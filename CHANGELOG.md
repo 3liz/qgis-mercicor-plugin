@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.6.0 - 2021-04-XX
+## 0.6.0 - 2021-04-05
 
 * Ajout de plusieurs champs à la couche "scenario_pression"
 * Ajout de l'algorithme concernant l'habitat pression état écologique
