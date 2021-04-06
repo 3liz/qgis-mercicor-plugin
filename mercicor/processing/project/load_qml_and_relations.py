@@ -271,6 +271,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
             'fields': QgsMapLayer.Fields,
             'form': QgsMapLayer.Forms,
             'style': QgsMapLayer.Symbology,
+            'labels': QgsMapLayer.Labeling,
             'layer_configuration': QgsMapLayer.LayerConfiguration,
         }
         for name, component in qml_component.items():
