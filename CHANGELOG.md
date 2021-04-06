@@ -4,6 +4,7 @@
 
 * Ajout de l'action de suppression 
 * Ajout du calcul de la note "perte_ben" lors du calcul des pertes 
+* Vérification de l'existance des jointures lors de l'ajout des jointures
 
 ## 0.6.1 - 2021-04-06
 

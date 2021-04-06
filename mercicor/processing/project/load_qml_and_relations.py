@@ -197,6 +197,13 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
             definition['layer_add_join'] = self.input_layers[layer_add_join]
 
+            for join in definition['layer_add_join'].vectorJoins():
+                if definition['join_layer'] == join.joinLayer():
+                    definition['layer_add_join'].removeJoin(join.joinLayer().id())
+                    feedback.pushDebugInfo(
+                        'Removing pre-existing join between {} and {}'.format(
+                            definition['layer_add_join'].name(), definition['join_layer'].name()))
+
             join_habitat = QgsVectorLayerJoinInfo()
             join_habitat.setJoinFieldName(definition['join_field_name'])
             join_habitat.setJoinLayerId(definition['join_layer'].id())
