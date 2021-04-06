@@ -46,7 +46,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -60,7 +60,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -74,7 +74,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -88,7 +88,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -102,7 +102,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -116,7 +116,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -130,7 +130,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -144,7 +144,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -158,7 +158,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -172,7 +172,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -186,7 +186,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -200,7 +200,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -214,7 +214,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -228,7 +228,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -242,7 +242,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -256,7 +256,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -270,7 +270,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -284,7 +284,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -298,7 +298,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -312,7 +312,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -326,7 +326,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -340,7 +340,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -354,7 +354,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -368,7 +368,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -382,7 +382,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -396,7 +396,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -410,7 +410,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -424,7 +424,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -438,7 +438,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -452,7 +452,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -466,7 +466,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -480,7 +480,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -524,7 +524,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -538,7 +538,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -552,7 +552,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -566,7 +566,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -580,7 +580,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -594,7 +594,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -608,7 +608,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -622,7 +622,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -636,7 +636,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -650,7 +650,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -664,7 +664,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -678,7 +678,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -692,7 +692,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -706,7 +706,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -720,7 +720,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -734,7 +734,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -748,7 +748,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -762,7 +762,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -776,7 +776,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -790,7 +790,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -804,7 +804,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -818,7 +818,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -832,7 +832,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -846,7 +846,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -860,7 +860,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -874,7 +874,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="3"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -888,7 +888,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -902,7 +902,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -916,7 +916,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -930,7 +930,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -944,7 +944,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
@@ -958,7 +958,7 @@
             <Option name="AllowNull" type="bool" value="true"/>
             <Option name="Max" type="double" value="10"/>
             <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="0"/>
+            <Option name="Precision" type="int" value="3"/>
             <Option name="Step" type="double" value="1"/>
             <Option name="Style" type="QString" value="SpinBox"/>
           </Option>
