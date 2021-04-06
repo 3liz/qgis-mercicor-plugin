@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.6.1 - 2021-04-06
+
+* Correction du Calcul de l'état écologique des habitats suite à la suppression de la sortie couche
+
 ## 0.6.0 - 2021-04-05
 
 * Ajout de plusieurs champs à la couche "scenario_pression"
