@@ -192,7 +192,7 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
         # Calcul des notes mercicor
         params = {
             'INPUT': layer,
-            'OUTPUT': parameters[self.OUTPUT_LAYER]
+            'OUTPUT': 'TEMPORARY_OUTPUT'
         }
         results = processing.run(
             "mercicor:calcul_notes",
