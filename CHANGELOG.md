@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.7.0 - 2021-04-XX
+
+* Ajout de l'action de suppression 
+* Ajout du calcul de la note "perte_ben" lors du calcul des pertes 
+
 ## 0.6.1 - 2021-04-06
 
 * Correction du Calcul de l'état écologique des habitats suite à la suppression de la sortie couche

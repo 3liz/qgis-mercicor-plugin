@@ -27,6 +27,7 @@ class CalculPertes(CalculAlgorithm):
         self.fields['perte_bsm'] = ['hab_note_bsm', 'note_bsm']
         self.fields['perte_man'] = ['hab_note_man', 'note_man']
         self.fields['perte_pmi'] = ['hab_note_pmi', 'note_pmi']
+        self.fields['perte_ben'] = ['hab_note_ben', 'note_ben']
         self.fields['perte_mercicor'] = ['hab_score_mercicor', 'score_mercicor']
 
         for note in self.fields.keys():
