@@ -46,7 +46,12 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
                 '"bsm_div_herb" + "bsm_epibiose") / 6.0) * (10.0 / 3.0)'
         )
         self.expressions['note_ben'] = (
-            '"note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm"'
+            'CASE '
+            'WHEN "note_bsd" IS NULL THEN "note_bsm" '
+            'WHEN "note_bsm" IS NULL THEN "note_bsd" '
+            'ELSE '
+            '"note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm" '
+            'END'
         )
         self.expressions['note_man'] = (
             '(("man_fragm" + "man_recouv" + "man_diam_tronc" + "man_dens" + "man_diversit" + '
