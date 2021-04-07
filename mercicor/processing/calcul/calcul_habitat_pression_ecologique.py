@@ -7,6 +7,7 @@ from typing import Optional, Tuple
 import processing
 
 from qgis.core import (
+    QgsExpression,
     QgsFeature,
     QgsFeatureRequest,
     QgsProcessing,
@@ -17,6 +18,17 @@ from qgis.core import (
 )
 
 from mercicor.processing.calcul.base import CalculAlgorithm
+
+fields_indic = [
+    "perc_bsd", "perc_bsm", "bsd_recouv_cor", "bsd_p_acrop", "bsd_vital_cor",
+    "bsd_comp_struc", "bsd_taille_cor", "bsd_dens_juv", "bsd_f_sessile", "bsd_recouv_ma",
+    "bsm_fragm_herb", "bsm_recouv_her", "bsm_haut_herb", "bsm_dens_herb", "bsm_div_herb",
+    "bsm_epibiose", "man_fragm", "man_recouv", "man_diam_tronc", "man_dens", "man_diversit",
+    "man_vital", "pmi_div_poi", "pmi_predat_poi", "pmi_scarib_poi", "pmi_macro_inv",
+    "note_bsd", "note_bsm", "note_ben", "note_man", "note_pmi", "score_mercicor"
+]
+
+fields_id = ['habitat_id', 'pression_id', 'scenario_id']
 
 
 class CalculHabitatPressionEtatEcologique(CalculAlgorithm):
@@ -123,13 +135,12 @@ class CalculHabitatPressionEtatEcologique(CalculAlgorithm):
 
         intersection.updateFields()
 
-        fields = ['habitat_id', 'pression_id', 'scenario_id']
         multi_feedback.pushInfo(
-            "Collect des géométries ayant les couples {} identiques".format(' ,'.join(fields)))
+            "Collect des géométries ayant les couples {} identiques".format(' ,'.join(fields_id)))
         multi_feedback.setCurrentStep(2)
         params = {
             'INPUT': intersection,
-            'FIELD': fields,
+            'FIELD': fields_id,
             'OUTPUT': 'TEMPORARY_OUTPUT',
         }
         results = processing.run(
@@ -169,6 +180,14 @@ class CalculHabitatPressionEtatEcologique(CalculAlgorithm):
                 pression_id = feature['pression_id']
                 scenario_id = feature['scenario_id']
 
+                # Test du type de pression associé
+                filter_expression = QgsExpression.createFieldEqualityExpression('id', pression_id)
+                filter_request = QgsFeatureRequest(QgsExpression(filter_expression))
+                filter_request.setLimit(1)
+                for press in pression.getFeatures(filter_expression):
+                    pression_emprise = (press['type_pression'] == 6)
+                    break
+
                 exists, existing_feature = self.feature_exists(
                     self.output_layer, habitat_id, pression_id, scenario_id)
 
@@ -177,11 +196,15 @@ class CalculHabitatPressionEtatEcologique(CalculAlgorithm):
 
                     attribute_map = dict()
                     for field in layer.fields():
-                        if field.name() in ('habitat_id', 'pression_id', 'scenario_id'):
+                        field_name = field.name()
+                        if field_name in fields_id:
                             continue
 
-                        if field.name() in self.output_layer.fields().names():
-                            attribute_map[field_map[field.name()]] = feature[field.name()]
+                        if field_name in self.output_layer.fields().names():
+                            if pression_emprise and field_name in fields_indic:
+                                attribute_map[field_map[field_name]] = 0
+                            else:
+                                attribute_map[field_map[field_name]] = feature[field_name]
 
                     self.output_layer.changeAttributeValues(existing_feature.id(), attribute_map)
 
@@ -194,11 +217,15 @@ class CalculHabitatPressionEtatEcologique(CalculAlgorithm):
                     out_feature.setGeometry(feature.geometry())
 
                     for field in layer.fields():
-                        if field.name() in ('habitat_id', 'pression_id', 'scenario_id'):
+                        field_name = field.name()
+                        if field_name in fields_id:
                             continue
 
-                        if field.name() in self.output_layer.fields().names():
-                            out_feature.setAttribute(field.name(), feature[field.name()])
+                        if field_name in self.output_layer.fields().names():
+                            if pression_emprise and field_name in fields_indic:
+                                out_feature.setAttribute(field_name, 0)
+                            else:
+                                out_feature.setAttribute(field_name, feature[field_name])
 
                     self.output_layer.addFeature(out_feature)
 

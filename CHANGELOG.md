@@ -9,6 +9,8 @@
   d'habitat_pression_etat_ecologique après l'import des données
 * Correction du calcul de la note benthique
 * Suppression des doublons des champs 'nom' et 'facies' sur la jointure entre 'habitat_etat_ecologique' et 'habitat'
+* Mise à jour de l'algorithme 'calcul_habitat_pression_etat_ecologique', attribut 0 aux indicateurs, notes et scores quand
+  le type de pression est égal à 6
 * Mise à jour de la documentation
 
 ## 0.6.1 - 2021-04-06

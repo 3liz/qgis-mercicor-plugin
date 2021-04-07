@@ -7,13 +7,19 @@ from qgis.core import (
     QgsExpressionContext,
     QgsExpressionContextUtils,
     QgsFeature,
+    QgsFeatureRequest,
+    QgsField,
     QgsGeometry,
     QgsVectorLayer,
     QgsVectorLayerJoinInfo,
     edit,
 )
 from qgis.processing import run
+from qgis.PyQt.QtCore import QVariant
 
+from mercicor.processing.calcul.calcul_habitat_pression_ecologique import (
+    fields_indic,
+)
 from mercicor.processing.calcul.calcul_notes import CalculNotes
 from mercicor.processing.calcul.calcul_pertes import CalculPertes
 from mercicor.qgis_plugin_tools import plugin_test_data_path
@@ -55,6 +61,18 @@ class TestCalculsAlgorithms(BaseTestProcessing):
 
         habitat_layer = QgsVectorLayer(plugin_test_data_path('habitat.geojson', copy=True), 'habitat', 'ogr')
 
+        habitat_layer.startEditing()
+        for field in fields_indic:
+            habitat_layer.addAttribute(QgsField(field, QVariant.Double))
+        habitat_layer.updateFields()
+        habitat_layer.commitChanges()
+
+        habitat_layer.startEditing()
+        for feat in habitat_layer.getFeatures():
+            for field in fields_indic:
+                feat[field] = 1
+        habitat_layer.commitChanges()
+
         gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
         name = 'habitat_pression_etat_ecologique'
         hab_pression_etat_ecolo_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
@@ -74,6 +92,34 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         )  # pression_id
         self.assertSetEqual({1}, hab_pression_etat_ecolo_layer.uniqueValues(3))  # scenario_id
 
+        # Get 1 pression with type 6 - Emprise
+        filter_pression = QgsExpression.createFieldEqualityExpression('type_pression', 6)
+        request_pression = QgsFeatureRequest(QgsExpression(filter_pression))
+        request_pression.setLimit(1)
+        ids = []
+        for feat in pression_layer.getFeatures(filter_pression):
+            ids.append(feat['id'])
+        self.assertEqual(len(ids), 1)
+
+        # Get 1 habitat_pression_etat_ecologique with type_emprise Emprise
+        filter_hpee = QgsExpression.createFieldEqualityExpression('pression_id', ids[0])
+        request_hpee = QgsFeatureRequest(QgsExpression(filter_hpee))
+        request_hpee.setLimit(1)
+        for feature in hab_pression_etat_ecolo_layer.getFeatures(request_hpee):
+            self.assertIn(feature['pression_id'], ids)
+            for field in fields_indic:
+                with self.subTest(i=field):
+                    self.assertEqual(0, feature[field])
+
+        # Get 1 habitat_pression_etat_ecologique without type_emprise Emprise
+        request_hpee = QgsFeatureRequest(QgsExpression('NOT ' + filter_hpee))
+        request_hpee.setLimit(1)
+        for feature in hab_pression_etat_ecolo_layer.getFeatures(request_hpee):
+            self.assertNotIn(feature['pression_id'], ids)
+            for field in fields_indic:
+                with self.subTest(i=field):
+                    self.assertNotEqual(0, feature[field])
+
         index = hab_pression_etat_ecolo_layer.fields().indexOf('perc_bsd')
         self.assertSetEqual({0, 1, 2, 3}, hab_pression_etat_ecolo_layer.uniqueValues(index))
 
@@ -87,7 +133,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         run("mercicor:calcul_habitat_pression_etat_ecologique", params)
         self.assertEqual(28, hab_pression_etat_ecolo_layer.featureCount())
         index = hab_pression_etat_ecolo_layer.fields().indexOf('perc_bsd')
-        self.assertSetEqual({10, 11, 12, 13}, hab_pression_etat_ecolo_layer.uniqueValues(index))
+        self.assertSetEqual({10, 11, 12, 13, 0}, hab_pression_etat_ecolo_layer.uniqueValues(index))
         del os.environ['TESTING_MERCICOR']
 
     def test_unicity_facies_name(self):
