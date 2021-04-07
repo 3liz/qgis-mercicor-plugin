@@ -9,6 +9,7 @@ from qgis.core import (
     QgsFeatureRequest,
     QgsProcessing,
     QgsProcessingException,
+    QgsProcessingParameterBoolean,
     QgsProcessingParameterField,
     QgsProcessingParameterString,
     QgsProcessingParameterVectorLayer,
@@ -28,6 +29,9 @@ class ImportPressureData(BaseImportAlgorithm):
     SCENARIO_NAME = 'SCENARIO_NAME'
     SCENARIO_LAYER = 'SCENARIO_LAYER'
     OUTPUT_LAYER = 'OUTPUT_LAYER'
+    APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE = 'APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE'
+    HABITAT_LAYER = 'HABITAT_LAYER'
+    HABITAT_PRESSION_LAYER = 'HABITAT_PRESSION_LAYER'
 
     def __init__(self):
         super().__init__()
@@ -101,6 +105,33 @@ class ImportPressureData(BaseImportAlgorithm):
                 "Couche des pressions de destination",
                 [QgsProcessing.TypeVectorPolygon],
                 defaultValue="pression",
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterBoolean(
+                self.APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE,
+                "Ajout des entités de l'état écologique des habitats en fonction de la pression."
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.HABITAT_LAYER,
+                "Couche des pressions de destination",
+                [QgsProcessing.TypeVectorPolygon],
+                defaultValue="habitat",
+                optional=True,
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.HABITAT_PRESSION_LAYER,
+                "Couche des pressions de destination",
+                [QgsProcessing.TypeVectorPolygon],
+                defaultValue="habitat_pression_etat_ecologique",
+                optional=True,
             )
         )
 
@@ -214,6 +245,73 @@ class ImportPressureData(BaseImportAlgorithm):
 
         if not self.output_layer.setSubsetString('"scenario_id" = {}'.format(self.scenario_id)):
             raise QgsProcessingException('Subset string is not valid')
+
+        apply_calcul = self.parameterAsBoolean(
+            parameters, self.APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
+
+        # Si apply_calcul = False
+        # ALors l'algo s'arrête ici
+        if not apply_calcul:
+
+            return{}
+
+        habitat = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
+
+        # Si la couche habitat est nulle
+        # le calcul ne peut pas se faire
+        if not habitat:
+            feedback.reportError('Un problème est survenu avec la couche habitat')
+            return {}
+
+        # Vérification de l'unicité des couples habitat/faciès
+        params = {
+            'INPUT': habitat,
+            'OUTPUT': 'TEMPORARY_OUTPUT'
+        }
+        results = processing.run(
+            "mercicor:calcul_unicity_habitat",
+            params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True)
+
+        # Si les couple habitat/faciès ne sont pas unique
+        # Alors le calcul ne se fait pas
+        if results['NUMBER_OF_NON_UNIQUE']:
+            feedback.pushDebugInfo(
+                '{} couple(s) habitat/faciès non unique !'.format(
+                    results['NUMBER_OF_NON_UNIQUE']
+                )
+            )
+            feedback.reportError('Les couples habitat/faciès ne sont pas uniques !')
+            msg = 'Utiliser l\'algorithme Mercicor : '
+            msg += 'Calcul unicité habitat/faciès ; '
+            msg += 'pour corriger le problème.'
+            feedback.pushInfo(msg)
+
+            return {}
+
+        habitat_pression = self.parameterAsVectorLayer(
+            parameters, self.HABITAT_PRESSION_LAYER, context)
+
+        # Si la couche habitat_pression_etat_ecologique est nulle
+        # le calcul ne peut pas se faire
+        if not habitat_pression:
+            feedback.reportError(
+                'Un problème est survenu avec la couche habitat_pression_etat_ecologique')
+            return {}
+
+        params = {
+            'HABITAT_LAYER': habitat,
+            'PRESSION_LAYER': self._output_layer,
+            'HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER': habitat_pression
+        }
+        results = processing.run(
+            "mercicor:calcul_habitat_pression_etat_ecologique",
+            params,
+            context=context,
+            feedback=feedback,
+            is_child_algorithm=True)
 
         return {}
 

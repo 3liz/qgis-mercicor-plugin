@@ -7,6 +7,7 @@
 * Vérification de l'existance des jointures lors de l'ajout des jointures
 * Suppression des doublons de champs 'nom', 'facies' sur la jointure entre 'habitat_etat_ecologique' et 'habitat'
 * Correction du calcul de la note benthique
+* Ajout d'une checkbox sur l'algorithme d'import de pression pour lancer le calcul d'habitat_pression_etat_ecologique après l'import 
 
 ## 0.6.1 - 2021-04-06
 

@@ -68,6 +68,7 @@ class TestImportAlgorithms(BaseTestProcessing):
             "PRESSURE_FIELD": 'pression',
             "SCENARIO_NAME": 'testing scenario',
             "SCENARIO_LAYER": scenario_layer,
+            "APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE": False,
             "OUTPUT_LAYER": pression_layer,
         }
         run("mercicor:import_donnees_pression", params)
@@ -98,6 +99,7 @@ class TestImportAlgorithms(BaseTestProcessing):
             "PRESSURE_FIELD": 'pression',
             "SCENARIO_NAME": 'scenario',
             "SCENARIO_LAYER": scenario_pression_layer,
+            "APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE": False,
             "OUTPUT_LAYER": pression_layer,
         }
         with self.assertRaises(QgsProcessingException) as context:
@@ -140,6 +142,113 @@ class TestImportAlgorithms(BaseTestProcessing):
         self.assertEqual(1, scenario_pression_layer.featureCount())
         self.assertSetEqual(scenario_pression_layer.uniqueValues(0), {1})
         self.assertSetEqual(scenario_pression_layer.uniqueValues(1), {'testing scenario'})
+
+        index = pression_layer.fields().indexOf('scenario_id')
+        self.assertSetEqual({1}, pression_layer.uniqueValues(index))
+        self.assertEqual(pression_layer.subsetString(), '"scenario_id" = 1')
+
+    def test_import_pressure_data_calcul(self):
+        """ Test to import pressure data. """
+        project = QgsProject()
+        context = QgsProcessingContext()
+        context.setProject(project)
+
+        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+
+        name = 'pression'
+        pression_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+        self.assertTrue(pression_layer.isValid())
+        project.addMapLayer(pression_layer)
+
+        name = 'scenario_pression'
+        scenario_pression_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+        self.assertTrue(scenario_pression_layer.isValid())
+        project.addMapLayer(scenario_pression_layer)
+
+        name = 'habitat'
+        habitat_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+        self.assertTrue(scenario_pression_layer.isValid())
+        project.addMapLayer(scenario_pression_layer)
+
+        name = 'habitat_pression_etat_ecologique'
+        habitat_pression_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
+        self.assertTrue(scenario_pression_layer.isValid())
+        project.addMapLayer(scenario_pression_layer)
+
+        # import habitat
+        import_layer = QgsVectorLayer(plugin_test_data_path('import_habitat.geojson'), 'habitat', 'ogr')
+        self.assertTrue(import_layer.isValid())
+        self.assertEqual(1, import_layer.featureCount())
+        params = {
+            "INPUT_LAYER": import_layer,
+            "FACIES_FIELD": 'facies',
+            "NAME_FIELD": 'nom',
+            "OUTPUT_LAYER": habitat_layer,
+        }
+        run("mercicor:import_donnees_habitat", params)
+        index = habitat_layer.fields().indexOf('facies')
+
+        self.assertEqual(1, habitat_layer.featureCount())
+
+        # import pression
+        layer_to_import = QgsVectorLayer(
+            'MultiPolygon?crs=epsg:2154&field=id:integer&field=pression:integer&index=yes',
+            'polygon',
+            'memory')
+
+        x = 700000  # NOQA VNE001
+        y = 7000000  # NOQA VNE001
+
+        with edit(layer_to_import):
+            feature = QgsFeature(layer_to_import.fields())
+            feature.setGeometry(QgsGeometry.fromMultiPolygonXY(
+                [
+                    [
+                        [
+                            QgsPointXY(0 + x, 0 + y), QgsPointXY(5 + x, 0 + y), QgsPointXY(5 + x, 5 + y),
+                            QgsPointXY(0 + x, 5 + y), QgsPointXY(0 + x, 0 + y)
+                        ]
+                    ],
+                    [
+                        [
+                            QgsPointXY(5 + x, 0 + y), QgsPointXY(10 + x, 0 + y), QgsPointXY(10 + x, 5 + y),
+                            QgsPointXY(5 + x, 5 + y), QgsPointXY(5 + x, 0 + y)
+                        ]
+                    ]
+                ]
+            ))
+            feature.setAttributes([1, 1])
+            layer_to_import.addFeature(feature)
+        self.assertTrue(layer_to_import.isValid())
+        self.assertEqual(1, layer_to_import.featureCount())
+
+        params = {
+            "INPUT_LAYER": layer_to_import,
+            "PRESSURE_FIELD": 'pression',
+            "SCENARIO_NAME": 'testing scenario',
+            "SCENARIO_LAYER": scenario_pression_layer,
+            "APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE": True,
+            "HABITAT_LAYER": habitat_layer,
+            "HABITAT_PRESSION_LAYER": habitat_pression_layer,
+            "OUTPUT_LAYER": pression_layer,
+        }
+        run("mercicor:import_donnees_pression", params)
+
+        # Couche pression
+        self.assertEqual(1, pression_layer.featureCount())
+
+        index = pression_layer.fields().indexOf('type_pression')
+        self.assertSetEqual({1}, pression_layer.uniqueValues(index))
+
+        self.assertEqual(layer_to_import.extent(), QgsRectangle(700000, 7000000, 700010, 7000005))
+
+        # Couche scénario
+        self.assertEqual(1, scenario_pression_layer.featureCount())
+        self.assertSetEqual(scenario_pression_layer.uniqueValues(0), {1})
+        self.assertSetEqual(scenario_pression_layer.uniqueValues(1), {'testing scenario'})
+
+        # Couche habitat_pression_etat_ecologique
+        self.assertEqual(1, habitat_pression_layer.featureCount())
 
         index = pression_layer.fields().indexOf('scenario_id')
         self.assertSetEqual({1}, pression_layer.uniqueValues(index))
