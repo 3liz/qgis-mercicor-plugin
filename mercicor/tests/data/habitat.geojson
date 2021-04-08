@@ -3,9 +3,9 @@
 "name": "habitat",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32738" } },
 "features": [
-{ "type": "Feature", "properties": { "id": 1, "nom": "nom A", "facies": "1", "perc_bsd": 0 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518200.0, 8593780.0 ], [ 518200.0, 8593880.0 ], [ 518900.0, 8593880.0 ], [ 518900.0, 8593780.0 ], [ 518200.0, 8593780.0 ] ] ] ] } },
-{ "type": "Feature", "properties": { "id": 2, "nom": "nom B", "facies": "2", "perc_bsd": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518200.0, 8593680.0 ], [ 518200.0, 8593780.0 ], [ 518900.0, 8593780.0 ], [ 518900.0, 8593680.0 ], [ 518200.0, 8593680.0 ] ] ] ] } },
-{ "type": "Feature", "properties": { "id": 3, "nom": "nom C", "facies": "3", "perc_bsd": 2 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518200.0, 8593580.0 ], [ 518200.0, 8593680.0 ], [ 518900.0, 8593680.0 ], [ 518900.0, 8593580.0 ], [ 518200.0, 8593580.0 ] ] ] ] } },
-{ "type": "Feature", "properties": { "id": 4, "nom": "nom D", "facies": "4", "perc_bsd": 3 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518200.0, 8593480.0 ], [ 518200.0, 8593580.0 ], [ 518900.0, 8593580.0 ], [ 518900.0, 8593480.0 ], [ 518200.0, 8593480.0 ] ] ] ] } }
+{ "type": "Feature", "properties": { "id": 1, "nom": "nom A", "facies": "1", "perc_bsd": 0 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518200.0, 8593780.0 ], [ 518200.0, 8593880.0 ], [ 519100.0, 8593880.0 ], [ 519100.0, 8593780.0 ], [ 518200.0, 8593780.0 ] ] ] ] } },
+{ "type": "Feature", "properties": { "id": 2, "nom": "nom B", "facies": "2", "perc_bsd": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518200.0, 8593680.0 ], [ 518200.0, 8593780.0 ], [ 519100.0, 8593780.0 ], [ 519100.0, 8593680.0 ], [ 518200.0, 8593680.0 ] ] ] ] } },
+{ "type": "Feature", "properties": { "id": 3, "nom": "nom C", "facies": "3", "perc_bsd": 2 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518200.0, 8593580.0 ], [ 518200.0, 8593680.0 ], [ 519100.0, 8593680.0 ], [ 519100.0, 8593580.0 ], [ 518200.0, 8593580.0 ] ] ] ] } },
+{ "type": "Feature", "properties": { "id": 4, "nom": "nom D", "facies": "4", "perc_bsd": 3 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518200.0, 8593480.0 ], [ 518200.0, 8593580.0 ], [ 519100.0, 8593580.0 ], [ 519100.0, 8593480.0 ], [ 518200.0, 8593480.0 ] ] ] ] } }
 ]
 }

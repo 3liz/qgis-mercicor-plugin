@@ -6,6 +6,7 @@
 * Ajout du calcul de la note "perte_ben" lors du calcul des pertes 
 * Vérification de l'existance des jointures lors de l'ajout des jointures
 * Suppression des doublons de champs 'nom', 'facies' sur la jointure entre 'habitat_etat_ecologique' et 'habitat'
+* Correction du calcul de la note benthique
 
 ## 0.6.1 - 2021-04-06
 
