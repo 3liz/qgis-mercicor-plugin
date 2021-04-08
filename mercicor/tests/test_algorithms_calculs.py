@@ -66,9 +66,12 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         }
         os.environ['TESTING_MERCICOR'] = 'True'
         run("mercicor:calcul_habitat_pression_etat_ecologique", params)
-        self.assertEqual(20, hab_pression_etat_ecolo_layer.featureCount())
+        self.assertEqual(28, hab_pression_etat_ecolo_layer.featureCount())
         self.assertSetEqual({1, 2, 3, 4}, hab_pression_etat_ecolo_layer.uniqueValues(1))  # habitat_id
-        self.assertSetEqual({1, 2, 3, 4, 5}, hab_pression_etat_ecolo_layer.uniqueValues(2))  # pression_id
+        self.assertSetEqual(
+            {1, 2, 3, 4, 5, 6, 7},
+            hab_pression_etat_ecolo_layer.uniqueValues(2)
+        )  # pression_id
         self.assertSetEqual({1}, hab_pression_etat_ecolo_layer.uniqueValues(3))  # scenario_id
 
         index = hab_pression_etat_ecolo_layer.fields().indexOf('perc_bsd')
@@ -82,7 +85,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
 
         # Import it a second time, we must only update existing features with new perc_bsd
         run("mercicor:calcul_habitat_pression_etat_ecologique", params)
-        self.assertEqual(20, hab_pression_etat_ecolo_layer.featureCount())
+        self.assertEqual(28, hab_pression_etat_ecolo_layer.featureCount())
         index = hab_pression_etat_ecolo_layer.fields().indexOf('perc_bsd')
         self.assertSetEqual({10, 11, 12, 13}, hab_pression_etat_ecolo_layer.uniqueValues(index))
         del os.environ['TESTING_MERCICOR']

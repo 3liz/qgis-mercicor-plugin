@@ -8,7 +8,7 @@
 { "type": "Feature", "properties": { "id": 3, "type_pression": 2, "scenario_id": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518500, 8593420 ], [ 518500, 8593920 ], [ 518600, 8593920 ], [ 518600, 8593420 ], [ 518500, 8593420 ] ] ] ] } },
 { "type": "Feature", "properties": { "id": 4, "type_pression": 3, "scenario_id": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518600, 8593420 ], [ 518600, 8593920 ], [ 518700, 8593920 ], [ 518700, 8593420 ], [ 518600, 8593420 ] ] ] ] } },
 { "type": "Feature", "properties": { "id": 5, "type_pression": 4, "scenario_id": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518700, 8593420 ], [ 518700, 8593920 ], [ 518800, 8593920 ], [ 518800, 8593420 ], [ 518700, 8593420 ] ] ] ] } },
-{ "type": "Feature", "properties": { "id": 5, "type_pression": 5, "scenario_id": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518800, 8593420 ], [ 518800, 8593920 ], [ 518900, 8593920 ], [ 518900, 8593420 ], [ 518800, 8593420 ] ] ] ] } },
-{ "type": "Feature", "properties": { "id": 5, "type_pression": 6, "scenario_id": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518900, 8593420 ], [ 518900, 8593920 ], [ 519000, 8593920 ], [ 519000, 8593420 ], [ 518900, 8593420 ] ] ] ] } }
+{ "type": "Feature", "properties": { "id": 6, "type_pression": 5, "scenario_id": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518800, 8593420 ], [ 518800, 8593920 ], [ 518900, 8593920 ], [ 518900, 8593420 ], [ 518800, 8593420 ] ] ] ] } },
+{ "type": "Feature", "properties": { "id": 7, "type_pression": 6, "scenario_id": 1 }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 518900, 8593420 ], [ 518900, 8593920 ], [ 519000, 8593920 ], [ 519000, 8593420 ], [ 518900, 8593420 ] ] ] ] } }
 ]
 }
