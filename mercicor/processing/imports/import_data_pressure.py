@@ -56,7 +56,9 @@ class ImportPressureData(BaseImportAlgorithm):
             'Import des données de pression.\n\n'
             'Le champ des pressions doit être correctement formaté : \n'
             '{values}\n'
-            'Un scénario sera également crée et la couche sera filtrée pour ce scénario.'.format(
+            'Un scénario sera également crée et la couche sera filtrée pour ce scénario.\n'
+            'Il est également possible de lancer directement le calcul de l\'état écologique des '
+            'habitats en fonction de la pression à l\'aide de la case à cocher.'.format(
                 values=', '.join([str(i) for i in self.expected_values]))
         )
 
@@ -118,7 +120,7 @@ class ImportPressureData(BaseImportAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.HABITAT_LAYER,
-                "Couche des pressions de destination",
+                "Couche des habitats de destination",
                 [QgsProcessing.TypeVectorPolygon],
                 defaultValue="habitat",
                 optional=True,
@@ -128,7 +130,7 @@ class ImportPressureData(BaseImportAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.HABITAT_PRESSION_LAYER,
-                "Couche des pressions de destination",
+                "Couche des habitats pressions état écologique de destination",
                 [QgsProcessing.TypeVectorPolygon],
                 defaultValue="habitat_pression_etat_ecologique",
                 optional=True,
@@ -136,10 +138,21 @@ class ImportPressureData(BaseImportAlgorithm):
         )
 
     def checkParameterValues(self, parameters, context):
-        scenario_layer = self.parameterAsVectorLayer(parameters, self.SCENARIO_LAYER, context)
-        flag, msg = self.check_layer_is_geopackage(scenario_layer)
-        if not flag:
-            return False, msg
+        layers = [
+            self.parameterAsVectorLayer(parameters, self.SCENARIO_LAYER, context),
+            self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context),
+        ]
+
+        apply_calcul = self.parameterAsBoolean(
+            parameters, self.APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
+        if apply_calcul:
+            layers.append(self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context))
+            layers.append(self.parameterAsVectorLayer(parameters, self.HABITAT_PRESSION_LAYER, context))
+
+        for layer in layers:
+            flag, msg = self.check_layer_is_geopackage(layer)
+            if not flag:
+                return False, msg
 
         return super().checkParameterValues(parameters, context)
 
@@ -252,16 +265,10 @@ class ImportPressureData(BaseImportAlgorithm):
         # Si apply_calcul = False
         # ALors l'algo s'arrête ici
         if not apply_calcul:
-
             return{}
 
         habitat = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
-
-        # Si la couche habitat est nulle
-        # le calcul ne peut pas se faire
-        if not habitat:
-            feedback.reportError('Un problème est survenu avec la couche habitat')
-            return {}
+        habitat_pression = self.parameterAsVectorLayer(parameters, self.HABITAT_PRESSION_LAYER, context)
 
         # Vérification de l'unicité des couples habitat/faciès
         params = {
@@ -279,39 +286,25 @@ class ImportPressureData(BaseImportAlgorithm):
         # Alors le calcul ne se fait pas
         if results['NUMBER_OF_NON_UNIQUE']:
             feedback.pushDebugInfo(
-                '{} couple(s) habitat/faciès non unique !'.format(
-                    results['NUMBER_OF_NON_UNIQUE']
-                )
-            )
+                '{} couple(s) habitat/faciès non unique !'.format(results['NUMBER_OF_NON_UNIQUE']))
             feedback.reportError('Les couples habitat/faciès ne sont pas uniques !')
-            msg = 'Utiliser l\'algorithme Mercicor : '
-            msg += 'Calcul unicité habitat/faciès ; '
-            msg += 'pour corriger le problème.'
+            msg = (
+                'Utiliser l\'algorithme Mercicor "Calcul unicité habitat/faciès" pour corriger le problème.')
             feedback.pushInfo(msg)
-
-            return {}
-
-        habitat_pression = self.parameterAsVectorLayer(
-            parameters, self.HABITAT_PRESSION_LAYER, context)
-
-        # Si la couche habitat_pression_etat_ecologique est nulle
-        # le calcul ne peut pas se faire
-        if not habitat_pression:
-            feedback.reportError(
-                'Un problème est survenu avec la couche habitat_pression_etat_ecologique')
             return {}
 
         params = {
             'HABITAT_LAYER': habitat,
-            'PRESSION_LAYER': self._output_layer,
+            'PRESSION_LAYER': self.output_layer,
             'HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER': habitat_pression
         }
-        results = processing.run(
+        processing.run(
             "mercicor:calcul_habitat_pression_etat_ecologique",
             params,
             context=context,
             feedback=feedback,
-            is_child_algorithm=True)
+            is_child_algorithm=True,
+        )
 
         return {}
 
