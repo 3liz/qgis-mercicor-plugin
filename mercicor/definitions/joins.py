@@ -12,7 +12,7 @@ attribute_joins = [
         'join_layer': 'habitat_etat_ecologique',
         'layer_add_join': 'habitat',
         'prefix': '',
-        'black_list': ['nom', 'facies']
+        'block_list': ['nom', 'facies']
     },
     {
         'join_field_name': 'id',
