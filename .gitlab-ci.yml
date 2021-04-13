@@ -126,7 +126,10 @@ Release:
       "description":"'"${CONTENT}"'",
       "assets":{
       "links":[{
-      "name":"QGIS Package",
+      "name":"QGIS Package (packages.3liz.org)",
+      "url":"https://packages.3liz.org/private/'"${CUSTOMER}"'/'"${PLUGIN_NAME}"'.'"${CI_COMMIT_REF_NAME}"'.zip"
+      },{
+      "name":"QGIS Package (artifacts)",
       "url":"'"${CI_JOB_URL}"'/artifacts/file/'"${PLUGIN_NAME}"'.'"${CI_COMMIT_REF_NAME}"'.zip"
       }] } }'
       --request POST https://projects.3liz.org/api/v4/projects/${PROJECT_ID}/releases
