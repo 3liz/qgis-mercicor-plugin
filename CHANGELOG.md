@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.7.0 - 2021-04-XX
+## 0.7.0 - 2021-04-14
 
 * Ajout d'une action pour la suppression d'un scénario 
 * Ajout du calcul de la note "perte_ben" lors du calcul des pertes
