@@ -64,12 +64,19 @@ No output
 Calcul des notes MERCI-Cor à partir des indicateurs MERCI-Cor
 
 Liste des notes :
+
 note_bsd = (("bsd_recouv_cor" + "bsd_p_acrop" + "bsd_vital_cor" + "bsd_comp_struc" + "bsd_taille_cor" + "bsd_dens_juv" + "bsd_f_sessile" + "bsd_recouv_ma") / 8.0) * (10.0 / 3.0)
+
 note_bsm = (("bsm_fragm_herb" + "bsm_recouv_her" + "bsm_haut_herb" + "bsm_dens_herb" + "bsm_div_herb" + "bsm_epibiose") / 6.0) * (10.0 / 3.0)
+
 note_ben = CASE WHEN "note_bsd" IS NULL THEN "note_bsm" WHEN "note_bsm" IS NULL THEN "note_bsd" ELSE "note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm" END
+
 note_man = (("man_fragm" + "man_recouv" + "man_diam_tronc" + "man_dens" + "man_diversit" + "man_vital") / 6.0) * (10.0 / 3.0)
+
 note_pmi = (("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_inv") / 4) * (10 / 3)
+
 score_mercicor = CASE WHEN lower(to_string("station_man")) = 'true' THEN ("note_man" + "note_pmi") / 2 ELSE ("note_ben" + "note_pmi") / 2 END
+
 
 
 ![algo_id](./mercicor-calcul_notes.jpg)
@@ -97,12 +104,19 @@ OUTPUT|output|VectorLayer||
 Calcul des notes de pertes à partir des indicateurs MERCI-Cor
 
 Liste des notes :
+
 perte_bsd = La somme de '("hab_note_bsd" - "note_bsd") * surface', filtré par scénario
+
 perte_bsm = La somme de '("hab_note_bsm" - "note_bsm") * surface', filtré par scénario
+
 perte_man = La somme de '("hab_note_man" - "note_man") * surface', filtré par scénario
+
 perte_pmi = La somme de '("hab_note_pmi" - "note_pmi") * surface', filtré par scénario
+
 perte_ben = La somme de '("hab_note_ben" - "note_ben") * surface', filtré par scénario
+
 perte_mercicor = La somme de '("hab_score_mercicor" - "score_mercicor") * surface', filtré par scénario
+
 
 
 ![algo_id](./mercicor-calcul_pertes.jpg)

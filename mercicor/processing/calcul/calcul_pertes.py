@@ -59,9 +59,9 @@ class CalculPertes(CalculAlgorithm):
 
     def shortHelpString(self):
         message = 'Calcul des notes de pertes à partir des indicateurs MERCI-Cor\n\n'
-        message += 'Liste des notes :\n'
+        message += 'Liste des notes :\n\n'
         for field, formula in self.aide.items():
-            message += '{} = {}\n'.format(field, formula)
+            message += '{} = {}\n\n'.format(field, formula)
         return message
 
     def initAlgorithm(self, config):
