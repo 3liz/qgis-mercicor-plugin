@@ -63,14 +63,13 @@ class TestCalculsAlgorithms(BaseTestProcessing):
 
         habitat_layer.startEditing()
         for field in fields_indic:
-            habitat_layer.addAttribute(QgsField(field, QVariant.Double))
-        habitat_layer.updateFields()
-        habitat_layer.commitChanges()
+            if field not in habitat_layer.fields().names():
+                self.assertTrue(habitat_layer.addAttribute(QgsField(field, QVariant.Double)))
 
-        habitat_layer.startEditing()
         for feat in habitat_layer.getFeatures():
             for field in fields_indic:
-                feat[field] = 1
+                index = habitat_layer.fields().indexOf(field)
+                self.assertTrue(habitat_layer.changeAttributeValue(feat.id(), index, 1))
         habitat_layer.commitChanges()
 
         gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
@@ -121,7 +120,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
                     self.assertNotEqual(0, feature[field])
 
         index = hab_pression_etat_ecolo_layer.fields().indexOf('perc_bsd')
-        self.assertSetEqual({0, 1, 2, 3}, hab_pression_etat_ecolo_layer.uniqueValues(index))
+        self.assertSetEqual({0, 1}, hab_pression_etat_ecolo_layer.uniqueValues(index))
 
         # Increment +10 for testing purpose
         index = habitat_layer.fields().indexOf('perc_bsd')
@@ -133,7 +132,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         run("mercicor:calcul_habitat_pression_etat_ecologique", params)
         self.assertEqual(28, hab_pression_etat_ecolo_layer.featureCount())
         index = hab_pression_etat_ecolo_layer.fields().indexOf('perc_bsd')
-        self.assertSetEqual({10, 11, 12, 13, 0}, hab_pression_etat_ecolo_layer.uniqueValues(index))
+        self.assertSetEqual({0, 11}, hab_pression_etat_ecolo_layer.uniqueValues(index))
         del os.environ['TESTING_MERCICOR']
 
     def test_unicity_facies_name(self):
