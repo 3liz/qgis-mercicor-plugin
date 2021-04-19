@@ -36,16 +36,18 @@ class BaseCalculPertesGains(CalculAlgorithm):
         return NotImplementedError
 
     def group(self):
-        return 'Calcul {}'.format(self.project_type.calcul_type)
+        return 'Calcul {}'.format(self.project_type.label)
 
     def groupId(self):
-        return 'calcul_group_{}'.format(self.project_type.calcul_type)
+        return 'calcul_group_{}'.format(self.project_type.label)
 
     def name(self):
-        return 'calcul_{}'.format(self.project_type.calcul_type)
+        return 'calcul_{}'.format(self.project_type.label)
 
     def displayName(self):
-        return 'Calcul des notes de {} pour le scénario de pression'.format(self.project_type.calcul_type)
+        return (
+            'Calcul des notes de {} pour le scénario de {}'.format(
+                self.project_type.calcul_type, self.project_type.label))
 
     def checkParameterValues(self, parameters, context):
         sources = [
