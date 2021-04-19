@@ -23,12 +23,13 @@ from qgis.core import (
     edit,
 )
 
+from mercicor.definitions.project_type import ProjectType
 from mercicor.definitions.tables import tables
 from mercicor.processing.project.base import BaseProjectAlgorithm
 from mercicor.qgis_plugin_tools import load_csv, resources_path
 
 
-class CreateGeopackageProject(BaseProjectAlgorithm):
+class BaseCreateGeopackageProject(BaseProjectAlgorithm):
 
     FILE_GPKG = 'FILE_GPKG'
     PROJECT_CRS = 'PROJECT_CRS'
@@ -36,14 +37,26 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
     PROJECT_EXTENT = 'PROJECT_EXTENT'
     OUTPUT_LAYERS = 'OUTPUT_LAYERS'
 
+    @property
+    def project_type(self) -> ProjectType:
+        # noinspection PyTypeChecker
+        return NotImplementedError
+
+    @property
+    def glossary(self) -> dict:
+        # noinspection PyTypeChecker
+        return NotImplementedError
+
     def name(self):
-        return 'create_geopackage_project'
+        return 'create_geopackage_project_{}'.format(self.project_type.label)
 
     def displayName(self):
-        return 'Créer le geopackage de la zone d\'étude'
+        return 'Créer le projet de {} de la zone d\'étude'.format(self.project_type.label)
 
     def shortHelpString(self):
-        return "Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage."
+        return (
+            "Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage pour le projet "
+            "de {}".format(self.project_type.label))
 
     def initAlgorithm(self, config):
 
@@ -104,9 +117,9 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         if os.path.exists(base_name):
             feedback.reportError('Le fichier existe déjà. Ré-écriture du fichier…')
 
-        self.create_geopackage(base_name, crs, context.project().transformContext())
+        self.create_geopackage(self.project_type, base_name, crs, context.project().transformContext())
 
-        output_layers = self.load_layers(base_name, feedback)
+        output_layers = self.load_layers(self.project_type, base_name, feedback)
 
         # Add metadata
         feature = QgsFeature(output_layers['metadata'].fields())
@@ -116,12 +129,8 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         with edit(output_layers['metadata']):
             output_layers['metadata'].addFeature(feature)
 
-        # Add glossary for pressure
-        # If you edit these labels, you MUST change in the resources/qml/style folder as well
-        data = {
-            'liste_type_pression': ['Très faible', 'Faible', 'Moyenne', 'Forte', 'Très forte', 'Emprise'],
-        }
-        for table, labels in data.items():
+        # Add glossary
+        for table, labels in self.glossary.items():
             with edit(output_layers[table]):
                 for i, label in enumerate(labels):
                     feature = QgsFeature(output_layers[table].fields())
@@ -147,10 +156,10 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         return {self.FILE_GPKG: base_name, self.OUTPUT_LAYERS: output_id}
 
     @staticmethod
-    def load_layers(base_name, feedback):
+    def load_layers(project_type: ProjectType, base_name, feedback):
         """ Create vector layer object from URI. """
         output_layers = {}
-        for table in tables.keys():
+        for table in project_type.layers:
             destination = QgsVectorLayer('{}|layername={}'.format(base_name, table), table, 'ogr')
             if not destination.isValid():
                 raise QgsProcessingException(
@@ -162,13 +171,13 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
         return output_layers
 
     @staticmethod
-    def create_geopackage(file_path, crs, transform_context) -> None:
+    def create_geopackage(project_type: ProjectType, file_path, crs, transform_context) -> None:
         """ Create the geopackage for the given path. """
         encoding = 'UTF-8'
         driver_name = QgsVectorFileWriter.driverForExtension('gpkg')
-        for table, geometry in tables.items():
+        for table in project_type.layers:
 
-            layer_path = str(geometry)
+            layer_path = str(tables[table])
             if layer_path != 'None':
                 layer_path += "?crs={}".format(crs.authid())
 
@@ -226,3 +235,28 @@ class CreateGeopackageProject(BaseProjectAlgorithm):
             del fields
             del data_provider
             del vector_layer
+
+
+class CreateGeopackageProjectPression(BaseCreateGeopackageProject):
+
+    @property
+    def project_type(self) -> ProjectType:
+        return ProjectType.Pression
+
+    @property
+    def glossary(self) -> dict:
+        # If you edit these labels, you MUST change in the resources/qml/style folder as well
+        return {
+            'liste_type_pression': ['Très faible', 'Faible', 'Moyenne', 'Forte', 'Très forte', 'Emprise'],
+        }
+
+
+class CreateGeopackageProjectCompensation(BaseCreateGeopackageProject):
+
+    @property
+    def project_type(self) -> ProjectType:
+        return ProjectType.Compensation
+
+    @property
+    def glossary(self) -> dict:
+        return {}

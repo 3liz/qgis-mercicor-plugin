@@ -6,6 +6,7 @@ import shutil
 from qgis.core import QgsVectorLayer
 from qgis.processing import run
 
+from mercicor.definitions.project_type import ProjectType
 from mercicor.qgis_plugin_tools import (
     load_csv,
     plugin_test_data_path,
@@ -35,7 +36,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
             "PROJECT_CRS": 'EPSG:2154',
             "PROJECT_EXTENT": '0,10,0,10',
         }
-        run("mercicor:create_geopackage_project", params)
+        run("mercicor:create_geopackage_project_pression", params)
 
         self.assertTrue(os.path.exists(file_path))
 
@@ -45,7 +46,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
 
         if debug:
             # Without data
-            shutil.copy(file_path, plugin_test_data_path('output_main_geopackage_empty.gpkg'))
+            shutil.copy(file_path, plugin_test_data_path('output_main_geopackage_empty_pression.gpkg'))
 
             # With data
             name = 'pression'
@@ -59,25 +60,32 @@ class TestProjectAlgorithms(BaseTestProcessing):
 
     def test_empty_geopackage(self):
         """ Test if the empty geopackage is up to date with CSV files. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        projects = (ProjectType.Pression, ProjectType.Compensation)
+        for project in projects:
+            gpkg = plugin_test_data_path('main_geopackage_empty_{}.gpkg'.format(project.label), copy=True)
 
-        files = os.listdir(resources_path('data_models'))
-        for csv_file in files:
-            with self.subTest(i=csv_file):
-                csv = load_csv(csv_file, resources_path('data_models', csv_file))
-                gpkg_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, csv_file[0:-4]), csv_file, 'ogr')
+            files = os.listdir(resources_path('data_models'))
+            for csv_file in files:
 
-                gpkg_fields = gpkg_layer.fields().names()
-                gpkg_fields.sort()
+                if csv_file not in ProjectType.Pression.layers:
+                    continue
 
-                csv_fields = list(csv.uniqueValues(1))
-                csv_fields.sort()
+                with self.subTest(i=csv_file):
+                    csv = load_csv(csv_file, resources_path('data_models', csv_file))
+                    gpkg_layer = QgsVectorLayer(
+                        '{}|layername={}'.format(gpkg, csv_file[0:-4]), csv_file, 'ogr')
 
-                self.assertListEqual(gpkg_fields, csv_fields)
+                    gpkg_fields = gpkg_layer.fields().names()
+                    gpkg_fields.sort()
+
+                    csv_fields = list(csv.uniqueValues(1))
+                    csv_fields.sort()
+
+                    self.assertListEqual(gpkg_fields, csv_fields)
 
     def test_apply_qml_styles(self):
         """ Test to apply some QML to loaded layers in the canvas. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
 
         name = 'pression'
         pression_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')

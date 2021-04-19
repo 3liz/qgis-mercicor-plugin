@@ -90,7 +90,7 @@ class TestImportAlgorithms(BaseTestProcessing):
 
         self.assertEqual(1, layer_to_import.featureCount())
 
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         pression_layer = QgsVectorLayer('{}|layername=pression'.format(gpkg), 'test', 'ogr')
         scenario_pression_layer = QgsVectorLayer(
             '{}|layername=scenario_pression'.format(gpkg), 'test scenario', 'ogr')
@@ -116,7 +116,7 @@ class TestImportAlgorithms(BaseTestProcessing):
         context = QgsProcessingContext()
         context.setProject(project)
 
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
 
         name = 'pression'
         pression_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
@@ -153,7 +153,7 @@ class TestImportAlgorithms(BaseTestProcessing):
         context = QgsProcessingContext()
         context.setProject(project)
 
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
 
         name = 'pression'
         pression_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
@@ -256,7 +256,7 @@ class TestImportAlgorithms(BaseTestProcessing):
 
     def test_import_habitat_data(self):
         """ Test to import habitat data. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         target_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, 'habitat'), 'habitat', 'ogr')
         self.assertEqual(0, target_layer.featureCount())
 
@@ -284,7 +284,7 @@ class TestImportAlgorithms(BaseTestProcessing):
 
     def test_import_observation_exist(self):
         """ Test to retrieve a specific observation feature. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         name = 'observations'
         observations = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
 
@@ -300,7 +300,7 @@ class TestImportAlgorithms(BaseTestProcessing):
 
     def test_import_observations(self):
         """ Test to import observations with a geometry from a vector layer. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         name = 'observations'
         observations = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
 

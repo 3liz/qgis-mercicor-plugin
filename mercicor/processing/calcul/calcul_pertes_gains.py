@@ -91,9 +91,9 @@ class BaseCalculPertesGains(CalculAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.SCENARIO_IMPACT,
-                self.project_type.label_impact_scenario,
+                self.project_type.label_scenario_impact,
                 [QgsProcessing.TypeVectorAnyGeometry],
-                defaultValue=self.project_type.couche_impact_scenario,
+                defaultValue=self.project_type.couche_scenario_impact,
             )
         )
 

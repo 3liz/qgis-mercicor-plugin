@@ -28,7 +28,8 @@ from mercicor.processing.imports.import_data_observations import (
 )
 from mercicor.processing.imports.import_data_pressure import ImportPressureData
 from mercicor.processing.project.create_geopackage import (
-    CreateGeopackageProject,
+    CreateGeopackageProjectCompensation,
+    CreateGeopackageProjectPression,
 )
 from mercicor.processing.project.load_qml_and_relations import (
     LoadStylesAndRelations,
@@ -45,7 +46,8 @@ class MercicorProvider(QgsProcessingProvider):
         self.addAlgorithm(CalculNotes())
         self.addAlgorithm(CalculUnicityHabitat())
         self.addAlgorithm(CalculPertes())
-        self.addAlgorithm(CreateGeopackageProject())
+        self.addAlgorithm(CreateGeopackageProjectCompensation())
+        self.addAlgorithm(CreateGeopackageProjectPression())
         self.addAlgorithm(DownloadObservationFile())
         self.addAlgorithm(ImportHabitatData())
         self.addAlgorithm(ImportObservationData())

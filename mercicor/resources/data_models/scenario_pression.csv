@@ -1,6 +1,6 @@
 idx,name,type,typeName,length,precision,comment,alias
 1,id,4,Integer64,0,0,ID,Identifiant
-2,nom,10,String,0,0,libellé du scenario,libellé du scenario
+2,nom,10,String,0,0,libellé du scenario,libellé du scénario
 3,perte_bsd,6,Double,0,0,Perte Mercicor Benthique de substrats durs,Perte Mercicor Benthique de substrats durs
 4,perte_bsm,6,Double,0,0,Perte Mercicor Benthique de substrats meubles,Perte Mercicor Benthique de substrats meubles
 5,perte_ben,6,Double,0,0,Perte Mercicor Benthique,Perte Mercicor Benthique

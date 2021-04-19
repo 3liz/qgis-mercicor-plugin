@@ -1,0 +1,38 @@
+idx,name,type,typeName,length,precision,comment,alias
+1,id,4,Integer64,0,0,Identifiant,Identifiant
+2,habitat_id,4,Integer64,0,0,Identifiant habitat,Identifiant habitat
+3,compensation_id,4,Integer64,0,0,Identifiant de compensation,Identifiant de compensation
+4,scenario_id,4,Integer64,0,0,Identifiant du scenario de pression,Identifiant du scenario de pression
+5,station_man,1,Boolean,0,0,Stations en Mangrove,Stations en Mangrove
+6,perc_bsd,6,Double,0,0,Pourcentage Benthique de substrats durs ,Pourcentage Benthique de substrats durs
+7,perc_bsm,6,Double,0,0,Pourcentage Benthique de substrats meubles,Pourcentage Benthique de substrats meubles
+8,bsd_recouv_cor,6,Double,0,0,Recouvrement corallien (Scléractiniaires),Recouvrement corallien (Scléractiniaires)
+9,bsd_p_acrop,6,Double,0,0,Pourcentage du recouvrement corallien représenté par les coraux acropores,Pourcentage du recouvrement corallien représenté par les coraux acropores
+10,bsd_vital_cor,6,Double,0,0,Vitalité et taux de mortalité corallienne,Vitalité et taux de mortalité corallienne
+11,bsd_comp_struc,6,Double,0,0,Complexité structurelle des peuplements coralliens,Complexité structurelle des peuplements coralliens
+12,bsd_taille_cor,6,Double,0,0,Taille des coraux vivants,Taille des coraux vivants
+13,bsd_dens_juv,6,Double,0,0,Densité de coraux juvéniles,Densité de coraux juvéniles
+14,bsd_f_sessile,6,Double,0,0,Recouvrement par la faune sessile non corallienne,Recouvrement par la faune sessile non corallienne
+15,bsd_recouv_ma,6,Double,0,0,Recouvrement par les macroalgues,Recouvrement par les macroalgues
+16,bsm_fragm_herb,6,Double,0,0,Fragmentation de l’herbier,Fragmentation de l’herbier
+17,bsm_recouv_her,6,Double,0,0,Recouvrement par l’herbier (patchs),Recouvrement par l’herbier (patchs)
+18,bsm_haut_herb,6,Double,0,0,Hauteur de l’herbier (patchs),Hauteur de l’herbier (patchs)
+19,bsm_dens_herb,6,Double,0,0,Densité des phanérogames (patchs),Densité des phanérogames (patchs)
+20,bsm_div_herb,6,Double,0,0,Diversité spécifique des phanérogames (patchs),Diversité spécifique des phanérogames (patchs)
+21,bsm_epibiose,6,Double,0,0,Epibiose de l’herbier (patchs),Epibiose de l’herbier (patchs)
+22,man_fragm,6,Double,0,0,Fragmentation de la mangrove,Fragmentation de la mangrove
+23,man_recouv,6,Double,0,0,Recouvrement par la mangrove (patchs),Recouvrement par la mangrove (patchs)
+24,man_diam_tronc,6,Double ,0,0,Diamètre des troncs (patchs),Diamètre des troncs (patchs)
+25,man_dens,6,Double,0,0,Densité des palétuviers (patchs),Densité des palétuviers (patchs)
+26,man_diversit,6,Double,0,0,Diversité spécifique des palétuviers (patchs),Diversité spécifique des palétuviers (patchs)
+27,man_vital,6,Double,0,0,Vitalité des palétuviers (patchs),Vitalité des palétuviers (patchs)
+28,pmi_div_poi,6,Double,0,0,Diversité spécifique des peuplements de poissons,Diversité spécifique des peuplements de poissons
+29,pmi_predat_poi,6,Double,0,0,Abondance et maturité des prédateurs supérieurs récifaux,Abondance et maturité des prédateurs supérieurs récifaux
+30,pmi_scarib_poi,6,Double,0,0,Abondance et maturité des poissons perroquets,Abondance et maturité des poissons perroquets
+31,pmi_macro_inv,6,Double,0,0,Abondance des macro-invertébrés,Abondance des macro-invertébrés
+32,note_bsd,6,Double,0,0,Note Mercicor Benthique de substrats durs,Note Mercicor Benthique de substrats durs
+33,note_bsm,6,Double,0,0,Note Mercicor Benthique de substrats meubles,Note Mercicor Benthique de substrats meubles
+34,note_ben,6,Double,0,0,Note Mercicor Benthique,Note Mercicor Benthique
+35,note_man,6,Double,0,0,Note Mercicor Mangrove,Note Mercicor Mangrove
+36,note_pmi,6,Double,0,0,Note Mercicor Poissons et Macro-invertébrés,Note Mercicor Poissons et Macro-invertébrés
+37,score_mercicor,6,Double,0,0,Score Mercicor,Score Mercicor

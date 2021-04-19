@@ -1,0 +1,9 @@
+idx,name,type,typeName,length,precision,comment,alias
+1,id,4,Integer64,0,0,ID,Identifiant
+2,nom,10,String,0,0,libellé du scenario,libellé du scénario
+3,gain_bsd,6,Double,0,0,Gain Mercicor Benthique de substrats durs,Gain Mercicor Benthique de substrats durs
+4,gain_bsm,6,Double,0,0,Gain Mercicor Benthique de substrats meubles,Gain Mercicor Benthique de substrats meubles
+5,gain_ben,6,Double,0,0,Gain Mercicor Benthique,Gain Mercicor Benthique
+6,gain_man,6,Double,0,0,Gain Mercicor Mangrove,Gain Mercicor Mangrove
+7,gain_pmi,6,Double,0,0,Gain Mercicor Poissons et Macro-invertébrés,Gain Mercicor Poissons et Macro-invertébrés
+8,gain_mercicor,6,Double,0,0,Gain Mercicor,Gain Mercicor

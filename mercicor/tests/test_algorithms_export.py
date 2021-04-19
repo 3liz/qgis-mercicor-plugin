@@ -24,7 +24,7 @@ class TestExportAlgorithms(BaseTestProcessing):
 
     def _observation_layer_empty(self) -> tuple:
         """ Internal function to get the observation layer. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         name = 'observations'
         observations = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
 

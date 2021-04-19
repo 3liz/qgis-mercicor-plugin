@@ -34,7 +34,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
 
     def test_expressions_mercicor(self):
         """ Test that expressions are valid. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         layer = QgsVectorLayer('{}|layername=observations'.format(gpkg), 'test', 'ogr')
 
         # Fields
@@ -72,7 +72,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
                 self.assertTrue(habitat_layer.changeAttributeValue(feat.id(), index, 1))
         habitat_layer.commitChanges()
 
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         name = 'habitat_pression_etat_ecologique'
         hab_pression_etat_ecolo_layer = QgsVectorLayer('{}|layername={}'.format(gpkg, name), name, 'ogr')
 
@@ -137,7 +137,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
 
     def test_unicity_facies_name(self):
         """ Test the unicity between name and facies. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         layer = QgsVectorLayer('{}|layername=habitat'.format(gpkg), 'test', 'ogr')
         self.assertTrue(layer.isValid())
 
@@ -185,7 +185,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
 
     def test_expressions_calcul_perte(self):
         """ Test that expressions are valid. """
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
         layer = QgsVectorLayer(
             '{}|layername=habitat_pression_etat_ecologique'.format(gpkg), 'test', 'ogr')
         scenar = QgsVectorLayer('{}|layername=scenario_pression'.format(gpkg), 'test', 'ogr')

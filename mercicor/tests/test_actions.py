@@ -21,7 +21,7 @@ class TestActions(unittest.TestCase):
         project = QgsProject.instance()
         project.clear()
 
-        gpkg = plugin_test_data_path('main_geopackage_empty.gpkg', copy=True)
+        gpkg = plugin_test_data_path('main_geopackage_empty_pression.gpkg', copy=True)
 
         for layer_name in ('pression', 'habitat_pression_etat_ecologique', 'scenario_pression'):
             layer = QgsVectorLayer('{}|layername={}'.format(gpkg, layer_name), layer_name, 'ogr')
