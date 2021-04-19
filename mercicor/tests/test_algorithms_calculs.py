@@ -21,7 +21,7 @@ from mercicor.processing.calcul.calcul_habitat_pression_ecologique import (
     fields_indic,
 )
 from mercicor.processing.calcul.calcul_notes import CalculNotes
-from mercicor.processing.calcul.calcul_pertes import CalculPertes
+from mercicor.processing.calcul.calcul_pertes_gains import CalculPertes
 from mercicor.qgis_plugin_tools import plugin_test_data_path
 from mercicor.tests.base_processing import BaseTestProcessing
 
@@ -202,7 +202,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
 
         for note in CalculPertes().fields.keys():
             with self.subTest(i=note):
-                self.assertGreater(scenar.fields().indexOf(note), -1, note)
+                self.assertGreater(scenar.fields().indexOf('perte_{}'.format(note)), -1, note)
                 for field in CalculPertes().fields[note]:
                     with self.subTest(i=field):
                         self.assertGreater(layer.fields().indexOf(field), -1, field)
