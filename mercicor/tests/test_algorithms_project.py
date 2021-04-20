@@ -7,6 +7,9 @@ from qgis.core import QgsVectorLayer
 from qgis.processing import run
 
 from mercicor.definitions.project_type import ProjectType
+from mercicor.processing.project.load_qml_and_relations import (
+    LoadStylesAndRelations,
+)
 from mercicor.qgis_plugin_tools import (
     load_csv,
     plugin_test_data_path,
@@ -82,6 +85,31 @@ class TestProjectAlgorithms(BaseTestProcessing):
                     csv_fields.sort()
 
                     self.assertListEqual(gpkg_fields, csv_fields)
+
+    def test_combine_qml(self):
+        """ Test to combine QML files. """
+        labels = resources_path('qml', 'labels', 'observations.qml')
+        style = resources_path('qml', 'style', 'observations.qml')
+
+        qml = [labels, style]
+        path = LoadStylesAndRelations.combine_qml('foo', qml, False)
+        with open(path, 'r', encoding='utf-8') as f:
+            self.assertIn('labelsEnabled="0"', f.read())
+
+        path = LoadStylesAndRelations.combine_qml('foo', qml, True)
+        with open(path, 'r', encoding='utf-8') as f:
+            self.assertIn('labelsEnabled="1"', f.read())
+
+        # Check number of lines
+        # -3 because we have the 2 top lines and the last line
+        with open(labels, 'r', encoding='utf-8') as f:
+            lines_label = len(f.readlines()) - 3
+
+        with open(style, 'r', encoding='utf-8') as f:
+            lines_style = len(f.readlines()) - 3
+
+        with open(path, 'r', encoding='utf-8') as f:
+            self.assertEqual(len(f.readlines()), lines_style + lines_label + 3)
 
     def test_apply_qml_styles(self):
         """ Test to apply some QML to loaded layers in the canvas. """
