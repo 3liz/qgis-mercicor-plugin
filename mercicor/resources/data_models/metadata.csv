@@ -3,3 +3,4 @@ idx,name,type,typeName,length,precision,comment,alias
 2,project_name,10,String,0,0,Nom du projet,Nom du projet
 3,crs,10,String,0,0,CRS,CRS
 4,extent,10,String,0,0,Emprise,Emprise
+5,project_type,10,String,0,0,Type de projet,Type de projet

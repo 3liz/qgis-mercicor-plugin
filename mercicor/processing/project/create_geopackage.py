@@ -110,6 +110,9 @@ class BaseCreateGeopackageProject(BaseProjectAlgorithm):
         extent = self.parameterAsExtent(parameters, self.PROJECT_EXTENT, context)
         crs = self.parameterAsCrs(parameters, self.PROJECT_CRS, context)
 
+        feedback.pushInfo(
+            'Création du projet de {type} : {name}'.format(type=self.project_type.label, name=project_name))
+
         parent_base_name = str(Path(base_name).parent)
         if not base_name.endswith('.gpkg'):
             base_name = os.path.join(parent_base_name, Path(base_name).stem + '.gpkg')
@@ -126,6 +129,7 @@ class BaseCreateGeopackageProject(BaseProjectAlgorithm):
         feature.setAttribute('project_name', project_name)
         feature.setAttribute('crs', str(crs.authid()))
         feature.setAttribute('extent', extent.asWktPolygon())
+        feature.setAttribute('project_type', self.project_type.label)
         with edit(output_layers['metadata']):
             output_layers['metadata'].addFeature(feature)
 
