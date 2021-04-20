@@ -7,7 +7,7 @@ from qgis.PyQt.QtCore import QUrl
 from qgis.PyQt.QtGui import QDesktopServices, QIcon
 from qgis.PyQt.QtWidgets import QAction, QMessageBox
 
-from mercicor.actions import actions_list
+from mercicor.actions import actions_list_compensation, actions_list_pression
 from mercicor.processing.provider import MercicorProvider
 from mercicor.qgis_plugin_tools import resources_path
 
@@ -51,6 +51,7 @@ class Mercicor:
     @staticmethod
     def run_action(name, *args):
         """ Run a specific action. """
+        actions_list = dict(actions_list_compensation, **actions_list_pression)
         if name not in actions_list:
             QMessageBox.critical(
                 None, 'Action non trouvée', 'L\'action n\'a pas été trouvée.')

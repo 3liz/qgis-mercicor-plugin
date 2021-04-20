@@ -18,22 +18,25 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import QDir, QTemporaryFile
 
-from mercicor.actions import actions_list
-from mercicor.definitions.joins import attribute_joins
-from mercicor.definitions.relations import relations
+from mercicor.actions import actions_list_compensation, actions_list_pression
+from mercicor.definitions.joins import (
+    attribute_joins_compensation,
+    attribute_joins_pression,
+)
+from mercicor.definitions.project_type import ProjectType
+from mercicor.definitions.relations import (
+    relations_compensation,
+    relations_pression,
+)
 from mercicor.processing.project.base import BaseProjectAlgorithm
 from mercicor.qgis_plugin_tools import load_csv, resources_path
 
 
-class LoadStylesAndRelations(BaseProjectAlgorithm):
+class BaseLoadStylesAndRelations(BaseProjectAlgorithm):
 
-    PRESSURE_LAYER = 'PRESSURE_LAYER'
     HABITAT_LAYER = 'HABITAT_LAYER'
-    PRESSURE_LIST_LAYER = 'PRESSURE_LIST_LAYER'
     HABITAT_ETAT_ECOLOGIQUE_LAYER = 'HABITAT_ETAT_ECOLOGIQUE_LAYER'
     OBSERVATIONS_LAYER = 'OBSERVATIONS_LAYER'
-    SCENARIO_PRESSION = 'SCENARIO_PRESSION'
-    HABITAT_PRESSION_ETAT_ECOLOGIQUE = 'HABITAT_PRESSION_ETAT_ECOLOGIQUE'
 
     ACTIONS_ADDED = 'ACTIONS_ADDED'
     JOINS_ADDED = 'JOINS_ADDED'
@@ -48,11 +51,31 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
         self.success_action = 0
         self.input_layers = None
 
+    @property
+    def project_type(self) -> ProjectType:
+        # noinspection PyTypeChecker
+        return NotImplementedError
+
+    @property
+    def attribute_joins(self) -> list:
+        """ List of all attribute joins. """
+        return NotImplementedError
+
+    @property
+    def relations(self) -> list:
+        """ List of all relations. """
+        return NotImplementedError
+
+    @property
+    def actions_list(self) -> list:
+        """ List of all actions. """
+        return NotImplementedError
+
     def name(self):
-        return "load_qml_and_relations"
+        return "load_qml_and_relations_{}".format(self.project_type.label)
 
     def displayName(self):
-        return "Charger les styles"
+        return "Charger les styles de {}".format(self.project_type.label)
 
     def shortHelpString(self):
         return (
@@ -74,10 +97,10 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     def initAlgorithm(self, config):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.PRESSURE_LAYER,
-                "Couche des pressions",
+                self.IMPACT_LAYER,
+                self.project_type.label_impact,
                 [QgsProcessing.TypeVectorPolygon],
-                defaultValue='pression',
+                defaultValue=self.project_type.couche_impact,
             )
         )
         self.addParameter(
@@ -86,14 +109,6 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
                 "Couche des habitats",
                 [QgsProcessing.TypeVectorPolygon],
                 defaultValue='habitat',
-            )
-        )
-        self.addParameter(
-            QgsProcessingParameterVectorLayer(
-                self.PRESSURE_LIST_LAYER,
-                "Liste des types de pression",
-                [QgsProcessing.TypeVectorPolygon],
-                defaultValue='liste_type_pression',
             )
         )
 
@@ -117,19 +132,19 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.SCENARIO_PRESSION,
-                "Couche des scénario de pression",
+                self.SCENARIO_IMPACT,
+                self.project_type.label_scenario_impact,
                 [QgsProcessing.TypeVectorPolygon],
-                defaultValue='scenario_pression',
+                defaultValue=self.project_type.couche_scenario_impact,
             )
         )
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.HABITAT_PRESSION_ETAT_ECOLOGIQUE,
-                "Couche du résultat de l'intersection entre les pressions et les habitats.",
+                self.HABITAT_IMPACT_ETAT_ECOLOGIQUE,
+                self.project_type.label_habitat_impact_etat_ecologique,
                 [QgsProcessing.TypeVectorPolygon],
-                defaultValue='habitat_pression_etat_ecologique',
+                defaultValue=self.project_type.couche_habitat_impact_etat_ecologique,
             )
         )
 
@@ -178,18 +193,18 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
     def add_actions(self, feedback):
         """ Add actions for layers. """
-        for action in actions_list.values():
+        for action in self.actions_list.values():
             # We remove multiple times actions on a layer :(
             self.input_layers[action.layer].actions().clearActions()
 
-        for action in actions_list.values():
+        for action in self.actions_list.values():
             feedback.pushInfo('Ajout de l\'action sur {}'.format(action.layer))
             self.input_layers[action.layer].actions().addAction(action.action)
             self.success_action += 1
 
     def add_joins(self, feedback):
         """ Add all joins between tables. """
-        for definition in attribute_joins:
+        for definition in self.attribute_joins:
             definition = dict(definition)
             join_layer = definition['join_layer']
             layer_add_join = definition['layer_add_join']
@@ -226,7 +241,7 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     def add_relations(self, context, feedback):
         """ Add all relations to the QGIS project. """
         relation_manager = context.project().relationManager()
-        for definition in relations:
+        for definition in self.relations:
             # definition: Relation
 
             if relation_manager.relation(definition.qgis_id):
@@ -331,22 +346,92 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
 
     def fetch_layers(self, parameters, context):
         """ Fetch layers from the form and set them in a dictionary. """
-        pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LAYER, context)
+        impact_layer = self.parameterAsVectorLayer(parameters, self.IMPACT_LAYER, context)
         habitat_layer = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
-        list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
         habitat_etat_ecologique = self.parameterAsVectorLayer(
             parameters, self.HABITAT_ETAT_ECOLOGIQUE_LAYER, context)
         observations_layer = self.parameterAsVectorLayer(parameters, self.OBSERVATIONS_LAYER, context)
-        scenario_pression = self.parameterAsVectorLayer(parameters, self.SCENARIO_PRESSION, context)
-        habitat_pression_etat_ecologique = self.parameterAsVectorLayer(
-            parameters, self.HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
+        scenario_impact = self.parameterAsVectorLayer(parameters, self.SCENARIO_IMPACT, context)
+        habitat_impact_etat_ecologique = self.parameterAsVectorLayer(
+            parameters, self.HABITAT_IMPACT_ETAT_ECOLOGIQUE, context)
 
         self.input_layers = {
             "habitat": habitat_layer,
-            "pression": pressure_layer,
-            "liste_type_pression": list_pressure_layer,
+            self.project_type.couche_impact: impact_layer,
             "observations": observations_layer,
             "habitat_etat_ecologique": habitat_etat_ecologique,
-            "scenario_pression": scenario_pression,
-            "habitat_pression_etat_ecologique": habitat_pression_etat_ecologique,
+            self.project_type.couche_scenario_impact: scenario_impact,
+            self.project_type.couche_habitat_impact_etat_ecologique: habitat_impact_etat_ecologique,
         }
+
+
+class PressionLoadStylesAndRelations(BaseLoadStylesAndRelations):
+
+    IMPACT_LAYER = 'PRESSION_LAYER'
+    SCENARIO_IMPACT = 'SCENARIO_PRESSION'
+    HABITAT_IMPACT_ETAT_ECOLOGIQUE = 'HABITAT_PRESSION_ETAT_ECOLOGIQUE'
+    PRESSURE_LIST_LAYER = 'PRESSURE_LIST_LAYER'
+
+    @property
+    def project_type(self):
+        return ProjectType.Pression
+
+    def initAlgorithm(self, config=None):
+
+        super().initAlgorithm(config)
+        self.addParameter(
+            QgsProcessingParameterVectorLayer(
+                self.PRESSURE_LIST_LAYER,
+                "Liste des types de pression",
+                [QgsProcessing.TypeVectorPolygon],
+                defaultValue='liste_type_pression',
+            )
+        )
+
+    def fetch_layers(self, parameters, context):
+
+        super().fetch_layers(parameters, context)
+        list_pressure_layer = self.parameterAsVectorLayer(parameters, self.PRESSURE_LIST_LAYER, context)
+
+        self.input_layers["liste_type_pression"] = list_pressure_layer
+
+    @property
+    def attribute_joins(self) -> list:
+        """ List of all attribute joins. """
+        return attribute_joins_pression
+
+    @property
+    def relations(self) -> list:
+        """ List of all relations. """
+        return relations_pression
+
+    @property
+    def actions_list(self) -> list:
+        """ List of all actions. """
+        return actions_list_pression
+
+
+class CompensationLoadStylesAndRelations(BaseLoadStylesAndRelations):
+
+    IMPACT_LAYER = 'COMPENSATION_LAYER'
+    SCENARIO_IMPACT = 'SCENARIO_COMPENSATION'
+    HABITAT_IMPACT_ETAT_ECOLOGIQUE = 'HABITAT_COMPENSATION_ETAT_ECOLOGIQUE'
+
+    @property
+    def project_type(self):
+        return ProjectType.Compensation
+
+    @property
+    def attribute_joins(self) -> list:
+        """ List of all attribute joins. """
+        return attribute_joins_compensation
+
+    @property
+    def relations(self) -> list:
+        """ List of all relations. """
+        return relations_compensation
+
+    @property
+    def actions_list(self) -> list:
+        """ List of all actions. """
+        return actions_list_compensation

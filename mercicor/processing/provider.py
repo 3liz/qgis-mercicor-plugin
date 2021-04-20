@@ -36,7 +36,8 @@ from mercicor.processing.project.create_geopackage import (
     CreateGeopackageProjectPression,
 )
 from mercicor.processing.project.load_qml_and_relations import (
-    LoadStylesAndRelations,
+    CompensationLoadStylesAndRelations,
+    PressionLoadStylesAndRelations,
 )
 from mercicor.qgis_plugin_tools import resources_path
 
@@ -58,7 +59,8 @@ class MercicorProvider(QgsProcessingProvider):
         self.addAlgorithm(ImportObservationData())
         self.addAlgorithm(ImportDataCompensation())
         self.addAlgorithm(ImportDataPression())
-        self.addAlgorithm(LoadStylesAndRelations())
+        self.addAlgorithm(PressionLoadStylesAndRelations())
+        self.addAlgorithm(CompensationLoadStylesAndRelations())
 
     def id(self):  # NOQA
         return "mercicor"

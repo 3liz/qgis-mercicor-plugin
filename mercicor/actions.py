@@ -8,7 +8,10 @@ from qgis.core import Qgis, QgsAction, QgsExpression, QgsMessageLog, QgsProject
 from qgis.utils import iface
 
 from mercicor.definitions.relations import (
-    relations,
+    relations_compensation,
+    relations_pression,
+    scenario_compensation__compensation,
+    scenario_compensation__habitat_compensation_etat_ecologique,
     scenario_pression__habitat_pression_etat_ecologique,
     scenario_pression__pression,
 )
@@ -23,14 +26,22 @@ def change_scenario(*args, project: QgsProject = None):
     """ Action used to change the scenario and apply filter. """
     scenario_id = int(args[0])
     scenario_name = args[1]
+    type_scenario = args[2]
 
     if project is None:
         project = QgsProject.instance()
 
-    relations_ids = [
-        scenario_pression__pression.qgis_id,
-        scenario_pression__habitat_pression_etat_ecologique.qgis_id,
-    ]
+    if type_scenario == 'pression':
+        relations_ids = [
+            scenario_pression__pression.qgis_id,
+            scenario_pression__habitat_pression_etat_ecologique.qgis_id,
+        ]
+    else:
+        relations_ids = [
+            scenario_compensation__compensation.qgis_id,
+            scenario_compensation__habitat_compensation_etat_ecologique.qgis_id,
+        ]
+
     for ids in relations_ids:
         relation = project.relationManager().relation(ids)
         if not relation.isValid():
@@ -55,13 +66,17 @@ def delete_scenario(*args, project: QgsProject = None):
     """ Action used to delete the scenario and his entities child """
     scenario_id = int(args[0])
     scenario_name = args[1]
+    layer_name = 'scenario_' + args[2]
     scenario_layer = None
 
     if project is None:
         project = QgsProject.instance()
 
+    relations = []
+    relations.extend(relations_compensation)
+    relations.extend(relations_pression)
     for relation in relations:
-        if relation.referenced_layer == 'scenario_pression':
+        if relation.referenced_layer == layer_name:
             relation = project.relationManager().relation(relation.qgis_id)
             if not relation.isValid():
                 QgsMessageLog.logMessage(
@@ -92,10 +107,10 @@ def delete_scenario(*args, project: QgsProject = None):
     )
 
 
-action_change_scenario = QgsAction(
+action_change_scenario_pression = QgsAction(
     QgsAction.GenericPython,
     'Mettre ce scénario par défaut',
-    CALL.format(action_name=change_scenario.__name__, params='[% "id" %], \'[% "nom" %]\''),
+    CALL.format(action_name=change_scenario.__name__, params='[% "id" %], \'[% "nom" %]\', \'pression\''),
     '',
     False,
     'Permet de changer de scénario pour les couches pression et habitat écologique',
@@ -103,10 +118,32 @@ action_change_scenario = QgsAction(
     ''
 )
 
-action_delete_scenario = QgsAction(
+action_delete_scenario_pression = QgsAction(
     QgsAction.GenericPython,
     'Supprimer ce scénario',
-    CALL.format(action_name=delete_scenario.__name__, params='[% "id" %], \'[% "nom" %]\''),
+    CALL.format(action_name=delete_scenario.__name__, params='[% "id" %], \'[% "nom" %]\', \'pression\''),
+    '',
+    False,
+    'Permet de supprimer le scénario en supprimant les entités enfants',
+    ['Feature', 'Field'],
+    ''
+)
+
+action_change_scenario_compensation = QgsAction(
+    QgsAction.GenericPython,
+    'Mettre ce scénario par défaut',
+    CALL.format(action_name=change_scenario.__name__, params='[% "id" %], \'[% "nom" %]\', \'compensation\''),
+    '',
+    False,
+    'Permet de changer de scénario pour les couches pression et habitat écologique',
+    ['Feature', 'Field'],
+    ''
+)
+
+action_delete_scenario_compensation = QgsAction(
+    QgsAction.GenericPython,
+    'Supprimer ce scénario',
+    CALL.format(action_name=delete_scenario.__name__, params='[% "id" %], \'[% "nom" %]\', \'compensation\''),
     '',
     False,
     'Permet de supprimer le scénario en supprimant les entités enfants',
@@ -124,17 +161,32 @@ class Action:
         self.action = action
 
 
-actions_list = {
+actions_list_pression = {
     change_scenario.__name__: Action(
         'scenario_pression',
-        2,
+        3,
         change_scenario,
-        action_change_scenario
+        action_change_scenario_pression
     ),
     delete_scenario.__name__: Action(
         'scenario_pression',
-        2,
+        3,
         delete_scenario,
-        action_delete_scenario
+        action_delete_scenario_pression
+    )
+}
+
+actions_list_compensation = {
+    change_scenario.__name__: Action(
+        'scenario_compensation',
+        3,
+        change_scenario,
+        action_change_scenario_compensation
+    ),
+    delete_scenario.__name__: Action(
+        'scenario_compensation',
+        3,
+        delete_scenario,
+        action_delete_scenario_compensation
     )
 }

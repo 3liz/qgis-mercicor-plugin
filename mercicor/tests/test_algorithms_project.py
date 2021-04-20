@@ -8,7 +8,7 @@ from qgis.processing import run
 
 from mercicor.definitions.project_type import ProjectType
 from mercicor.processing.project.load_qml_and_relations import (
-    LoadStylesAndRelations,
+    PressionLoadStylesAndRelations,
 )
 from mercicor.qgis_plugin_tools import (
     load_csv,
@@ -92,11 +92,11 @@ class TestProjectAlgorithms(BaseTestProcessing):
         style = resources_path('qml', 'style', 'observations.qml')
 
         qml = [labels, style]
-        path = LoadStylesAndRelations.combine_qml('foo', qml, False)
+        path = PressionLoadStylesAndRelations.combine_qml('foo', qml, False)
         with open(path, 'r', encoding='utf-8') as f:
             self.assertIn('labelsEnabled="0"', f.read())
 
-        path = LoadStylesAndRelations.combine_qml('foo', qml, True)
+        path = PressionLoadStylesAndRelations.combine_qml('foo', qml, True)
         with open(path, 'r', encoding='utf-8') as f:
             self.assertIn('labelsEnabled="1"', f.read())
 
@@ -144,7 +144,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
         self.assertTrue(habitat_pression_etat_ecologique.isValid())
 
         params = {
-            "PRESSURE_LAYER": pression_layer,
+            "PRESSION_LAYER": pression_layer,
             "PRESSURE_LIST_LAYER": list_type_pressure,
             "HABITAT_LAYER": habitat_layer,
             "HABITAT_ETAT_ECOLOGIQUE_LAYER": habitat_etat_ecologique,
@@ -152,7 +152,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
             "SCENARIO_PRESSION": scenario_pression,
             "HABITAT_PRESSION_ETAT_ECOLOGIQUE": habitat_pression_etat_ecologique,
         }
-        result = run("mercicor:load_qml_and_relations", params)
+        result = run("mercicor:load_qml_and_relations_pression", params)
         self.assertEqual(result['QML_LOADED'], 12)
         # self.assertEqual(result['JOINS_ADDED'], 4)
         # self.assertEqual(result['ACTIONS_ADDED'], 1)

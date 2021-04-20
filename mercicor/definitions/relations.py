@@ -72,11 +72,59 @@ pression_habitat_pression_etat_ecologique__pression = Relation(
     referencing_field='id',
 )
 
-relations = (
+relations = [
+    habitat__habitat_etat_ecologique
+]
+
+relations_pression = [
     type_pression__pression,
     scenario_pression__pression,
     scenario_pression__habitat_pression_etat_ecologique,
-    habitat__habitat_etat_ecologique,
     habitat_pression_etat_ecologique__habitat,
     pression_habitat_pression_etat_ecologique__pression,
+]
+relations_pression.extend(relations)
+
+scenario_compensation__compensation = Relation(
+    qgis_id='scenario_compensation-compensation',
+    name='Scénario compensation - Compensation',
+    referenced_layer='scenario_compensation',
+    referenced_field='id',
+    referencing_layer='compensation',
+    referencing_field='scenario_id',
 )
+
+scenario_compensation__habitat_compensation_etat_ecologique = Relation(
+    qgis_id='scenario_compensation-habitat_compensation_etat_ecologique',
+    name='Scénario compensation - Habitat compensation état écologique',
+    referenced_layer='scenario_compensation',
+    referenced_field='id',
+    referencing_layer='habitat_compensation_etat_ecologique',
+    referencing_field='scenario_id',
+)
+
+habitat_compensation_etat_ecologique__habitat = Relation(
+    qgis_id='habitat_compensation_etat_ecologique-habitat',
+    name='Habitat compensation état écologique - Habitat',
+    referenced_layer='habitat_compensation_etat_ecologique',
+    referenced_field='habitat_id',
+    referencing_layer='habitat',
+    referencing_field='id',
+)
+
+compensation_habitat_compensation_etat_ecologique__compensation = Relation(
+    qgis_id='compensation_habitat_compensation_etat_ecologique-compensation',
+    name='Habitat compensation état écologique - compensation',
+    referenced_layer='habitat_compensation_etat_ecologique',
+    referenced_field='compensation_id',
+    referencing_layer='compensation',
+    referencing_field='id',
+)
+
+relations_compensation = [
+    scenario_compensation__compensation,
+    scenario_compensation__habitat_compensation_etat_ecologique,
+    habitat_compensation_etat_ecologique__habitat,
+    compensation_habitat_compensation_etat_ecologique__compensation,
+]
+relations_compensation.extend(relations)
