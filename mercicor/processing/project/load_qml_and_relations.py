@@ -4,6 +4,8 @@ __email__ = "info@3liz.org"
 
 import os
 
+from collections import OrderedDict
+
 from qgis.core import (
     Qgis,
     QgsMapLayer,
@@ -14,6 +16,7 @@ from qgis.core import (
     QgsRelation,
     QgsVectorLayerJoinInfo,
 )
+from qgis.PyQt.QtCore import QDir, QTemporaryFile
 
 from mercicor.actions import actions_list
 from mercicor.definitions.joins import attribute_joins
@@ -267,21 +270,69 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     def add_styles(self, feedback, input_layers):
         """ Add all QML style in the resource folder to given layers. """
         feedback.pushInfo("Ajout des styles")
-        qml_component = {
-            'fields': QgsMapLayer.Fields,
-            'form': QgsMapLayer.Forms,
-            'style': QgsMapLayer.Symbology,
-            'layer_configuration': QgsMapLayer.LayerConfiguration,
-        }
-        for name, component in qml_component.items():
-            for layer_name, vector_layer in input_layers.items():
+        qml_component = OrderedDict()
+        qml_component['style'] = QgsMapLayer.Symbology
+        qml_component['fields'] = QgsMapLayer.Fields
+        qml_component['form'] = QgsMapLayer.Forms
+        qml_component['labels'] = QgsMapLayer.Labeling
+        qml_component['layer_configuration'] = QgsMapLayer.LayerConfiguration
+
+        for layer_name, vector_layer in input_layers.items():
+            qml_list = []
+            has_labels = False
+            for name, component in qml_component.items():
                 qml_file = resources_path('qml', name, '{}.qml'.format(layer_name))
                 if not os.path.exists(qml_file):
                     continue
-                vector_layer.loadNamedStyle(qml_file, component)
-                feedback.pushInfo(vector_layer.name() + " {} for {} successfully loaded".format(
-                    name.capitalize(), layer_name))
                 self.success_qml += 1
+                qml_list.append(qml_file)
+                if component == QgsMapLayer.Labeling:
+                    has_labels = True
+
+            if not qml_list:
+                continue
+
+            output_file = self.combine_qml(layer_name, qml_list, has_labels)
+            feedback.pushDebugInfo(output_file)
+            message, flag = vector_layer.loadNamedStyle(output_file)
+            if flag:
+                feedback.reportError(message)
+            feedback.pushInfo(vector_layer.name() + " QML for {} successfully loaded".format(layer_name))
+
+    @staticmethod
+    def combine_qml(layer_name: str, qml_list: list, has_labels: bool) -> str:
+        """ Combine a few QML together in a single file. """
+        # Actions is missing, managed with Python code
+        categories = (
+            "LayerConfiguration|Symbology|Symbology3D|Labeling|Fields|Forms|MapTips|Diagrams|AttributeTable|"
+            "Rendering|CustomProperties|GeometryOptions|Relations|Temporal|Legend|Elevation"
+        )
+
+        qml_str = "<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>\n"
+        qml_str += (
+            '<qgis simplifyAlgorithm="0" readOnly="0" simplifyLocal="1" simplifyDrawingHints="1" '
+            'simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" maxScale="0" labelsEnabled="{label}" '
+            'styleCategories="{categories}" simplifyDrawingTol="1" version="{version}" '
+            'minScale="100000000">\n'.format(
+                label='1' if has_labels else '0',
+                categories=categories,
+                version=Qgis.QGIS_VERSION)
+        )
+
+        for qml in qml_list:
+            with open(qml, 'r', encoding='utf-8') as f:
+                qml_str += ''.join(f.readlines()[2:-1])
+
+        qml_str += '</qgis>'
+        temporary = QTemporaryFile('{}/{}_XXXXXX.qml'.format(QDir.tempPath(), layer_name))
+        temporary.open()
+        output_file = temporary.fileName()
+        temporary.remove()
+
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write(qml_str)
+
+        return output_file
 
     def fetch_layers(self, parameters, context):
         """ Fetch layers from the form and set them in a dictionary. """
