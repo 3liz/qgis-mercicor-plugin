@@ -17,6 +17,8 @@ Il y a plusieurs étapes :
 
 ## Diagramme
 
+### Projet de pression
+
 ```mermaid
 graph TD
 Projet[Création du projet : geopackage et style]
@@ -62,6 +64,44 @@ EtatEcologique -->EtatEcologiqueHabitatPression
 Pression --> EtatEcologiqueHabitatPression
 EtatEcologiqueHabitatPression --> Pertes
 ScénarioPression --> Pertes
+```
+
+### Projet de compensation
+
+```mermaid
+graph TD
+Projet[Création du projet : geopackage et style]
+Habitat[Import des données habitat]
+VérificationUnicité[Vérification de l'unicité nom/faciès]
+ObservationsExport[Préparation de la campagne]
+ObservationsImport[Import de la campagne]
+CalculNotesMercicor[Calcul des notes mercicor]
+Compensation[Import des compensations]
+ScénarioCompensation{{Création d'un scénario}}
+EtatEcologique[État écologique des habitats]
+EtatEcologiqueHabitatCompensation[Habitat compensation état écologique]
+Gains[Calcul des gains]
+
+Projet --> Habitat
+Projet --> ObservationsExport
+Projet --> Compensation
+
+subgraph Données Habitats
+Habitat <--> VérificationUnicité
+end
+subgraph Données Observations
+ObservationsExport --> ObservationsImport
+ObservationsImport --> CalculNotesMercicor
+end
+subgraph Données Compensation
+Compensation-- Implique ---ScénarioCompensation
+end
+Habitat --> EtatEcologique
+CalculNotesMercicor --> EtatEcologique
+EtatEcologique -->EtatEcologiqueHabitatCompensation
+Compensation --> EtatEcologiqueHabitatCompensation
+EtatEcologiqueHabitatCompensation --> Gains
+ScénarioCompensation --> Gains
 ```
 
 ![create_gpkg](media/mercicor-barre_outils.jpg)
