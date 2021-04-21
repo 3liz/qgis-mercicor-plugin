@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Unreleased
+
+* Ajout d'une symbologie sur certaines couches
+* Ajout de la notion de projet de pression et de compensation
+
 ## 0.7.0 - 2021-04-14
 
 * Ajout d'une action pour la suppression d'un scénario 

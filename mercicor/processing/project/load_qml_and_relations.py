@@ -302,20 +302,15 @@ class LoadStylesAndRelations(BaseProjectAlgorithm):
     @staticmethod
     def combine_qml(layer_name: str, qml_list: list, has_labels: bool) -> str:
         """ Combine a few QML together in a single file. """
-        # Actions is missing, managed with Python code
-        categories = (
-            "LayerConfiguration|Symbology|Symbology3D|Labeling|Fields|Forms|MapTips|Diagrams|AttributeTable|"
-            "Rendering|CustomProperties|GeometryOptions|Relations|Temporal|Legend|Elevation"
-        )
-
-        qml_str = "<!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>\n"
-        qml_str += (
+        # Actions is missing from categories because it is managed with Python code
+        qml_str = (
+            '<!DOCTYPE qgis PUBLIC \'http://mrcc.com/qgis.dtd\' \'SYSTEM\'>\n'
             '<qgis simplifyAlgorithm="0" readOnly="0" simplifyLocal="1" simplifyDrawingHints="1" '
             'simplifyMaxScale="1" hasScaleBasedVisibilityFlag="0" maxScale="0" labelsEnabled="{label}" '
-            'styleCategories="{categories}" simplifyDrawingTol="1" version="{version}" '
-            'minScale="100000000">\n'.format(
+            'styleCategories="LayerConfiguration|Symbology|Symbology3D|Labeling|Fields|Forms|MapTips|Diagrams'
+            '|AttributeTable|Rendering|CustomProperties|GeometryOptions|Relations|Temporal|Legend|Elevation" '
+            'simplifyDrawingTol="1" version="{version}" minScale="100000000">\n'.format(
                 label='1' if has_labels else '0',
-                categories=categories,
                 version=Qgis.QGIS_VERSION)
         )
 
