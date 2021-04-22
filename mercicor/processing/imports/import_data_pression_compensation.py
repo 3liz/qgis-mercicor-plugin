@@ -315,10 +315,10 @@ class BaseImportImpactData(BaseImportAlgorithm):
         params = {
             'HABITAT_LAYER': habitat,
             'PRESSION_LAYER': self.output_layer,
-            'HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER': habitat_impact  # TODO update PRESSION to COMPENSATION
+            'HABITAT_{}_ETAT_ECOLOGIQUE_LAYER'.format(self.project_type.label.upper()): habitat_impact
         }
         processing.run(
-            "mercicor:calcul_habitat_pression_etat_ecologique",  # TODO update PRESSION to COMPENSATION
+            "mercicor:calcul_habitat_{}_etat_ecologique".format(self.project_type.label),
             params,
             context=context,
             feedback=feedback,

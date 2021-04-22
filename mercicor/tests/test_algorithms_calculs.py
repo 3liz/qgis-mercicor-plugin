@@ -17,8 +17,8 @@ from qgis.core import (
 from qgis.processing import run
 from qgis.PyQt.QtCore import QVariant
 
-from mercicor.processing.calcul.calcul_habitat_pression_ecologique import (
-    fields_indic,
+from mercicor.processing.calcul.calcul_habitat_impact_ecologique import (
+    BaseCalculHabitatImpactEtatEcologique,
 )
 from mercicor.processing.calcul.calcul_notes import CalculNotes
 from mercicor.processing.calcul.calcul_pertes_gains import CalculPertes
@@ -62,12 +62,12 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         habitat_layer = QgsVectorLayer(plugin_test_data_path('habitat.geojson', copy=True), 'habitat', 'ogr')
 
         habitat_layer.startEditing()
-        for field in fields_indic:
+        for field in BaseCalculHabitatImpactEtatEcologique.fields():
             if field not in habitat_layer.fields().names():
                 self.assertTrue(habitat_layer.addAttribute(QgsField(field, QVariant.Double)))
 
         for feat in habitat_layer.getFeatures():
-            for field in fields_indic:
+            for field in BaseCalculHabitatImpactEtatEcologique.fields():
                 index = habitat_layer.fields().indexOf(field)
                 self.assertTrue(habitat_layer.changeAttributeValue(feat.id(), index, 1))
         habitat_layer.commitChanges()
@@ -106,7 +106,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         request_hpee.setLimit(1)
         for feature in hab_pression_etat_ecolo_layer.getFeatures(request_hpee):
             self.assertIn(feature['pression_id'], ids)
-            for field in fields_indic:
+            for field in BaseCalculHabitatImpactEtatEcologique.fields():
                 with self.subTest(i=field):
                     self.assertEqual(0, feature[field])
 
@@ -115,7 +115,7 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         request_hpee.setLimit(1)
         for feature in hab_pression_etat_ecolo_layer.getFeatures(request_hpee):
             self.assertNotIn(feature['pression_id'], ids)
-            for field in fields_indic:
+            for field in BaseCalculHabitatImpactEtatEcologique.fields():
                 with self.subTest(i=field):
                     self.assertNotEqual(0, feature[field])
 
