@@ -19,47 +19,57 @@ from qgis.core import (
 )
 from qgis.PyQt.QtCore import NULL
 
+from mercicor.definitions.project_type import ProjectType
 from mercicor.processing.imports.base import BaseImportAlgorithm
 
 
-class ImportPressureData(BaseImportAlgorithm):
+class BaseImportImpactData(BaseImportAlgorithm):
 
     INPUT_LAYER = 'INPUT_LAYER'
-    PRESSURE_FIELD = 'PRESSURE_FIELD'
     SCENARIO_NAME = 'SCENARIO_NAME'
     SCENARIO_LAYER = 'SCENARIO_LAYER'
     OUTPUT_LAYER = 'OUTPUT_LAYER'
-    APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE = 'APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE'
     HABITAT_LAYER = 'HABITAT_LAYER'
-    HABITAT_PRESSION_LAYER = 'HABITAT_PRESSION_LAYER'
 
     def __init__(self):
         super().__init__()
         self._output_layer = None
         self.scenario_id = None
 
-        # Values for "pression"
-        self.expected_values = {1, 2, 3, 4, 5, 6, NULL}
-
     @property
     def output_layer(self):
         return self._output_layer
 
+    @property
+    def project_type(self) -> ProjectType:
+        # noinspection PyTypeChecker
+        return NotImplementedError
+
+    @property
+    def expected_values(self) -> set:
+        """ Expected values for the input layer. """
+        return set()
+
+    @property
+    def destination_impact_field(self) -> str:
+        """ Destination impact field. """
+        # noinspection PyTypeChecker
+        return NotImplementedError
+
     def name(self):
-        return 'import_donnees_pression'
+        return 'import_donnees_{}'.format(self.project_type.label)
 
     def displayName(self):
-        return 'Import données pression'
+        return 'Import données {}'.format(self.project_type.label)
 
     def shortHelpString(self):
         return (
-            'Import des données de pression.\n\n'
-            'Le champ des pressions doit être correctement formaté : \n'
-            '{values}\n'
+            'Import des données de {project_type}.\n\n'
             'Un scénario sera également crée et la couche sera filtrée pour ce scénario.\n'
             'Il est également possible de lancer directement le calcul de l\'état écologique des '
-            'habitats en fonction de la pression à l\'aide de la case à cocher.'.format(
-                values=', '.join([str(i) for i in self.expected_values]))
+            'habitats en fonction de la {project_type} à l\'aide de la case à cocher.'.format(
+                project_type=self.project_type.label,
+            )
         )
 
     def initAlgorithm(self, config):
@@ -74,8 +84,8 @@ class ImportPressureData(BaseImportAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterField(
-                self.PRESSURE_FIELD,
-                "Champ comportant la pression",
+                self.IMPACT_FIELD,
+                "Champ comportant la {}".format(self.project_type.label),
                 None,
                 self.INPUT_LAYER,
                 QgsProcessingParameterField.Numeric,
@@ -87,14 +97,14 @@ class ImportPressureData(BaseImportAlgorithm):
             "Nom du scénario",
         )
         self.set_tooltip_parameter(
-            parameter, 'Le nom du scénario en cours pour cette couche des pressions.')
+            parameter, 'Le nom du scénario en cours pour cette couche de {}.'.format(self.project_type.label))
         self.addParameter(parameter)
 
         parameter = QgsProcessingParameterVectorLayer(
             self.SCENARIO_LAYER,
-            "Couche des scénarios de destination",
+            self.project_type.label_scenario_impact,
             [QgsProcessing.TypeVector],
-            defaultValue="scenario_pression",
+            defaultValue=self.project_type.couche_scenario_impact,
         )
         self.set_tooltip_parameter(
             parameter,
@@ -104,16 +114,17 @@ class ImportPressureData(BaseImportAlgorithm):
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.OUTPUT_LAYER,
-                "Couche des pressions de destination",
+                self.project_type.label_impact,
                 [QgsProcessing.TypeVectorPolygon],
-                defaultValue="pression",
+                defaultValue=self.project_type.couche_impact,
             )
         )
 
         self.addParameter(
             QgsProcessingParameterBoolean(
-                self.APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE,
-                "Ajout des entités de l'état écologique des habitats en fonction de la pression."
+                self.APPLY_CALCUL_HABITAT_IMPACT_ETAT_ECOLOGIQUE,
+                "Ajout des entités de l'état écologique des habitats en fonction de la {}.".format(
+                    self.project_type.label)
             )
         )
 
@@ -129,10 +140,10 @@ class ImportPressureData(BaseImportAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
-                self.HABITAT_PRESSION_LAYER,
-                "Couche des habitats pressions état écologique de destination",
+                self.HABITAT_IMPACT_LAYER,
+                self.project_type.label_habitat_impact_etat_ecologique,
                 [QgsProcessing.TypeVectorPolygon],
-                defaultValue="habitat_pression_etat_ecologique",
+                defaultValue=self.project_type.couche_habitat_impact_etat_ecologique,
                 optional=True,
             )
         )
@@ -144,10 +155,10 @@ class ImportPressureData(BaseImportAlgorithm):
         ]
 
         apply_calcul = self.parameterAsBoolean(
-            parameters, self.APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
+            parameters, self.APPLY_CALCUL_HABITAT_IMPACT_ETAT_ECOLOGIQUE, context)
         if apply_calcul:
             layers.append(self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context))
-            layers.append(self.parameterAsVectorLayer(parameters, self.HABITAT_PRESSION_LAYER, context))
+            layers.append(self.parameterAsVectorLayer(parameters, self.HABITAT_IMPACT_LAYER, context))
 
         for layer in layers:
             flag, msg = self.check_layer_is_geopackage(layer)
@@ -158,19 +169,27 @@ class ImportPressureData(BaseImportAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT_LAYER, context)
-        pressure_field = self.parameterAsExpression(parameters, self.PRESSURE_FIELD, context)
+        impact_field = self.parameterAsExpression(parameters, self.IMPACT_FIELD, context)
         scenario_name = self.parameterAsString(parameters, self.SCENARIO_NAME, context)
         scenario_layer = self.parameterAsVectorLayer(parameters, self.SCENARIO_LAYER, context)
         self._output_layer = self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context)
 
-        index = input_layer.fields().indexOf(pressure_field)
+        index = input_layer.fields().indexOf(impact_field)
         unique_values = input_layer.uniqueValues(index)
-        if not unique_values.issubset(self.expected_values):
+        if len(self.expected_values) and not unique_values.issubset(self.expected_values):
             feedback.reportError(
-                'Valeur possible pour la pression : ' + ', '.join([str(i) for i in self.expected_values]))
+                'Valeur possible pour la {} : {}'.format(
+                    self.project_type.label,
+                    ', '.join([str(i) for i in self.expected_values])
+                )
+            )
             diff = unique_values - self.expected_values
             raise QgsProcessingException(
-                'Valeur inconnue pour la pression : ' + ', '.join([str(i) for i in diff]))
+                'Valeur inconnue pour la {} : {}'.format(
+                    self.project_type.label,
+                    ', '.join([str(i) for i in diff])
+                )
+            )
 
         params = {
             'INPUT': input_layer,
@@ -186,7 +205,7 @@ class ImportPressureData(BaseImportAlgorithm):
 
         params = {
             'INPUT': results['OUTPUT'],
-            'FIELD': [pressure_field],
+            'FIELD': [impact_field],
             'OUTPUT': 'TEMPORARY_OUTPUT'
         }
         results = processing.run(
@@ -243,7 +262,7 @@ class ImportPressureData(BaseImportAlgorithm):
         feedback.pushInfo('Création du scénario numéro {} : {}'.format(self.scenario_id, scenario_name))
 
         request = QgsFeatureRequest()
-        request.setSubsetOfAttributes([pressure_field], input_layer.fields())
+        request.setSubsetOfAttributes([impact_field], input_layer.fields())
         for input_feature in layer.getFeatures(request):
 
             if feedback.isCanceled():
@@ -252,7 +271,7 @@ class ImportPressureData(BaseImportAlgorithm):
             output_feature = QgsFeature(self.output_layer.fields())
             output_feature.setGeometry(input_feature.geometry())
             output_feature.setAttribute('scenario_id', self.scenario_id)
-            output_feature.setAttribute('type_pression', input_feature[pressure_field])
+            output_feature.setAttribute(self.destination_impact_field, input_feature[impact_field])
             with edit(self.output_layer):
                 self.output_layer.addFeature(output_feature)
 
@@ -260,15 +279,15 @@ class ImportPressureData(BaseImportAlgorithm):
             raise QgsProcessingException('Subset string is not valid')
 
         apply_calcul = self.parameterAsBoolean(
-            parameters, self.APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE, context)
+            parameters, self.APPLY_CALCUL_HABITAT_IMPACT_ETAT_ECOLOGIQUE, context)
 
         # Si apply_calcul = False
-        # ALors l'algo s'arrête ici
+        # Alors l'algo s'arrête ici
         if not apply_calcul:
-            return{}
+            return {}
 
         habitat = self.parameterAsVectorLayer(parameters, self.HABITAT_LAYER, context)
-        habitat_pression = self.parameterAsVectorLayer(parameters, self.HABITAT_PRESSION_LAYER, context)
+        habitat_impact = self.parameterAsVectorLayer(parameters, self.HABITAT_IMPACT_LAYER, context)
 
         # Vérification de l'unicité des couples habitat/faciès
         params = {
@@ -296,10 +315,10 @@ class ImportPressureData(BaseImportAlgorithm):
         params = {
             'HABITAT_LAYER': habitat,
             'PRESSION_LAYER': self.output_layer,
-            'HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER': habitat_pression
+            'HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER': habitat_impact  # TODO update PRESSION to COMPENSATION
         }
         processing.run(
-            "mercicor:calcul_habitat_pression_etat_ecologique",
+            "mercicor:calcul_habitat_pression_etat_ecologique",  # TODO update PRESSION to COMPENSATION
             params,
             context=context,
             feedback=feedback,
@@ -326,3 +345,49 @@ class ImportPressureData(BaseImportAlgorithm):
     def postProcess(self, context, feedback):
         self.output_layer.reloadData()
         self.output_layer.triggerRepaint()
+
+
+class ImportDataPression(BaseImportImpactData):
+
+    IMPACT_FIELD = 'PRESSION_FIELD'
+    APPLY_CALCUL_HABITAT_IMPACT_ETAT_ECOLOGIQUE = 'APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE'
+    HABITAT_IMPACT_LAYER = 'HABITAT_PRESSION_LAYER'
+
+    @property
+    def project_type(self):
+        return ProjectType.Pression
+
+    def shortHelpString(self):
+        help_string = super().shortHelpString()
+        help_string += (
+            '\n\n'
+            'Le champ de pressions doit être correctement formaté : \n'
+            '{values}\n'.format(values=', '.join([str(i) for i in self.expected_values]))
+        )
+        return help_string
+
+    @property
+    def expected_values(self) -> set:
+        """ Expected values for the input layer. """
+        return {1, 2, 3, 4, 5, 6, NULL}
+
+    @property
+    def destination_impact_field(self) -> str:
+        """ Destination impact field. """
+        return 'type_pression'
+
+
+class ImportDataCompensation(BaseImportImpactData):
+
+    IMPACT_FIELD = 'COMPENSATION_FIELD'
+    APPLY_CALCUL_HABITAT_IMPACT_ETAT_ECOLOGIQUE = 'APPLY_CALCUL_HABITAT_COMPENSATION_ETAT_ECOLOGIQUE'
+    HABITAT_IMPACT_LAYER = 'HABITAT_COMPENSATION_LAYER'
+
+    @property
+    def project_type(self):
+        return ProjectType.Compensation
+
+    @property
+    def destination_impact_field(self) -> str:
+        """ Destination impact field. """
+        return 'nom'

@@ -26,7 +26,10 @@ from mercicor.processing.imports.import_data_habitat import ImportHabitatData
 from mercicor.processing.imports.import_data_observations import (
     ImportObservationData,
 )
-from mercicor.processing.imports.import_data_pressure import ImportPressureData
+from mercicor.processing.imports.import_data_pression_compensation import (
+    ImportDataCompensation,
+    ImportDataPression,
+)
 from mercicor.processing.project.create_geopackage import (
     CreateGeopackageProjectCompensation,
     CreateGeopackageProjectPression,
@@ -51,7 +54,8 @@ class MercicorProvider(QgsProcessingProvider):
         self.addAlgorithm(DownloadObservationFile())
         self.addAlgorithm(ImportHabitatData())
         self.addAlgorithm(ImportObservationData())
-        self.addAlgorithm(ImportPressureData())
+        self.addAlgorithm(ImportDataCompensation())
+        self.addAlgorithm(ImportDataPression())
         self.addAlgorithm(LoadStylesAndRelations())
 
     def id(self):  # NOQA

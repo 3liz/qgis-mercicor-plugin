@@ -65,7 +65,7 @@ class TestImportAlgorithms(BaseTestProcessing):
 
         params = {
             "INPUT_LAYER": layer_to_import,
-            "PRESSURE_FIELD": 'pression',
+            "PRESSION_FIELD": 'pression',
             "SCENARIO_NAME": 'testing scenario',
             "SCENARIO_LAYER": scenario_layer,
             "APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE": False,
@@ -96,7 +96,7 @@ class TestImportAlgorithms(BaseTestProcessing):
             '{}|layername=scenario_pression'.format(gpkg), 'test scenario', 'ogr')
         params = {
             "INPUT_LAYER": layer_to_import,
-            "PRESSURE_FIELD": 'pression',
+            "PRESSION_FIELD": 'pression',
             "SCENARIO_NAME": 'scenario',
             "SCENARIO_LAYER": scenario_pression_layer,
             "APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE": False,
@@ -224,7 +224,7 @@ class TestImportAlgorithms(BaseTestProcessing):
 
         params = {
             "INPUT_LAYER": layer_to_import,
-            "PRESSURE_FIELD": 'pression',
+            "PRESSION_FIELD": 'pression',
             "SCENARIO_NAME": 'testing scenario',
             "SCENARIO_LAYER": scenario_pression_layer,
             "APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE": True,
