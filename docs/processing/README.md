@@ -5,6 +5,72 @@ hide:
 
 # Processing
 
+## Calcul compensation
+
+
+### Calcul des notes de gain pour le scénario de compensation
+
+Calcul des notes de gain à partir des indicateurs MERCI-Cor
+
+Liste des notes :
+
+gain_bsd = La somme de ("hab_note_bsd + note_bsd ") * surface, filtré par scénario
+
+gain_bsm = La somme de ("hab_note_bsm + note_bsm ") * surface, filtré par scénario
+
+gain_man = La somme de ("hab_note_man + note_man ") * surface, filtré par scénario
+
+gain_pmi = La somme de ("hab_note_pmi + note_pmi ") * surface, filtré par scénario
+
+gain_ben = La somme de ("hab_note_ben + note_ben ") * surface, filtré par scénario
+
+gain_mercicor = La somme de ("hab_score_mercicor + score_mercicor ") * surface, filtré par scénario
+
+
+
+![algo_id](./mercicor-calcul_compensation.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+HABITAT_COMPENSATION_ETAT_ECOLOGIQUE|Couche habitat compensation état écologique|VectorLayer||✓||Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+SCENARIO_COMPENSATION|Table scénario compensation|VectorLayer||✓||Default: scenario_compensation <br> Type: TypeVectorAnyGeometry <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+No output
+
+***
+
+
+### Ajout des entités de l'état écologique des habitats en fonction de la compensation
+
+Ajout des entités de l'état écologique des habitats en fonction de la compensation.
+
+![algo_id](./mercicor-calcul_habitat_compensation_etat_ecologique.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+HABITAT_LAYER|Couches des habitats|VectorLayer|Couche des habitats dans le geopackage|✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
+COMPENSATION_LAYER|Couche des compensations|VectorLayer|Couche des compensations|✓||Default: compensation <br> Type: TypeVectorPolygon <br>|
+HABITAT_COMPENSATION_ETAT_ECOLOGIQUE_LAYER|Couche habitat compensation état écologique|VectorLayer|Couche habitat compensation état écologique|✓||Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+No output
+
+***
+
+
 ## Calcul
 
 
@@ -24,30 +90,6 @@ Calcul de l'état écologique des habitats à partir des données d'observations
 HABITAT|Couche habitat|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
 OBSERVATIONS|Couche observations|VectorLayer||✓||Default: observations <br> Type: TypeVectorPoint <br>|
 HABITAT_ETAT_ECOLOGIQUE|Table habitat état écologique|VectorLayer||✓||Default: habitat_etat_ecologique <br> Type: TypeVectorAnyGeometry <br>|
-
-
-#### Outputs
-
-| ID | Description | Type | Info |
-|:-:|:-:|:-:|:-:|
-No output
-
-***
-
-
-### Ajout des entités de l'état écologique des habitats en fonction de la pression
-
-Ajout des entités de l'état écologique des habitats en fonction des pressions.
-
-![algo_id](./mercicor-calcul_habitat_pression_etat_ecologique.jpg)
-
-#### Parameters
-
-| ID | Description | Type | Info | Required | Advanced | Option |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-HABITAT_LAYER|Couches des habitats|VectorLayer|Couche des habitats dans le geopackage|✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
-PRESSION_LAYER|Couches des pressions|VectorLayer|Couche des pressions dans le geopackage|✓||Default: pression <br> Type: TypeVectorPolygon <br>|
-HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER|Couches habitat pression état écologique|VectorLayer|Couches habitat pression état écologique dans le geopackage|✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
 
 
 #### Outputs
@@ -99,45 +141,6 @@ OUTPUT|output|VectorLayer||
 ***
 
 
-### Calcul des notes de perte pour le scénario de pression
-
-Calcul des notes de pertes à partir des indicateurs MERCI-Cor
-
-Liste des notes :
-
-perte_bsd = La somme de '("hab_note_bsd" - "note_bsd") * surface', filtré par scénario
-
-perte_bsm = La somme de '("hab_note_bsm" - "note_bsm") * surface', filtré par scénario
-
-perte_man = La somme de '("hab_note_man" - "note_man") * surface', filtré par scénario
-
-perte_pmi = La somme de '("hab_note_pmi" - "note_pmi") * surface', filtré par scénario
-
-perte_ben = La somme de '("hab_note_ben" - "note_ben") * surface', filtré par scénario
-
-perte_mercicor = La somme de '("hab_score_mercicor" - "score_mercicor") * surface', filtré par scénario
-
-
-
-![algo_id](./mercicor-calcul_pertes.jpg)
-
-#### Parameters
-
-| ID | Description | Type | Info | Required | Advanced | Option |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-HABITAT_PRESSION_ETAT_ECOLOGIQUE|Couche habitat pression état écologique|VectorLayer||✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
-SCENARIO_PRESSION|Table scénario pression|VectorLayer||✓||Default: scenario_pression <br> Type: TypeVectorAnyGeometry <br>|
-
-
-#### Outputs
-
-| ID | Description | Type | Info |
-|:-:|:-:|:-:|:-:|
-No output
-
-***
-
-
 ### Calcul unicité habitat/faciès
 
 Vérification des données des habitats.
@@ -166,14 +169,80 @@ NUMBER_OF_NON_UNIQUE|Nombre de couple habitat/faciès non unique|Number||
 ***
 
 
+## Calcul pression
+
+
+### Ajout des entités de l'état écologique des habitats en fonction de la pression
+
+Ajout des entités de l'état écologique des habitats en fonction de la pression.
+
+![algo_id](./mercicor-calcul_habitat_pression_etat_ecologique.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+HABITAT_LAYER|Couches des habitats|VectorLayer|Couche des habitats dans le geopackage|✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
+PRESSION_LAYER|Couche des pressions|VectorLayer|Couche des pressions|✓||Default: pression <br> Type: TypeVectorPolygon <br>|
+HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER|Couche habitat pression état écologique|VectorLayer|Couche habitat pression état écologique|✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+No output
+
+***
+
+
+### Calcul des notes de perte pour le scénario de pression
+
+Calcul des notes de perte à partir des indicateurs MERCI-Cor
+
+Liste des notes :
+
+perte_bsd = La somme de ("hab_note_bsd - note_bsd ") * surface, filtré par scénario
+
+perte_bsm = La somme de ("hab_note_bsm - note_bsm ") * surface, filtré par scénario
+
+perte_man = La somme de ("hab_note_man - note_man ") * surface, filtré par scénario
+
+perte_pmi = La somme de ("hab_note_pmi - note_pmi ") * surface, filtré par scénario
+
+perte_ben = La somme de ("hab_note_ben - note_ben ") * surface, filtré par scénario
+
+perte_mercicor = La somme de ("hab_score_mercicor - score_mercicor ") * surface, filtré par scénario
+
+
+
+![algo_id](./mercicor-calcul_pression.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+HABITAT_PRESSION_ETAT_ECOLOGIQUE|Couche habitat pression état écologique|VectorLayer||✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+SCENARIO_PRESSION|Table scénario pression|VectorLayer||✓||Default: scenario_pression <br> Type: TypeVectorAnyGeometry <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+No output
+
+***
+
+
 ## Administration
 
 
-### Créer le geopackage de la zone d'étude
+### Créer le projet de compensation de la zone d'étude
 
-Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage.
+Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage pour le projet de compensation
 
-![algo_id](./mercicor-create_geopackage_project.jpg)
+![algo_id](./mercicor-create_geopackage_project_compensation.jpg)
 
 #### Parameters
 
@@ -196,25 +265,85 @@ OUTPUT_LAYERS|Couches de sorties|MultipleLayers||
 ***
 
 
-### Charger les styles
+### Créer le projet de pression de la zone d'étude
 
-Charger les styles pour les différentes couches.
+Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage pour le projet de pression
 
-Les relations et les jointures vont également être chargés dans le projet.
-
-![algo_id](./mercicor-load_qml_and_relations.jpg)
+![algo_id](./mercicor-create_geopackage_project_pression.jpg)
 
 #### Parameters
 
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-PRESSURE_LAYER|Couche des pressions|VectorLayer||✓||Default: pression <br> Type: TypeVectorPolygon <br>|
+FILE_GPKG|Fichier Geopackage|FileDestination||✓|||
+PROJECT_NAME|Nom de la zone d'étude|String||✓|||
+PROJECT_CRS|CRS du project|Crs||✓||Default: EPSG:2154 <br> |
+PROJECT_EXTENT|Emprise du projet|Extent||✓|||
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+FILE_GPKG|Fichier Geopackage|File||
+OUTPUT_LAYERS|Couches de sorties|MultipleLayers||
+
+
+***
+
+
+### Charger les styles de compensation
+
+Charger les styles pour les différentes couches.
+
+Les relations et les jointures vont également être chargés dans le projet.
+
+![algo_id](./mercicor-load_qml_and_relations_compensation.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+COMPENSATION_LAYER|Couche des compensations|VectorLayer||✓||Default: compensation <br> Type: TypeVectorPolygon <br>|
 HABITAT_LAYER|Couche des habitats|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
-PRESSURE_LIST_LAYER|Liste des types de pression|VectorLayer||✓||Default: liste_type_pression <br> Type: TypeVectorPolygon <br>|
 OBSERVATIONS_LAYER|Couches des observations|VectorLayer||✓||Default: observations <br> Type: TypeVectorPoint <br>|
 HABITAT_ETAT_ECOLOGIQUE_LAYER|Table des observations ramenées à l'habitat|VectorLayer||✓||Default: habitat_etat_ecologique <br> Type: TypeVectorPolygon <br>|
-SCENARIO_PRESSION|Couche des scénario de pression|VectorLayer||✓||Default: scenario_pression <br> Type: TypeVectorPolygon <br>|
-HABITAT_PRESSION_ETAT_ECOLOGIQUE|Couche du résultat de l'intersection entre les pressions et les habitats.|VectorLayer||✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+SCENARIO_COMPENSATION|Table scénario compensation|VectorLayer||✓||Default: scenario_compensation <br> Type: TypeVectorPolygon <br>|
+HABITAT_COMPENSATION_ETAT_ECOLOGIQUE|Couche habitat compensation état écologique|VectorLayer||✓||Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+JOINS_ADDED|Nombre de jointures chargées|Number||
+ACTIONS_ADDED|Nombre d'actions chargées|Number||
+RELATIONS_ADDED|Nombre de relations chargées|Number||
+QML_LOADED|Nombre de QML chargés|Number||
+
+
+***
+
+
+### Charger les styles de pression
+
+Charger les styles pour les différentes couches.
+
+Les relations et les jointures vont également être chargés dans le projet.
+
+![algo_id](./mercicor-load_qml_and_relations_pression.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+PRESSION_LAYER|Couche des pressions|VectorLayer||✓||Default: pression <br> Type: TypeVectorPolygon <br>|
+HABITAT_LAYER|Couche des habitats|VectorLayer||✓||Default: habitat <br> Type: TypeVectorPolygon <br>|
+OBSERVATIONS_LAYER|Couches des observations|VectorLayer||✓||Default: observations <br> Type: TypeVectorPoint <br>|
+HABITAT_ETAT_ECOLOGIQUE_LAYER|Table des observations ramenées à l'habitat|VectorLayer||✓||Default: habitat_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+SCENARIO_PRESSION|Table scénario pression|VectorLayer||✓||Default: scenario_pression <br> Type: TypeVectorPolygon <br>|
+HABITAT_PRESSION_ETAT_ECOLOGIQUE|Couche habitat pression état écologique|VectorLayer||✓||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+PRESSURE_LIST_LAYER|Liste des types de pression|VectorLayer||✓||Default: liste_type_pression <br> Type: TypeVectorPolygon <br>|
 
 
 #### Outputs
@@ -260,6 +389,38 @@ DESTINATION_FILE|Fichier tableur de destination|File||
 
 
 ## Import
+
+
+### Import données compensation
+
+Import des données de compensation.
+
+Un scénario sera également crée et la couche sera filtrée pour ce scénario.
+Il est également possible de lancer directement le calcul de l'état écologique des habitats en fonction de la compensation à l'aide de la case à cocher.
+
+![algo_id](./mercicor-import_donnees_compensation.jpg)
+
+#### Parameters
+
+| ID | Description | Type | Info | Required | Advanced | Option |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+INPUT_LAYER|Couche pour l'import|VectorLayer||✓||Type: TypeVectorPolygon <br>|
+COMPENSATION_FIELD|Champ comportant la compensation|Field||✓|||
+SCENARIO_NAME|Nom du scénario|String|Le nom du scénario en cours pour cette couche de compensation.|✓|||
+SCENARIO_LAYER|Table scénario compensation|VectorLayer|La couche de destination des scénarios doit être la couche qui est dans le geopackage.|✓||Default: scenario_compensation <br> Type: TypeVector <br>|
+OUTPUT_LAYER|Couche des compensations|VectorLayer||✓||Default: compensation <br> Type: TypeVectorPolygon <br>|
+APPLY_CALCUL_HABITAT_COMPENSATION_ETAT_ECOLOGIQUE|Ajout des entités de l'état écologique des habitats en fonction de la compensation.|Boolean||✓|||
+HABITAT_LAYER|Couche des habitats de destination|VectorLayer||||Default: habitat <br> Type: TypeVectorPolygon <br>|
+HABITAT_COMPENSATION_LAYER|Couche habitat compensation état écologique|VectorLayer||||Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+
+
+#### Outputs
+
+| ID | Description | Type | Info |
+|:-:|:-:|:-:|:-:|
+No output
+
+***
 
 
 ### Import données habitat
@@ -321,10 +482,12 @@ No output
 
 Import des données de pression.
 
-Le champ des pressions doit être correctement formaté : 
-1, 2, 3, 4, 5, 6, NULL
 Un scénario sera également crée et la couche sera filtrée pour ce scénario.
 Il est également possible de lancer directement le calcul de l'état écologique des habitats en fonction de la pression à l'aide de la case à cocher.
+
+Le champ de pressions doit être correctement formaté : 
+1, 2, 3, 4, 5, 6, NULL
+
 
 ![algo_id](./mercicor-import_donnees_pression.jpg)
 
@@ -333,13 +496,13 @@ Il est également possible de lancer directement le calcul de l'état écologiqu
 | ID | Description | Type | Info | Required | Advanced | Option |
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 INPUT_LAYER|Couche pour l'import|VectorLayer||✓||Type: TypeVectorPolygon <br>|
-PRESSURE_FIELD|Champ comportant la pression|Field||✓|||
-SCENARIO_NAME|Nom du scénario|String|Le nom du scénario en cours pour cette couche des pressions.|✓|||
-SCENARIO_LAYER|Couche des scénarios de destination|VectorLayer|La couche de destination des scénarios doit être la couche qui est dans le geopackage.|✓||Default: scenario_pression <br> Type: TypeVector <br>|
-OUTPUT_LAYER|Couche des pressions de destination|VectorLayer||✓||Default: pression <br> Type: TypeVectorPolygon <br>|
+PRESSION_FIELD|Champ comportant la pression|Field||✓|||
+SCENARIO_NAME|Nom du scénario|String|Le nom du scénario en cours pour cette couche de pression.|✓|||
+SCENARIO_LAYER|Table scénario pression|VectorLayer|La couche de destination des scénarios doit être la couche qui est dans le geopackage.|✓||Default: scenario_pression <br> Type: TypeVector <br>|
+OUTPUT_LAYER|Couche des pressions|VectorLayer||✓||Default: pression <br> Type: TypeVectorPolygon <br>|
 APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE|Ajout des entités de l'état écologique des habitats en fonction de la pression.|Boolean||✓|||
 HABITAT_LAYER|Couche des habitats de destination|VectorLayer||||Default: habitat <br> Type: TypeVectorPolygon <br>|
-HABITAT_PRESSION_LAYER|Couche des habitats pressions état écologique de destination|VectorLayer||||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+HABITAT_PRESSION_LAYER|Couche habitat pression état écologique|VectorLayer||||Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br>|
 
 
 #### Outputs
