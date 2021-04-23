@@ -1,9 +1,12 @@
 # CHANGELOG
 
-## Unreleased
+## 0.8.0 - 2021-04-23
 
-* Ajout d'une symbologie sur certaines couches
-* Ajout de la notion de projet de pression et de compensation
+* Ajout d'une symbologie et des étiquettes sur certaines couches, notamment les notes mercicor
+* Ajout de la notion de projet de pression ou de compensation
+* Ajout du diagramme de compensation dans la documentation
+* Correction de la précision des champs de type entier
+* Forcer la détection des champs lors de l'ouverture d'un fichier Excel
 
 ## 0.7.0 - 2021-04-14
 
