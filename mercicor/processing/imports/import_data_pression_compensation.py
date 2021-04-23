@@ -314,7 +314,7 @@ class BaseImportImpactData(BaseImportAlgorithm):
 
         params = {
             'HABITAT_LAYER': habitat,
-            'PRESSION_LAYER': self.output_layer,
+            '{}_LAYER'.format(self.project_type.label.upper()): self.output_layer,
             'HABITAT_{}_ETAT_ECOLOGIQUE_LAYER'.format(self.project_type.label.upper()): habitat_impact
         }
         processing.run(
