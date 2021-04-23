@@ -13,7 +13,11 @@ On peut utiliser la saisie dans QGIS via le formulaire d'édition pour l'ajout d
 
 ### Import de fichier tableur
 
-Soit par l'import fichier Excel.
+On peut aussi importer un fichier Excel.
+
+!!! tip
+    Concernant le champ `station_man`, le champ doit être reconnu comme un booléen, avec les valeurs à droite
+    ou au centre dans un tableur. Les champs à gauche sont du texte.
 
 !!! tip
     On peut ouvrir une feuille Excel dans QGIS, comme une couche tabulaire, sans géométrie.

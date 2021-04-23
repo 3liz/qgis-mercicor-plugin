@@ -172,6 +172,7 @@ class DownloadObservationFile(BaseExportAlgorithm):
         options.driverName = QgsVectorFileWriter.driverForExtension('xlsx')
         options.fileEncoding = 'UTF-8'
         options.layerName = input_layer.name()
+        options.layerOptions = ['OGR_XLSX_FIELD_TYPES=AUTO']
 
         write_result, error_message = QgsVectorFileWriter.writeAsVectorFormatV2(
             input_layer,
