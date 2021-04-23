@@ -365,7 +365,7 @@ class BaseLoadStylesAndRelations(BaseProjectAlgorithm):
         }
 
 
-class PressionLoadStylesAndRelations(BaseLoadStylesAndRelations):
+class LoadStylesAndRelationsPression(BaseLoadStylesAndRelations):
 
     IMPACT_LAYER = 'PRESSION_LAYER'
     SCENARIO_IMPACT = 'SCENARIO_PRESSION'
@@ -411,7 +411,7 @@ class PressionLoadStylesAndRelations(BaseLoadStylesAndRelations):
         return actions_list_pression
 
 
-class CompensationLoadStylesAndRelations(BaseLoadStylesAndRelations):
+class LoadStylesAndRelationsCompensation(BaseLoadStylesAndRelations):
 
     IMPACT_LAYER = 'COMPENSATION_LAYER'
     SCENARIO_IMPACT = 'SCENARIO_COMPENSATION'
