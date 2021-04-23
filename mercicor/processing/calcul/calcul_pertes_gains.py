@@ -9,6 +9,7 @@ from qgis.core import (
     QgsProcessing,
     QgsProcessingParameterVectorLayer,
 )
+from qgis.PyQt.QtCore import NULL
 
 from mercicor.definitions.project_type import ProjectType
 from mercicor.processing.calcul.base import CalculAlgorithm
@@ -102,26 +103,34 @@ class BaseCalculPertesGains(CalculAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         hab_etat_ecolo = self.parameterAsVectorLayer(
             parameters, self.HABITAT_IMPACT_ETAT_ECOLOGIQUE, context)
-        scenario = self.parameterAsVectorLayer(parameters, self.SCENARIO_IMPACT, context)
+        scenario_impact = self.parameterAsVectorLayer(parameters, self.SCENARIO_IMPACT, context)
 
-        scenario.startEditing()
+        scenario_impact.startEditing()
 
-        for feat in scenario.getFeatures():
+        for feat in scenario_impact.getFeatures():
             scenario_id = feat['id']
             for note in self.fields.keys():
-                feat[note] = 0
+                # from "bsd" to "perte_bsd" or "gain_bsd"
+                field_name = '{calcul_type}_{note}'.format(
+                    calcul_type=self.project_type.calcul_type, note=note)
+                feat[field_name] = 0
 
                 filter_expression = QgsExpression.createFieldEqualityExpression('scenario_id', scenario_id)
                 for feature in hab_etat_ecolo.getFeatures(filter_expression):
-                    geom = feature.geometry()
+
+                    if feature[self.fields[note][1]] == NULL:
+                        feedback.pushDebugInfo(
+                            "Omission du calcul {} pour l'entité {}".format(field_name, feature.id()))
+                        continue
+
                     sub_result = (
                             feature[self.fields[note][0]] +
                             (feature[self.fields[note][1]] * self.multiplier)
                     )
-                    feat[note] += sub_result * geom.area()
+                    feat[field_name] += sub_result * feature.geometry().area()
 
-            scenario.updateFeature(feat)
-        scenario.commitChanges()
+            scenario_impact.updateFeature(feat)
+        scenario_impact.commitChanges()
 
         return {}
 
