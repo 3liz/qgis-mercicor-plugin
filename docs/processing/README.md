@@ -292,9 +292,9 @@ OUTPUT_LAYERS|Couches de sorties|MultipleLayers||
 ***
 
 
-### Charger les styles de compensation
+### Charger les propriétés de compensation pour toutes les couches
 
-Charger les styles pour les différentes couches.
+Charger les propriétés pour les différentes couches : symbologie, formulaire, actions, configuration des champs.
 
 Les relations et les jointures vont également être chargés dans le projet.
 
@@ -325,9 +325,9 @@ QML_LOADED|Nombre de QML chargés|Number||
 ***
 
 
-### Charger les styles de pression
+### Charger les propriétés de pression pour toutes les couches
 
-Charger les styles pour les différentes couches.
+Charger les propriétés pour les différentes couches : symbologie, formulaire, actions, configuration des champs.
 
 Les relations et les jointures vont également être chargés dans le projet.
 

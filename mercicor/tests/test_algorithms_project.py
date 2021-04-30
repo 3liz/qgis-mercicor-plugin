@@ -7,8 +7,8 @@ from qgis.core import QgsVectorLayer
 from qgis.processing import run
 
 from mercicor.definitions.project_type import ProjectType
-from mercicor.processing.project.load_qml_and_relations import (
-    LoadStylesAndRelationsPression,
+from mercicor.processing.project.load_layer_config_and_relations import (
+    LoadLayerConfigAndRelationsPression,
 )
 from mercicor.qgis_plugin_tools import (
     load_csv,
@@ -92,11 +92,11 @@ class TestProjectAlgorithms(BaseTestProcessing):
         style = resources_path('qml', 'style', 'observations.qml')
 
         qml = [labels, style]
-        path = LoadStylesAndRelationsPression.combine_qml('foo', qml, False)
+        path = LoadLayerConfigAndRelationsPression.combine_qml('foo', qml, False)
         with open(path, 'r', encoding='utf-8') as f:
             self.assertIn('labelsEnabled="0"', f.read())
 
-        path = LoadStylesAndRelationsPression.combine_qml('foo', qml, True)
+        path = LoadLayerConfigAndRelationsPression.combine_qml('foo', qml, True)
         with open(path, 'r', encoding='utf-8') as f:
             self.assertIn('labelsEnabled="1"', f.read())
 

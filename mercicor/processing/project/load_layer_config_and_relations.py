@@ -32,7 +32,7 @@ from mercicor.processing.project.base import BaseProjectAlgorithm
 from mercicor.qgis_plugin_tools import load_csv, resources_path
 
 
-class BaseLoadStylesAndRelations(BaseProjectAlgorithm):
+class BaseLoadLayerConfigAndRelations(BaseProjectAlgorithm):
 
     HABITAT_LAYER = 'HABITAT_LAYER'
     HABITAT_ETAT_ECOLOGIQUE_LAYER = 'HABITAT_ETAT_ECOLOGIQUE_LAYER'
@@ -75,11 +75,12 @@ class BaseLoadStylesAndRelations(BaseProjectAlgorithm):
         return "load_qml_and_relations_{}".format(self.project_type.label)
 
     def displayName(self):
-        return "Charger les styles de {}".format(self.project_type.label)
+        return "Charger les propriétés de {} pour toutes les couches".format(self.project_type.label)
 
     def shortHelpString(self):
         return (
-            "Charger les styles pour les différentes couches.\n\n"
+            "Charger les propriétés pour les différentes couches : symbologie, formulaire, actions, "
+            "configuration des champs.\n\n"
             "Les relations et les jointures vont également être chargés dans le projet."
         )
 
@@ -365,7 +366,7 @@ class BaseLoadStylesAndRelations(BaseProjectAlgorithm):
         }
 
 
-class LoadStylesAndRelationsPression(BaseLoadStylesAndRelations):
+class LoadLayerConfigAndRelationsPression(BaseLoadLayerConfigAndRelations):
 
     IMPACT_LAYER = 'PRESSION_LAYER'
     SCENARIO_IMPACT = 'SCENARIO_PRESSION'
@@ -411,7 +412,7 @@ class LoadStylesAndRelationsPression(BaseLoadStylesAndRelations):
         return actions_list_pression
 
 
-class LoadStylesAndRelationsCompensation(BaseLoadStylesAndRelations):
+class LoadLayerConfigAndRelationsCompensation(BaseLoadLayerConfigAndRelations):
 
     IMPACT_LAYER = 'COMPENSATION_LAYER'
     SCENARIO_IMPACT = 'SCENARIO_COMPENSATION'
