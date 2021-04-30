@@ -42,8 +42,11 @@ class BaseImportImpactData(BaseImportAlgorithm):
 
     @property
     def project_type(self) -> ProjectType:
-        # noinspection PyTypeChecker
-        return NotImplementedError
+        raise NotImplementedError
+
+    @property
+    def impact_field_type(self):
+        raise NotImplementedError
 
     @property
     def expected_values(self) -> set:
@@ -53,8 +56,7 @@ class BaseImportImpactData(BaseImportAlgorithm):
     @property
     def destination_impact_field(self) -> str:
         """ Destination impact field. """
-        # noinspection PyTypeChecker
-        return NotImplementedError
+        raise NotImplementedError
 
     def name(self):
         return 'import_donnees_{}'.format(self.project_type.label)
@@ -88,7 +90,7 @@ class BaseImportImpactData(BaseImportAlgorithm):
                 "Champ comportant la {}".format(self.project_type.label),
                 None,
                 self.INPUT_LAYER,
-                QgsProcessingParameterField.Numeric,
+                self.impact_field_type,
             )
         )
 
@@ -372,6 +374,10 @@ class ImportDataPression(BaseImportImpactData):
         return {1, 2, 3, 4, 5, 6, NULL}
 
     @property
+    def impact_field_type(self):
+        return QgsProcessingParameterField.Numeric
+
+    @property
     def destination_impact_field(self) -> str:
         """ Destination impact field. """
         return 'type_pression'
@@ -386,6 +392,10 @@ class ImportDataCompensation(BaseImportImpactData):
     @property
     def project_type(self):
         return ProjectType.Compensation
+
+    @property
+    def impact_field_type(self):
+        return QgsProcessingParameterField.Any
 
     @property
     def destination_impact_field(self) -> str:
