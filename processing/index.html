@@ -1,0 +1,3011 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Extension QGIS pour l'étude des récifs coralliens">
+      
+      
+      
+        <meta name="author" content="3Liz">
+      
+      
+        <link rel="canonical" href="http://packages.3liz.org/private/um3-mercicor/processing/">
+      
+      <link rel="icon" href="../media/icon.jpg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.3">
+    
+    
+      
+        <title>Traitements - Mercicor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e35208c4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4cae4f">
+        
+      
+    
+    
+    
+      
+    
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="deep-orange">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#processing" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Mercicor" class="md-header__button md-logo" aria-label="Mercicor" data-md-component="logo">
+      
+  <img src="../media/icon.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mercicor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Traitements
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href=".." class="md-tabs__link">
+      Accueil
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../user-guide/" class="md-tabs__link">
+        Guide utilisateur
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../model/" class="md-tabs__link">
+      Modèle de données
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      Traitements
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../changelog/" class="md-tabs__link">
+      Changelog
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../contributing/" class="md-tabs__link">
+      Contribution
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Mercicor" class="md-nav__button md-logo" aria-label="Mercicor" data-md-component="logo">
+      
+  <img src="../media/icon.jpg" alt="logo">
+
+    </a>
+    Mercicor
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Accueil
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Guide utilisateur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Guide utilisateur" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Guide utilisateur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/initialisation-projet/" class="md-nav__link">
+        Création du projet
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/import-donnees-habitats/" class="md-nav__link">
+        Import des habitats
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/preparation-observations/" class="md-nav__link">
+        Préparation de la campagne
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/integration-campagne/" class="md-nav__link">
+        Intégration de la campagne
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/calcul-etat-ecologique/" class="md-nav__link">
+        Calcul de l'état écologique
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/etude-scenario/" class="md-nav__link">
+        Étude des scénarios
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/habitat-pression-etat-ecologique/" class="md-nav__link">
+        Habitat pression état écologique
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/pertes/" class="md-nav__link">
+        Pertes
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model/" class="md-nav__link">
+        Modèle de données
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Traitements
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Traitements
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#calcul-compensation" class="md-nav__link">
+    Calcul compensation
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calcul-des-notes-de-gain-pour-le-scenario-de-compensation" class="md-nav__link">
+    Calcul des notes de gain pour le scénario de compensation
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul des notes de gain pour le scénario de compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajout-des-entites-de-letat-ecologique-des-habitats-en-fonction-de-la-compensation" class="md-nav__link">
+    Ajout des entités de l'état écologique des habitats en fonction de la compensation
+  </a>
+  
+    <nav class="md-nav" aria-label="Ajout des entités de l'état écologique des habitats en fonction de la compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_1" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calcul" class="md-nav__link">
+    Calcul
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calcul-de-letat-ecologique-des-habitats" class="md-nav__link">
+    Calcul de l'état écologique des habitats
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul de l'état écologique des habitats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_2" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcul-des-notes-merci-cor" class="md-nav__link">
+    Calcul des notes MERCI-Cor
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul des notes MERCI-Cor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_3" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcul-unicite-habitatfacies" class="md-nav__link">
+    Calcul unicité habitat/faciès
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul unicité habitat/faciès">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_4" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calcul-pression" class="md-nav__link">
+    Calcul pression
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul pression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ajout-des-entites-de-letat-ecologique-des-habitats-en-fonction-de-la-pression" class="md-nav__link">
+    Ajout des entités de l'état écologique des habitats en fonction de la pression
+  </a>
+  
+    <nav class="md-nav" aria-label="Ajout des entités de l'état écologique des habitats en fonction de la pression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_5" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcul-des-notes-de-perte-pour-le-scenario-de-pression" class="md-nav__link">
+    Calcul des notes de perte pour le scénario de pression
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul des notes de perte pour le scénario de pression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_6" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#administration" class="md-nav__link">
+    Administration
+  </a>
+  
+    <nav class="md-nav" aria-label="Administration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creer-le-projet-de-compensation-de-la-zone-detude" class="md-nav__link">
+    Créer le projet de compensation de la zone d'étude
+  </a>
+  
+    <nav class="md-nav" aria-label="Créer le projet de compensation de la zone d'étude">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_7" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creer-le-projet-de-pression-de-la-zone-detude" class="md-nav__link">
+    Créer le projet de pression de la zone d'étude
+  </a>
+  
+    <nav class="md-nav" aria-label="Créer le projet de pression de la zone d'étude">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_8" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charger-les-proprietes-de-compensation-pour-toutes-les-couches" class="md-nav__link">
+    Charger les propriétés de compensation pour toutes les couches
+  </a>
+  
+    <nav class="md-nav" aria-label="Charger les propriétés de compensation pour toutes les couches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_9" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charger-les-proprietes-de-pression-pour-toutes-les-couches" class="md-nav__link">
+    Charger les propriétés de pression pour toutes les couches
+  </a>
+  
+    <nav class="md-nav" aria-label="Charger les propriétés de pression pour toutes les couches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_10" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    Export
+  </a>
+  
+    <nav class="md-nav" aria-label="Export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#telecharger-le-modele-des-observations" class="md-nav__link">
+    Télécharger le modèle des observations
+  </a>
+  
+    <nav class="md-nav" aria-label="Télécharger le modèle des observations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_11" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_11" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    Import
+  </a>
+  
+    <nav class="md-nav" aria-label="Import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-donnees-compensation" class="md-nav__link">
+    Import données compensation
+  </a>
+  
+    <nav class="md-nav" aria-label="Import données compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_12" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_12" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-donnees-habitat" class="md-nav__link">
+    Import données habitat
+  </a>
+  
+    <nav class="md-nav" aria-label="Import données habitat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_13" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_13" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-donnees-observation" class="md-nav__link">
+    Import données observation
+  </a>
+  
+    <nav class="md-nav" aria-label="Import données observation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_14" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_14" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-donnees-pression" class="md-nav__link">
+    Import données pression
+  </a>
+  
+    <nav class="md-nav" aria-label="Import données pression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_15" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_15" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        Contribution
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#calcul-compensation" class="md-nav__link">
+    Calcul compensation
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calcul-des-notes-de-gain-pour-le-scenario-de-compensation" class="md-nav__link">
+    Calcul des notes de gain pour le scénario de compensation
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul des notes de gain pour le scénario de compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajout-des-entites-de-letat-ecologique-des-habitats-en-fonction-de-la-compensation" class="md-nav__link">
+    Ajout des entités de l'état écologique des habitats en fonction de la compensation
+  </a>
+  
+    <nav class="md-nav" aria-label="Ajout des entités de l'état écologique des habitats en fonction de la compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_1" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calcul" class="md-nav__link">
+    Calcul
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calcul-de-letat-ecologique-des-habitats" class="md-nav__link">
+    Calcul de l'état écologique des habitats
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul de l'état écologique des habitats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_2" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcul-des-notes-merci-cor" class="md-nav__link">
+    Calcul des notes MERCI-Cor
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul des notes MERCI-Cor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_3" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcul-unicite-habitatfacies" class="md-nav__link">
+    Calcul unicité habitat/faciès
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul unicité habitat/faciès">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_4" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#calcul-pression" class="md-nav__link">
+    Calcul pression
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul pression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ajout-des-entites-de-letat-ecologique-des-habitats-en-fonction-de-la-pression" class="md-nav__link">
+    Ajout des entités de l'état écologique des habitats en fonction de la pression
+  </a>
+  
+    <nav class="md-nav" aria-label="Ajout des entités de l'état écologique des habitats en fonction de la pression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_5" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calcul-des-notes-de-perte-pour-le-scenario-de-pression" class="md-nav__link">
+    Calcul des notes de perte pour le scénario de pression
+  </a>
+  
+    <nav class="md-nav" aria-label="Calcul des notes de perte pour le scénario de pression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_6" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#administration" class="md-nav__link">
+    Administration
+  </a>
+  
+    <nav class="md-nav" aria-label="Administration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creer-le-projet-de-compensation-de-la-zone-detude" class="md-nav__link">
+    Créer le projet de compensation de la zone d'étude
+  </a>
+  
+    <nav class="md-nav" aria-label="Créer le projet de compensation de la zone d'étude">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_7" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creer-le-projet-de-pression-de-la-zone-detude" class="md-nav__link">
+    Créer le projet de pression de la zone d'étude
+  </a>
+  
+    <nav class="md-nav" aria-label="Créer le projet de pression de la zone d'étude">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_8" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charger-les-proprietes-de-compensation-pour-toutes-les-couches" class="md-nav__link">
+    Charger les propriétés de compensation pour toutes les couches
+  </a>
+  
+    <nav class="md-nav" aria-label="Charger les propriétés de compensation pour toutes les couches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_9" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_9" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charger-les-proprietes-de-pression-pour-toutes-les-couches" class="md-nav__link">
+    Charger les propriétés de pression pour toutes les couches
+  </a>
+  
+    <nav class="md-nav" aria-label="Charger les propriétés de pression pour toutes les couches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_10" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_10" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    Export
+  </a>
+  
+    <nav class="md-nav" aria-label="Export">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#telecharger-le-modele-des-observations" class="md-nav__link">
+    Télécharger le modèle des observations
+  </a>
+  
+    <nav class="md-nav" aria-label="Télécharger le modèle des observations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_11" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_11" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#import" class="md-nav__link">
+    Import
+  </a>
+  
+    <nav class="md-nav" aria-label="Import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-donnees-compensation" class="md-nav__link">
+    Import données compensation
+  </a>
+  
+    <nav class="md-nav" aria-label="Import données compensation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_12" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_12" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-donnees-habitat" class="md-nav__link">
+    Import données habitat
+  </a>
+  
+    <nav class="md-nav" aria-label="Import données habitat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_13" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_13" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-donnees-observation" class="md-nav__link">
+    Import données observation
+  </a>
+  
+    <nav class="md-nav" aria-label="Import données observation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_14" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_14" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-donnees-pression" class="md-nav__link">
+    Import données pression
+  </a>
+  
+    <nav class="md-nav" aria-label="Import données pression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters_15" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputs_15" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="processing">Processing<a class="headerlink" href="#processing" title="Permanent link">#</a></h1>
+<h2 id="calcul-compensation">Calcul compensation<a class="headerlink" href="#calcul-compensation" title="Permanent link">#</a></h2>
+<h3 id="calcul-des-notes-de-gain-pour-le-scenario-de-compensation">Calcul des notes de gain pour le scénario de compensation<a class="headerlink" href="#calcul-des-notes-de-gain-pour-le-scenario-de-compensation" title="Permanent link">#</a></h3>
+<p>Calcul des notes de gain à partir des indicateurs MERCI-Cor</p>
+<p>Liste des notes :</p>
+<p>gain_bsd = La somme de ("hab_note_bsd + note_bsd ") * surface, filtré par scénario</p>
+<p>gain_bsm = La somme de ("hab_note_bsm + note_bsm ") * surface, filtré par scénario</p>
+<p>gain_man = La somme de ("hab_note_man + note_man ") * surface, filtré par scénario</p>
+<p>gain_pmi = La somme de ("hab_note_pmi + note_pmi ") * surface, filtré par scénario</p>
+<p>gain_ben = La somme de ("hab_note_ben + note_ben ") * surface, filtré par scénario</p>
+<p>gain_mercicor = La somme de ("hab_score_mercicor + score_mercicor ") * surface, filtré par scénario</p>
+<p><img alt="algo_id" src="mercicor-calcul_compensation.jpg" /></p>
+<h4 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">HABITAT_COMPENSATION_ETAT_ECOLOGIQUE</td>
+<td align="center">Couche habitat compensation état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">SCENARIO_COMPENSATION</td>
+<td align="center">Table scénario compensation</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: scenario_compensation <br> Type: TypeVectorAnyGeometry <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="ajout-des-entites-de-letat-ecologique-des-habitats-en-fonction-de-la-compensation">Ajout des entités de l'état écologique des habitats en fonction de la compensation<a class="headerlink" href="#ajout-des-entites-de-letat-ecologique-des-habitats-en-fonction-de-la-compensation" title="Permanent link">#</a></h3>
+<p>Ajout des entités de l'état écologique des habitats en fonction de la compensation.</p>
+<p><img alt="algo_id" src="mercicor-calcul_habitat_compensation_etat_ecologique.jpg" /></p>
+<h4 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">HABITAT_LAYER</td>
+<td align="center">Couches des habitats</td>
+<td align="center">VectorLayer</td>
+<td align="center">Couche des habitats dans le geopackage</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">COMPENSATION_LAYER</td>
+<td align="center">Couche des compensations</td>
+<td align="center">VectorLayer</td>
+<td align="center">Couche des compensations</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: compensation <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_COMPENSATION_ETAT_ECOLOGIQUE_LAYER</td>
+<td align="center">Couche habitat compensation état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center">Couche habitat compensation état écologique</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_1">Outputs<a class="headerlink" href="#outputs_1" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="calcul">Calcul<a class="headerlink" href="#calcul" title="Permanent link">#</a></h2>
+<h3 id="calcul-de-letat-ecologique-des-habitats">Calcul de l'état écologique des habitats<a class="headerlink" href="#calcul-de-letat-ecologique-des-habitats" title="Permanent link">#</a></h3>
+<p>Calcul de l'état écologique des habitats à partir des données d'observations :
+- Vérification de l'unicité du facies
+- Jointure de données
+- Calcul des notes</p>
+<p><img alt="algo_id" src="mercicor-calcul_habitat_etat_ecologique.jpg" /></p>
+<h4 id="parameters_2">Parameters<a class="headerlink" href="#parameters_2" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">HABITAT</td>
+<td align="center">Couche habitat</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">OBSERVATIONS</td>
+<td align="center">Couche observations</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: observations <br> Type: TypeVectorPoint <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_ETAT_ECOLOGIQUE</td>
+<td align="center">Table habitat état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_etat_ecologique <br> Type: TypeVectorAnyGeometry <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_2">Outputs<a class="headerlink" href="#outputs_2" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="calcul-des-notes-merci-cor">Calcul des notes MERCI-Cor<a class="headerlink" href="#calcul-des-notes-merci-cor" title="Permanent link">#</a></h3>
+<p>Calcul des notes MERCI-Cor à partir des indicateurs MERCI-Cor</p>
+<p>Liste des notes :</p>
+<p>note_bsd = (("bsd_recouv_cor" + "bsd_p_acrop" + "bsd_vital_cor" + "bsd_comp_struc" + "bsd_taille_cor" + "bsd_dens_juv" + "bsd_f_sessile" + "bsd_recouv_ma") / 8.0) * (10.0 / 3.0)</p>
+<p>note_bsm = (("bsm_fragm_herb" + "bsm_recouv_her" + "bsm_haut_herb" + "bsm_dens_herb" + "bsm_div_herb" + "bsm_epibiose") / 6.0) * (10.0 / 3.0)</p>
+<p>note_ben = CASE WHEN "note_bsd" IS NULL THEN "note_bsm" WHEN "note_bsm" IS NULL THEN "note_bsd" ELSE "note_bsd" * "perc_bsd" + "note_bsm" * "perc_bsm" END</p>
+<p>note_man = (("man_fragm" + "man_recouv" + "man_diam_tronc" + "man_dens" + "man_diversit" + "man_vital") / 6.0) * (10.0 / 3.0)</p>
+<p>note_pmi = (("pmi_div_poi" + "pmi_predat_poi" + "pmi_scarib_poi" + "pmi_macro_inv") / 4) * (10 / 3)</p>
+<p>score_mercicor = CASE WHEN lower(to_string("station_man")) = 'true' THEN ("note_man" + "note_pmi") / 2 ELSE ("note_ben" + "note_pmi") / 2 END</p>
+<p><img alt="algo_id" src="mercicor-calcul_notes.jpg" /></p>
+<h4 id="parameters_3">Parameters<a class="headerlink" href="#parameters_3" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">INPUT</td>
+<td align="center">Input layer</td>
+<td align="center">FeatureSource</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT</td>
+<td align="center">output</td>
+<td align="center">FeatureSink</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Type: TypeVector <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_3">Outputs<a class="headerlink" href="#outputs_3" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT</td>
+<td align="center">output</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="calcul-unicite-habitatfacies">Calcul unicité habitat/faciès<a class="headerlink" href="#calcul-unicite-habitatfacies" title="Permanent link">#</a></h3>
+<p>Vérification des données des habitats.
+Les champs nom et faciès doivent être unique par objet géographique.</p>
+<p><img alt="algo_id" src="mercicor-calcul_unicity_habitat.jpg" /></p>
+<h4 id="parameters_4">Parameters<a class="headerlink" href="#parameters_4" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">INPUT</td>
+<td align="center">Couche habitat</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">OUTPUT</td>
+<td align="center">Couche des habitat/faciès à unifier</td>
+<td align="center">FeatureSink</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">Type: TypeVectorPoint <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_4">Outputs<a class="headerlink" href="#outputs_4" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">OUTPUT</td>
+<td align="center">Couche des habitat/faciès à unifier</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">NUMBER_OF_UNIQUE</td>
+<td align="center">Nombre de couple habitat/faciès unique</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">NUMBER_OF_NON_UNIQUE</td>
+<td align="center">Nombre de couple habitat/faciès non unique</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="calcul-pression">Calcul pression<a class="headerlink" href="#calcul-pression" title="Permanent link">#</a></h2>
+<h3 id="ajout-des-entites-de-letat-ecologique-des-habitats-en-fonction-de-la-pression">Ajout des entités de l'état écologique des habitats en fonction de la pression<a class="headerlink" href="#ajout-des-entites-de-letat-ecologique-des-habitats-en-fonction-de-la-pression" title="Permanent link">#</a></h3>
+<p>Ajout des entités de l'état écologique des habitats en fonction de la pression.</p>
+<p><img alt="algo_id" src="mercicor-calcul_habitat_pression_etat_ecologique.jpg" /></p>
+<h4 id="parameters_5">Parameters<a class="headerlink" href="#parameters_5" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">HABITAT_LAYER</td>
+<td align="center">Couches des habitats</td>
+<td align="center">VectorLayer</td>
+<td align="center">Couche des habitats dans le geopackage</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">PRESSION_LAYER</td>
+<td align="center">Couche des pressions</td>
+<td align="center">VectorLayer</td>
+<td align="center">Couche des pressions</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: pression <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_PRESSION_ETAT_ECOLOGIQUE_LAYER</td>
+<td align="center">Couche habitat pression état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center">Couche habitat pression état écologique</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_5">Outputs<a class="headerlink" href="#outputs_5" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="calcul-des-notes-de-perte-pour-le-scenario-de-pression">Calcul des notes de perte pour le scénario de pression<a class="headerlink" href="#calcul-des-notes-de-perte-pour-le-scenario-de-pression" title="Permanent link">#</a></h3>
+<p>Calcul des notes de perte à partir des indicateurs MERCI-Cor</p>
+<p>Liste des notes :</p>
+<p>perte_bsd = La somme de ("hab_note_bsd - note_bsd ") * surface, filtré par scénario</p>
+<p>perte_bsm = La somme de ("hab_note_bsm - note_bsm ") * surface, filtré par scénario</p>
+<p>perte_man = La somme de ("hab_note_man - note_man ") * surface, filtré par scénario</p>
+<p>perte_pmi = La somme de ("hab_note_pmi - note_pmi ") * surface, filtré par scénario</p>
+<p>perte_ben = La somme de ("hab_note_ben - note_ben ") * surface, filtré par scénario</p>
+<p>perte_mercicor = La somme de ("hab_score_mercicor - score_mercicor ") * surface, filtré par scénario</p>
+<p><img alt="algo_id" src="mercicor-calcul_pression.jpg" /></p>
+<h4 id="parameters_6">Parameters<a class="headerlink" href="#parameters_6" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">HABITAT_PRESSION_ETAT_ECOLOGIQUE</td>
+<td align="center">Couche habitat pression état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">SCENARIO_PRESSION</td>
+<td align="center">Table scénario pression</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: scenario_pression <br> Type: TypeVectorAnyGeometry <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_6">Outputs<a class="headerlink" href="#outputs_6" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="administration">Administration<a class="headerlink" href="#administration" title="Permanent link">#</a></h2>
+<h3 id="creer-le-projet-de-compensation-de-la-zone-detude">Créer le projet de compensation de la zone d'étude<a class="headerlink" href="#creer-le-projet-de-compensation-de-la-zone-detude" title="Permanent link">#</a></h3>
+<p>Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage pour le projet de compensation</p>
+<p><img alt="algo_id" src="mercicor-create_geopackage_project_compensation.jpg" /></p>
+<h4 id="parameters_7">Parameters<a class="headerlink" href="#parameters_7" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">FILE_GPKG</td>
+<td align="center">Fichier Geopackage</td>
+<td align="center">FileDestination</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PROJECT_NAME</td>
+<td align="center">Nom de la zone d'étude</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PROJECT_CRS</td>
+<td align="center">CRS du project</td>
+<td align="center">Crs</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: EPSG:2154 <br></td>
+</tr>
+<tr>
+<td align="center">PROJECT_EXTENT</td>
+<td align="center">Emprise du projet</td>
+<td align="center">Extent</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_7">Outputs<a class="headerlink" href="#outputs_7" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">FILE_GPKG</td>
+<td align="center">Fichier Geopackage</td>
+<td align="center">File</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYERS</td>
+<td align="center">Couches de sorties</td>
+<td align="center">MultipleLayers</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="creer-le-projet-de-pression-de-la-zone-detude">Créer le projet de pression de la zone d'étude<a class="headerlink" href="#creer-le-projet-de-pression-de-la-zone-detude" title="Permanent link">#</a></h3>
+<p>Pour commencer une nouvelle zone d'étude, vous devez d'abord créer le geopackage pour le projet de pression</p>
+<p><img alt="algo_id" src="mercicor-create_geopackage_project_pression.jpg" /></p>
+<h4 id="parameters_8">Parameters<a class="headerlink" href="#parameters_8" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">FILE_GPKG</td>
+<td align="center">Fichier Geopackage</td>
+<td align="center">FileDestination</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PROJECT_NAME</td>
+<td align="center">Nom de la zone d'étude</td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PROJECT_CRS</td>
+<td align="center">CRS du project</td>
+<td align="center">Crs</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: EPSG:2154 <br></td>
+</tr>
+<tr>
+<td align="center">PROJECT_EXTENT</td>
+<td align="center">Emprise du projet</td>
+<td align="center">Extent</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_8">Outputs<a class="headerlink" href="#outputs_8" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">FILE_GPKG</td>
+<td align="center">Fichier Geopackage</td>
+<td align="center">File</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYERS</td>
+<td align="center">Couches de sorties</td>
+<td align="center">MultipleLayers</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="charger-les-proprietes-de-compensation-pour-toutes-les-couches">Charger les propriétés de compensation pour toutes les couches<a class="headerlink" href="#charger-les-proprietes-de-compensation-pour-toutes-les-couches" title="Permanent link">#</a></h3>
+<p>Charger les propriétés pour les différentes couches : symbologie, formulaire, actions, configuration des champs.</p>
+<p>Les relations et les jointures vont également être chargés dans le projet.</p>
+<p><img alt="algo_id" src="mercicor-load_qml_and_relations_compensation.jpg" /></p>
+<h4 id="parameters_9">Parameters<a class="headerlink" href="#parameters_9" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">COMPENSATION_LAYER</td>
+<td align="center">Couche des compensations</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: compensation <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_LAYER</td>
+<td align="center">Couche des habitats</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">OBSERVATIONS_LAYER</td>
+<td align="center">Couches des observations</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: observations <br> Type: TypeVectorPoint <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_ETAT_ECOLOGIQUE_LAYER</td>
+<td align="center">Table des observations ramenées à l'habitat</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">SCENARIO_COMPENSATION</td>
+<td align="center">Table scénario compensation</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: scenario_compensation <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_COMPENSATION_ETAT_ECOLOGIQUE</td>
+<td align="center">Couche habitat compensation état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_9">Outputs<a class="headerlink" href="#outputs_9" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">JOINS_ADDED</td>
+<td align="center">Nombre de jointures chargées</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">ACTIONS_ADDED</td>
+<td align="center">Nombre d'actions chargées</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">RELATIONS_ADDED</td>
+<td align="center">Nombre de relations chargées</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">QML_LOADED</td>
+<td align="center">Nombre de QML chargés</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="charger-les-proprietes-de-pression-pour-toutes-les-couches">Charger les propriétés de pression pour toutes les couches<a class="headerlink" href="#charger-les-proprietes-de-pression-pour-toutes-les-couches" title="Permanent link">#</a></h3>
+<p>Charger les propriétés pour les différentes couches : symbologie, formulaire, actions, configuration des champs.</p>
+<p>Les relations et les jointures vont également être chargés dans le projet.</p>
+<p><img alt="algo_id" src="mercicor-load_qml_and_relations_pression.jpg" /></p>
+<h4 id="parameters_10">Parameters<a class="headerlink" href="#parameters_10" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">PRESSION_LAYER</td>
+<td align="center">Couche des pressions</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: pression <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_LAYER</td>
+<td align="center">Couche des habitats</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">OBSERVATIONS_LAYER</td>
+<td align="center">Couches des observations</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: observations <br> Type: TypeVectorPoint <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_ETAT_ECOLOGIQUE_LAYER</td>
+<td align="center">Table des observations ramenées à l'habitat</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">SCENARIO_PRESSION</td>
+<td align="center">Table scénario pression</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: scenario_pression <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_PRESSION_ETAT_ECOLOGIQUE</td>
+<td align="center">Couche habitat pression état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">PRESSURE_LIST_LAYER</td>
+<td align="center">Liste des types de pression</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: liste_type_pression <br> Type: TypeVectorPolygon <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_10">Outputs<a class="headerlink" href="#outputs_10" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">JOINS_ADDED</td>
+<td align="center">Nombre de jointures chargées</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">ACTIONS_ADDED</td>
+<td align="center">Nombre d'actions chargées</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">RELATIONS_ADDED</td>
+<td align="center">Nombre de relations chargées</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">QML_LOADED</td>
+<td align="center">Nombre de QML chargés</td>
+<td align="center">Number</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="export">Export<a class="headerlink" href="#export" title="Permanent link">#</a></h2>
+<h3 id="telecharger-le-modele-des-observations">Télécharger le modèle des observations<a class="headerlink" href="#telecharger-le-modele-des-observations" title="Permanent link">#</a></h3>
+<p>Télécharger le modèle de fichier tableur pour les observations.</p>
+<p><img alt="algo_id" src="mercicor-download_observation_file.jpg" /></p>
+<h4 id="parameters_11">Parameters<a class="headerlink" href="#parameters_11" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">INPUT_LAYER</td>
+<td align="center">Couche des observations dans le geopackage</td>
+<td align="center">VectorLayer</td>
+<td align="center">Couche des observations dans le geopackage</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: observations <br> Type: TypeVectorPoint <br></td>
+</tr>
+<tr>
+<td align="center">INCLUDE_X_Y</td>
+<td align="center">Inclure des colonnes avec latitude/longitude</td>
+<td align="center">Boolean</td>
+<td align="center">Inclure des colonnes avec latitude/longitude</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: True <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_LAYER</td>
+<td align="center">Couche des habitats dans le geopackage</td>
+<td align="center">VectorLayer</td>
+<td align="center">Couche des habitats dans le geopackage</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">DESTINATION_FILE</td>
+<td align="center">Fichier tableur de destination</td>
+<td align="center">FileDestination</td>
+<td align="center">Fichier tableur de destination</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_11">Outputs<a class="headerlink" href="#outputs_11" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">DESTINATION_FILE</td>
+<td align="center">Fichier tableur de destination</td>
+<td align="center">File</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="import">Import<a class="headerlink" href="#import" title="Permanent link">#</a></h2>
+<h3 id="import-donnees-compensation">Import données compensation<a class="headerlink" href="#import-donnees-compensation" title="Permanent link">#</a></h3>
+<p>Import des données de compensation.</p>
+<p>Un scénario sera également crée et la couche sera filtrée pour ce scénario.
+Il est également possible de lancer directement le calcul de l'état écologique des habitats en fonction de la compensation à l'aide de la case à cocher.</p>
+<p><img alt="algo_id" src="mercicor-import_donnees_compensation.jpg" /></p>
+<h4 id="parameters_12">Parameters<a class="headerlink" href="#parameters_12" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">INPUT_LAYER</td>
+<td align="center">Couche pour l'import</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">COMPENSATION_FIELD</td>
+<td align="center">Champ comportant la compensation</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SCENARIO_NAME</td>
+<td align="center">Nom du scénario</td>
+<td align="center">String</td>
+<td align="center">Le nom du scénario en cours pour cette couche de compensation.</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SCENARIO_LAYER</td>
+<td align="center">Table scénario compensation</td>
+<td align="center">VectorLayer</td>
+<td align="center">La couche de destination des scénarios doit être la couche qui est dans le geopackage.</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: scenario_compensation <br> Type: TypeVector <br></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER</td>
+<td align="center">Couche des compensations</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: compensation <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">APPLY_CALCUL_HABITAT_COMPENSATION_ETAT_ECOLOGIQUE</td>
+<td align="center">Ajout des entités de l'état écologique des habitats en fonction de la compensation.</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">HABITAT_LAYER</td>
+<td align="center">Couche des habitats de destination</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_COMPENSATION_LAYER</td>
+<td align="center">Couche habitat compensation état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_12">Outputs<a class="headerlink" href="#outputs_12" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="import-donnees-habitat">Import données habitat<a class="headerlink" href="#import-donnees-habitat" title="Permanent link">#</a></h3>
+<p>Import des données des habitats.
+Le champ du faciès doit être correctement formaté.
+Un style pour les habitats sera ajouté.</p>
+<p><img alt="algo_id" src="mercicor-import_donnees_habitat.jpg" /></p>
+<h4 id="parameters_13">Parameters<a class="headerlink" href="#parameters_13" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">INPUT_LAYER</td>
+<td align="center">Couche pour l'import</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">NAME_FIELD</td>
+<td align="center">Champ comportant le nom de l'habitat</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">FACIES_FIELD</td>
+<td align="center">Champ comportant le faciès</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER</td>
+<td align="center">Couche des habitats de destination</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_13">Outputs<a class="headerlink" href="#outputs_13" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="import-donnees-observation">Import données observation<a class="headerlink" href="#import-donnees-observation" title="Permanent link">#</a></h3>
+<p>Import des données des observations.</p>
+<p>L'algortihme peut soit mettre à jour des observations existantes ou alors les rajouter dans la table destinaton.
+Pour cela, l'algorithme s'appuie sur le ID de la station.</p>
+<p><img alt="algo_id" src="mercicor-import_donnees_observation.jpg" /></p>
+<h4 id="parameters_14">Parameters<a class="headerlink" href="#parameters_14" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">INPUT_LAYER</td>
+<td align="center">Couche pour l'import des observations</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Type: TypeVector <br></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER</td>
+<td align="center">Couche des observations de destination</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: observations <br> Type: TypeVectorPoint <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_14">Outputs<a class="headerlink" href="#outputs_14" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="import-donnees-pression">Import données pression<a class="headerlink" href="#import-donnees-pression" title="Permanent link">#</a></h3>
+<p>Import des données de pression.</p>
+<p>Un scénario sera également crée et la couche sera filtrée pour ce scénario.
+Il est également possible de lancer directement le calcul de l'état écologique des habitats en fonction de la pression à l'aide de la case à cocher.</p>
+<p>Le champ de pressions doit être correctement formaté : 
+1, 2, 3, 4, 5, 6, NULL</p>
+<p><img alt="algo_id" src="mercicor-import_donnees_pression.jpg" /></p>
+<h4 id="parameters_15">Parameters<a class="headerlink" href="#parameters_15" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+<th align="center">Required</th>
+<th align="center">Advanced</th>
+<th align="center">Option</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">INPUT_LAYER</td>
+<td align="center">Couche pour l'import</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">PRESSION_FIELD</td>
+<td align="center">Champ comportant la pression</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SCENARIO_NAME</td>
+<td align="center">Nom du scénario</td>
+<td align="center">String</td>
+<td align="center">Le nom du scénario en cours pour cette couche de pression.</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SCENARIO_LAYER</td>
+<td align="center">Table scénario pression</td>
+<td align="center">VectorLayer</td>
+<td align="center">La couche de destination des scénarios doit être la couche qui est dans le geopackage.</td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: scenario_pression <br> Type: TypeVector <br></td>
+</tr>
+<tr>
+<td align="center">OUTPUT_LAYER</td>
+<td align="center">Couche des pressions</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center">Default: pression <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">APPLY_CALCUL_HABITAT_PRESSION_ETAT_ECOLOGIQUE</td>
+<td align="center">Ajout des entités de l'état écologique des habitats en fonction de la pression.</td>
+<td align="center">Boolean</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">HABITAT_LAYER</td>
+<td align="center">Couche des habitats de destination</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">Default: habitat <br> Type: TypeVectorPolygon <br></td>
+</tr>
+<tr>
+<td align="center">HABITAT_PRESSION_LAYER</td>
+<td align="center">Couche habitat pression état écologique</td>
+<td align="center">VectorLayer</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">Default: habitat_pression_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
+</tr>
+</tbody>
+</table>
+<h4 id="outputs_15">Outputs<a class="headerlink" href="#outputs_15" title="Permanent link">#</a></h4>
+<table>
+<thead>
+<tr>
+<th align="center">ID</th>
+<th align="center">Description</th>
+<th align="center">Type</th>
+<th align="center">Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">No output</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<hr />
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../model/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Précédent
+              </span>
+              Modèle de données
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../changelog/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Suivant
+              </span>
+              Changelog
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            <span class="copyleft">&copy;</span> 3Liz
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/3LIZ_news" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.linkedin.com/company/3liz" target="_blank" rel="noopener" title="www.linkedin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/3liz/" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://hub.docker.com/u/3liz" target="_blank" rel="noopener" title="hub.docker.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.4ea5477f.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@8.6.4/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
