@@ -14,17 +14,17 @@ Calcul des notes de gain à partir des indicateurs MERCI-Cor
 
 Liste des notes :
 
-gain_bsd = La somme de ("hab_note_bsd + note_bsd ") * surface, filtré par scénario
+gain_bsd = La somme de ("note_bsd - hab_note_bsd ") * surface, filtré par scénario
 
-gain_bsm = La somme de ("hab_note_bsm + note_bsm ") * surface, filtré par scénario
+gain_bsm = La somme de ("note_bsm - hab_note_bsm ") * surface, filtré par scénario
 
-gain_man = La somme de ("hab_note_man + note_man ") * surface, filtré par scénario
+gain_man = La somme de ("note_man - hab_note_man ") * surface, filtré par scénario
 
-gain_pmi = La somme de ("hab_note_pmi + note_pmi ") * surface, filtré par scénario
+gain_pmi = La somme de ("note_pmi - hab_note_pmi ") * surface, filtré par scénario
 
-gain_ben = La somme de ("hab_note_ben + note_ben ") * surface, filtré par scénario
+gain_ben = La somme de ("note_ben - hab_note_ben ") * surface, filtré par scénario
 
-gain_mercicor = La somme de ("hab_score_mercicor + score_mercicor ") * surface, filtré par scénario
+gain_mercicor = La somme de ("score_mercicor - hab_score_mercicor ") * surface, filtré par scénario
 
 
 

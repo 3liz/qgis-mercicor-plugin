@@ -28,10 +28,6 @@ class BaseCalculPertesGains(CalculAlgorithm):
         self.fields['mercicor'] = ['hab_score_mercicor', 'score_mercicor']
 
     @property
-    def multiplier(self) -> int:
-        raise NotImplementedError
-
-    @property
     def project_type(self) -> ProjectType:
         # noinspection PyTypeChecker
         return NotImplementedError
@@ -70,12 +66,11 @@ class BaseCalculPertesGains(CalculAlgorithm):
         for field, formula in self.fields.items():
             message += (
                 '{type_calcul}_{output} = '
-                'La somme de ("{field_1} {operator} {field_2} ") * surface, filtré par scénario\n\n'.format(
+                'La somme de ("{field_1} - {field_2} ") * surface, filtré par scénario\n\n'.format(
                     type_calcul=self.project_type.calcul_type,
                     output=field,
-                    field_1=formula[0],
-                    field_2=formula[1],
-                    operator='-' if self.multiplier == -1 else '+',
+                    field_1=formula[0] if self.project_type == ProjectType.Pression else formula[1],
+                    field_2=formula[1] if self.project_type == ProjectType.Pression else formula[0],
                 )
             )
         return message
@@ -123,10 +118,10 @@ class BaseCalculPertesGains(CalculAlgorithm):
                             "Omission du calcul {} pour l'entité {}".format(field_name, feature.id()))
                         continue
 
-                    sub_result = (
-                            feature[self.fields[note][0]] +
-                            (feature[self.fields[note][1]] * self.multiplier)
-                    )
+                    if self.project_type == ProjectType.Pression:
+                        sub_result = feature[self.fields[note][0]] - feature[self.fields[note][1]]
+                    else:
+                        sub_result = feature[self.fields[note][1]] - feature[self.fields[note][0]]
                     feat[field_name] += sub_result * feature.geometry().area()
 
             scenario_impact.updateFeature(feat)
@@ -144,10 +139,6 @@ class CalculPertes(BaseCalculPertesGains):
     def project_type(self):
         return ProjectType.Pression
 
-    @property
-    def multiplier(self):
-        return -1
-
 
 class CalculGains(BaseCalculPertesGains):
 
@@ -157,7 +148,3 @@ class CalculGains(BaseCalculPertesGains):
     @property
     def project_type(self):
         return ProjectType.Compensation
-
-    @property
-    def multiplier(self):
-        return 1
