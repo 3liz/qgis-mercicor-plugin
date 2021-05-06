@@ -23,6 +23,7 @@ nav:
     - 'Modèle de données': model/index.md
     - Traitements: processing/README.md
     - Changelog: changelog.md
+    - Contribution: contributing.md
 
 markdown_extensions:
   # - git-revision-date:

@@ -12,6 +12,7 @@ __MACOSX/
 
 # MkDocs
 docs/CHANGELOG.md
+docs/CONTRIBUTING.md
 build/
 
 # Plugins, QGIS-plugin-CI

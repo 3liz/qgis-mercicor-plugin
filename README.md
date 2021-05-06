@@ -2,10 +2,11 @@
 
 Extension MERCICOR pour QGIS
 
+[![Tests 🎳](https://github.com/3liz/qgis-mercicor-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/3liz/qgis-mercicor-plugin/actions/workflows/ci.yml)
+
 ## Links
 
-* Doc https://packages.3liz.org/private/mercicor/docs/
-* Dépôt QGIS https://packages.3liz.org/private/mercicor/plugins.xml
+* Doc https://docs.3liz.org/qgis-mercicor-plugin/
 
 ## Running tests
 
