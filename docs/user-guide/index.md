@@ -19,6 +19,8 @@ Il y a plusieurs étapes :
 
 ### Projet de pression
 
+_This diagram is clickable_
+
 ```mermaid
 graph TD
 Projet[Création du projet : geopackage et style]
