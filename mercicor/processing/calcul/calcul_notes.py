@@ -104,18 +104,6 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
             message += '{} = {}\n\n'.format(field, formula)
         return message
 
-    def inputParameterName(self):
-        """
-        Nom du paramètre pour la couche d'entrée
-        """
-        return super().inputParameterName()
-
-    def inputParameterDescription(self):
-        """
-        Description du paramètre pour la couche d'entrée
-        """
-        return super().inputParameterDescription()
-
     def outputName(self):
         """
         Nom de la couche résultat
@@ -145,23 +133,13 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
                 input_fields.append(QgsField(field_name, QVariant.Double, '', 24, 15))
         return input_fields
 
-    def initAlgorithm(self, config):
-        """
-        Fonction d'initialisation de l'algorithme
-        """
-        return super().initAlgorithm(config)
-
-    def initParameters(self, config=None):
-        """
-        Fonction d'ajout des paramètres autres que la couche à modifier
-        """
-        pass
-
     def prepareAlgorithm(self, parameters, context, feedback):
         """
         Fonction de préparation de l'algorithme
         Il est possible de vérifier le paramètre INPUT
         """
+        _ = feedback, context
+
         # get source
         source = self.parameterAsSource(parameters, 'INPUT', context)
 
@@ -179,6 +157,8 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
 
         Application des expressions pour les champs à mettre à jour
         """
+        _ = context
+
         # boucle sur les champs des notes merci-cor
         for note in self.expressions.keys():
             # création de l'expression

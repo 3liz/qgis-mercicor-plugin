@@ -15,6 +15,7 @@ from mercicor.qgis_plugin_tools import (
     plugin_test_data_path,
     resources_path,
 )
+from mercicor.tests.test_algorithms_import import TestImportAlgorithms
 from mercicor.tests.base_processing import BaseTestProcessing
 
 __copyright__ = "Copyright 2021, 3Liz"
@@ -54,10 +55,8 @@ class TestProjectAlgorithms(BaseTestProcessing):
             # With data
             name = 'pression'
             pression_layer = QgsVectorLayer('{}|layername={}'.format(file_path, name), name, 'ogr')
-            from mercicor.tests.test_algorithms_import import (
-                TestImportAlgorithms,
-            )
-            TestImportAlgorithms.import_data(pression_layer)
+            # Fix pylint
+            TestImportAlgorithms.import_data(pression_layer)  # pylint: disable=no-value-for-parameter
 
             shutil.copy(file_path, plugin_test_data_path('output_main_geopackage_data.gpkg'))
 

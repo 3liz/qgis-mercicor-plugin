@@ -30,8 +30,14 @@ jobs:
       - name: Running tests
         run: ./exec_tests.sh
 
-  flake8:
+  python-lint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        lint: [
+            "flake8",
+            "pylint",
+        ]
     steps:
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -52,8 +58,8 @@ jobs:
       - name: Install Python requirements
         run: pip install -r requirements/requirements-dev.txt
 
-      - name: Run flake8
-        run: flake8
+      - name: Run Python lint ${{ matrix.lint }}
+        run: make ${{ matrix.lint }}
 
   packaging:
     needs: [flake8, unittests]

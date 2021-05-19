@@ -55,7 +55,7 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
         )
 
     def initAlgorithm(self, config):
-
+        _ = config
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.HABITAT,

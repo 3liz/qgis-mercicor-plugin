@@ -57,7 +57,9 @@ def slug(table):
     return table.replace('_', '-')
 
 
+# pylint: disable=inconsistent-return-statements
 def find_relation(field_name, table):
+    # pylint: disable=no-else-return
     for relation in relations:
         relation: Relation
         if relation.referencing_layer == table and relation.referencing_field == field_name:
@@ -66,7 +68,7 @@ def find_relation(field_name, table):
             return relation.referencing_layer
 
 def generate_model_doc():  # NOQA C901
-    global TEMPLATE
+    global TEMPLATE  # pylint: disable=global-statement
 
     markdown_all = TEMPLATE
 
@@ -156,9 +158,8 @@ def generate_model_doc():  # NOQA C901
 
     output_file = join(PATH, 'README.md')
     output_file = '/home/etienne/dev/python/qgis-mercicor-plugin/docs/model/index.md'
-    text_file = open(output_file, "w+")
-    text_file.write(markdown_all)
-    text_file.close()
+    with open(output_file, "w+") as text_file:
+        text_file.write(markdown_all)
 
 
 generate_model_doc()

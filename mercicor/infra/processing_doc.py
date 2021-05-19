@@ -68,7 +68,7 @@ def format_type(class_name):
 
 
 def generate_processing_doc():  # NOQA C901
-    global TEMPLATE
+    global TEMPLATE  # pylint: disable=global-statement
 
     markdown_all = TEMPLATE
     algorithms_markdown = {}
@@ -175,16 +175,15 @@ def generate_processing_doc():  # NOQA C901
 
         algorithms_markdown[alg.group()].append(markdown)
 
-    for group in algorithms_markdown.keys():
+    for group in algorithms_markdown:
         markdown_all += TEMPLATE_GROUP.format(group=group)
         for alg in algorithms_markdown[group]:
             markdown_all += alg
 
     output_file = join(PATH, 'README.md')
     # output_file = join('/home/pdrillin/dev/', 'README.md')
-    text_file = open(output_file, "w+")
-    text_file.write(markdown_all)
-    text_file.close()
+    with open(output_file, "w+") as text_file:
+        text_file.write(markdown_all)
 
 
 generate_processing_doc()

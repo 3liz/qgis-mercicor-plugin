@@ -59,7 +59,7 @@ class TestImportAlgorithms(BaseTestProcessing):
             feature.setAttributes([1, 1])
             layer_to_import.addFeature(feature)
 
-        assert 1 == layer_to_import.featureCount()
+        assert layer_to_import.featureCount() == 1
 
         count = pression_layer.featureCount()
 

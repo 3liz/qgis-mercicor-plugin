@@ -51,7 +51,7 @@ class ImportHabitatData(BaseImportAlgorithm):
         )
 
     def initAlgorithm(self, config):
-
+        _ = config
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.INPUT_LAYER,
@@ -201,4 +201,5 @@ class ImportHabitatData(BaseImportAlgorithm):
         self.output_layer.setRenderer(renderer)
 
     def postProcess(self, context, feedback):
+        _ = context, feedback
         self.output_layer.triggerRepaint()

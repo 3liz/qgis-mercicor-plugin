@@ -46,6 +46,7 @@ class DownloadObservationFile(BaseExportAlgorithm):
         return "Télécharger le modèle de fichier tableur pour les observations."
 
     def initAlgorithm(self, config):
+        _ = config
 
         tooltip = "Couche des observations dans le geopackage"
         parameter = QgsProcessingParameterVectorLayer(
