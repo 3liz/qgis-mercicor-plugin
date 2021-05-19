@@ -64,13 +64,15 @@ class BaseCalculPertesGains(CalculAlgorithm):
             'Liste des notes :\n\n'.format(self.project_type.calcul_type)
         )
         for field, formula in self.fields.items():
+            divider = '' if self.project_type == ProjectType.Pression else ' / (coeff_risque * coeff_delais)'
             message += (
                 '{type_calcul}_{output} = '
-                'La somme de ("{field_1} - {field_2} ") * surface, filtré par scénario\n\n'.format(
+                'La somme de ("{field_1} - {field_2} ") * surface{divider}, filtré par scénario\n\n'.format(
                     type_calcul=self.project_type.calcul_type,
                     output=field,
                     field_1=formula[0] if self.project_type == ProjectType.Pression else formula[1],
                     field_2=formula[1] if self.project_type == ProjectType.Pression else formula[0],
+                    divider=divider
                 )
             )
         return message
@@ -121,9 +123,13 @@ class BaseCalculPertesGains(CalculAlgorithm):
 
                     if self.project_type == ProjectType.Pression:
                         sub_result = feature[self.fields[note][0]] - feature[self.fields[note][1]]
+                        divide = 1
                     else:
+                        # Compensation
+                        # Tenir compte du délais et du risque
                         sub_result = feature[self.fields[note][1]] - feature[self.fields[note][0]]
-                    feat[field_name] += sub_result * feature.geometry().area()
+                        divide = feature['coeff_risque'] * feature['coeff_delais']
+                    feat[field_name] += (sub_result * feature.geometry().area()) / divide
 
             scenario_impact.updateFeature(feat)
         scenario_impact.commitChanges()

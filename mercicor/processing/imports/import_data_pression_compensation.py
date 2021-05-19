@@ -172,9 +172,18 @@ class BaseImportImpactData(BaseImportAlgorithm):
 
     def processAlgorithm(self, parameters, context, feedback):
         input_layer = self.parameterAsVectorLayer(parameters, self.INPUT_LAYER, context)
-        impact_field = self.parameterAsExpression(parameters, self.IMPACT_FIELD, context)
+        impact_field = self.parameterAsString(parameters, self.IMPACT_FIELD, context)
         scenario_name = self.parameterAsString(parameters, self.SCENARIO_NAME, context)
         scenario_layer = self.parameterAsVectorLayer(parameters, self.SCENARIO_LAYER, context)
+
+        # Only for compensation
+        if self.project_type == ProjectType.Compensation:
+            risque_field = self.parameterAsString(parameters, self.RISQUE_COEFFICIENT_CHAMP, context)
+            delais_field = self.parameterAsString(parameters, self.RISQUE_COEFFICIENT_CHAMP, context)
+        else:
+            risque_field = None
+            delais_field = None
+
         self._output_layer = self.parameterAsVectorLayer(parameters, self.OUTPUT_LAYER, context)
 
         index = input_layer.fields().indexOf(impact_field)
@@ -265,7 +274,11 @@ class BaseImportImpactData(BaseImportAlgorithm):
         feedback.pushInfo('Création du scénario numéro {} : {}'.format(self.scenario_id, scenario_name))
 
         request = QgsFeatureRequest()
-        request.setSubsetOfAttributes([impact_field], input_layer.fields())
+        requested_fields = [impact_field]
+        if self.project_type == ProjectType.Compensation:
+            requested_fields.append(delais_field)
+            requested_fields.append(risque_field)
+        request.setSubsetOfAttributes(requested_fields, input_layer.fields())
         for input_feature in layer.getFeatures(request):
 
             if feedback.isCanceled():
@@ -275,6 +288,10 @@ class BaseImportImpactData(BaseImportAlgorithm):
             output_feature.setGeometry(input_feature.geometry())
             output_feature.setAttribute('scenario_id', self.scenario_id)
             output_feature.setAttribute(self.destination_impact_field, input_feature[impact_field])
+            if self.project_type == ProjectType.Compensation:
+                output_feature.setAttribute('coeff_risque', input_feature[risque_field])
+                output_feature.setAttribute('coeff_delais', input_feature[delais_field])
+
             with edit(self.output_layer):
                 self.output_layer.addFeature(output_feature)
 
@@ -388,6 +405,8 @@ class ImportDataPression(BaseImportImpactData):
 class ImportDataCompensation(BaseImportImpactData):
 
     IMPACT_FIELD = 'COMPENSATION_FIELD'
+    RISQUE_COEFFICIENT_CHAMP = 'RISQUE_COEFFICIENT_CHAMP'
+    DELAIS_COEFFICIENT_CHAMP = 'DELAIS_COEFFICIENT_CHAMP'
     APPLY_CALCUL_HABITAT_IMPACT_ETAT_ECOLOGIQUE = 'APPLY_CALCUL_HABITAT_COMPENSATION_ETAT_ECOLOGIQUE'
     HABITAT_IMPACT_LAYER = 'HABITAT_COMPENSATION_LAYER'
 
@@ -403,3 +422,26 @@ class ImportDataCompensation(BaseImportImpactData):
     def destination_impact_field(self) -> str:
         """ Destination impact field. """
         return 'nom'
+
+    def initAlgorithm(self, config=None):
+
+        super().initAlgorithm(config)
+        self.addParameter(
+            QgsProcessingParameterField(
+                self.RISQUE_COEFFICIENT_CHAMP,
+                "Champ comportant le coefficient de risque",
+                None,
+                self.INPUT_LAYER,
+                QgsProcessingParameterField.Numeric,
+            )
+        )
+
+        self.addParameter(
+            QgsProcessingParameterField(
+                self.DELAIS_COEFFICIENT_CHAMP,
+                "Champ comportant le coefficient de délais",
+                None,
+                self.INPUT_LAYER,
+                QgsProcessingParameterField.Numeric,
+            )
+        )

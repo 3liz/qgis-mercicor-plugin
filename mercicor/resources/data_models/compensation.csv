@@ -2,3 +2,5 @@ idx,name,type,typeName,length,precision,comment,alias
 1,id,4,Integer64,0,0,ID,ID
 2,nom,10,String,0,0,Nom,Nom
 3,scenario_id,4,Integer64,0,0,ID scénario,ID Scénario
+4,coeff_risque,6,Double,0,0,Coefficient risque,Coefficient risque
+5,coeff_delais,6,Double,0,0,Coefficient délais,Coefficient délais

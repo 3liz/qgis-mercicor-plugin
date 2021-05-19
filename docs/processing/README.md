@@ -14,17 +14,17 @@ Calcul des notes de gain à partir des indicateurs MERCI-Cor
 
 Liste des notes :
 
-gain_bsd = La somme de ("note_bsd - hab_note_bsd ") * surface, filtré par scénario
+gain_bsd = La somme de ("note_bsd - hab_note_bsd ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
-gain_bsm = La somme de ("note_bsm - hab_note_bsm ") * surface, filtré par scénario
+gain_bsm = La somme de ("note_bsm - hab_note_bsm ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
-gain_man = La somme de ("note_man - hab_note_man ") * surface, filtré par scénario
+gain_man = La somme de ("note_man - hab_note_man ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
-gain_pmi = La somme de ("note_pmi - hab_note_pmi ") * surface, filtré par scénario
+gain_pmi = La somme de ("note_pmi - hab_note_pmi ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
-gain_ben = La somme de ("note_ben - hab_note_ben ") * surface, filtré par scénario
+gain_ben = La somme de ("note_ben - hab_note_ben ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
-gain_mercicor = La somme de ("score_mercicor - hab_score_mercicor ") * surface, filtré par scénario
+gain_mercicor = La somme de ("score_mercicor - hab_score_mercicor ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
 
 
@@ -412,6 +412,8 @@ OUTPUT_LAYER|Couche des compensations|VectorLayer||✓||Default: compensation <b
 APPLY_CALCUL_HABITAT_COMPENSATION_ETAT_ECOLOGIQUE|Ajout des entités de l'état écologique des habitats en fonction de la compensation.|Boolean||✓|||
 HABITAT_LAYER|Couche des habitats de destination|VectorLayer||||Default: habitat <br> Type: TypeVectorPolygon <br>|
 HABITAT_COMPENSATION_LAYER|Couche habitat compensation état écologique|VectorLayer||||Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br>|
+RISQUE_COEFFICIENT_CHAMP|Champ comportant le coefficient de risque|Field||✓|||
+DELAIS_COEFFICIENT_CHAMP|Champ comportant le coefficient de délais|Field||✓|||
 
 
 #### Outputs
