@@ -13,6 +13,7 @@ from qgis.PyQt import Qt
 
 def pytest_report_header(config):
     """Used by PyTest and Unittest."""
+    _ = config
     message = "QGIS : {}\n".format(Qgis.QGIS_VERSION_INT)
     message += "Python GDAL : {}\n".format(gdal.VersionInfo("VERSION_NUM"))
     message += "Python : {}\n".format(sys.version)

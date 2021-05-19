@@ -45,6 +45,7 @@ class ImportObservationData(BaseImportAlgorithm):
         )
 
     def initAlgorithm(self, config):
+        _ = config
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.INPUT_LAYER,
@@ -89,6 +90,7 @@ class ImportObservationData(BaseImportAlgorithm):
 
         return {}
 
+    # pylint: disable=too-many-arguments
     def update_feature(self, feature, existing, with_geom, context, feedback):
         """ Update the existing observation in the geopackage. """
 
@@ -162,9 +164,9 @@ class ImportObservationData(BaseImportAlgorithm):
         join_feature = QgsFeature()
         if layer.getFeatures(request).nextFeature(join_feature):
             return True, join_feature
-        else:
-            return False, None
+        return False, None
 
     def postProcess(self, context, feedback):
+        _ = context, feedback
         self.output_layer.reloadData()
         self.output_layer.triggerRepaint()

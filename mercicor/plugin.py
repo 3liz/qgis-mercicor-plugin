@@ -72,6 +72,7 @@ class Mercicor:
     @staticmethod
     def run_tests(pattern='test_*.py', package=None):
         """Run the test inside QGIS."""
+        # pylint: disable=import-outside-toplevel
         from pathlib import Path
         try:
             from mercicor.tests.test_runner import test_package

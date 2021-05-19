@@ -96,6 +96,7 @@ class BaseLoadLayerConfigAndRelations(BaseProjectAlgorithm):
         return super().checkParameterValues(parameters, context)
 
     def initAlgorithm(self, config):
+        _ = config
         self.addParameter(
             QgsProcessingParameterVectorLayer(
                 self.IMPACT_LAYER,
@@ -160,6 +161,7 @@ class BaseLoadLayerConfigAndRelations(BaseProjectAlgorithm):
         return True
 
     def processAlgorithm(self, parameters, context, feedback):
+        _ = parameters, context
 
         feedback.pushInfo('\n')
         self.add_alias_from_csv(feedback, self.input_layers)

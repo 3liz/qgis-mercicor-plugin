@@ -54,12 +54,12 @@ def plugin_test_data_path(*args, copy=False):
     for item in args:
         path = abspath(join(path, item))
 
-    if copy:
-        temp = tempfile.mkdtemp()
-        shutil.copy(path, temp)
-        return join(temp, args[-1])
-    else:
+    if not copy:
         return path
+
+    temp = tempfile.mkdtemp()
+    shutil.copy(path, temp)
+    return join(temp, args[-1])
 
 
 def resources_path(*args):

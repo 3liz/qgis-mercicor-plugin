@@ -2,7 +2,7 @@ __copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
-from collections import Callable
+from collections import Callable  # pylint: disable=no-name-in-module
 
 from qgis.core import Qgis, QgsAction, QgsExpression, QgsMessageLog, QgsProject
 from qgis.utils import iface
@@ -152,7 +152,8 @@ action_delete_scenario_compensation = QgsAction(
 )
 
 
-class Action:
+# TODO fix pylint
+class Action:  # pylint: disable=too-few-public-methods
 
     def __init__(self, layer: str, count: int, function: Callable, action: QgsAction):
         self.layer = layer

@@ -79,7 +79,7 @@ class BaseCalculHabitatImpactEtatEcologique(CalculAlgorithm):
         )
 
     def initAlgorithm(self, config):
-
+        _ = config
         parameter = QgsProcessingParameterVectorLayer(
             self.HABITAT_LAYER,
             "Couches des habitats",
@@ -207,7 +207,7 @@ class BaseCalculHabitatImpactEtatEcologique(CalculAlgorithm):
                 impact_id = feature[self.impact_id]
                 scenario_id = feature['scenario_id']
 
-                # Fixme, need to check for compensation this behavior
+                # TODO need to check for compensation this behavior
                 if self.impact_field:
                     # Test du type de pression associé
                     filter_expression = QgsExpression.createFieldEqualityExpression('id', impact_id)
@@ -263,6 +263,7 @@ class BaseCalculHabitatImpactEtatEcologique(CalculAlgorithm):
         return {}
 
     def postProcess(self, context, feedback):
+        _ = context, feedback
         self.output_layer.triggerRepaint()
 
     @staticmethod
@@ -279,8 +280,8 @@ class BaseCalculHabitatImpactEtatEcologique(CalculAlgorithm):
         feature = QgsFeature()
         if layer.getFeatures(request).nextFeature(feature):
             return True, feature
-        else:
-            return False, None
+
+        return False, None
 
 
 class CalculHabitatPressionEtatEcologique(BaseCalculHabitatImpactEtatEcologique):

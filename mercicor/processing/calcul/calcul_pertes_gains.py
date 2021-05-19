@@ -76,6 +76,7 @@ class BaseCalculPertesGains(CalculAlgorithm):
         return message
 
     def initAlgorithm(self, config):
+        _ = config
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(

@@ -75,6 +75,7 @@ class BaseImportImpactData(BaseImportAlgorithm):
         )
 
     def initAlgorithm(self, config):
+        _ = config
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
@@ -178,7 +179,7 @@ class BaseImportImpactData(BaseImportAlgorithm):
 
         index = input_layer.fields().indexOf(impact_field)
         unique_values = input_layer.uniqueValues(index)
-        if len(self.expected_values) and not unique_values.issubset(self.expected_values):
+        if self.expected_values and not unique_values.issubset(self.expected_values):
             feedback.reportError(
                 'Valeur possible pour la {} : {}'.format(
                     self.project_type.label,
@@ -345,6 +346,7 @@ class BaseImportImpactData(BaseImportAlgorithm):
         return feature['id']
 
     def postProcess(self, context, feedback):
+        _ = context, feedback
         self.output_layer.reloadData()
         self.output_layer.triggerRepaint()
 

@@ -9,5 +9,5 @@ flake8-pep3101
 flake8-print
 flake8-variables-names
 isort
-# pylint
+pylint
 # pycodestyle

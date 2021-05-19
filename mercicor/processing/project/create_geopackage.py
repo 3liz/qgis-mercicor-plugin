@@ -59,6 +59,7 @@ class BaseCreateGeopackageProject(BaseProjectAlgorithm):
             "de {}".format(self.project_type.label))
 
     def initAlgorithm(self, config):
+        _ = config
 
         self.addParameter(
             QgsProcessingParameterFileDestination(

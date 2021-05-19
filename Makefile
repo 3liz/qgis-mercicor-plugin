@@ -15,3 +15,13 @@ tests: start_tests run_tests stop_tests
 
 processing-doc:
 	cd .docker && ./processing_doc.sh
+
+pylint:
+	@echo "PyLint"
+	@pylint --rcfile setup.cfg mercicor/
+
+flake8:
+	@echo "Flake8"
+	@flake8 --statistics
+
+lint: pylint flake8

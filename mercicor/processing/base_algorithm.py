@@ -22,9 +22,6 @@ from mercicor.qgis_plugin_tools import resources_path
 
 class BaseProcessingAlgorithm(QgsProcessingAlgorithm):
 
-    def __init__(self):
-        super().__init__()
-
     def createInstance(self):
         return type(self)()
 
@@ -35,8 +32,7 @@ class BaseProcessingAlgorithm(QgsProcessingAlgorithm):
         icon = resources_path('icons', 'icon.jpg')
         if os.path.isfile(icon):
             return QIcon(icon)
-        else:
-            return super().icon()
+        return super().icon()
 
     @staticmethod
     def set_tooltip_parameter(parameter, tooltip):

@@ -27,9 +27,10 @@ from mercicor.processing.calcul.base import CalculAlgorithm
 
 class SetLabelingPostProcessor(QgsProcessingLayerPostProcessorInterface):
     instance = None
-    fields = None
+    fields = []
 
     def postProcessLayer(self, layer, context, feedback):
+        _ = feedback, context
         layer.setLabelsEnabled(True)
 
         pal = QgsPalLayerSettings()
@@ -114,6 +115,7 @@ class CalculUnicityHabitat(CalculAlgorithm):
         )
 
     def initAlgorithm(self, config):
+        _ = config
 
         self.addParameter(
             QgsProcessingParameterVectorLayer(
@@ -187,7 +189,7 @@ class CalculUnicityHabitat(CalculAlgorithm):
 
         if not non_unique_couples:
             feedback.pushInfo('L\'ensemble des couples noms/faciès sont uniques')
-            (sink, dest_id) = self.parameterAsSink(
+            _, dest_id = self.parameterAsSink(
                 parameters, self.OUTPUT, context,
                 source.fields(), source.wkbType(), source.sourceCrs())
             return {
