@@ -39,11 +39,11 @@ jobs:
             "pylint",
         ]
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
         with:
-          python-version: 3.7
-          architecture: x64
+          python-version: 3.8
 
       - name: Checkout
         uses: actions/checkout@master
@@ -51,12 +51,12 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/requirements-dev.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements/dev.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
       - name: Install Python requirements
-        run: pip install -r requirements/requirements-dev.txt
+        run: pip install -r requirements/dev.txt
 
       - name: Run Python lint ${{ matrix.lint }}
         run: make ${{ matrix.lint }}
@@ -67,6 +67,10 @@ jobs:
     if: github.repository == '3liz/qgis-mercicor-plugin' && contains(github.ref, 'refs/tags/')
 
     steps:
+
+    - name: Set env
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
     - uses: actions/checkout@v2
 
     - name: Set up Python 3.8
@@ -74,28 +78,31 @@ jobs:
       with:
         python-version: 3.8
 
-    - name: Install qgis-plugin-ci
-      run: pip3 install qgis-plugin-ci==1.8.4
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements/packaging.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install Python requirements
+      run: pip install -r requirements/packaging.txt
 
     - name : Fetch current changelog
       run: |
-        qgis-plugin-ci changelog ${GITHUB_REF/refs\/tags\//} >> release.md
+        qgis-plugin-ci changelog ${{ env.RELEASE_VERSION }} >> release.md
         cat release.md
 
     - name: Create release on GitHub
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.BOT_HUB_TOKEN }}
+      uses: ncipollo/release-action@v1.8.4
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-        body_path: release.md
+        bodyFile: release.md
+        token: ${{ secrets.BOT_HUB_TOKEN }}
 
     - name: Package the plugin and deploy it in the release
       run: >-
         qgis-plugin-ci
-        release ${GITHUB_REF/refs\/tags\//}
+        release ${{ env.RELEASE_VERSION }}
         --github-token ${{ secrets.BOT_HUB_TOKEN }}
         --osgeo-username ${{ secrets.OSGEO_USERNAME }}
         --osgeo-password ${{ secrets.OSGEO_PASSWORD }}
