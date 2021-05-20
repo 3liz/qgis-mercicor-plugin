@@ -5,6 +5,7 @@ __email__ = "info@3liz.org"
 import os
 
 from collections import OrderedDict
+from pathlib import Path
 
 from qgis.core import (
     Qgis,
@@ -16,7 +17,6 @@ from qgis.core import (
     QgsRelation,
     QgsVectorLayerJoinInfo,
 )
-from qgis.PyQt.QtCore import QDir, QTemporaryFile
 
 from mercicor.actions import actions_list_compensation, actions_list_pression
 from mercicor.definitions.joins import (
@@ -310,7 +310,7 @@ class BaseLoadLayerConfigAndRelations(BaseProjectAlgorithm):
             if not qml_list:
                 continue
 
-            output_file = self.combine_qml(layer_name, qml_list, has_labels)
+            output_file = str(self.combine_qml(layer_name, qml_list, has_labels))
             feedback.pushDebugInfo(output_file)
             message, flag = vector_layer.loadNamedStyle(output_file)
             if flag:
@@ -318,7 +318,7 @@ class BaseLoadLayerConfigAndRelations(BaseProjectAlgorithm):
             feedback.pushInfo(vector_layer.name() + " QML for {} successfully loaded".format(layer_name))
 
     @staticmethod
-    def combine_qml(layer_name: str, qml_list: list, has_labels: bool) -> str:
+    def combine_qml(layer_name: str, qml_list: list, has_labels: bool) -> Path:
         """ Combine a few QML together in a single file. """
         # Actions is missing from categories because it is managed with Python code
         qml_str = (
@@ -337,10 +337,9 @@ class BaseLoadLayerConfigAndRelations(BaseProjectAlgorithm):
                 qml_str += ''.join(f.readlines()[2:-1])
 
         qml_str += '</qgis>'
-        temporary = QTemporaryFile('{}/{}_XXXXXX.qml'.format(QDir.tempPath(), layer_name))
-        temporary.open()
-        output_file = temporary.fileName()
-        temporary.remove()
+
+        output_file = Path(resources_path('qml', 'auto_generated', '{}.qml'.format(layer_name)))
+        output_file.unlink(missing_ok=True)
 
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(qml_str)

@@ -31,3 +31,4 @@ plugins.xml
 output_*.gpkg
 data/
 mercicor/tests/data/output
+mercicor/resources/qml/auto_generated/*.qml
