@@ -68,8 +68,7 @@ class TestProjectAlgorithms(BaseTestProcessing):
 
             files = os.listdir(resources_path('data_models'))
             for csv_file in files:
-
-                if csv_file not in ProjectType.Pression.layers:
+                if csv_file.replace('.csv', '') not in project.layers:
                     continue
 
                 with self.subTest(i=csv_file):
