@@ -9,6 +9,7 @@ on:
       - 'CONTRIBUTING.md'
       - 'docs/**'
       - 'requirements/doc.txt'
+      - '.github/workflows/publish-doc.yml'
       - 'mkdocs.yml'
 
 jobs:
