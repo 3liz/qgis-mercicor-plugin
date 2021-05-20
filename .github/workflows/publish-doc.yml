@@ -8,6 +8,7 @@ on:
       - 'CHANGELOG.md'
       - 'CONTRIBUTING.md'
       - 'docs/**'
+      - 'requirements/doc.txt'
       - 'mkdocs.yml'
 
 jobs:
