@@ -1,4 +1,13 @@
-# CHANGELOG
+# Changelog
+
+## Unreleased
+
+* Ajout des propriétés de la couche `compensation`
+* Ajout des coefficients de délais et de risque pour une compensation
+* Renommage du traitement pour charger les propriétés des couches dans le projet
+* Correction du type de champ pour l'import des compensations
+* Correction du calcul des gains pour une compensation  
+* Publication du projet sur GitHub et plugins.qgis.org
 
 ## 0.8.0 - 2021-04-23
 
