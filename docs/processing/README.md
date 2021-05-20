@@ -14,9 +14,9 @@ Calcul des notes de gain à partir des indicateurs MERCI-Cor
 
 Liste des notes :
 
-gain_bsd = La somme de ("note_bsd - hab_note_bsd ") * surface / (coeff_risque * coeff_delais), filtré par scénario
+gain_bsd = La somme de perc_bsd * ("note_bsd - hab_note_bsd ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
-gain_bsm = La somme de ("note_bsm - hab_note_bsm ") * surface / (coeff_risque * coeff_delais), filtré par scénario
+gain_bsm = La somme de perc_bsm * ("note_bsm - hab_note_bsm ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
 gain_man = La somme de ("note_man - hab_note_man ") * surface / (coeff_risque * coeff_delais), filtré par scénario
 
@@ -202,9 +202,9 @@ Calcul des notes de perte à partir des indicateurs MERCI-Cor
 
 Liste des notes :
 
-perte_bsd = La somme de ("hab_note_bsd - note_bsd ") * surface, filtré par scénario
+perte_bsd = La somme de perc_bsd * ("hab_note_bsd - note_bsd ") * surface, filtré par scénario
 
-perte_bsm = La somme de ("hab_note_bsm - note_bsm ") * surface, filtré par scénario
+perte_bsm = La somme de perc_bsm * ("hab_note_bsm - note_bsm ") * surface, filtré par scénario
 
 perte_man = La somme de ("hab_note_man - note_man ") * surface, filtré par scénario
 

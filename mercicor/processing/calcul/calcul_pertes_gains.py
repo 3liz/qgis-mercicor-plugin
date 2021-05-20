@@ -20,8 +20,8 @@ class BaseCalculPertesGains(CalculAlgorithm):
     def __init__(self):
         super().__init__()
         self.fields = OrderedDict()
-        self.fields['bsd'] = ['hab_note_bsd', 'note_bsd']
-        self.fields['bsm'] = ['hab_note_bsm', 'note_bsm']
+        self.fields['bsd'] = ['hab_note_bsd', 'note_bsd', 'perc_bsd']
+        self.fields['bsm'] = ['hab_note_bsm', 'note_bsm', 'perc_bsm']
         self.fields['man'] = ['hab_note_man', 'note_man']
         self.fields['pmi'] = ['hab_note_pmi', 'note_pmi']
         self.fields['ben'] = ['hab_note_ben', 'note_ben']
@@ -65,13 +65,17 @@ class BaseCalculPertesGains(CalculAlgorithm):
         )
         for field, formula in self.fields.items():
             divider = '' if self.project_type == ProjectType.Pression else ' / (coeff_risque * coeff_delais)'
+            bsd_bsm = '' if len(formula) == 2 else '{} * '.format(formula[2])
             message += (
                 '{type_calcul}_{output} = '
-                'La somme de ("{field_1} - {field_2} ") * surface{divider}, filtré par scénario\n\n'.format(
+                'La somme de '
+                '{bsd_bsm}("{field_1} - {field_2} ") * surface{divider}'
+                ', filtré par scénario\n\n'.format(
                     type_calcul=self.project_type.calcul_type,
                     output=field,
                     field_1=formula[0] if self.project_type == ProjectType.Pression else formula[1],
                     field_2=formula[1] if self.project_type == ProjectType.Pression else formula[0],
+                    bsd_bsm=bsd_bsm,
                     divider=divider
                 )
             )
@@ -129,7 +133,15 @@ class BaseCalculPertesGains(CalculAlgorithm):
                         # Tenir compte du délais et du risque
                         sub_result = feature[self.fields[note][1]] - feature[self.fields[note][0]]
                         divide = feature['coeff_risque'] * feature['coeff_delais']
-                    feat[field_name] += (sub_result * feature.geometry().area()) / divide
+
+                    if len(self.fields[note]) == 3:
+                        # Pour le calcul de perte_bsd, perte_bsm, gain_bsd et gain_bsm,
+                        # il faut tenir compte des valeurs des champs perc_bsd et perc_bsm.
+                        multiply = feature[self.fields[note][2]]
+                    else:
+                        multiply = 1
+
+                    feat[field_name] += multiply * (sub_result * feature.geometry().area()) / divide
 
             scenario_impact.updateFeature(feat)
         scenario_impact.commitChanges()
