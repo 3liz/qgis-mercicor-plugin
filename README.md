@@ -1,12 +1,18 @@
 # Mercicor
 
-Extension MERCICOR pour QGIS
+Methodology for Scaling Mitigation and Compensatory Measures in Tropical Marine Ecosystems.
+The plugin is available in French only for now.
+
+Méthode biophysiques d’évaluation des effets de l’aménagement sur l’environnement marin tropical.
+
+Extension Mercicor pour QGIS
 
 [![Tests 🎳](https://github.com/3liz/qgis-mercicor-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/3liz/qgis-mercicor-plugin/actions/workflows/ci.yml)
+[![Documentation 📚](https://github.com/3liz/qgis-mercicor-plugin/actions/workflows/publish-doc.yml/badge.svg)](https://github.com/3liz/qgis-mercicor-plugin/actions/workflows/publish-doc.yml)
 
 ## Links
 
-* Doc https://docs.3liz.org/qgis-mercicor-plugin/
+* Documentation https://docs.3liz.org/qgis-mercicor-plugin/
 
 ## Running tests
 
