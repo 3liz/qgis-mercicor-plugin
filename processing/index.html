@@ -15,7 +15,7 @@
       
         <link rel="canonical" href="http://packages.3liz.org/private/um3-mercicor/processing/">
       
-      <link rel="icon" href="../media/icon.jpg">
+      <link rel="icon" href="../media/icon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.5">
     
     
@@ -79,7 +79,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Mercicor" class="md-header__button md-logo" aria-label="Mercicor" data-md-component="logo">
       
-  <img src="../media/icon.jpg" alt="logo">
+  <img src="../media/icon.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -249,7 +249,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Mercicor" class="md-nav__button md-logo" aria-label="Mercicor" data-md-component="logo">
       
-  <img src="../media/icon.jpg" alt="logo">
+  <img src="../media/icon.png" alt="logo">
 
     </a>
     Mercicor
@@ -1580,8 +1580,8 @@
 <h3 id="calcul-des-notes-de-gain-pour-le-scenario-de-compensation">Calcul des notes de gain pour le scénario de compensation<a class="headerlink" href="#calcul-des-notes-de-gain-pour-le-scenario-de-compensation" title="Permanent link">#</a></h3>
 <p>Calcul des notes de gain à partir des indicateurs MERCI-Cor</p>
 <p>Liste des notes :</p>
-<p>gain_bsd = La somme de ("note_bsd - hab_note_bsd ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
-<p>gain_bsm = La somme de ("note_bsm - hab_note_bsm ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
+<p>gain_bsd = La somme de perc_bsd * ("note_bsd - hab_note_bsd ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
+<p>gain_bsm = La somme de perc_bsm * ("note_bsm - hab_note_bsm ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
 <p>gain_man = La somme de ("note_man - hab_note_man ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
 <p>gain_pmi = La somme de ("note_pmi - hab_note_pmi ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
 <p>gain_ben = La somme de ("note_ben - hab_note_ben ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
@@ -1981,8 +1981,8 @@ Les champs nom et faciès doivent être unique par objet géographique.</p>
 <h3 id="calcul-des-notes-de-perte-pour-le-scenario-de-pression">Calcul des notes de perte pour le scénario de pression<a class="headerlink" href="#calcul-des-notes-de-perte-pour-le-scenario-de-pression" title="Permanent link">#</a></h3>
 <p>Calcul des notes de perte à partir des indicateurs MERCI-Cor</p>
 <p>Liste des notes :</p>
-<p>perte_bsd = La somme de ("hab_note_bsd - note_bsd ") * surface, filtré par scénario</p>
-<p>perte_bsm = La somme de ("hab_note_bsm - note_bsm ") * surface, filtré par scénario</p>
+<p>perte_bsd = La somme de perc_bsd * ("hab_note_bsd - note_bsd ") * surface, filtré par scénario</p>
+<p>perte_bsm = La somme de perc_bsm * ("hab_note_bsm - note_bsm ") * surface, filtré par scénario</p>
 <p>perte_man = La somme de ("hab_note_man - note_man ") * surface, filtré par scénario</p>
 <p>perte_pmi = La somme de ("hab_note_pmi - note_pmi ") * surface, filtré par scénario</p>
 <p>perte_ben = La somme de ("hab_note_ben - note_ben ") * surface, filtré par scénario</p>
@@ -2905,7 +2905,7 @@ Il est également possible de lancer directement le calcul de l'état écologiqu
 <div class="md-source-date">
   <small>
     
-      Dernière mise à jour: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">19 mai 2021</span>
+      Dernière mise à jour: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">20 mai 2021</span>
       
     
   </small>
