@@ -44,3 +44,7 @@ If you want to disable the geopackage check for input layers :
 import os
 os.environ['TESTING_MERCICOR'] = 'True'
 ```
+
+## Credits
+
+* Coral icon by [Tezar Tantular from the Noun Project](https://thenounproject.com/search/?q=coral&i=3657551)

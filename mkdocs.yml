@@ -62,8 +62,8 @@ theme:
   icon:
     repo: fontawesome/brands/github-alt
   language: 'fr'
-  logo: media/icon.jpg
-  favicon: media/icon.jpg
+  logo: media/icon.png
+  favicon: media/icon.png
   palette:
     accent: deep-orange
     primary: green

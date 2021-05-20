@@ -29,7 +29,7 @@ class Mercicor:
 
         # Open the online help
         self.help_action = QAction(
-            QIcon(resources_path('icons', 'icon.jpg')),
+            QIcon(resources_path('icons', 'icon.png')),
             'Mercicor',
             self.iface.mainWindow())
         self.iface.pluginHelpMenu().addAction(self.help_action)

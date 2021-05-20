@@ -16,6 +16,6 @@ tags=mercicor
 
 homepage=https://docs.3liz.org/qgis-mercicor-plugin/
 category=Analysis
-icon=resources/icons/icon.jpg
+icon=resources/icons/icon.png
 experimental=False
 deprecated=False

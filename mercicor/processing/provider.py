@@ -66,7 +66,7 @@ class MercicorProvider(QgsProcessingProvider):
         return "mercicor"
 
     def icon(self):
-        return QIcon(resources_path("icons", "icon.jpg"))
+        return QIcon(resources_path("icons", "icon.png"))
 
     def name(self):
         return "Mercicor"

@@ -92,7 +92,7 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         return 'Calcul des notes MERCI-Cor'
 
     def icon(self):
-        return QIcon(resources_path('icons', 'icon.jpg'))
+        return QIcon(resources_path('icons', 'icon.png'))
 
     def shortHelpString(self):
         """

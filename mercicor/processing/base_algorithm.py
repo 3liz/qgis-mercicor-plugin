@@ -29,7 +29,7 @@ class BaseProcessingAlgorithm(QgsProcessingAlgorithm):
         return super().flags() | QgsProcessingAlgorithm.FlagHideFromModeler
 
     def icon(self):
-        icon = resources_path('icons', 'icon.jpg')
+        icon = resources_path('icons', 'icon.png')
         if os.path.isfile(icon):
             return QIcon(icon)
         return super().icon()
