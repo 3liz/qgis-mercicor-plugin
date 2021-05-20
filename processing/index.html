@@ -16,7 +16,7 @@
         <link rel="canonical" href="http://packages.3liz.org/private/um3-mercicor/processing/">
       
       <link rel="icon" href="../media/icon.jpg">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.5">
     
     
       
@@ -1580,12 +1580,12 @@
 <h3 id="calcul-des-notes-de-gain-pour-le-scenario-de-compensation">Calcul des notes de gain pour le scénario de compensation<a class="headerlink" href="#calcul-des-notes-de-gain-pour-le-scenario-de-compensation" title="Permanent link">#</a></h3>
 <p>Calcul des notes de gain à partir des indicateurs MERCI-Cor</p>
 <p>Liste des notes :</p>
-<p>gain_bsd = La somme de ("note_bsd - hab_note_bsd ") * surface, filtré par scénario</p>
-<p>gain_bsm = La somme de ("note_bsm - hab_note_bsm ") * surface, filtré par scénario</p>
-<p>gain_man = La somme de ("note_man - hab_note_man ") * surface, filtré par scénario</p>
-<p>gain_pmi = La somme de ("note_pmi - hab_note_pmi ") * surface, filtré par scénario</p>
-<p>gain_ben = La somme de ("note_ben - hab_note_ben ") * surface, filtré par scénario</p>
-<p>gain_mercicor = La somme de ("score_mercicor - hab_score_mercicor ") * surface, filtré par scénario</p>
+<p>gain_bsd = La somme de ("note_bsd - hab_note_bsd ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
+<p>gain_bsm = La somme de ("note_bsm - hab_note_bsm ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
+<p>gain_man = La somme de ("note_man - hab_note_man ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
+<p>gain_pmi = La somme de ("note_pmi - hab_note_pmi ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
+<p>gain_ben = La somme de ("note_ben - hab_note_ben ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
+<p>gain_mercicor = La somme de ("score_mercicor - hab_score_mercicor ") * surface / (coeff_risque * coeff_delais), filtré par scénario</p>
 <p><img alt="algo_id" src="mercicor-calcul_compensation.jpg" /></p>
 <h4 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h4>
 <table>
@@ -2606,6 +2606,24 @@ Il est également possible de lancer directement le calcul de l'état écologiqu
 <td align="center"></td>
 <td align="center">Default: habitat_compensation_etat_ecologique <br> Type: TypeVectorPolygon <br></td>
 </tr>
+<tr>
+<td align="center">RISQUE_COEFFICIENT_CHAMP</td>
+<td align="center">Champ comportant le coefficient de risque</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">DELAIS_COEFFICIENT_CHAMP</td>
+<td align="center">Champ comportant le coefficient de délais</td>
+<td align="center">Field</td>
+<td align="center"></td>
+<td align="center">✓</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
 </tbody>
 </table>
 <h4 id="outputs_12">Outputs<a class="headerlink" href="#outputs_12" title="Permanent link">#</a></h4>
@@ -2887,7 +2905,7 @@ Il est également possible de lancer directement le calcul de l'état écologiqu
 <div class="md-source-date">
   <small>
     
-      Dernière mise à jour: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">6 mai 2021</span>
+      Dernière mise à jour: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">19 mai 2021</span>
       
     
   </small>
@@ -3009,10 +3027,10 @@ Il est également possible de lancer directement le calcul de l'état écologiqu
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "translations": {"clipboard.copy": "Copier dans le presse-papier", "clipboard.copied": "Copi\u00e9 dans le presse-papier", "search.config.lang": "fr", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Rechercher", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.d351de03.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      <script src="../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
       
