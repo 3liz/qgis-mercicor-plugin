@@ -107,3 +107,11 @@ jobs:
         --osgeo-username ${{ secrets.OSGEO_USERNAME }}
         --osgeo-password ${{ secrets.OSGEO_PASSWORD }}
         --create-plugin-repo
+
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.BOT_HUB_TOKEN }}
+        repository: 3liz/3liz.github.io
+        event-type: merge-plugins
+        client-payload: '{"name": "mercicor", "version": "${{ env.RELEASE_VERSION }}", "url": "https://github.com/3liz/qgis-mercicor-plugin/releases/latest/download/plugins.xml"}'
