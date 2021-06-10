@@ -339,7 +339,9 @@ class BaseLoadLayerConfigAndRelations(BaseProjectAlgorithm):
         qml_str += '</qgis>'
 
         output_file = Path(resources_path('qml', 'auto_generated', '{}.qml'.format(layer_name)))
-        output_file.unlink(missing_ok=True)
+        if output_file.exists():
+            # Do not use missing_ok, Python 3.8 min
+            output_file.unlink()
 
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(qml_str)
