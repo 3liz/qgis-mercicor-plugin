@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 1.0.1 - 2021-06-10
+
+* Correction d'une erreur si la version de Python est inférieur à 3.8
+
 ## 1.0.0 - 2021-05-28
 
 * Ajout des propriétés de la couche `compensation`
