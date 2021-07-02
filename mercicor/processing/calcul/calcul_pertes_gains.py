@@ -132,7 +132,7 @@ class BaseCalculPertesGains(CalculAlgorithm):
                         # Compensation
                         # Tenir compte du délais et du risque
                         sub_result = feature[self.fields[note][1]] - feature[self.fields[note][0]]
-                        divide = feature['coeff_risque'] * feature['coeff_delais']
+                        divide = feature['compensation_coeff_risque'] * feature['compensation_coeff_delais']
 
                     if len(self.fields[note]) == 3:
                         # Pour le calcul de perte_bsd, perte_bsm, gain_bsd et gain_bsm,
