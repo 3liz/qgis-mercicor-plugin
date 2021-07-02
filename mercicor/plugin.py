@@ -46,7 +46,7 @@ class Mercicor:
     @staticmethod
     def open_help():
         """ Open the online help. """
-        QDesktopServices.openUrl(QUrl('https://packages.3liz.org/private/um3-mercicor/docs/'))
+        QDesktopServices.openUrl(QUrl('https://docs.3liz.org/qgis-mercicor-plugin/'))
 
     @staticmethod
     def run_action(name, *args):
