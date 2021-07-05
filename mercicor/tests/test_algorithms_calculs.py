@@ -200,9 +200,9 @@ class TestCalculsAlgorithms(BaseTestProcessing):
         join_habitat.setJoinLayer(habitat_etat_ecolo)
         layer.addJoin(join_habitat)
 
-        for note in CalculPertes().fields.keys():
+        for note, fields in CalculPertes().fields.items():
             with self.subTest(i=note):
                 self.assertGreater(scenar.fields().indexOf('perte_{}'.format(note)), -1, note)
-                for field in CalculPertes().fields[note]:
+                for field in fields:
                     with self.subTest(i=field):
                         self.assertGreater(layer.fields().indexOf(field), -1, field)

@@ -2,7 +2,7 @@ __copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
-from collections import Callable  # pylint: disable=no-name-in-module
+from collections.abc import Callable
 
 from qgis.core import Qgis, QgsAction, QgsExpression, QgsMessageLog, QgsProject
 from qgis.utils import iface

@@ -111,7 +111,7 @@ class BaseCalculPertesGains(CalculAlgorithm):
 
         for feat in scenario_impact.getFeatures():
             scenario_id = feat['id']
-            for note in self.fields.keys():
+            for note, fields in self.fields.items():
                 # from "bsd" to "perte_bsd" or "gain_bsd"
                 field_name = '{calcul_type}_{note}'.format(
                     calcul_type=self.project_type.calcul_type, note=note)
@@ -120,24 +120,24 @@ class BaseCalculPertesGains(CalculAlgorithm):
                 filter_expression = QgsExpression.createFieldEqualityExpression('scenario_id', scenario_id)
                 for feature in hab_etat_ecolo.getFeatures(filter_expression):
 
-                    if feature[self.fields[note][1]] == NULL:
+                    if feature[fields[1]] == NULL:
                         feedback.pushDebugInfo(
                             "Omission du calcul {} pour l'entité {}".format(field_name, feature.id()))
                         continue
 
                     if self.project_type == ProjectType.Pression:
-                        sub_result = feature[self.fields[note][0]] - feature[self.fields[note][1]]
+                        sub_result = feature[fields[0]] - feature[fields[1]]
                         divide = 1
                     else:
                         # Compensation
                         # Tenir compte du délais et du risque
-                        sub_result = feature[self.fields[note][1]] - feature[self.fields[note][0]]
+                        sub_result = feature[fields[1]] - feature[fields[0]]
                         divide = feature['compensation_coeff_risque'] * feature['compensation_coeff_delais']
 
-                    if len(self.fields[note]) == 3:
+                    if len(fields) == 3:
                         # Pour le calcul de perte_bsd, perte_bsm, gain_bsd et gain_bsm,
                         # il faut tenir compte des valeurs des champs perc_bsd et perc_bsm.
-                        multiply = feature[self.fields[note][2]]
+                        multiply = feature[fields[2]]
                     else:
                         multiply = 1
 

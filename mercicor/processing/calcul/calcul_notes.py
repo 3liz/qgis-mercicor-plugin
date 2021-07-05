@@ -160,9 +160,9 @@ class CalculNotes(QgsProcessingFeatureBasedAlgorithm):
         _ = context
 
         # boucle sur les champs des notes merci-cor
-        for note in self.expressions.keys():
+        for note, expresssion_string in self.expressions.items():
             # création de l'expression
-            expression = QgsExpression(self.expressions[note])
+            expression = QgsExpression(expresssion_string)
             # préparation de l'expression
             expression.prepare(self.exp_context)
             if expression.hasEvalError():

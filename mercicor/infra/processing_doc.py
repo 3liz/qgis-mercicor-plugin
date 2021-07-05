@@ -175,9 +175,9 @@ def generate_processing_doc():  # NOQA C901
 
         algorithms_markdown[alg.group()].append(markdown)
 
-    for group in algorithms_markdown:
+    for group, algs in algorithms_markdown.items():
         markdown_all += TEMPLATE_GROUP.format(group=group)
-        for alg in algorithms_markdown[group]:
+        for alg in algs:
             markdown_all += alg
 
     output_file = join(PATH, 'README.md')
