@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+* Correction du calcul des gains
+* QML: ajout du fichier de formulaire pour habitat_compensation_etat_ecologique
+* QML: ajout du fichier de champs pour habitat_compensation_etat_ecologique
+* QML: correction du fichier de formulaire pour habitat_pression_etat_ecologique
+
 ## 1.0.1 - 2021-06-10
 
 * Correction d'une erreur si la version de Python est inférieur à 3.8
