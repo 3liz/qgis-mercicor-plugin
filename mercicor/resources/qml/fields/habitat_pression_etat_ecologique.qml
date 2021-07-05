@@ -1,1374 +1,339 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis version="3.10.14-A Coruña" styleCategories="Fields">
-  <fieldConfiguration>
-    <field name="id">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="habitat_id">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="pression_id">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="scenario_id">
-      <editWidget type="RelationReference">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="station_man">
-      <editWidget type="CheckBox">
-        <config>
-          <Option type="Map">
-            <Option name="CheckedState" type="QString" value=""/>
-            <Option name="UncheckedState" type="QString" value=""/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="perc_bsd">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="perc_bsm">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsd_recouv_cor">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsd_p_acrop">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsd_vital_cor">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsd_comp_struc">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsd_taille_cor">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsd_dens_juv">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsd_f_sessile">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsd_recouv_ma">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsm_fragm_herb">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsm_recouv_her">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsm_haut_herb">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsm_dens_herb">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsm_div_herb">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="bsm_epibiose">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="man_fragm">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="man_recouv">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="man_diam_tronc">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="man_dens">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="man_diversit">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="man_vital">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="pmi_div_poi">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="pmi_predat_poi">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="pmi_scarib_poi">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="pmi_macro_inv">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="note_bsd">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="note_bsm">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="note_ben">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="note_man">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="note_pmi">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="score_mercicor">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_nom">
-      <editWidget type="TextEdit">
-        <config>
-          <Option type="Map">
-            <Option name="IsMultiline" type="bool" value="false"/>
-            <Option name="UseHtml" type="bool" value="false"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_facies">
-      <editWidget type="TextEdit">
-        <config>
-          <Option type="Map">
-            <Option name="IsMultiline" type="bool" value="false"/>
-            <Option name="UseHtml" type="bool" value="false"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_station_man">
-      <editWidget type="CheckBox">
-        <config>
-          <Option type="Map">
-            <Option name="CheckedState" type="QString" value=""/>
-            <Option name="UncheckedState" type="QString" value=""/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_perc_bsd">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_perc_bsm">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsd_recouv_cor">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsd_p_acrop">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsd_vital_cor">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsd_comp_struc">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsd_taille_cor">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsd_dens_juv">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsd_f_sessile">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsd_recouv_ma">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsm_fragm_herb">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsm_recouv_her">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsm_haut_herb">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsm_dens_herb">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsm_div_herb">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_bsm_epibiose">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_man_fragm">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_man_recouv">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_man_diam_tronc">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_man_dens">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_man_diversit">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_man_vital">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_pmi_div_poi">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_pmi_predat_poi">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_pmi_scarib_poi">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_pmi_macro_inv">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="3"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_note_bsd">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_note_bsm">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_note_ben">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_note_man">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_note_pmi">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="hab_score_mercicor">
-      <editWidget type="Range">
-        <config>
-          <Option type="Map">
-            <Option name="AllowNull" type="bool" value="true"/>
-            <Option name="Max" type="double" value="10"/>
-            <Option name="Min" type="double" value="0"/>
-            <Option name="Precision" type="int" value="3"/>
-            <Option name="Step" type="double" value="1"/>
-            <Option name="Style" type="QString" value="SpinBox"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="pression_type_pression">
-      <editWidget type="TextEdit">
-        <config>
-          <Option type="Map">
-            <Option name="IsMultiline" type="bool" value="false"/>
-            <Option name="UseHtml" type="bool" value="false"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="pression_scenario_id">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="scenario_nom">
-      <editWidget type="TextEdit">
-        <config>
-          <Option type="Map">
-            <Option name="IsMultiline" type="bool" value="false"/>
-            <Option name="UseHtml" type="bool" value="false"/>
-          </Option>
-        </config>
-      </editWidget>
-    </field>
-    <field name="scenario_perte_bsd">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="scenario_perte_bsm">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="scenario_perte_ben">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="scenario_perte_man">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="scenario_perte_pmi">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-    <field name="scenario_perte_mercicor">
-      <editWidget type="TextEdit">
-        <config>
-          <Option/>
-        </config>
-      </editWidget>
-    </field>
-  </fieldConfiguration>
-  <aliases>
-    <alias field="id" index="0" name=""/>
-    <alias field="habitat_id" index="1" name="Identifiant habitat"/>
-    <alias field="pression_id" index="2" name="Identifiant de pression"/>
-    <alias field="scenario_id" index="3" name="Identifiant du scenario de pression"/>
-    <alias field="station_man" index="4" name="Stations en Mangrove"/>
-    <alias field="perc_bsd" index="5" name="Pourcentage Benthique de substrats durs"/>
-    <alias field="perc_bsm" index="6" name="Pourcentage Benthique de substrats meubles"/>
-    <alias field="bsd_recouv_cor" index="7" name="Recouvrement corallien (Scléractiniaires)"/>
-    <alias field="bsd_p_acrop" index="8" name="Pourcentage du recouvrement corallien représenté par les coraux acropores"/>
-    <alias field="bsd_vital_cor" index="9" name="Vitalité et taux de mortalité corallienne"/>
-    <alias field="bsd_comp_struc" index="10" name="Complexité structurelle des peuplements coralliens"/>
-    <alias field="bsd_taille_cor" index="11" name="Taille des coraux vivants"/>
-    <alias field="bsd_dens_juv" index="12" name="Densité de coraux juvéniles"/>
-    <alias field="bsd_f_sessile" index="13" name="Recouvrement par la faune sessile non corallienne"/>
-    <alias field="bsd_recouv_ma" index="14" name="Recouvrement par les macroalgues"/>
-    <alias field="bsm_fragm_herb" index="15" name="Fragmentation de l’herbier"/>
-    <alias field="bsm_recouv_her" index="16" name="Recouvrement par l’herbier (patchs)"/>
-    <alias field="bsm_haut_herb" index="17" name="Hauteur de l’herbier (patchs)"/>
-    <alias field="bsm_dens_herb" index="18" name="Densité des phanérogames (patchs)"/>
-    <alias field="bsm_div_herb" index="19" name="Diversité spécifique des phanérogames (patchs)"/>
-    <alias field="bsm_epibiose" index="20" name="Epibiose de l’herbier (patchs)"/>
-    <alias field="man_fragm" index="21" name="Fragmentation de la mangrove"/>
-    <alias field="man_recouv" index="22" name="Recouvrement par la mangrove (patchs)"/>
-    <alias field="man_diam_tronc" index="23" name="Diamètre des troncs (patchs)"/>
-    <alias field="man_dens" index="24" name="Densité des palétuviers (patchs)"/>
-    <alias field="man_diversit" index="25" name="Diversité spécifique des palétuviers (patchs)"/>
-    <alias field="man_vital" index="26" name="Vitalité des palétuviers (patchs)"/>
-    <alias field="pmi_div_poi" index="27" name="Diversité spécifique des peuplements de poissons"/>
-    <alias field="pmi_predat_poi" index="28" name="Abondance et maturité des prédateurs supérieurs récifaux"/>
-    <alias field="pmi_scarib_poi" index="29" name="Abondance et maturité des poissons perroquets"/>
-    <alias field="pmi_macro_inv" index="30" name="Abondance des macro-invertébrés"/>
-    <alias field="note_bsd" index="31" name="Note Mercicor Benthique de substrats durs"/>
-    <alias field="note_bsm" index="32" name="Note Mercicor Benthique de substrats meubles"/>
-    <alias field="note_ben" index="33" name="Note Mercicor Benthique"/>
-    <alias field="note_man" index="34" name="Note Mercicor Mangrove"/>
-    <alias field="note_pmi" index="35" name="Note Mercicor Poissons et Macro-invertébrés"/>
-    <alias field="score_mercicor" index="36" name="Score Mercicor"/>
-    <alias field="hab_nom" index="37" name="Nom de l'habitat"/>
-    <alias field="hab_facies" index="38" name="Faciès de l'habitat"/>
-    <alias field="hab_station_man" index="39" name="Stations en Mangrove"/>
-    <alias field="hab_perc_bsd" index="40" name="Pourcentage Benthique de substrats durs"/>
-    <alias field="hab_perc_bsm" index="41" name="Pourcentage Benthique de substrats meubles"/>
-    <alias field="hab_bsd_recouv_cor" index="42" name="Recouvrement corallien (Scléractiniaires)"/>
-    <alias field="hab_bsd_p_acrop" index="43" name="Pourcentage du recouvrement corallien représenté par les coraux acropores"/>
-    <alias field="hab_bsd_vital_cor" index="44" name="Vitalité et taux de mortalité corallienne"/>
-    <alias field="hab_bsd_comp_struc" index="45" name="Complexité structurelle des peuplements coralliens"/>
-    <alias field="hab_bsd_taille_cor" index="46" name="Taille des coraux vivants"/>
-    <alias field="hab_bsd_dens_juv" index="47" name="Densité de coraux juvéniles"/>
-    <alias field="hab_bsd_f_sessile" index="48" name="Recouvrement par la faune sessile non corallienne"/>
-    <alias field="hab_bsd_recouv_ma" index="49" name="Recouvrement par les macroalgues"/>
-    <alias field="hab_bsm_fragm_herb" index="50" name="Fragmentation de l’herbier"/>
-    <alias field="hab_bsm_recouv_her" index="51" name="Recouvrement par l’herbier (patchs)"/>
-    <alias field="hab_bsm_haut_herb" index="52" name="Hauteur de l’herbier (patchs)"/>
-    <alias field="hab_bsm_dens_herb" index="53" name="Densité des phanérogames (patchs)"/>
-    <alias field="hab_bsm_div_herb" index="54" name="Diversité spécifique des phanérogames (patchs)"/>
-    <alias field="hab_bsm_epibiose" index="55" name="Epibiose de l’herbier (patchs)"/>
-    <alias field="hab_man_fragm" index="56" name="Fragmentation de la mangrove"/>
-    <alias field="hab_man_recouv" index="57" name="Recouvrement par la mangrove (patchs)"/>
-    <alias field="hab_man_diam_tronc" index="58" name="Diamètre des troncs (patchs)"/>
-    <alias field="hab_man_dens" index="59" name="Densité des palétuviers (patchs)"/>
-    <alias field="hab_man_diversit" index="60" name="Diversité spécifique des palétuviers (patchs)"/>
-    <alias field="hab_man_vital" index="61" name="Vitalité des palétuviers (patchs)"/>
-    <alias field="hab_pmi_div_poi" index="62" name="Diversité spécifique des peuplements de poissons"/>
-    <alias field="hab_pmi_predat_poi" index="63" name="Abondance et maturité des prédateurs supérieurs récifaux"/>
-    <alias field="hab_pmi_scarib_poi" index="64" name="Abondance et maturité des poissons perroquets"/>
-    <alias field="hab_pmi_macro_inv" index="65" name="Abondance des macro-invertébrés"/>
-    <alias field="hab_note_bsd" index="66" name="Note Mercicor Benthique de substrats durs"/>
-    <alias field="hab_note_bsm" index="67" name="Note Mercicor Benthique de substrats meubles"/>
-    <alias field="hab_note_ben" index="68" name="Note Mercicor Benthique"/>
-    <alias field="hab_note_man" index="69" name="Note Mercicor Mangrove"/>
-    <alias field="hab_note_pmi" index="70" name="Note Mercicor Poissons et Macro-invertébrés"/>
-    <alias field="hab_score_mercicor" index="71" name="Score Mercicor"/>
-    <alias field="pression_type_pression" index="72" name="Type de pression"/>
-    <alias field="pression_scenario_id" index="73" name="ID Scénario"/>
-    <alias field="scenario_nom" index="74" name="libellé du scenario"/>
-    <alias field="scenario_perte_bsd" index="75" name="Perte Mercicor Benthique de substrats durs"/>
-    <alias field="scenario_perte_bsm" index="76" name="Perte Mercicor Benthique de substrats meubles"/>
-    <alias field="scenario_perte_ben" index="77" name="Perte Mercicor Benthique"/>
-    <alias field="scenario_perte_man" index="78" name="Perte Mercicor Mangrove"/>
-    <alias field="scenario_perte_pmi" index="79" name="Perte Mercicor Poissons et Macro-invertébrés"/>
-    <alias field="scenario_perte_mercicor" index="80" name="Perte Mercicor"/>
-  </aliases>
-  <excludeAttributesWMS/>
-  <excludeAttributesWFS/>
-  <defaults>
-    <default field="id" expression="" applyOnUpdate="0"/>
-    <default field="habitat_id" expression="" applyOnUpdate="0"/>
-    <default field="pression_id" expression="" applyOnUpdate="0"/>
-    <default field="scenario_id" expression="" applyOnUpdate="0"/>
-    <default field="station_man" expression="" applyOnUpdate="0"/>
-    <default field="perc_bsd" expression="" applyOnUpdate="0"/>
-    <default field="perc_bsm" expression="" applyOnUpdate="0"/>
-    <default field="bsd_recouv_cor" expression="" applyOnUpdate="0"/>
-    <default field="bsd_p_acrop" expression="" applyOnUpdate="0"/>
-    <default field="bsd_vital_cor" expression="" applyOnUpdate="0"/>
-    <default field="bsd_comp_struc" expression="" applyOnUpdate="0"/>
-    <default field="bsd_taille_cor" expression="" applyOnUpdate="0"/>
-    <default field="bsd_dens_juv" expression="" applyOnUpdate="0"/>
-    <default field="bsd_f_sessile" expression="" applyOnUpdate="0"/>
-    <default field="bsd_recouv_ma" expression="" applyOnUpdate="0"/>
-    <default field="bsm_fragm_herb" expression="" applyOnUpdate="0"/>
-    <default field="bsm_recouv_her" expression="" applyOnUpdate="0"/>
-    <default field="bsm_haut_herb" expression="" applyOnUpdate="0"/>
-    <default field="bsm_dens_herb" expression="" applyOnUpdate="0"/>
-    <default field="bsm_div_herb" expression="" applyOnUpdate="0"/>
-    <default field="bsm_epibiose" expression="" applyOnUpdate="0"/>
-    <default field="man_fragm" expression="" applyOnUpdate="0"/>
-    <default field="man_recouv" expression="" applyOnUpdate="0"/>
-    <default field="man_diam_tronc" expression="" applyOnUpdate="0"/>
-    <default field="man_dens" expression="" applyOnUpdate="0"/>
-    <default field="man_diversit" expression="" applyOnUpdate="0"/>
-    <default field="man_vital" expression="" applyOnUpdate="0"/>
-    <default field="pmi_div_poi" expression="" applyOnUpdate="0"/>
-    <default field="pmi_predat_poi" expression="" applyOnUpdate="0"/>
-    <default field="pmi_scarib_poi" expression="" applyOnUpdate="0"/>
-    <default field="pmi_macro_inv" expression="" applyOnUpdate="0"/>
-    <default field="note_bsd" expression="" applyOnUpdate="0"/>
-    <default field="note_bsm" expression="" applyOnUpdate="0"/>
-    <default field="note_ben" expression="" applyOnUpdate="0"/>
-    <default field="note_man" expression="" applyOnUpdate="0"/>
-    <default field="note_pmi" expression="" applyOnUpdate="0"/>
-    <default field="score_mercicor" expression="" applyOnUpdate="0"/>
-    <default field="hab_nom" expression="" applyOnUpdate="0"/>
-    <default field="hab_facies" expression="" applyOnUpdate="0"/>
-    <default field="hab_station_man" expression="" applyOnUpdate="0"/>
-    <default field="hab_perc_bsd" expression="" applyOnUpdate="0"/>
-    <default field="hab_perc_bsm" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsd_recouv_cor" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsd_p_acrop" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsd_vital_cor" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsd_comp_struc" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsd_taille_cor" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsd_dens_juv" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsd_f_sessile" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsd_recouv_ma" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsm_fragm_herb" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsm_recouv_her" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsm_haut_herb" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsm_dens_herb" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsm_div_herb" expression="" applyOnUpdate="0"/>
-    <default field="hab_bsm_epibiose" expression="" applyOnUpdate="0"/>
-    <default field="hab_man_fragm" expression="" applyOnUpdate="0"/>
-    <default field="hab_man_recouv" expression="" applyOnUpdate="0"/>
-    <default field="hab_man_diam_tronc" expression="" applyOnUpdate="0"/>
-    <default field="hab_man_dens" expression="" applyOnUpdate="0"/>
-    <default field="hab_man_diversit" expression="" applyOnUpdate="0"/>
-    <default field="hab_man_vital" expression="" applyOnUpdate="0"/>
-    <default field="hab_pmi_div_poi" expression="" applyOnUpdate="0"/>
-    <default field="hab_pmi_predat_poi" expression="" applyOnUpdate="0"/>
-    <default field="hab_pmi_scarib_poi" expression="" applyOnUpdate="0"/>
-    <default field="hab_pmi_macro_inv" expression="" applyOnUpdate="0"/>
-    <default field="hab_note_bsd" expression="" applyOnUpdate="0"/>
-    <default field="hab_note_bsm" expression="" applyOnUpdate="0"/>
-    <default field="hab_note_ben" expression="" applyOnUpdate="0"/>
-    <default field="hab_note_man" expression="" applyOnUpdate="0"/>
-    <default field="hab_note_pmi" expression="" applyOnUpdate="0"/>
-    <default field="hab_score_mercicor" expression="" applyOnUpdate="0"/>
-    <default field="pression_type_pression" expression="" applyOnUpdate="0"/>
-    <default field="pression_scenario_id" expression="" applyOnUpdate="0"/>
-    <default field="scenario_nom" expression="" applyOnUpdate="0"/>
-    <default field="scenario_perte_bsd" expression="" applyOnUpdate="0"/>
-    <default field="scenario_perte_bsm" expression="" applyOnUpdate="0"/>
-    <default field="scenario_perte_ben" expression="" applyOnUpdate="0"/>
-    <default field="scenario_perte_man" expression="" applyOnUpdate="0"/>
-    <default field="scenario_perte_pmi" expression="" applyOnUpdate="0"/>
-    <default field="scenario_perte_mercicor" expression="" applyOnUpdate="0"/>
-  </defaults>
-  <constraints>
-    <constraint exp_strength="0" constraints="3" field="id" unique_strength="1" notnull_strength="1"/>
-    <constraint exp_strength="0" constraints="0" field="habitat_id" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="pression_id" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="scenario_id" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="station_man" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="perc_bsd" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="perc_bsm" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsd_recouv_cor" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsd_p_acrop" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsd_vital_cor" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsd_comp_struc" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsd_taille_cor" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsd_dens_juv" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsd_f_sessile" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsd_recouv_ma" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsm_fragm_herb" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsm_recouv_her" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsm_haut_herb" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsm_dens_herb" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsm_div_herb" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="bsm_epibiose" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="man_fragm" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="man_recouv" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="man_diam_tronc" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="man_dens" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="man_diversit" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="man_vital" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="pmi_div_poi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="pmi_predat_poi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="pmi_scarib_poi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="pmi_macro_inv" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="note_bsd" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="note_bsm" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="note_ben" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="note_man" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="note_pmi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="score_mercicor" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_nom" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_facies" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_station_man" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_perc_bsd" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_perc_bsm" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsd_recouv_cor" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsd_p_acrop" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsd_vital_cor" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsd_comp_struc" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsd_taille_cor" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsd_dens_juv" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsd_f_sessile" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsd_recouv_ma" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsm_fragm_herb" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsm_recouv_her" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsm_haut_herb" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsm_dens_herb" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsm_div_herb" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_bsm_epibiose" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_man_fragm" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_man_recouv" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_man_diam_tronc" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_man_dens" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_man_diversit" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_man_vital" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_pmi_div_poi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_pmi_predat_poi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_pmi_scarib_poi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_pmi_macro_inv" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_note_bsd" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_note_bsm" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_note_ben" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_note_man" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_note_pmi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="hab_score_mercicor" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="pression_type_pression" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="pression_scenario_id" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="scenario_nom" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="scenario_perte_bsd" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="scenario_perte_bsm" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="scenario_perte_ben" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="scenario_perte_man" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="scenario_perte_pmi" unique_strength="0" notnull_strength="0"/>
-    <constraint exp_strength="0" constraints="0" field="scenario_perte_mercicor" unique_strength="0" notnull_strength="0"/>
-  </constraints>
-  <constraintExpressions>
-    <constraint field="id" desc="" exp=""/>
-    <constraint field="habitat_id" desc="" exp=""/>
-    <constraint field="pression_id" desc="" exp=""/>
-    <constraint field="scenario_id" desc="" exp=""/>
-    <constraint field="station_man" desc="" exp=""/>
-    <constraint field="perc_bsd" desc="" exp=""/>
-    <constraint field="perc_bsm" desc="" exp=""/>
-    <constraint field="bsd_recouv_cor" desc="" exp=""/>
-    <constraint field="bsd_p_acrop" desc="" exp=""/>
-    <constraint field="bsd_vital_cor" desc="" exp=""/>
-    <constraint field="bsd_comp_struc" desc="" exp=""/>
-    <constraint field="bsd_taille_cor" desc="" exp=""/>
-    <constraint field="bsd_dens_juv" desc="" exp=""/>
-    <constraint field="bsd_f_sessile" desc="" exp=""/>
-    <constraint field="bsd_recouv_ma" desc="" exp=""/>
-    <constraint field="bsm_fragm_herb" desc="" exp=""/>
-    <constraint field="bsm_recouv_her" desc="" exp=""/>
-    <constraint field="bsm_haut_herb" desc="" exp=""/>
-    <constraint field="bsm_dens_herb" desc="" exp=""/>
-    <constraint field="bsm_div_herb" desc="" exp=""/>
-    <constraint field="bsm_epibiose" desc="" exp=""/>
-    <constraint field="man_fragm" desc="" exp=""/>
-    <constraint field="man_recouv" desc="" exp=""/>
-    <constraint field="man_diam_tronc" desc="" exp=""/>
-    <constraint field="man_dens" desc="" exp=""/>
-    <constraint field="man_diversit" desc="" exp=""/>
-    <constraint field="man_vital" desc="" exp=""/>
-    <constraint field="pmi_div_poi" desc="" exp=""/>
-    <constraint field="pmi_predat_poi" desc="" exp=""/>
-    <constraint field="pmi_scarib_poi" desc="" exp=""/>
-    <constraint field="pmi_macro_inv" desc="" exp=""/>
-    <constraint field="note_bsd" desc="" exp=""/>
-    <constraint field="note_bsm" desc="" exp=""/>
-    <constraint field="note_ben" desc="" exp=""/>
-    <constraint field="note_man" desc="" exp=""/>
-    <constraint field="note_pmi" desc="" exp=""/>
-    <constraint field="score_mercicor" desc="" exp=""/>
-    <constraint field="hab_nom" desc="" exp=""/>
-    <constraint field="hab_facies" desc="" exp=""/>
-    <constraint field="hab_station_man" desc="" exp=""/>
-    <constraint field="hab_perc_bsd" desc="" exp=""/>
-    <constraint field="hab_perc_bsm" desc="" exp=""/>
-    <constraint field="hab_bsd_recouv_cor" desc="" exp=""/>
-    <constraint field="hab_bsd_p_acrop" desc="" exp=""/>
-    <constraint field="hab_bsd_vital_cor" desc="" exp=""/>
-    <constraint field="hab_bsd_comp_struc" desc="" exp=""/>
-    <constraint field="hab_bsd_taille_cor" desc="" exp=""/>
-    <constraint field="hab_bsd_dens_juv" desc="" exp=""/>
-    <constraint field="hab_bsd_f_sessile" desc="" exp=""/>
-    <constraint field="hab_bsd_recouv_ma" desc="" exp=""/>
-    <constraint field="hab_bsm_fragm_herb" desc="" exp=""/>
-    <constraint field="hab_bsm_recouv_her" desc="" exp=""/>
-    <constraint field="hab_bsm_haut_herb" desc="" exp=""/>
-    <constraint field="hab_bsm_dens_herb" desc="" exp=""/>
-    <constraint field="hab_bsm_div_herb" desc="" exp=""/>
-    <constraint field="hab_bsm_epibiose" desc="" exp=""/>
-    <constraint field="hab_man_fragm" desc="" exp=""/>
-    <constraint field="hab_man_recouv" desc="" exp=""/>
-    <constraint field="hab_man_diam_tronc" desc="" exp=""/>
-    <constraint field="hab_man_dens" desc="" exp=""/>
-    <constraint field="hab_man_diversit" desc="" exp=""/>
-    <constraint field="hab_man_vital" desc="" exp=""/>
-    <constraint field="hab_pmi_div_poi" desc="" exp=""/>
-    <constraint field="hab_pmi_predat_poi" desc="" exp=""/>
-    <constraint field="hab_pmi_scarib_poi" desc="" exp=""/>
-    <constraint field="hab_pmi_macro_inv" desc="" exp=""/>
-    <constraint field="hab_note_bsd" desc="" exp=""/>
-    <constraint field="hab_note_bsm" desc="" exp=""/>
-    <constraint field="hab_note_ben" desc="" exp=""/>
-    <constraint field="hab_note_man" desc="" exp=""/>
-    <constraint field="hab_note_pmi" desc="" exp=""/>
-    <constraint field="hab_score_mercicor" desc="" exp=""/>
-    <constraint field="pression_type_pression" desc="" exp=""/>
-    <constraint field="pression_scenario_id" desc="" exp=""/>
-    <constraint field="scenario_nom" desc="" exp=""/>
-    <constraint field="scenario_perte_bsd" desc="" exp=""/>
-    <constraint field="scenario_perte_bsm" desc="" exp=""/>
-    <constraint field="scenario_perte_ben" desc="" exp=""/>
-    <constraint field="scenario_perte_man" desc="" exp=""/>
-    <constraint field="scenario_perte_pmi" desc="" exp=""/>
-    <constraint field="scenario_perte_mercicor" desc="" exp=""/>
-  </constraintExpressions>
-  <expressionfields/>
+<qgis version="3.10.14-A Coruña" styleCategories="Forms">
+  <editform tolerant="1"></editform>
+  <editforminit/>
+  <editforminitcodesource>0</editforminitcodesource>
+  <editforminitfilepath></editforminitfilepath>
+  <editforminitcode><![CDATA[# -*- coding: utf-8 -*-
+"""
+Les formulaires QGIS peuvent avoir une fonction Python qui sera appelée à l'ouverture du formulaire.
+
+Utilisez cette fonction pour ajouter plus de fonctionnalités à vos formulaires.
+
+Entrez le nom de la fonction dans le champ "Fonction d'initialisation Python".
+Voici un exemple à suivre:
+"""
+from qgis.PyQt.QtWidgets import QWidget
+
+def my_form_open(dialog, layer, feature):
+    geom = feature.geometry()
+    control = dialog.findChild(QWidget, "perc_bsd")
+
+]]></editforminitcode>
+  <featformsuppress>0</featformsuppress>
+  <editorlayout>tablayout</editorlayout>
+  <attributeEditorForm>
+    <attributeEditorField index="37" showLabel="1" name="hab_nom"/>
+    <attributeEditorField index="38" showLabel="1" name="hab_facies"/>
+    <attributeEditorField index="72" showLabel="1" name="pression_type_pression"/>
+    <attributeEditorField index="74" showLabel="1" name="scenario_nom"/>
+    <attributeEditorField index="4" showLabel="1" name="station_man"/>
+    <attributeEditorContainer visibilityExpression="" groupBox="0" showLabel="1" visibilityExpressionEnabled="0" name="Notes &amp; Scores" columnCount="2">
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Pression" columnCount="1">
+        <attributeEditorField index="5" showLabel="1" name="perc_bsd"/>
+        <attributeEditorField index="6" showLabel="1" name="perc_bsm"/>
+        <attributeEditorField index="31" showLabel="1" name="note_bsd"/>
+        <attributeEditorField index="32" showLabel="1" name="note_bsm"/>
+        <attributeEditorField index="33" showLabel="1" name="note_ben"/>
+        <attributeEditorField index="34" showLabel="1" name="note_man"/>
+        <attributeEditorField index="35" showLabel="1" name="note_pmi"/>
+        <attributeEditorField index="36" showLabel="1" name="score_mercicor"/>
+      </attributeEditorContainer>
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Habitat" columnCount="1">
+        <attributeEditorField index="40" showLabel="1" name="hab_perc_bsd"/>
+        <attributeEditorField index="41" showLabel="1" name="hab_perc_bsm"/>
+        <attributeEditorField index="66" showLabel="1" name="hab_note_bsd"/>
+        <attributeEditorField index="67" showLabel="1" name="hab_note_bsm"/>
+        <attributeEditorField index="68" showLabel="1" name="hab_note_ben"/>
+        <attributeEditorField index="69" showLabel="1" name="hab_note_man"/>
+        <attributeEditorField index="70" showLabel="1" name="hab_note_pmi"/>
+        <attributeEditorField index="71" showLabel="1" name="hab_score_mercicor"/>
+      </attributeEditorContainer>
+    </attributeEditorContainer>
+    <attributeEditorContainer visibilityExpression="CASE WHEN &quot;station_man&quot; IS NOT true THEN true END" groupBox="0" showLabel="1" visibilityExpressionEnabled="1" name="Indics Benthos Substrats durs" columnCount="2">
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Pression" columnCount="1">
+        <attributeEditorField index="7" showLabel="1" name="bsd_recouv_cor"/>
+        <attributeEditorField index="8" showLabel="1" name="bsd_p_acrop"/>
+        <attributeEditorField index="9" showLabel="1" name="bsd_vital_cor"/>
+        <attributeEditorField index="10" showLabel="1" name="bsd_comp_struc"/>
+        <attributeEditorField index="11" showLabel="1" name="bsd_taille_cor"/>
+        <attributeEditorField index="12" showLabel="1" name="bsd_dens_juv"/>
+        <attributeEditorField index="13" showLabel="1" name="bsd_f_sessile"/>
+        <attributeEditorField index="14" showLabel="1" name="bsd_recouv_ma"/>
+      </attributeEditorContainer>
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Habitat" columnCount="1">
+        <attributeEditorField index="42" showLabel="1" name="hab_bsd_recouv_cor"/>
+        <attributeEditorField index="43" showLabel="1" name="hab_bsd_p_acrop"/>
+        <attributeEditorField index="44" showLabel="1" name="hab_bsd_vital_cor"/>
+        <attributeEditorField index="45" showLabel="1" name="hab_bsd_comp_struc"/>
+        <attributeEditorField index="46" showLabel="1" name="hab_bsd_taille_cor"/>
+        <attributeEditorField index="47" showLabel="1" name="hab_bsd_dens_juv"/>
+        <attributeEditorField index="48" showLabel="1" name="hab_bsd_f_sessile"/>
+        <attributeEditorField index="49" showLabel="1" name="hab_bsd_recouv_ma"/>
+      </attributeEditorContainer>
+    </attributeEditorContainer>
+    <attributeEditorContainer visibilityExpression="CASE WHEN &quot;station_man&quot; IS NOT true THEN true END" groupBox="0" showLabel="1" visibilityExpressionEnabled="1" name="Indics Benthos Substrats meubles" columnCount="2">
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Pression" columnCount="1">
+        <attributeEditorField index="15" showLabel="1" name="bsm_fragm_herb"/>
+        <attributeEditorField index="16" showLabel="1" name="bsm_recouv_her"/>
+        <attributeEditorField index="17" showLabel="1" name="bsm_haut_herb"/>
+        <attributeEditorField index="18" showLabel="1" name="bsm_dens_herb"/>
+        <attributeEditorField index="19" showLabel="1" name="bsm_div_herb"/>
+        <attributeEditorField index="20" showLabel="1" name="bsm_epibiose"/>
+      </attributeEditorContainer>
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Habitat" columnCount="1">
+        <attributeEditorField index="50" showLabel="1" name="hab_bsm_fragm_herb"/>
+        <attributeEditorField index="51" showLabel="1" name="hab_bsm_recouv_her"/>
+        <attributeEditorField index="52" showLabel="1" name="hab_bsm_haut_herb"/>
+        <attributeEditorField index="53" showLabel="1" name="hab_bsm_dens_herb"/>
+        <attributeEditorField index="54" showLabel="1" name="hab_bsm_div_herb"/>
+        <attributeEditorField index="55" showLabel="1" name="hab_bsm_epibiose"/>
+      </attributeEditorContainer>
+    </attributeEditorContainer>
+    <attributeEditorContainer visibilityExpression="CASE WHEN &quot;station_man&quot; IS  true THEN true END" groupBox="0" showLabel="1" visibilityExpressionEnabled="1" name="Indics Mangroves" columnCount="2">
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Pression" columnCount="1">
+        <attributeEditorField index="21" showLabel="1" name="man_fragm"/>
+        <attributeEditorField index="22" showLabel="1" name="man_recouv"/>
+        <attributeEditorField index="23" showLabel="1" name="man_diam_tronc"/>
+        <attributeEditorField index="24" showLabel="1" name="man_dens"/>
+        <attributeEditorField index="25" showLabel="1" name="man_diversit"/>
+        <attributeEditorField index="26" showLabel="1" name="man_vital"/>
+      </attributeEditorContainer>
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Habitat" columnCount="1">
+        <attributeEditorField index="56" showLabel="1" name="hab_man_fragm"/>
+        <attributeEditorField index="57" showLabel="1" name="hab_man_recouv"/>
+        <attributeEditorField index="58" showLabel="1" name="hab_man_diam_tronc"/>
+        <attributeEditorField index="59" showLabel="1" name="hab_man_dens"/>
+        <attributeEditorField index="60" showLabel="1" name="hab_man_diversit"/>
+        <attributeEditorField index="61" showLabel="1" name="hab_man_vital"/>
+      </attributeEditorContainer>
+    </attributeEditorContainer>
+    <attributeEditorContainer visibilityExpression="" groupBox="0" showLabel="1" visibilityExpressionEnabled="0" name="Indics Poissons et Macro-invertégrés" columnCount="2">
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="Pression" columnCount="1">
+        <attributeEditorField index="27" showLabel="1" name="pmi_div_poi"/>
+        <attributeEditorField index="28" showLabel="1" name="pmi_predat_poi"/>
+        <attributeEditorField index="29" showLabel="1" name="pmi_scarib_poi"/>
+        <attributeEditorField index="30" showLabel="1" name="pmi_macro_inv"/>
+      </attributeEditorContainer>
+      <attributeEditorContainer visibilityExpression="" groupBox="1" showLabel="1" visibilityExpressionEnabled="0" name="habitat" columnCount="1">
+        <attributeEditorField index="62" showLabel="1" name="hab_pmi_div_poi"/>
+        <attributeEditorField index="63" showLabel="1" name="hab_pmi_predat_poi"/>
+        <attributeEditorField index="64" showLabel="1" name="hab_pmi_scarib_poi"/>
+        <attributeEditorField index="65" showLabel="1" name="hab_pmi_macro_inv"/>
+      </attributeEditorContainer>
+    </attributeEditorContainer>
+  </attributeEditorForm>
+  <editable>
+    <field name="bsd_comp_struc" editable="1"/>
+    <field name="bsd_dens_juv" editable="1"/>
+    <field name="bsd_f_sessile" editable="1"/>
+    <field name="bsd_p_acrop" editable="1"/>
+    <field name="bsd_recouv_cor" editable="1"/>
+    <field name="bsd_recouv_ma" editable="1"/>
+    <field name="bsd_taille_cor" editable="1"/>
+    <field name="bsd_vital_cor" editable="1"/>
+    <field name="bsm_dens_herb" editable="1"/>
+    <field name="bsm_div_herb" editable="1"/>
+    <field name="bsm_epibiose" editable="1"/>
+    <field name="bsm_fragm_herb" editable="1"/>
+    <field name="bsm_haut_herb" editable="1"/>
+    <field name="bsm_recouv_her" editable="1"/>
+    <field name="datetime_obs" editable="1"/>
+    <field name="hab_bsd_comp_struc" editable="0"/>
+    <field name="hab_bsd_dens_juv" editable="0"/>
+    <field name="hab_bsd_f_sessile" editable="0"/>
+    <field name="hab_bsd_p_acrop" editable="0"/>
+    <field name="hab_bsd_recouv_cor" editable="0"/>
+    <field name="hab_bsd_recouv_ma" editable="0"/>
+    <field name="hab_bsd_taille_cor" editable="0"/>
+    <field name="hab_bsd_vital_cor" editable="0"/>
+    <field name="hab_bsm_dens_herb" editable="0"/>
+    <field name="hab_bsm_div_herb" editable="0"/>
+    <field name="hab_bsm_epibiose" editable="0"/>
+    <field name="hab_bsm_fragm_herb" editable="0"/>
+    <field name="hab_bsm_haut_herb" editable="0"/>
+    <field name="hab_bsm_recouv_her" editable="0"/>
+    <field name="hab_facies" editable="0"/>
+    <field name="hab_man_dens" editable="0"/>
+    <field name="hab_man_diam_tronc" editable="0"/>
+    <field name="hab_man_diversit" editable="0"/>
+    <field name="hab_man_fragm" editable="0"/>
+    <field name="hab_man_recouv" editable="0"/>
+    <field name="hab_man_vital" editable="0"/>
+    <field name="hab_nom" editable="0"/>
+    <field name="hab_note_ben" editable="0"/>
+    <field name="hab_note_bsd" editable="0"/>
+    <field name="hab_note_bsm" editable="0"/>
+    <field name="hab_note_man" editable="0"/>
+    <field name="hab_note_pmi" editable="0"/>
+    <field name="hab_perc_bsd" editable="0"/>
+    <field name="hab_perc_bsm" editable="0"/>
+    <field name="hab_pmi_div_poi" editable="0"/>
+    <field name="hab_pmi_macro_inv" editable="0"/>
+    <field name="hab_pmi_predat_poi" editable="0"/>
+    <field name="hab_pmi_scarib_poi" editable="0"/>
+    <field name="hab_score_mercicor" editable="0"/>
+    <field name="hab_station_man" editable="0"/>
+    <field name="habitat_id" editable="1"/>
+    <field name="id" editable="1"/>
+    <field name="man_dens" editable="1"/>
+    <field name="man_diam_tronc" editable="1"/>
+    <field name="man_diversit" editable="1"/>
+    <field name="man_fragm" editable="1"/>
+    <field name="man_recouv" editable="1"/>
+    <field name="man_vital" editable="1"/>
+    <field name="nom_station" editable="1"/>
+    <field name="note_ben" editable="1"/>
+    <field name="note_bsd" editable="1"/>
+    <field name="note_bsm" editable="1"/>
+    <field name="note_man" editable="1"/>
+    <field name="note_pmi" editable="1"/>
+    <field name="perc_bsd" editable="1"/>
+    <field name="perc_bsm" editable="1"/>
+    <field name="perte_ben" editable="0"/>
+    <field name="perte_bsd" editable="0"/>
+    <field name="perte_bsm" editable="0"/>
+    <field name="perte_man" editable="0"/>
+    <field name="perte_mercicor" editable="0"/>
+    <field name="perte_pmi" editable="0"/>
+    <field name="phch_cond" editable="1"/>
+    <field name="phch_do" editable="1"/>
+    <field name="phch_dop" editable="1"/>
+    <field name="phch_ph" editable="1"/>
+    <field name="phch_sal" editable="1"/>
+    <field name="phch_sedi" editable="1"/>
+    <field name="phch_temp" editable="1"/>
+    <field name="phch_turb" editable="1"/>
+    <field name="pmi_div_poi" editable="1"/>
+    <field name="pmi_macro_inv" editable="1"/>
+    <field name="pmi_predat_poi" editable="1"/>
+    <field name="pmi_scarib_poi" editable="1"/>
+    <field name="pression_id" editable="1"/>
+    <field name="pression_scenario_id" editable="0"/>
+    <field name="pression_type_pression" editable="0"/>
+    <field name="profondeur" editable="1"/>
+    <field name="scenario_id" editable="1"/>
+    <field name="scenario_nom" editable="0"/>
+    <field name="scenario_perte_ben" editable="0"/>
+    <field name="scenario_perte_bsd" editable="0"/>
+    <field name="scenario_perte_bsm" editable="0"/>
+    <field name="scenario_perte_man" editable="0"/>
+    <field name="scenario_perte_mercicor" editable="0"/>
+    <field name="scenario_perte_pmi" editable="0"/>
+    <field name="score_mercicor" editable="1"/>
+    <field name="station_man" editable="1"/>
+  </editable>
+  <labelOnTop>
+    <field labelOnTop="1" name="bsd_comp_struc"/>
+    <field labelOnTop="1" name="bsd_dens_juv"/>
+    <field labelOnTop="1" name="bsd_f_sessile"/>
+    <field labelOnTop="1" name="bsd_p_acrop"/>
+    <field labelOnTop="1" name="bsd_recouv_cor"/>
+    <field labelOnTop="1" name="bsd_recouv_ma"/>
+    <field labelOnTop="1" name="bsd_taille_cor"/>
+    <field labelOnTop="1" name="bsd_vital_cor"/>
+    <field labelOnTop="1" name="bsm_dens_herb"/>
+    <field labelOnTop="1" name="bsm_div_herb"/>
+    <field labelOnTop="1" name="bsm_epibiose"/>
+    <field labelOnTop="1" name="bsm_fragm_herb"/>
+    <field labelOnTop="1" name="bsm_haut_herb"/>
+    <field labelOnTop="1" name="bsm_recouv_her"/>
+    <field labelOnTop="0" name="datetime_obs"/>
+    <field labelOnTop="1" name="hab_bsd_comp_struc"/>
+    <field labelOnTop="1" name="hab_bsd_dens_juv"/>
+    <field labelOnTop="1" name="hab_bsd_f_sessile"/>
+    <field labelOnTop="1" name="hab_bsd_p_acrop"/>
+    <field labelOnTop="1" name="hab_bsd_recouv_cor"/>
+    <field labelOnTop="1" name="hab_bsd_recouv_ma"/>
+    <field labelOnTop="1" name="hab_bsd_taille_cor"/>
+    <field labelOnTop="1" name="hab_bsd_vital_cor"/>
+    <field labelOnTop="1" name="hab_bsm_dens_herb"/>
+    <field labelOnTop="1" name="hab_bsm_div_herb"/>
+    <field labelOnTop="1" name="hab_bsm_epibiose"/>
+    <field labelOnTop="1" name="hab_bsm_fragm_herb"/>
+    <field labelOnTop="1" name="hab_bsm_haut_herb"/>
+    <field labelOnTop="1" name="hab_bsm_recouv_her"/>
+    <field labelOnTop="0" name="hab_facies"/>
+    <field labelOnTop="1" name="hab_man_dens"/>
+    <field labelOnTop="1" name="hab_man_diam_tronc"/>
+    <field labelOnTop="1" name="hab_man_diversit"/>
+    <field labelOnTop="1" name="hab_man_fragm"/>
+    <field labelOnTop="1" name="hab_man_recouv"/>
+    <field labelOnTop="1" name="hab_man_vital"/>
+    <field labelOnTop="0" name="hab_nom"/>
+    <field labelOnTop="1" name="hab_note_ben"/>
+    <field labelOnTop="1" name="hab_note_bsd"/>
+    <field labelOnTop="1" name="hab_note_bsm"/>
+    <field labelOnTop="1" name="hab_note_man"/>
+    <field labelOnTop="1" name="hab_note_pmi"/>
+    <field labelOnTop="1" name="hab_perc_bsd"/>
+    <field labelOnTop="1" name="hab_perc_bsm"/>
+    <field labelOnTop="1" name="hab_pmi_div_poi"/>
+    <field labelOnTop="1" name="hab_pmi_macro_inv"/>
+    <field labelOnTop="1" name="hab_pmi_predat_poi"/>
+    <field labelOnTop="1" name="hab_pmi_scarib_poi"/>
+    <field labelOnTop="1" name="hab_score_mercicor"/>
+    <field labelOnTop="0" name="hab_station_man"/>
+    <field labelOnTop="0" name="habitat_id"/>
+    <field labelOnTop="0" name="id"/>
+    <field labelOnTop="1" name="man_dens"/>
+    <field labelOnTop="1" name="man_diam_tronc"/>
+    <field labelOnTop="1" name="man_diversit"/>
+    <field labelOnTop="1" name="man_fragm"/>
+    <field labelOnTop="1" name="man_recouv"/>
+    <field labelOnTop="1" name="man_vital"/>
+    <field labelOnTop="0" name="nom_station"/>
+    <field labelOnTop="1" name="note_ben"/>
+    <field labelOnTop="1" name="note_bsd"/>
+    <field labelOnTop="1" name="note_bsm"/>
+    <field labelOnTop="1" name="note_man"/>
+    <field labelOnTop="1" name="note_pmi"/>
+    <field labelOnTop="1" name="perc_bsd"/>
+    <field labelOnTop="1" name="perc_bsm"/>
+    <field labelOnTop="0" name="perte_ben"/>
+    <field labelOnTop="0" name="perte_bsd"/>
+    <field labelOnTop="0" name="perte_bsm"/>
+    <field labelOnTop="0" name="perte_man"/>
+    <field labelOnTop="0" name="perte_mercicor"/>
+    <field labelOnTop="0" name="perte_pmi"/>
+    <field labelOnTop="0" name="phch_cond"/>
+    <field labelOnTop="0" name="phch_do"/>
+    <field labelOnTop="0" name="phch_dop"/>
+    <field labelOnTop="0" name="phch_ph"/>
+    <field labelOnTop="0" name="phch_sal"/>
+    <field labelOnTop="0" name="phch_sedi"/>
+    <field labelOnTop="0" name="phch_temp"/>
+    <field labelOnTop="0" name="phch_turb"/>
+    <field labelOnTop="1" name="pmi_div_poi"/>
+    <field labelOnTop="1" name="pmi_macro_inv"/>
+    <field labelOnTop="1" name="pmi_predat_poi"/>
+    <field labelOnTop="1" name="pmi_scarib_poi"/>
+    <field labelOnTop="0" name="pression_id"/>
+    <field labelOnTop="0" name="pression_scenario_id"/>
+    <field labelOnTop="0" name="pression_type_pression"/>
+    <field labelOnTop="0" name="profondeur"/>
+    <field labelOnTop="0" name="scenario_id"/>
+    <field labelOnTop="0" name="scenario_nom"/>
+    <field labelOnTop="0" name="scenario_perte_ben"/>
+    <field labelOnTop="0" name="scenario_perte_bsd"/>
+    <field labelOnTop="0" name="scenario_perte_bsm"/>
+    <field labelOnTop="0" name="scenario_perte_man"/>
+    <field labelOnTop="0" name="scenario_perte_mercicor"/>
+    <field labelOnTop="0" name="scenario_perte_pmi"/>
+    <field labelOnTop="1" name="score_mercicor"/>
+    <field labelOnTop="0" name="station_man"/>
+  </labelOnTop>
+  <widgets>
+    <widget name="habitat_pression_etat_ecologique-habitat">
+      <config type="Map">
+        <Option type="QString" value="" name="nm-rel"/>
+      </config>
+    </widget>
+    <widget name="pression_habitat_pression_etat_ecologique-pression">
+      <config type="Map">
+        <Option type="QString" value="" name="nm-rel"/>
+      </config>
+    </widget>
+  </widgets>
   <layerGeometryType>2</layerGeometryType>
 </qgis>
