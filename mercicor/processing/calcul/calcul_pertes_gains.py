@@ -20,12 +20,12 @@ class BaseCalculPertesGains(CalculAlgorithm):
     def __init__(self):
         super().__init__()
         self.fields = OrderedDict()
-        self.fields['bsd'] = ['hab_note_bsd', 'note_bsd', 'perc_bsd']
-        self.fields['bsm'] = ['hab_note_bsm', 'note_bsm', 'perc_bsm']
-        self.fields['man'] = ['hab_note_man', 'note_man']
-        self.fields['pmi'] = ['hab_note_pmi', 'note_pmi']
-        self.fields['ben'] = ['hab_note_ben', 'note_ben']
-        self.fields['mercicor'] = ['hab_score_mercicor', 'score_mercicor']
+        self.fields['bsd'] = ('hab_note_bsd', 'note_bsd', 'perc_bsd')
+        self.fields['bsm'] = ('hab_note_bsm', 'note_bsm', 'perc_bsm')
+        self.fields['man'] = ('hab_note_man', 'note_man')
+        self.fields['pmi'] = ('hab_note_pmi', 'note_pmi')
+        self.fields['ben'] = ('hab_note_ben', 'note_ben')
+        self.fields['mercicor'] = ('hab_score_mercicor', 'score_mercicor')
 
     @property
     def project_type(self) -> ProjectType:
@@ -109,13 +109,16 @@ class BaseCalculPertesGains(CalculAlgorithm):
 
         scenario_impact.startEditing()
 
+        feedback.pushInfo("Lancement des calculs")
         for feat in scenario_impact.getFeatures():
             scenario_id = feat['id']
+            feedback.pushDebugInfo("Lancement sur le scénario ID {}".format(scenario_id))
             for note, fields in self.fields.items():
                 # from "bsd" to "perte_bsd" or "gain_bsd"
                 field_name = '{calcul_type}_{note}'.format(
                     calcul_type=self.project_type.calcul_type, note=note)
                 feat[field_name] = 0
+                feedback.pushDebugInfo("Initialisation scénario {} {} = 0".format(scenario_id, field_name))
 
                 filter_expression = QgsExpression.createFieldEqualityExpression('scenario_id', scenario_id)
                 for feature in hab_etat_ecolo.getFeatures(filter_expression):
@@ -143,7 +146,26 @@ class BaseCalculPertesGains(CalculAlgorithm):
 
                     feat[field_name] += multiply * (sub_result * feature.geometry().area()) / divide
 
+                    # Tentative explication de la formule
+                    feedback.pushDebugInfo(
+                        "Scénario {scenario_id} entité habitat état écologique {id} : "
+                        "{field_name} += {multiply} * ( {sub_result} * surface) / {divide}".format(
+                            scenario_id=scenario_id,
+                            id=feature.id(),
+                            field_name=field_name,
+                            multiply=multiply,
+                            sub_result=sub_result,
+                            divide=divide,
+                        )
+                    )
+
+                feedback.pushDebugInfo(
+                    "Fin sur le scénario ID {} champ {} = {}".format(
+                        scenario_id, field_name, feat[field_name]))
+
             scenario_impact.updateFeature(feat)
+            feedback.pushDebugInfo("Fin sur le scénario ID {}".format(scenario_id))
+        feedback.pushInfo("Fin des calculs, enregistrement…")
         scenario_impact.commitChanges()
 
         return {}

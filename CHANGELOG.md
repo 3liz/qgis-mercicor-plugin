@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Ajout de logs lors du calcul des compensations et des gains
+
 ## 1.0.2 - 2021-07-06
 
 * Ajout des propriétés du formulaire et des champs pour la couche "habitat_compensation_etat_ecologique"
