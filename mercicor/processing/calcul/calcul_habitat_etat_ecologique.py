@@ -228,7 +228,7 @@ class CalculHabitatEtatEcologique(CalculAlgorithm):
         for existing in hab_etat_ecolo.getFeatures():
             if existing['id'] in hee_features:
                 feat = hee_features[existing['id']]
-                attributes = dict()
+                attributes = {}
                 for field in hee_fields:
                     field_name = field.name()
                     attributes[hee_fields.indexOf(field_name)] = feat[field_name]

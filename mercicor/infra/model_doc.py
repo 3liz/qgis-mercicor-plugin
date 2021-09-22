@@ -158,7 +158,7 @@ def generate_model_doc():  # NOQA C901
 
     output_file = join(PATH, 'README.md')
     output_file = '/home/etienne/dev/python/qgis-mercicor-plugin/docs/model/index.md'
-    with open(output_file, "w+") as text_file:
+    with open(output_file, "w+", encoding="utf8") as text_file:
         text_file.write(markdown_all)
 
 

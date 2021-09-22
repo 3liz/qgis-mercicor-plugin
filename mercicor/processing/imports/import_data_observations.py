@@ -94,7 +94,7 @@ class ImportObservationData(BaseImportAlgorithm):
     def update_feature(self, feature, existing, with_geom, context, feedback):
         """ Update the existing observation in the geopackage. """
 
-        attributes = dict()
+        attributes = {}
         latitude = None
         longitude = None
         for field in self.fields:

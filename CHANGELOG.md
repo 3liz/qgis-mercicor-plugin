@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 1.0.3 - 2021-09-22
+
 * Ajout de logs lors du calcul des compensations et des gains
 
 ## 1.0.2 - 2021-07-06

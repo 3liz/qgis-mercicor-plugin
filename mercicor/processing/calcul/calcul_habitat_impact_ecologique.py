@@ -225,7 +225,7 @@ class BaseCalculHabitatImpactEtatEcologique(CalculAlgorithm):
                 if exists:
                     self.output_layer.changeGeometry(existing_feature.id(), feature.geometry())
 
-                    attribute_map = dict()
+                    attribute_map = {}
                     for field in layer.fields():
                         field_name = field.name()
                         if field_name in self.fields_id:

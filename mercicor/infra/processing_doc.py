@@ -182,7 +182,7 @@ def generate_processing_doc():  # NOQA C901
 
     output_file = join(PATH, 'README.md')
     # output_file = join('/home/pdrillin/dev/', 'README.md')
-    with open(output_file, "w+") as text_file:
+    with open(output_file, "w+", encoding="utf8") as text_file:
         text_file.write(markdown_all)
 
 
