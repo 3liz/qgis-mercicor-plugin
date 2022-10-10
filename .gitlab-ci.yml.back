@@ -46,7 +46,7 @@ Lint:
 QGIS-3.10:
   stage: Tests 🎳
   image:
-    name: registry.snap.lizlan:5000/qgis/qgis:release-3_10
+    name: $REGISTRY_URI/qgis/qgis:release-3_10
   script:
     - qgis_setup.sh ${PLUGIN_NAME}
     # Patch the script because it use an invalid redirection to non-existent /dev/tty
@@ -61,7 +61,7 @@ QGIS-3.10:
 QGIS-3.16:
   stage: Tests 🎳
   image:
-    name: registry.snap.lizlan:5000/qgis/qgis:release-3_16
+    name: $REGISTRY_URI/qgis/qgis:release-3_16
   script:
     - mkdir /tests_directory/
     - ln -s ${CI_PROJECT_DIR}/mercicor /tests_directory
